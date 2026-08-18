@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bloom Again — Companion</title>
+<title>Bloom Again Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -54,9 +54,12 @@ body{overflow-x:hidden}
 .pick-title{font-size:clamp(22px,3.4vw,30px);margin-top:14px;margin-bottom:10px;line-height:1.3}
 .pick-sub{font-size:13px;color:var(--text-soft);margin-bottom:8px}
 
-/* opening flower nav — the five chapters as the primary table of contents */
-.opening-flower{display:flex;align-items:center;justify-content:center;gap:10px 34px;flex-wrap:wrap;max-width:760px;margin:18px auto 8px;padding:0 5vw}
-.petal-nav-list{display:flex;flex-direction:column;gap:3px;width:100%;max-width:320px}
+/* opening flower nav — the five chapters as the primary table of contents.
+   Full-bleed wrap breaks out of .kit-page's 640px cap so the flower (left)
+   and chapter list (right) can sit apart as a proper two-column composition. */
+.opening-flower-wrap{width:100vw;position:relative;left:50%;transform:translateX(-50%)}
+.opening-flower{display:flex;align-items:center;justify-content:space-between;gap:18px 40px;flex-wrap:wrap;max-width:940px;margin:18px auto 8px;padding:0 6vw}
+.petal-nav-list{display:flex;flex-direction:column;gap:3px;flex:1 1 300px;max-width:360px}
 .petal-btn{display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
 .petal-btn:hover{background:rgba(245,236,224,.08)}
 .petal-btn.sel{background:rgba(232,178,154,.14)}
@@ -65,7 +68,8 @@ body{overflow-x:hidden}
 .petal-btn:hover .petal-icon{background:rgba(232,178,154,.18)}
 .petal-btn.sel .petal-icon{background:rgba(232,178,154,.26);border-width:2px}
 .petal-text{display:flex;flex-direction:column}
-@media(max-width:640px){.opening-flower{flex-direction:column-reverse}.petal-nav-list{max-width:380px}}
+.opening-flower .flower-wrap{flex:0 1 260px}
+@media(max-width:600px){.opening-flower{justify-content:center;padding:0 5vw}.petal-nav-list{max-width:380px}}
 
 /* full-companion ad */
 .companion-ad{background:var(--bg-deep);padding:56px 5vw 64px;text-align:center;border-top:1px solid rgba(245,236,224,.12);border-radius:24px;margin-top:20px;transition:opacity .3s ease}
@@ -133,28 +137,46 @@ body{overflow-x:hidden}
 .area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 20px}
 .area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:74px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{width:56px;height:56px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
+.area-circle{position:relative;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
 .area-circle svg{width:24px;height:24px}
+/* Photo layer: drop a file matching each sub-area's `img` filename into
+   bloom-again-images/ and it appears automatically, covering the icon
+   fallback beneath. Nothing to wire up, no code changes needed. */
+.area-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,178,154,.18)}
 .area-icon-btn.sel .area-circle{background:rgba(232,178,154,.26);border-width:2px}
 .area-lbl{font-size:10px;letter-spacing:.08em;color:var(--text-soft);text-transform:uppercase;text-align:center;line-height:1.35}
 
-/* tips box */
+/* inspiration overview — navigation only: headings + a small open button.
+   All content/imagery lives in the modal (see below), not here. */
 .tips-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 .tips-lead{font-size:13px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
-.tip-card{background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:18px;padding:20px 22px;display:flex;align-items:center;gap:18px;margin-bottom:12px;transition:background .3s}
-.tip-card:hover{background:rgba(245,236,224,.1)}
-.tip-badge{width:88px;height:88px;border-radius:50%;background:rgba(232,178,154,.16);border:1px solid rgba(232,178,154,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.tip-badge img{width:100%;height:100%;object-fit:cover}
-@media(max-width:480px){.tip-badge{width:64px;height:64px}}
-.tip-content{flex:1;min-width:0}
-.tip-title{font-family:var(--serif);font-size:17.5px;color:var(--text);margin-bottom:6px;line-height:1.3}
-.tip-body{font-size:13.5px;line-height:1.68;color:var(--text-soft)}
-.tip-body strong{color:var(--text);font-weight:600}
+.insp-list{display:flex;flex-direction:column;gap:9px}
+.insp-row{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:16px;padding:16px 16px 16px 20px;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
+.insp-row:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45)}
+.insp-row-title{font-family:var(--serif);font-style:italic;font-size:16.5px;color:var(--text);line-height:1.35}
+.insp-row-open{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .22s ease}
+.insp-row-open svg{width:15px;height:15px}
+.insp-row:hover .insp-row-open{background:rgba(232,178,154,.2)}
 
-.kit-cta-wrap{text-align:center;margin-top:30px;padding-top:24px;border-top:1px dashed rgba(245,236,224,.2)}
-.kit-cta-note{font-size:11.5px;color:var(--text-muted);margin-bottom:14px;line-height:1.6;max-width:38ch;margin-left:auto;margin-right:auto}
+/* inspiration modal — this is where the actual content and photos live */
+.insp-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.insp-modal.open{opacity:1;pointer-events:all}
+.insp-modal-scrim{position:absolute;inset:0;background:rgba(20,28,32,.6);backdrop-filter:blur(3px)}
+.insp-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
+.insp-modal.open .insp-modal-card{transform:translateY(0) scale(1)}
+.insp-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
+.insp-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
+.insp-modal-media{display:flex;gap:12px;justify-content:center;margin-bottom:22px}
+.insp-photo{width:116px;height:116px;border-radius:22px;overflow:hidden;position:relative;flex-shrink:0;background:linear-gradient(150deg,rgba(232,178,154,.32),rgba(196,212,184,.24));border:1px solid rgba(245,236,224,.18);display:flex;align-items:center;justify-content:center}
+.insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.insp-photo-mark{color:var(--accent);opacity:.6}
+.insp-photo-mark svg{width:28px;height:28px}
+.insp-modal-title{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3.8vw,25px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
+.insp-modal-text{font-size:14px;line-height:1.75;color:var(--text-soft)}
+.insp-modal-text strong{color:var(--text);font-weight:600}
+
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
 
@@ -171,11 +193,11 @@ body{overflow-x:hidden}
 <div id="s-cover" class="screen active">
   <div class="cover-simple">
     <div class="cover-mockup-wrap cover-mockup-desktop">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup.png" alt="Bloom Again Companion — the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup-square.png" alt="Bloom Again Companion — the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup-square.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
   </div>
@@ -193,11 +215,15 @@ body{overflow-x:hidden}
     <div class="pick-section">
       <span class="eyebrow">Start Here</span>
       <h1 class="pick-title serif">Where do you need relief first?</h1>
-      <p class="pick-sub">The flower is your map — soil to petals. Choose a layer to begin.</p>
+      <p class="pick-sub">The flower is your map, soil to petals. Choose a layer to begin.</p>
     </div>
 
     <!-- OPENING FLOWER NAV — the five chapters as the primary table of contents -->
+    <div class="opening-flower-wrap">
     <div class="opening-flower">
+      <div class="flower-wrap">
+        <img class="flower-illustration" src="bloom-again-images/flower-illustration.png" alt="Bloom Again flower, soil to petals">
+      </div>
       <div class="petal-nav-list" id="petal-nav-list">
         <button class="petal-btn" data-pillar="expansion" onclick="pickPillar('expansion')">
           <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg></span>
@@ -220,9 +246,7 @@ body{overflow-x:hidden}
           <span class="petal-text"><span class="fl-layer">Soil</span><span class="fl-title">Environment</span><span class="fl-frame">Input &amp; nourishment</span></span>
         </button>
       </div>
-      <div class="flower-wrap">
-        <img class="flower-illustration" src="bloom-again-images/flower-illustration.png" alt="Bloom Again flower — soil to petals">
-      </div>
+    </div>
     </div>
 
     <!-- ZERO CAPACITY ENTRY -->
@@ -235,7 +259,7 @@ body{overflow-x:hidden}
       <span class="eyebrow">You Have The Whole Guide</span>
 
       <div class="companion-copy">
-        <p class="companion-lead">Five layers, from soil to petals — this is the complete Bloom Again journey.</p>
+        <p class="companion-lead">Five layers, from soil to petals. This is the complete Bloom Again journey.</p>
         <p>Body and energy, relationships, environment, identity, and expansion hold together as one system here, not five separate tip lists.</p>
         <p>Come back to any layer whenever your nervous system needs it. There's no order you have to follow and no chapter you have to finish before another one counts.</p>
         <p class="companion-arc">From surviving → to restoring → to reconnecting → to blooming.</p>
@@ -259,8 +283,8 @@ body{overflow-x:hidden}
     <div class="kbox expand" id="kbox3">
       <div class="tips-eyebrow"><span class="eyebrow" id="tips-eyebrow"></span></div>
       <h2 class="tips-title" id="tips-title"></h2>
-      <p class="tips-lead">Six small things that help, right now.</p>
-      <div id="tips-list"></div>
+      <p class="tips-lead">Six small things that help, right now. Choose one to open it.</p>
+      <div id="tips-list" class="insp-list"></div>
     </div>
   </div>
 </div>
@@ -287,7 +311,7 @@ body{overflow-x:hidden}
 
     <hr class="zero-divider">
 
-    <p class="zero-sub">For the next 24–72 hours, your job is not to fix your life.</p>
+    <p class="zero-sub">For the next 24 to 72 hours, your job is not to fix your life.</p>
 
     <div class="zero-steps">
       <div class="zero-step"><div class="zero-step-n">1</div><div class="zero-step-text">Stop adding stimulation. Put the phone down. Dim the lights. Reduce noise.</div></div>
@@ -307,6 +331,20 @@ body{overflow-x:hidden}
     <div class="zero-back-wrap">
       <button class="kit-cta-btn" onclick="goTo('kit')">Back to Main Menu</button>
     </div>
+  </div>
+</div>
+
+<!-- INSPIRATION MODAL — content + photos live here, not in the overview.
+     Applies to every chapter and every sub-area the same way. -->
+<div class="insp-modal" id="insp-modal">
+  <div class="insp-modal-scrim" onclick="closeInsp()"></div>
+  <div class="insp-modal-card">
+    <button class="insp-modal-close" onclick="closeInsp()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="insp-modal-media" id="insp-modal-media"></div>
+    <h3 class="insp-modal-title" id="insp-modal-title"></h3>
+    <p class="insp-modal-text" id="insp-modal-text"></p>
   </div>
 </div>
 
@@ -360,52 +398,52 @@ const KIT = {
     q:"Where in your environment do you feel the most pressure?",
     subs:[
       {id:'home',label:'Home',img:'ba-17_curtain-window.png',tips:[
-        {title:'Turn one corner into your recovery zone',img:'cozy.png',body:"Pick a single space — a bed, a corner, a chair — and lower the lights, quiet the noise, and clear only what's directly in your path. Visual clutter keeps your <strong>nervous system scanning for threat</strong>, even when nothing is actually wrong. You don't need the whole house to feel safe. You need one square meter that reliably does."},
-        {title:"Pre-decide so your brain doesn't have to",img:'decisionmaking.jpg',body:"Every choice you make burns through the same limited mental fuel — this is <strong>decision fatigue</strong>, and a depleted nervous system has almost none of it left. Keep water, easy food, chargers, and anything you already rely on within arm's reach. Removing tiny decisions protects the little bandwidth you have for the ones that actually matter."},
+        {title:'Turn one corner into your recovery zone',img:'cozy.png',body:"Pick a single space, a bed, a corner, a chair, and lower the lights, quiet the noise, and clear only what's directly in your path. Visual clutter keeps your <strong>nervous system scanning for threat</strong>, even when nothing is actually wrong. You don't need the whole house to feel safe. You need one square meter that reliably does."},
+        {title:"Pre-decide so your brain doesn't have to",img:'decisionmaking.jpg',body:"Every choice you make burns through the same limited mental fuel, known as <strong>decision fatigue</strong>, and a depleted nervous system has almost none of it left. Keep water, easy food, chargers, and anything you already rely on within arm's reach. Removing tiny decisions protects the little bandwidth you have for the ones that actually matter."},
         {title:'Let "good enough" be enough',img:'comfy.png',body:"Dishes and laundry can wait; an exhausted body recovering cannot. Chasing a spotless home while depleted asks your <strong>already-taxed stress response</strong> to work even harder, not less. Self-compassion consistently does more for recovery than a higher standard does. A messy home is not a failure. It's just a home."},
-        {title:'Let sound do some of the softening',body:"A fan, white noise, or soft instrumental music can mask the unpredictable sounds — a slammed door, a raised voice, traffic — that keep your <strong>auditory startle response</strong> primed. A steady, low background hum tells your nervous system nothing sudden is coming."},
+        {title:'Let sound do some of the softening',body:"A fan, white noise, or soft instrumental music can mask unpredictable sounds like a slammed door, a raised voice, or traffic that keep your <strong>auditory startle response</strong> primed. A steady, low background hum tells your nervous system nothing sudden is coming."},
         {title:"Give the clutter a landing pad, not a verdict",body:"One basket or bin that catches loose things through the day means mess has somewhere to go without becoming a decision. <strong>Working memory</strong> is a limited resource, and every visible pile is quietly asking your brain to track it. A landing pad takes that job off your plate."},
         {title:'Match your lighting to the hour',body:"Bright, cool light in the morning and warm, dim light in the evening both send real signals to your <strong>circadian rhythm</strong> about when to be alert and when to wind down. Fighting that rhythm with harsh evening light is a small, constant tax on your ability to eventually rest."}
       ]},
       {id:'work',label:'Work',img:'ba-21_mechanical-timer.png',tips:[
-        {title:"Sick leave isn't something you earn",img:'timeoff.png',body:"If you are genuinely unwell, taking leave is maintenance, not indulgence. Pushing through keeps your body's <strong>stress-hormone system</strong> activated long after the workday ends, which is part of why burnout compounds instead of resolving on its own. Recovery isn't a reward for reaching collapse — it's allowed the moment you notice you need it."},
-        {title:'Protect yourself from constant switching',img:'digital detox.png',body:"Every jump between a message, a task, and a meeting costs you a hidden <strong>attention tax</strong> — part of your focus stays stuck on the last thing even as you move to the next. Fewer notifications, fewer open tabs, fewer simultaneous demands means less of that residue piling up. A depleted system can't afford the toll of constant switching."},
-        {title:'Build a wall between work and rest',img:'hour of work.png',body:"If you work from home, resist turning your bed into your desk — your body needs at least one space it associates only with safety, not tasks. Even ten uninterrupted minutes of real detachment lets your system shift out of <strong>high-alert mode</strong>. Distance from work isn't disloyalty. It's what makes sustainable output possible at all."},
-        {title:'Name the ask before you agree to it',body:"\"What exactly do you need, and by when?\" turns a vague, open-ended request into something you can actually plan around. Open loops are one of the biggest hidden drains on <strong>working memory</strong> — clarity closes them before they start costing you."},
-        {title:"Let your body move between blocks",body:"Standing, stretching, or stepping outside for two minutes between tasks isn't a break from productivity — it's what lets your <strong>vagus nerve</strong> reset before the next demand lands. A still body in a chair for eight hours stays quietly activated the whole time."},
-        {title:'Do one thing at a time, on purpose',body:"Every switch between tasks costs real, measurable focus — this is <strong>task-switching cost</strong>, and it adds up even when the tasks themselves feel small. Closing extra tabs and finishing one thing before opening the next isn't slower. It's usually faster, and it costs you less."}
+        {title:"Sick leave isn't something you earn",img:'timeoff.png',body:"If you are genuinely unwell, taking leave is maintenance, not indulgence. Pushing through keeps your body's <strong>stress-hormone system</strong> activated long after the workday ends, which is part of why burnout compounds instead of resolving on its own. Recovery isn't a reward for reaching collapse. It's allowed the moment you notice you need it."},
+        {title:'Protect yourself from constant switching',img:'digital detox.png',body:"Every jump between a message, a task, and a meeting costs you a hidden <strong>attention tax</strong>, since part of your focus stays stuck on the last thing even as you move to the next. Fewer notifications, fewer open tabs, fewer simultaneous demands means less of that residue piling up. A depleted system can't afford the toll of constant switching."},
+        {title:'Build a wall between work and rest',img:'hour of work.png',body:"If you work from home, resist turning your bed into your desk. Your body needs at least one space it associates only with safety, not tasks. Even ten uninterrupted minutes of real detachment lets your system shift out of <strong>high-alert mode</strong>. Distance from work isn't disloyalty. It's what makes sustainable output possible at all."},
+        {title:'Name the ask before you agree to it',body:"\"What exactly do you need, and by when?\" turns a vague, open-ended request into something you can actually plan around. Open loops are one of the biggest hidden drains on <strong>working memory</strong>, and clarity closes them before they start costing you."},
+        {title:"Let your body move between blocks",body:"Standing, stretching, or stepping outside for two minutes between tasks isn't a break from productivity. It's what lets your <strong>vagus nerve</strong> reset before the next demand lands. A still body in a chair for eight hours stays quietly activated the whole time."},
+        {title:'Do one thing at a time, on purpose',body:"Every switch between tasks costs real, measurable focus, known as <strong>task-switching cost</strong>, and it adds up even when the tasks themselves feel small. Closing extra tabs and finishing one thing before opening the next isn't slower. It's usually faster, and it costs you less."}
       ]},
       {id:'physical',label:'Physical',img:'ba-06_potted-plant-window.png',tips:[
-        {title:'Turn down the sensory volume',img:'noisereducitons.jpg',body:"Harsh lighting, background noise, strong smells, scratchy fabric — each one is a small tax on a nervous system already running a deficit. If you're highly sensitive, your brain genuinely takes in <strong>more sensory data per second</strong> than average, which means it needs proportionally more relief. Softening even one input at a time counts as real regulation."},
-        {title:'Make your bedroom boringly calm',img:'sleepMAIN.jpg',body:"Light exposure, even dim light, can suppress the <strong>melatonin</strong> your body needs to feel sleepy and to actually recover overnight. An eye mask, blackout curtains, and low, warm lighting aren't excessive — they're structural support for an overstimulated system. The calmer the room looks, the less your body has to work to settle in it."},
-        {title:'Regulate before you reach the edge',img:'diffuser.png',body:"Your capacity to absorb stimulation isn't fixed — it's a window that narrows the more depleted you get, sometimes called your <strong>window of tolerance</strong>. Waiting until you're already overwhelmed to reduce input is like trying to put out a fire mid-blaze. Lowering stimulation early, before you're at your limit, is what real prevention looks like."},
-        {title:'Layer softness where your body touches things',body:"A cushion, a blanket, socks instead of bare feet on a cold floor — small points of physical comfort feed your brain steady, reassuring <strong>proprioceptive input</strong>. Comfort here isn't indulgence. It's one more signal telling your body it's safe to stand down."},
+        {title:'Turn down the sensory volume',img:'noisereducitons.jpg',body:"Harsh lighting, background noise, strong smells, and scratchy fabric are each a small tax on a nervous system already running a deficit. If you're highly sensitive, your brain genuinely takes in <strong>more sensory data per second</strong> than average, which means it needs proportionally more relief. Softening even one input at a time counts as real regulation."},
+        {title:'Make your bedroom boringly calm',img:'sleepMAIN.jpg',body:"Light exposure, even dim light, can suppress the <strong>melatonin</strong> your body needs to feel sleepy and to actually recover overnight. An eye mask, blackout curtains, and low, warm lighting aren't excessive. They're structural support for an overstimulated system. The calmer the room looks, the less your body has to work to settle in it."},
+        {title:'Regulate before you reach the edge',img:'diffuser.png',body:"Your capacity to absorb stimulation isn't fixed. It's a window that narrows the more depleted you get, sometimes called your <strong>window of tolerance</strong>. Waiting until you're already overwhelmed to reduce input is like trying to put out a fire mid-blaze. Lowering stimulation early, before you're at your limit, is what real prevention looks like."},
+        {title:'Layer softness where your body touches things',body:"A cushion, a blanket, or socks instead of bare feet on a cold floor are small points of physical comfort that feed your brain steady, reassuring <strong>proprioceptive input</strong>. Comfort here isn't indulgence. It's one more signal telling your body it's safe to stand down."},
         {title:'Let fresh air do some of the work',body:"Opening a window for even a few minutes shifts temperature, humidity, and oxygen levels enough to measurably support a calmer <strong>parasympathetic state</strong>. It costs nothing and asks nothing of you except letting the air move."},
-        {title:"Keep one low-stimulation hour non-negotiable",body:"Pick one hour a day — dim light, no screens, minimal noise — and protect it the way you'd protect a meeting. Your <strong>sensory bandwidth</strong> isn't unlimited, and a guaranteed quiet hour gives it somewhere reliable to recover."}
+        {title:"Keep one low-stimulation hour non-negotiable",body:"Pick one hour a day with dim light, no screens, and minimal noise, and protect it the way you'd protect a meeting. Your <strong>sensory bandwidth</strong> isn't unlimited, and a guaranteed quiet hour gives it somewhere reliable to recover."}
       ]},
       {id:'digital',label:'Digital',img:'ba-12_phone-facedown.png',tips:[
         {title:"Scrolling isn't the same as resting",img:'time off the phone.png',body:"Your phone can keep your <strong>attention and emotional systems fully engaged</strong> even while your body is completely still, which means scrolling can look like rest without giving your nervous system any of the actual benefit. Try putting it somewhere physically out of reach, not just face-down. Distance is what actually breaks the automatic reach."},
-        {title:'Notifications are tiny alarms',img:'digital detox.png',body:"Each ping is a small, unpredictable jolt — and unpredictability is exactly what keeps a stressed body on edge, since it can never fully relax while waiting for the next one. Turning off what isn't essential isn't about discipline. It's about giving your <strong>cortisol levels</strong> one less reason to stay elevated all day."},
-        {title:'Choose real recovery over more input',img:'comfy.png',body:"Audiobooks at low volume, familiar music, darkness, silence, or simply lying still with nothing playing can restore you more than another hour of content ever will. True recovery needs <strong>low stimulation</strong>, not just different stimulation — your nervous system can't tell the difference between \"productive\" scrolling and any other kind of overload."},
-        {title:'Batch the checking instead of banning it',body:"Fixed check-in times — say, 10am and 4pm — satisfy the urge to look without leaving you at the mercy of it all day. Unpredictable checking feeds the same <strong>dopamine-seeking loop</strong> as a slot machine; a schedule quietly breaks that pattern."},
-        {title:'Curate what reaches you, not just how often',body:"Muting or unfollowing accounts that reliably spike envy or inadequacy is not sensitivity — it's basic maintenance. <strong>Social comparison</strong> operates below conscious awareness, which means you often feel worse before you've noticed why."},
+        {title:'Notifications are tiny alarms',img:'digital detox.png',body:"Each ping is a small, unpredictable jolt, and unpredictability is exactly what keeps a stressed body on edge, since it can never fully relax while waiting for the next one. Turning off what isn't essential isn't about discipline. It's about giving your <strong>cortisol levels</strong> one less reason to stay elevated all day."},
+        {title:'Choose real recovery over more input',img:'comfy.png',body:"Audiobooks at low volume, familiar music, darkness, silence, or simply lying still with nothing playing can restore you more than another hour of content ever will. True recovery needs <strong>low stimulation</strong>, not just different stimulation. Your nervous system can't tell the difference between \"productive\" scrolling and any other kind of overload."},
+        {title:'Batch the checking instead of banning it',body:"Fixed check-in times, say 10am and 4pm, satisfy the urge to look without leaving you at the mercy of it all day. Unpredictable checking feeds the same <strong>dopamine-seeking loop</strong> as a slot machine; a schedule quietly breaks that pattern."},
+        {title:'Curate what reaches you, not just how often',body:"Muting or unfollowing accounts that reliably spike envy or inadequacy is not sensitivity. It's basic maintenance. <strong>Social comparison</strong> operates below conscious awareness, which means you often feel worse before you've noticed why."},
         {title:'Let boredom happen on purpose',body:"Resist the reflexive reach for your phone in an idle moment, even just once today. Unstructured, screen-free time is what lets your brain's <strong>default mode network</strong> do the quiet background processing that constant input never allows."}
       ]},
       {id:'time',label:'Time',img:'ba-16_calendar-circled.png',tips:[
-        {title:"Recovery doesn't come with homework",img:'timeoff.png',body:"You don't need a flawless morning routine or a five-step plan to be resting correctly. If you have two free hours, you're allowed to spend both of them lying down and doing absolutely nothing else. Turning rest into another task to perform defeats its entire biological purpose: <strong>letting your system actually downshift</strong>."},
-        {title:'Give yourself room between things',img:'hour of work.png',body:"The transition between one demand and the next is where your nervous system gets the chance to downshift from high alert back toward calm — skip it, and stress just keeps accumulating unprocessed. Even sixty seconds of nothing between tasks counts as real recovery. <strong>Transitions aren't wasted minutes.</strong> They're where the reset actually happens."},
-        {title:'Ask what can simply disappear',img:'nodecisions.png',body:"When your capacity is already low, the answer isn't a better system for fitting more in — it's actively removing things from the list. Your energy today is a <strong>finite, non-negotiable resource</strong>, not a productivity problem to optimize around. Some of what feels urgent can simply wait. Let it."},
-        {title:'Protect one buffer block a day',body:"A literal, scheduled block of nothing between two demanding things does real work — it's the difference between one stressor ending before the next begins, instead of stacking. Unbuffered days keep your <strong>anticipatory stress</strong> running continuously, even during the calm parts."},
-        {title:'"Later" is allowed to be the whole answer',body:"Not everything that feels urgent actually is. Deferring a non-urgent ask isn't avoidance — it's resisting the pull of <strong>urgency bias</strong>, the mind's tendency to treat \"soon\" and \"important\" as the same thing when they rarely are."},
-        {title:'Sort by importance before you sort by loudness',body:"The task that feels most urgent is often just the one that arrived last or made the most noise, not the one that matters most. A quick gut-check — does this actually matter, or does it just feel loud — quiets your <strong>threat-appraisal system</strong> enough to think clearly."}
+        {title:"Recovery doesn't come with homework",img:'timeoff.png',body:"You don't need a flawless morning routine or a five-step plan to be resting correctly. If you have two free hours, you're allowed to spend both of them lying down and doing absolutely nothing else. Turning rest into another task to perform defeats its entire biological purpose, which is <strong>letting your system actually downshift</strong>."},
+        {title:'Give yourself room between things',img:'hour of work.png',body:"The transition between one demand and the next is where your nervous system gets the chance to downshift from high alert back toward calm. Skip it, and stress just keeps accumulating unprocessed. Even sixty seconds of nothing between tasks counts as real recovery. <strong>Transitions aren't wasted minutes.</strong> They're where the reset actually happens."},
+        {title:'Ask what can simply disappear',img:'nodecisions.png',body:"When your capacity is already low, the answer isn't a better system for fitting more in. It's actively removing things from the list. Your energy today is a <strong>finite, non-negotiable resource</strong>, not a productivity problem to optimize around. Some of what feels urgent can simply wait. Let it."},
+        {title:'Protect one buffer block a day',body:"A literal, scheduled block of nothing between two demanding things does real work. It's the difference between one stressor ending before the next begins, instead of stacking. Unbuffered days keep your <strong>anticipatory stress</strong> running continuously, even during the calm parts."},
+        {title:'"Later" is allowed to be the whole answer',body:"Not everything that feels urgent actually is. Deferring a non-urgent ask isn't avoidance. It's resisting the pull of <strong>urgency bias</strong>, the mind's tendency to treat \"soon\" and \"important\" as the same thing when they rarely are."},
+        {title:'Sort by importance before you sort by loudness',body:"The task that feels most urgent is often just the one that arrived last or made the most noise, not the one that matters most. A quick gut check, does this actually matter or does it just feel loud, quiets your <strong>threat-appraisal system</strong> enough to think clearly."}
       ]},
       {id:'financial',label:'Financial',img:'ba-25_jar-coin-seedling.png',tips:[
         {title:'Narrow decisions to what\'s urgent',img:'finances.png',body:"Money stress activates the same <strong>threat-response system</strong> in your body as physical danger, which means trying to make sound decisions while already depleted is working against your own biology. Make a short list of what genuinely needs attention this week, and let everything else wait until you have more capacity to think clearly."},
-        {title:'Let convenience be a real recovery tool',img:'warmmeals.png',body:"Paying for delivery, prepared meals, or a few hours of cleaning help isn't a failure of thrift — when it stops you from running your body into the ground, it's a legitimate investment in your <strong>nervous system's recovery</strong>, not a luxury. Sustainable functioning is worth more long-term than the money saved by doing everything yourself."},
-        {title:"Exhaustion isn't a financial character flaw",img:'heart.png',body:"Financial stress is genuinely, physiologically stressful — not a personal failing you should be able to think your way out of. <strong>Chronic stress hormones actively impair the exact cognitive functions</strong> you need for clear money decisions, which can trap you in a cycle that has nothing to do with willpower. Getting practical support here is part of stabilizing your whole system."},
-        {title:"Automate what you can so willpower isn't required",body:"Auto-pay and auto-transfer move recurring decisions out of your daily attention entirely. Every bill you have to remember and act on manually is a small, ongoing draw on your <strong>vigilance</strong> — automating it gives that attention back."},
-        {title:"Separate 'must decide now' from 'can wait'",body:"Two short lists — what genuinely needs a decision this week, and everything else — keeps money stress from feeling like one giant, undifferentiated weight. Your brain handles a few clear priorities far better than one long, blurred one."},
-        {title:'Let one trusted person see the numbers with you',body:"Money stress isolates by nature — most people carry it silently, which only adds shame to an already-heavy load. Sharing the actual numbers with one safe person distributes some of the <strong>cognitive load</strong>, even if they can't fix anything."}
+        {title:'Let convenience be a real recovery tool',img:'warmmeals.png',body:"Paying for delivery, prepared meals, or a few hours of cleaning help isn't a failure of thrift. When it stops you from running your body into the ground, it's a legitimate investment in your <strong>nervous system's recovery</strong>, not a luxury. Sustainable functioning is worth more long-term than the money saved by doing everything yourself."},
+        {title:"Exhaustion isn't a financial character flaw",img:'heart.png',body:"Financial stress is genuinely, physiologically stressful, not a personal failing you should be able to think your way out of. <strong>Chronic stress hormones actively impair the exact cognitive functions</strong> you need for clear money decisions, which can trap you in a cycle that has nothing to do with willpower. Getting practical support here is part of stabilizing your whole system."},
+        {title:"Automate what you can so willpower isn't required",body:"Auto-pay and auto-transfer move recurring decisions out of your daily attention entirely. Every bill you have to remember and act on manually is a small, ongoing draw on your <strong>vigilance</strong>, and automating it gives that attention back."},
+        {title:"Separate 'must decide now' from 'can wait'",body:"Two short lists, what genuinely needs a decision this week and everything else, keep money stress from feeling like one giant, undifferentiated weight. Your brain handles a few clear priorities far better than one long, blurred one."},
+        {title:'Let one trusted person see the numbers with you',body:"Money stress isolates by nature. Most people carry it silently, which only adds shame to an already-heavy load. Sharing the actual numbers with one safe person distributes some of the <strong>cognitive load</strong>, even if they can't fix anything."}
       ]}
     ]
   },
@@ -413,28 +451,28 @@ const KIT = {
     q:"Where in your relationships do you feel the most pressure?",
     subs:[
       {id:'boundaries',label:'Boundaries',img:'ba-09_brass-key-leaf.png',tips:[
-        {title:'A short no is a complete sentence',img:'boundaries.jpg',body:'You don\'t need a courtroom case to decline something — "I don\'t have capacity for this right now" is enough on its own. Over-explaining is often a <strong>learned safety behavior</strong>, not a requirement, especially for anyone conditioned to justify their limits before they\'re allowed to have them. The shorter version is still valid.'},
+        {title:'A short no is a complete sentence',img:'boundaries.jpg',body:'You don\'t need a courtroom case to decline something. "I don\'t have capacity for this right now" is enough on its own. Over-explaining is often a <strong>learned safety behavior</strong>, not a requirement, especially for anyone conditioned to justify their limits before they\'re allowed to have them. The shorter version is still valid.'},
         {title:'Protect your lowest-energy hours',img:'digital detox.png',body:"Notice when your capacity is naturally at its thinnest, often evenings after a demanding day, and treat that window as protected time. You can mute messages, delay replies, or simply tell people when you'll be reachable again. <strong>Guarding your lowest hours</strong> prevents the kind of depletion that takes days to recover from."},
-        {title:'Notice who costs more than they give',img:'letting go.png',body:"Nervous systems are contagious — you can pick up someone else's dysregulation just by being near them, the same mechanism that lets calm people help you settle. During acute depletion, proximity to people who demand, criticize, or constantly need reassurance may cost more than you currently have. <strong>Distance is allowed to be temporary</strong>, not permanent."},
+        {title:'Notice who costs more than they give',img:'letting go.png',body:"Nervous systems are contagious. You can pick up someone else's dysregulation just by being near them, the same mechanism that lets calm people help you settle. During acute depletion, proximity to people who demand, criticize, or constantly need reassurance may cost more than you currently have. <strong>Distance is allowed to be temporary</strong>, not permanent."},
         {title:"Decide your answer before you're asked",body:"If you already know a certain request drains you, decide your response in advance instead of improvising under pressure. Pre-deciding removes the moment of <strong>on-the-spot decision fatigue</strong> where guilt usually wins."},
         {title:'A boundary is a sentence, not a negotiation',body:"You don't owe a counter-offer once you've said no. Waiting for the other person to accept it before you feel allowed to hold it keeps your <strong>nervous system</strong> in a bracing, unresolved state longer than it needs to be."},
-        {title:'Notice the guilt, then check the facts',body:"Guilt after a boundary is common and doesn't automatically mean you did something wrong — it often just means you're breaking an old pattern. <strong>Anticipatory guilt</strong> fades faster than it feels like it will in the moment."}
+        {title:'Notice the guilt, then check the facts',body:"Guilt after a boundary is common and doesn't automatically mean you did something wrong. It often just means you're breaking an old pattern. <strong>Anticipatory guilt</strong> fades faster than it feels like it will in the moment."}
       ]},
       {id:'attachment',label:'Attachment',img:'ba-08_book-pressed-botanicals.png',tips:[
-        {title:"Don't let exhaustion write the verdict",img:'attachment.jpg',body:"When you're running on empty, your brain's threat-detection system tilts toward the <strong>worst-case read</strong> of almost everything — a delayed reply can start to feel like rejection. This is a known effect of depletion, not a reliable signal about the relationship. Give yourself permission to postpone big conclusions until you've actually recovered."},
-        {title:'One safe person beats ten conversations',img:'coregulation.jpg',body:"Your nervous system doesn't need maximum contact — it needs contact that actually feels safe. Time with one calm, trustworthy person can do more for your <strong>regulation</strong> than a full day of surface-level interaction, because safety, not quantity, is what your body is tracking. Choose depth over volume while you're depleted."},
-        {title:"Needing reassurance isn't weakness",img:'comfort2.jpg',body:"Humans are wired to regulate partly through each other — this isn't a flaw to override, it's basic <strong>nervous-system architecture</strong>. Wanting closeness when you're overwhelmed doesn't mean you're too dependent; it means your body is doing exactly what it's built to do. Let yourself reach for it without the extra layer of shame."},
-        {title:'Ask before you assume',body:"A short, direct question — \"are we okay?\" — resolves uncertainty faster than hours spent privately interpreting someone's tone. Left unchecked, ambiguity keeps your <strong>threat-detection system</strong> quietly scanning for confirmation of the worst case."},
+        {title:"Don't let exhaustion write the verdict",img:'attachment.jpg',body:"When you're running on empty, your brain's threat-detection system tilts toward the <strong>worst-case read</strong> of almost everything, where a delayed reply can start to feel like rejection. This is a known effect of depletion, not a reliable signal about the relationship. Give yourself permission to postpone big conclusions until you've actually recovered."},
+        {title:'One safe person beats ten conversations',img:'coregulation.jpg',body:"Your nervous system doesn't need maximum contact. It needs contact that actually feels safe. Time with one calm, trustworthy person can do more for your <strong>regulation</strong> than a full day of surface-level interaction, because safety, not quantity, is what your body is tracking. Choose depth over volume while you're depleted."},
+        {title:"Needing reassurance isn't weakness",img:'comfort2.jpg',body:"Humans are wired to regulate partly through each other. This isn't a flaw to override. It's basic <strong>nervous-system architecture</strong>. Wanting closeness when you're overwhelmed doesn't mean you're too dependent; it means your body is doing exactly what it's built to do. Let yourself reach for it without the extra layer of shame."},
+        {title:'Ask before you assume',body:"A short, direct question, like \"are we okay?\", resolves uncertainty faster than hours spent privately interpreting someone's tone. Left unchecked, ambiguity keeps your <strong>threat-detection system</strong> quietly scanning for confirmation of the worst case."},
         {title:'Consistency matters more than intensity',body:"A person who shows up reliably in small ways is doing more for your sense of safety than someone who is occasionally intense and often absent. <strong>Predictability</strong>, not grand gestures, is what your nervous system actually reads as safe."},
-        {title:"You're allowed to need reassurance more than once",body:"Needing to hear the same comforting thing again isn't a flaw in you — some seasons ask for more repetition before something new can be believed. <strong>Rebuilding felt safety</strong> is rarely a one-conversation process."}
+        {title:"You're allowed to need reassurance more than once",body:"Needing to hear the same comforting thing again isn't a flaw in you. Some seasons ask for more repetition before something new can be believed. <strong>Rebuilding felt safety</strong> is rarely a one-conversation process."}
       ]},
       {id:'coregulation',label:'Co-Regulation',img:'ba-14_hammock-trees.png',tips:[
-        {title:'Borrow a calmer nervous system',img:'coregulation.jpg',body:"Spend time near people whose presence lets your body actually soften, not people you have to perform steadiness for. Nervous systems synchronize with what's nearby, a real, measurable effect sometimes called <strong>co-regulation</strong> — so sitting beside someone calm can lower your own activation without either of you saying a word."},
+        {title:'Borrow a calmer nervous system',img:'coregulation.jpg',body:"Spend time near people whose presence lets your body actually soften, not people you have to perform steadiness for. Nervous systems synchronize with what's nearby, a real, measurable effect sometimes called <strong>co-regulation</strong>, so sitting beside someone calm can lower your own activation without either of you saying a word."},
         {title:"You don't always need to talk",img:'comfort2.jpg',body:"Sitting quietly beside someone safe, sharing a simple meal, or receiving a hug can be real connection without another conversation to manage. Physical closeness and touch can trigger the release of <strong>oxytocin</strong>, a hormone directly tied to feeling calmer and safer, independent of anything either of you says out loud."},
-        {title:'Ask for something specific',img:'heart.png',body:'"Can you sit with me?" or "Can you make me something to eat?" is far easier for someone to say yes to than a vague "I need help." Specific requests <strong>remove the guesswork</strong> that often stalls people from offering support at all. Precision isn\'t demanding — it\'s what actually makes it possible for others to show up.'},
-        {title:'Notice who you feel different around',body:"Pay attention to whose company leaves your shoulders lower and whose leaves you subtly braced, even if nothing was said. That physical difference is real data about <strong>co-regulation</strong> — not a mood, a measurable shift."},
-        {title:'Let calm be contagious on purpose',body:"Sitting near someone regulated — even in comfortable silence — can lower your own <strong>heart-rate variability</strong> stress markers without either of you doing anything active. Proximity alone is doing real work."},
-        {title:'A pet or a plant can co-regulate too',body:"Slow, rhythmic contact — petting an animal, tending something living — engages the same calming touch pathways as human contact. <strong>Co-regulation</strong> isn't limited to people; it's about steady, safe presence."}
+        {title:'Ask for something specific',img:'heart.png',body:'"Can you sit with me?" or "Can you make me something to eat?" is far easier for someone to say yes to than a vague "I need help." Specific requests <strong>remove the guesswork</strong> that often stalls people from offering support at all. Precision isn\'t demanding. It\'s what actually makes it possible for others to show up.'},
+        {title:'Notice who you feel different around',body:"Pay attention to whose company leaves your shoulders lower and whose leaves you subtly braced, even if nothing was said. That physical difference is real data about <strong>co-regulation</strong>, not a mood, but a measurable shift."},
+        {title:'Let calm be contagious on purpose',body:"Sitting near someone regulated, even in comfortable silence, can lower your own <strong>heart-rate variability</strong> stress markers without either of you doing anything active. Proximity alone is doing real work."},
+        {title:'A pet or a plant can co-regulate too',body:"Slow, rhythmic contact, like petting an animal or tending something living, engages the same calming touch pathways as human contact. <strong>Co-regulation</strong> isn't limited to people; it's about steady, safe presence."}
       ]},
       {id:'social',label:'Social',img:'ba-20_pressed-ferns-linen.png',tips:[
         {title:'Shrink your circle, not your worth',img:'social withdrawal.jpg',body:"You don't have to disappear from everyone, just narrow things down to the small handful of people who genuinely feel safe right now. Social contact costs real energy to process, especially for a <strong>sensitive or overstimulated nervous system</strong>, and that cost doesn't disappear just because the people involved are kind. Protecting your circle is protecting your recovery."},
@@ -442,23 +480,23 @@ const KIT = {
         {title:"You're allowed to be boring right now",img:'cozy.png',body:"You don't have to be entertaining, engaged, or \"on\" to deserve someone's company while you're recovering. That pressure to perform is usually <strong>self-imposed, not actually required</strong> by the people who care about you. Let conversations be short, let silences sit, let yourself be exactly as low-energy as you actually are."},
         {title:'Give yourself a real exit time',body:"Deciding in advance when you'll leave an event, and telling a friend that plan, removes the pressure of guessing your limit in the moment. Knowing there's an end point measurably lowers <strong>anticipatory social fatigue</strong> before you've even arrived."},
         {title:"Recovery time isn't optional after connection",body:"Even good, wanted social time has a cost for a sensitive nervous system, and needing quiet afterward isn't a sign something went wrong. Budgeting <strong>recovery time</strong> after gatherings is planning, not antisocial behavior."},
-        {title:'One honest sentence beats a performed smile',body:"\"I'm a bit low on energy today\" costs less than maintaining a cheerful front you don't feel. <strong>Masking</strong> is measurably tiring — dropping it, even partially, with safe people frees up real capacity."}
+        {title:'One honest sentence beats a performed smile',body:"\"I'm a bit low on energy today\" costs less than maintaining a cheerful front you don't feel. <strong>Masking</strong> is measurably tiring, and dropping it, even partially, with safe people frees up real capacity."}
       ]},
       {id:'receiving',label:'Support',img:'ba-02_notebook-pen.png',tips:[
-        {title:'Let people actually help you',img:'food.png',body:"Food, groceries, errands, childcare, a ride somewhere — support doesn't have to be emotional or deep to genuinely count. Accepting practical help isn't weakness; it's <strong>redistributing the load</strong> your system is currently unable to carry alone. Say yes to the small offers. They add up more than they seem to."},
-        {title:'Make the ask concrete',img:'warmmeals.png',body:'"Could you bring me dinner tonight?" is something a person can actually act on — "can you support me?" often just creates more decisions for them to make. Vague requests <strong>quietly increase the very decision fatigue</strong> you\'re trying to escape, for both of you. Specific, small, and doable beats big and abstract every time.'},
-        {title:"Receiving doesn't require repayment",img:'heart.png',body:"You're allowed to accept care without immediately calculating how you'll pay it back. That reflex is often less about fairness and more about <strong>discomfort with vulnerability</strong> — being on the receiving end can feel exposed even when it's exactly what you need. Reciprocity can wait until you actually have the capacity for it again."},
-        {title:'Practice receiving something small today',body:"A compliment, a coffee someone offers to buy, help carrying something — let one small thing in today without deflecting it. <strong>Receiving</strong> is a practiced skill, not a fixed trait, and it gets easier with small reps."},
+        {title:'Let people actually help you',img:'food.png',body:"Food, groceries, errands, childcare, a ride somewhere. Support doesn't have to be emotional or deep to genuinely count. Accepting practical help isn't weakness; it's <strong>redistributing the load</strong> your system is currently unable to carry alone. Say yes to the small offers. They add up more than they seem to."},
+        {title:'Make the ask concrete',img:'warmmeals.png',body:'"Could you bring me dinner tonight?" is something a person can actually act on. "Can you support me?" often just creates more decisions for them to make. Vague requests <strong>quietly increase the very decision fatigue</strong> you\'re trying to escape, for both of you. Specific, small, and doable beats big and abstract every time.'},
+        {title:"Receiving doesn't require repayment",img:'heart.png',body:"You're allowed to accept care without immediately calculating how you'll pay it back. That reflex is often less about fairness and more about <strong>discomfort with vulnerability</strong>, since being on the receiving end can feel exposed even when it's exactly what you need. Reciprocity can wait until you actually have the capacity for it again."},
+        {title:'Practice receiving something small today',body:"A compliment, a coffee someone offers to buy, help carrying something. Let one small thing in today without deflecting it. <strong>Receiving</strong> is a practiced skill, not a fixed trait, and it gets easier with small reps."},
         {title:'Say thank you and stop there',body:"You don't need to immediately offer something back to balance the scale. Resisting the urge to reciprocate on the spot interrupts the reflex that treats every gift as a <strong>debt</strong> instead of a gift."},
-        {title:"Let your ask be smaller than you think it needs to be",body:'Could you check in on me this week? is a completely reasonable, small request — you don\'t need a full crisis to justify asking for help. Small requests are the ones people can actually meet <strong>consistently</strong>.'}
+        {title:"Let your ask be smaller than you think it needs to be",body:'Could you check in on me this week? is a completely reasonable, small request. You don\'t need a full crisis to justify asking for help. Small requests are the ones people can actually meet <strong>consistently</strong>.'}
       ]},
       {id:'giving',label:'Giving',img:'ba-23_birds-nest-eggs.png',tips:[
-        {title:"You can't pour from an empty body",img:'letting go.png',body:"If helping someone else leaves you measurably more depleted, it isn't sustainable right now, no matter how much you want to show up. This isn't selfishness — it's basic <strong>resource physiology</strong>: a nervous system with nothing left to give can't manufacture more just because someone else needs it. Your limits are information, not a moral failing."},
-        {title:'Let the pause come before the yes',img:'decisionmaking.jpg',body:"Notice the automatic reflex to say yes before you've even checked whether you actually have the capacity — that instant agreement is often less a choice than a <strong>learned survival response</strong>. Give yourself even five seconds to ask: do I genuinely have this to give right now? The pause itself is the boundary."},
+        {title:"You can't pour from an empty body",img:'letting go.png',body:"If helping someone else leaves you measurably more depleted, it isn't sustainable right now, no matter how much you want to show up. This isn't selfishness. It's basic <strong>resource physiology</strong>, since a nervous system with nothing left to give can't manufacture more just because someone else needs it. Your limits are information, not a moral failing."},
+        {title:'Let the pause come before the yes',img:'decisionmaking.jpg',body:"Notice the automatic reflex to say yes before you've even checked whether you actually have the capacity. That instant agreement is often less a choice than a <strong>learned survival response</strong>. Give yourself even five seconds to ask: do I genuinely have this to give right now? The pause itself is the boundary."},
         {title:"Their emergency isn't automatically yours",img:'heart.png',body:"Someone else being in crisis doesn't obligate you to drop everything, even if guilt tries to convince you otherwise. Confusing <strong>compassion with obligation</strong> is a fast route to depletion, especially for anyone used to being the reliable one. Temporary unavailability, even during someone else's hard moment, is not the same thing as abandonment."},
-        {title:'Check your body before you check your calendar',body:"Before saying yes to helping someone, notice what happens in your body first — tightness or dread is information your calendar alone won't show you. <strong>Interoception</strong>, reading your own internal state, is a faster and more honest gauge than logic."},
+        {title:'Check your body before you check your calendar',body:"Before saying yes to helping someone, notice what happens in your body first. Tightness or dread is information your calendar alone won't show you. <strong>Interoception</strong>, reading your own internal state, is a faster and more honest gauge than logic."},
         {title:'Helping and rescuing are not the same thing',body:"Support that leaves someone still needing to solve their own problem is often more helpful long-term than stepping in and fixing it for them. <strong>Over-functioning for others</strong> can quietly deplete you while not actually serving them."},
-        {title:"It's allowed to be enough to just listen",body:"You don't have to solve someone else's problem to have shown up for them meaningfully. Presence alone regulates — offering a fix isn't always what <strong>co-regulation</strong> actually requires."}
+        {title:"It's allowed to be enough to just listen",body:"You don't have to solve someone else's problem to have shown up for them meaningfully. Presence alone regulates. Offering a fix isn't always what <strong>co-regulation</strong> actually requires."}
       ]}
     ]
   },
@@ -466,51 +504,51 @@ const KIT = {
     q:"What does your body need most right now?",
     subs:[
       {id:'sleep',label:'Sleep',img:'ba-18_lamp-book.png',tips:[
-        {title:'Sleep is maintenance, not a reward',img:'sleep.jpg',body:"Most adults need somewhere around <strong>seven to nine hours</strong> to actually recover, and a consistent bedtime matters almost as much as the total — it's what keeps your body's internal clock, and the cortisol rhythm tied to it, predictable. You don't need to earn rest by finishing everything first. Needing more sleep than usual right now is data, not laziness."},
-        {title:'Make the room aggressively boring',img:'sleep.png',body:"Dark, cool, quiet, and comfortable isn't excessive — it's the actual baseline your body needs to fall and stay asleep. Even small amounts of light can suppress the <strong>melatonin</strong> your brain relies on to initiate rest, so an eye mask and earplugs can matter more than they seem to, especially when your sensory system is already running hot."},
-        {title:'Protect the hour before bed',img:'cozy.png',body:"Screens, stimulating content, and emotionally charged conversations right before sleep keep your <strong>stress-response system</strong> active exactly when it needs to be winding down. Blue light in particular can delay melatonin release for hours, not minutes. A slow, boring, low-stimulation wind-down isn't precious — it's what actually lets your body cross the line into real rest."},
-        {title:'A wind-down routine works better than willpower',body:"The same few steps in the same order each night — dim lights, same drink, same playlist — teaches your body to associate the sequence with sleep itself. This kind of <strong>conditioned cueing</strong> works even on nights your mind is busy."},
+        {title:'Sleep is maintenance, not a reward',img:'sleep.jpg',body:"Most adults need somewhere around <strong>seven to nine hours</strong> to actually recover, and a consistent bedtime matters almost as much as the total. It's what keeps your body's internal clock, and the cortisol rhythm tied to it, predictable. You don't need to earn rest by finishing everything first. Needing more sleep than usual right now is data, not laziness."},
+        {title:'Make the room aggressively boring',img:'sleep.png',body:"Dark, cool, quiet, and comfortable isn't excessive. It's the actual baseline your body needs to fall and stay asleep. Even small amounts of light can suppress the <strong>melatonin</strong> your brain relies on to initiate rest, so an eye mask and earplugs can matter more than they seem to, especially when your sensory system is already running hot."},
+        {title:'Protect the hour before bed',img:'cozy.png',body:"Screens, stimulating content, and emotionally charged conversations right before sleep keep your <strong>stress-response system</strong> active exactly when it needs to be winding down. Blue light in particular can delay melatonin release for hours, not minutes. A slow, boring, low-stimulation wind-down isn't precious. It's what actually lets your body cross the line into real rest."},
+        {title:'A wind-down routine works better than willpower',body:"The same few steps in the same order each night, dim lights, same drink, same playlist, teach your body to associate the sequence with sleep itself. This kind of <strong>conditioned cueing</strong> works even on nights your mind is busy."},
         {title:"Get out of bed if you're not sleeping",body:"Lying awake and frustrated trains your brain to associate the bed with wakefulness instead of rest. Getting up briefly and returning when drowsy protects the <strong>bed-sleep association</strong> your body relies on."},
         {title:'Morning light matters as much as evening dark',body:"Getting natural light within the first hour of waking helps anchor your <strong>circadian rhythm</strong>, which makes falling asleep at night noticeably easier. It's a small, five-minute habit with an outsized effect."}
       ]},
       {id:'nourishment',label:'Nourishment',img:'ba-07_tea-linen.png',tips:[
-        {title:"Feed the system before the willpower runs out",img:'nourishment.jpg',body:"Your brain and body run on real fuel, not determination — coffee and willpower alone will eventually borrow energy you don't have to repay. Skipped meals let blood sugar drop low enough to <strong>mimic anxiety and brain fog</strong>, which can make an already-hard day feel even more unmanageable. Eat regularly, even if every meal is extremely simple."},
-        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"Aim for roughly <strong>20 to 30 grams of protein per meal</strong> — yogurt with fruit, eggs and toast, rice with chicken or tofu — since protein supplies the amino acids your brain needs to build calming neurotransmitters and keeps blood sugar far steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel."},
-        {title:'Hydration is nervous-system maintenance',img:'warmmeals.png',body:"Water and regular meals cover most ordinary dehydration — but if you've been sweating heavily, vomiting, or losing significant fluids, electrolytes like <strong>sodium, potassium, and magnesium</strong> genuinely matter, since even mild dehydration measurably worsens mood and focus. Electrolyte products aren't magic, but neglecting fluids will quietly work against everything else you're trying to do."},
-        {title:'Keep something easy within reach',body:"Nuts, fruit, crackers, anything that requires zero preparation, close by on genuinely low-capacity days. The barrier between hungry and fed matters more than the nutritional perfection of what you actually eat — <strong>blood sugar stability</strong> comes first."},
+        {title:"Feed the system before the willpower runs out",img:'nourishment.jpg',body:"Your brain and body run on real fuel, not determination. Coffee and willpower alone will eventually borrow energy you don't have to repay. Skipped meals let blood sugar drop low enough to <strong>mimic anxiety and brain fog</strong>, which can make an already-hard day feel even more unmanageable. Eat regularly, even if every meal is extremely simple."},
+        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"Aim for roughly <strong>20 to 30 grams of protein per meal</strong>, like yogurt with fruit, eggs and toast, or rice with chicken or tofu, since protein supplies the amino acids your brain needs to build calming neurotransmitters and keeps blood sugar far steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel."},
+        {title:'Hydration is nervous-system maintenance',img:'warmmeals.png',body:"Water and regular meals cover most ordinary dehydration, but if you've been sweating heavily, vomiting, or losing significant fluids, electrolytes like <strong>sodium, potassium, and magnesium</strong> genuinely matter, since even mild dehydration measurably worsens mood and focus. Electrolyte products aren't magic, but neglecting fluids will quietly work against everything else you're trying to do."},
+        {title:'Keep something easy within reach',body:"Nuts, fruit, crackers, anything that requires zero preparation, close by on genuinely low-capacity days. The barrier between hungry and fed matters more than the nutritional perfection of what you actually eat. <strong>Blood sugar stability</strong> comes first."},
         {title:"There's no such thing as a bad meal on a hard day",body:"Whatever you can manage to eat when you're depleted is the right meal. Restricting further on a hard day only adds physical stress on top of emotional stress, working directly against your <strong>stress-hormone regulation</strong>."},
         {title:'Warm food does more than fill you up',body:"A warm meal or drink can have a measurable calming effect beyond nutrition alone, tied to the same comfort and safety cues linked to <strong>vagal tone</strong>. Temperature is a real, physical input, not just a preference."}
       ]},
       {id:'movement',label:'Movement',img:'ba-11_yoga-mat-leaf.png',tips:[
-        {title:"Let your body discharge what it's holding",img:'movement2.jpg',body:"Stress hormones like cortisol and adrenaline don't just disappear once a stressful moment ends — gentle movement is one of the most effective ways to help your body actually <strong>complete that stress cycle</strong> and clear them. This might mean walking slowly around the room, not a workout. The goal is discharge, not performance."},
+        {title:"Let your body discharge what it's holding",img:'movement2.jpg',body:"Stress hormones like cortisol and adrenaline don't just disappear once a stressful moment ends. Gentle movement is one of the most effective ways to help your body actually <strong>complete that stress cycle</strong> and clear them. This might mean walking slowly around the room, not a workout. The goal is discharge, not performance."},
         {title:'Choose circulation over intensity',img:'sport.png',body:"A few minutes of gentle walking, stretching, or simply changing position increases blood flow and oxygen to your brain without spiking cortisol the way harder exercise can when you're already depleted. On a very low-capacity day, this small amount isn't a lesser version of movement. It's the <strong>right-sized version</strong> for where your body actually is."},
-        {title:'Let your body set the ceiling',img:'cozy.png',body:"If movement leaves you noticeably worse afterward instead of better, that's useful information, not a failure to push through. Exercising an already-depleted system can tip it into further <strong>dysregulation of your stress-hormone axis</strong> rather than relief. Scaling back isn't giving up — it's listening to a signal your body is actively sending you."},
-        {title:"Movement doesn't have to look like exercise",body:"Dancing in your kitchen, shaking out your hands, rolling your shoulders — anything that moves your body counts, and doesn't need a workout label to count. Your <strong>nervous system</strong> responds to motion itself, not to how structured it looks."},
-        {title:'Shaking is an actual stress-release mechanism',body:"Many animals physically tremble after a threat passes to discharge built-up activation — humans have the same wiring, just more suppressed. A few minutes of deliberate shaking or bouncing can mimic that natural <strong>stress-cycle completion</strong>."},
+        {title:'Let your body set the ceiling',img:'cozy.png',body:"If movement leaves you noticeably worse afterward instead of better, that's useful information, not a failure to push through. Exercising an already-depleted system can tip it into further <strong>dysregulation of your stress-hormone axis</strong> rather than relief. Scaling back isn't giving up. It's listening to a signal your body is actively sending you."},
+        {title:"Movement doesn't have to look like exercise",body:"Dancing in your kitchen, shaking out your hands, or rolling your shoulders, anything that moves your body counts, and doesn't need a workout label to count. Your <strong>nervous system</strong> responds to motion itself, not to how structured it looks."},
+        {title:'Shaking is an actual stress-release mechanism',body:"Many animals physically tremble after a threat passes to discharge built-up activation. Humans have the same wiring, just more suppressed. A few minutes of deliberate shaking or bouncing can mimic that natural <strong>stress-cycle completion</strong>."},
         {title:"Rest days are part of the plan, not a failure of it",body:"A body that never gets recovery time between movement stays in a low-grade state of strain, even from gentle activity. Scheduled rest supports your <strong>stress-hormone axis</strong> just as much as the movement itself does."}
       ]},
       {id:'hormones',label:'Hormones',img:'ba-16_calendar-circled.png',tips:[
-        {title:"Your capacity shifts — that's biology, not inconsistency",img:'cycletracking.png',body:"Estrogen and progesterone rise and fall across your cycle, and both directly influence the <strong>brain chemicals tied to mood, energy, and pain sensitivity</strong> — meaning your baseline genuinely isn't constant, and it was never supposed to be. Illness, poor sleep, and stress add on top of that. Knowing roughly where you are can explain a lot of what you're feeling today."},
-        {title:'Track the pattern instead of the blame',img:'hormones.jpg',body:"The days before your period often bring a drop in progesterone that's linked to increased anxiety and lower stress tolerance for many people — not a personal failing, a <strong>hormonal shift with a name</strong>. Writing down what you notice, cycle after cycle, turns confusion into information. Bring anything persistent or severe to a healthcare professional rather than carrying it alone."},
+        {title:"Your capacity shifts, and that's biology, not inconsistency",img:'cycletracking.png',body:"Estrogen and progesterone rise and fall across your cycle, and both directly influence the <strong>brain chemicals tied to mood, energy, and pain sensitivity</strong>, meaning your baseline genuinely isn't constant, and it was never supposed to be. Illness, poor sleep, and stress add on top of that. Knowing roughly where you are can explain a lot of what you're feeling today."},
+        {title:'Track the pattern instead of the blame',img:'hormones.jpg',body:"The days before your period often bring a drop in progesterone that's linked to increased anxiety and lower stress tolerance for many people. It's not a personal failing. It's a <strong>hormonal shift with a name</strong>. Writing down what you notice, cycle after cycle, turns confusion into information. Bring anything persistent or severe to a healthcare professional rather than carrying it alone."},
         {title:'Work with your rhythm, not against it',img:'heart.png',body:"If you already know certain days or weeks tend to be harder, reduce what you're asking of yourself before you reach them, rather than waiting for a crash to force the issue. Living in sync with your <strong>actual hormonal rhythm</strong>, instead of a flat, identical expectation every day, is not lower standards. It's working with the body you actually have."},
         {title:'Track more than just your period',body:"Energy, mood, sleep, and appetite all shift across your cycle, not just physical symptoms. A fuller picture, tracked over a few months, reveals your actual <strong>hormonal pattern</strong> instead of just its most obvious marker."},
-        {title:'Plan demanding tasks around your higher-energy days',body:"If you notice a consistent window where focus and stamina are naturally higher, save your heaviest tasks for it when you can. Working with your <strong>hormonal rhythm</strong> instead of a flat schedule isn't inefficient — it's realistic."},
+        {title:'Plan demanding tasks around your higher-energy days',body:"If you notice a consistent window where focus and stamina are naturally higher, save your heaviest tasks for it when you can. Working with your <strong>hormonal rhythm</strong> instead of a flat schedule isn't inefficient. It's realistic."},
         {title:'Perimenopause can start earlier than expected',body:"Shifts in mood, sleep, and stress tolerance can begin years before periods change noticeably, and are often dismissed as unrelated. Naming <strong>hormonal transition</strong> as a possibility, rather than assuming it's purely psychological, can change how you get support."}
       ]},
       {id:'sensory',label:'Sensory',img:'ba-13_candle-lavender.png',tips:[
-        {title:'Lower the input before you try to calm down',img:'diffuser.png',body:"Darkness, quiet, soft fabric, and comfortable temperature all reduce the raw amount of data your brain has to process in a given moment. Trying to \"calm down\" while still bombarded with input is an uphill battle — your <strong>nervous system has a finite bandwidth</strong>, and reducing what's coming in is often the actual prerequisite for feeling calmer, not an afterthought."},
+        {title:'Lower the input before you try to calm down',img:'diffuser.png',body:"Darkness, quiet, soft fabric, and comfortable temperature all reduce the raw amount of data your brain has to process in a given moment. Trying to \"calm down\" while still bombarded with input is an uphill battle. Your <strong>nervous system has a finite bandwidth</strong>, and reducing what's coming in is often the actual prerequisite for feeling calmer, not an afterthought."},
         {title:'Build a tiny sensory emergency kit',img:'noisereducitons.jpg',body:"Earplugs, an eye mask, a soft layer, water, and easy food, kept together somewhere accessible, mean you don't have to assemble comfort from scratch mid-overwhelm. Pressure and soft texture can activate <strong>calming input through the vagus nerve</strong>, which is part of why weighted or textured items reliably help. Small, ready tools matter more than they look like they should."},
-        {title:"Your threshold shrinks when you're exhausted",img:'comfy.png',body:"Something you'd normally shrug off can suddenly feel completely unbearable, and that's not you being dramatic — depletion genuinely <strong>lowers your available filtering capacity</strong>, the same mental resource that would otherwise screen out minor irritations. Your tolerance isn't fixed; it moves with how much you already have on board. Treat a lower threshold as real, not something to push past."},
-        {title:"One sense at a time when you're overloaded",body:"When everything feels like too much, deliberately reducing just one input — turning off music, dimming one light — can be enough to tip you back under threshold. You don't need to fix the whole environment, just lower the total <strong>sensory load</strong> a little."},
-        {title:'Weight and pressure are legitimate tools',body:"A weighted blanket, a firm hug, or pressing your palms together applies deep pressure that measurably calms the nervous system through the <strong>vagus nerve</strong>. This isn't a preference for comfort — it's a physiological lever."},
-        {title:'Sensitivity is information, not a malfunction',body:"Noticing more than other people do isn't a flaw to override — it's how a highly attuned <strong>nervous system</strong> is built to work. The goal isn't to feel less. It's to have enough support that feeling this much is sustainable."}
+        {title:"Your threshold shrinks when you're exhausted",img:'comfy.png',body:"Something you'd normally shrug off can suddenly feel completely unbearable, and that's not you being dramatic. Depletion genuinely <strong>lowers your available filtering capacity</strong>, the same mental resource that would otherwise screen out minor irritations. Your tolerance isn't fixed; it moves with how much you already have on board. Treat a lower threshold as real, not something to push past."},
+        {title:"One sense at a time when you're overloaded",body:"When everything feels like too much, deliberately reducing just one input, like turning off music or dimming one light, can be enough to tip you back under threshold. You don't need to fix the whole environment, just lower the total <strong>sensory load</strong> a little."},
+        {title:'Weight and pressure are legitimate tools',body:"A weighted blanket, a firm hug, or pressing your palms together applies deep pressure that measurably calms the nervous system through the <strong>vagus nerve</strong>. This isn't a preference for comfort. It's a physiological lever."},
+        {title:'Sensitivity is information, not a malfunction',body:"Noticing more than other people do isn't a flaw to override. It's how a highly attuned <strong>nervous system</strong> is built to work. The goal isn't to feel less. It's to have enough support that feeling this much is sustainable."}
       ]},
       {id:'breath',label:'Breath',img:'ba-01_hourglass-leaf.png',tips:[
-        {title:"Don't force a huge breath",img:'breathing2.jpg',body:"For some people, big deliberate deep breaths can actually increase dizziness or panic rather than easing it — the shift in <strong>carbon dioxide levels</strong> from over-breathing can paradoxically mimic the very anxiety you're trying to calm. Keep it gentle and small. There's no prize for the most dramatic inhale."},
+        {title:"Don't force a huge breath",img:'breathing2.jpg',body:"For some people, big deliberate deep breaths can actually increase dizziness or panic rather than easing it. The shift in <strong>carbon dioxide levels</strong> from over-breathing can paradoxically mimic the very anxiety you're trying to calm. Keep it gentle and small. There's no prize for the most dramatic inhale."},
         {title:'Let the exhale run a little longer',img:'breathing.jpg',body:"Inhale naturally, then let the exhale stretch out slightly longer and slower than the breath in, without forcing or counting rigidly. A longer exhale specifically activates the <strong>vagus nerve and your parasympathetic \"rest\" response</strong>, which is measurably one of the fastest ways to lower a racing heart rate. Small and unforced still works."},
-        {title:'Let breath be an invitation, not a task',img:'comfy.png',body:"The goal was never to hit a specific, impressive state of calm on command — that expectation alone can add pressure that defeats the entire point. Give your body a few minutes of slightly slower, easier breathing and let that genuinely be enough, whether or not it <strong>feels dramatically different</strong> afterward. Small shifts still count as real ones."},
-        {title:'Try box breathing when your mind is racing',body:"Inhale for four counts, hold for four, exhale for four, hold for four — the structure itself gives a racing mind something concrete to follow. This pattern engages the same <strong>parasympathetic pathway</strong> as a longer exhale, with an easier rhythm to hold onto."},
-        {title:"Sighing is your body already trying to help",body:"A spontaneous sigh is a built-in mechanism your body uses to reset breathing patterns and release tension — it's not a sign of exasperation. Two purposeful sighs, a long exhale followed by a short one, mimic this same natural <strong>physiological reset</strong>."},
+        {title:'Let breath be an invitation, not a task',img:'comfy.png',body:"The goal was never to hit a specific, impressive state of calm on command. That expectation alone can add pressure that defeats the entire point. Give your body a few minutes of slightly slower, easier breathing and let that genuinely be enough, whether or not it <strong>feels dramatically different</strong> afterward. Small shifts still count as real ones."},
+        {title:'Try box breathing when your mind is racing',body:"Inhale for four counts, hold for four, exhale for four, hold for four. The structure itself gives a racing mind something concrete to follow. This pattern engages the same <strong>parasympathetic pathway</strong> as a longer exhale, with an easier rhythm to hold onto."},
+        {title:"Sighing is your body already trying to help",body:"A spontaneous sigh is a built-in mechanism your body uses to reset breathing patterns and release tension. It's not a sign of exasperation. Two purposeful sighs, a long exhale followed by a short one, mimic this same natural <strong>physiological reset</strong>."},
         {title:"Breathe from your belly, not your chest",body:"Shallow chest breathing keeps your body signaling alertness, while breathing that expands your belly activates the calming <strong>diaphragmatic response</strong>. Placing a hand on your stomach and feeling it rise is enough to check which one you're doing."}
       ]}
     ]
@@ -540,7 +578,7 @@ const KIT = {
         {title:"Learn the language of your own body.",body:"Over time, you can become more familiar with patterns in your energy, appetite, sleep, tension, emotions, concentration, menstrual cycle, sensory tolerance, and stress response. This is not about treating every bodily sensation as a warning. It is about developing a nuanced relationship with your body rather than overriding it automatically."},
         {title:"Your boundaries become stronger when you believe your discomfort matters.",body:"A boundary often begins as a subtle internal signal before it becomes a spoken limit. Practice noticing resentment, dread, tension, exhaustion, or repeated avoidance as information rather than immediately judging yourself for feeling them. You do not have to act on every feeling, but you can become willing to investigate what it is telling you."},
         {title:"You can survive being wrong.",body:"Self-trust does not mean always making the right decision. It means knowing that a wrong decision does not destroy you. You can repair, apologize, learn, change direction, ask for help, and try again. This reduces the pressure to make every decision perfectly."},
-        {title:"Let evidence—not fear—teach you who you are.",body:"If you have spent years believing \"I can't handle this,\" \"I always mess things up,\" or \"I can't trust myself,\" begin collecting real evidence. Notice the situations you navigated, the boundaries you maintained, the difficult conversations you survived, the things you learned, and the ways you adapted. A more accurate self-concept grows from lived evidence."}
+        {title:"Let evidence, not fear, teach you who you are.",body:"If you have spent years believing \"I can't handle this,\" \"I always mess things up,\" or \"I can't trust myself,\" begin collecting real evidence. Notice the situations you navigated, the boundaries you maintained, the difficult conversations you survived, the things you learned, and the ways you adapted. A more accurate self-concept grows from lived evidence."}
       ]},
       {id:'shame',label:'Shame',img:'ba-15_papers-lifted.png',tips:[
         {title:"Meet the parts of yourself you learned to hide with curiosity.",body:"Shame thrives in secrecy and global judgments such as \"I am too much,\" \"I am lazy,\" \"I am broken,\" or \"something is wrong with me.\" Curiosity changes the question from \"What is wrong with me?\" to \"What happened, what do I need, and what am I protecting?\" This does not excuse harmful behavior; it creates enough safety to understand it and change it."},
@@ -559,7 +597,7 @@ const KIT = {
         {title:"Let your self-talk evolve as you recover.",body:"The language that helped you survive a difficult period may not be the language you need for expansion. \"Just get through today\" can be lifesaving during depletion, but eventually you may be ready for \"What do I want to build?\" Recovery includes updating your internal narrative to match your current capacity."}
       ]},
       {id:'values',label:'Values / Faith',img:'ba-19_balanced-scale.png',tips:[
-        {title:"Build your life around what you actually value.",body:"Values become meaningful when they influence choices, time, relationships, attention, and behavior. Identify a small number of principles that feel deeply yours—perhaps love, truth, freedom, creativity, family, beauty, learning, service, faith, courage, or peace—and ask whether your current life gives them enough room."},
+        {title:"Build your life around what you actually value.",body:"Values become meaningful when they influence choices, time, relationships, attention, and behavior. Identify a small number of principles that feel deeply yours, perhaps love, truth, freedom, creativity, family, beauty, learning, service, faith, courage, or peace, and ask whether your current life gives them enough room."},
         {title:"Let faith be a relationship, not another performance.",body:"For someone with a spiritual or religious framework, faith can become another arena for perfectionism if it is approached primarily through rules, achievement, or fear of failing. A softer approach allows room for doubt, questions, silence, grief, gratitude, longing, and mystery. Spiritual life can be somewhere you bring your whole self rather than somewhere you perform an ideal self."},
         {title:"Make room for meaning beyond productivity.",body:"Meaning can come from loving someone, creating beauty, raising children, learning, serving, praying, witnessing nature, cultivating friendship, practicing a craft, or simply being present. A meaningful life does not need to maximize measurable output."},
         {title:"Ask what kind of woman you want to become.",body:"Instead of defining yourself entirely through achievements, consider qualities: grounded, courageous, warm, discerning, creative, generous, truthful, playful, spiritually connected, independent, compassionate, or alive. Then look for small opportunities to practice those qualities now."},
@@ -572,7 +610,7 @@ const KIT = {
     q:"What part of yourself is ready to come alive?",
     subs:[
       {id:'desire',label:'Desire',img:'ba-10_watering-can-pot.png',tips:[
-        {title:"After survival, ask yourself what you want.",body:"When energy has been devoted primarily to getting through the day, desire can become quiet. Once basic stability returns, gently begin asking what sounds interesting, beautiful, exciting, nourishing, or meaningful—not what would make you look successful."},
+        {title:"After survival, ask yourself what you want.",body:"When energy has been devoted primarily to getting through the day, desire can become quiet. Once basic stability returns, gently begin asking what sounds interesting, beautiful, exciting, nourishing, or meaningful, not what would make you look successful."},
         {title:"Curiosity can come before purpose.",body:"You do not need to discover your calling immediately. Follow small sparks: a subject you want to learn, somewhere you want to go, something you want to make, a person you want to know, a skill you want to explore. Curiosity is often a more reliable doorway into expansion than pressure to find a grand purpose."},
         {title:"Let yourself want without demanding certainty.",body:"A desire is not a contract. You can want something and later discover that it is not right for you. Giving yourself permission to explore reduces the pressure that makes desire feel dangerous or overwhelming."},
         {title:"Notice what gives you energy rather than only what consumes it.",body:"Begin observing activities that leave you feeling more alive, interested, connected, or spacious. These are not necessarily \"productive.\" They may be creative, social, physical, intellectual, spiritual, or completely playful."},
@@ -606,7 +644,7 @@ const KIT = {
       {id:'joy',label:'Joy',img:'ba-14_hammock-trees.png',tips:[
         {title:"Let pleasure become part of your health, not something you earn afterward.",body:"Joy is not a reward for completing your responsibilities. Pleasant experiences can support connection, motivation, creativity, and quality of life. Allow enjoyment to exist alongside responsibility rather than permanently postponing it until everything is finished."},
         {title:"Pay attention to what makes you feel alive.",body:"Notice the moments when you become more animated, curious, present, playful, or connected. These moments can provide clues about what belongs in a nourishing life. Keep a small record if necessary; after depletion, it can take time to recognize your own sources of pleasure again."},
-        {title:"Choose joy that actually restores you.",body:"Not everything pleasurable is restorative. Some forms of stimulation leave you more depleted afterward. Experiment with different kinds of pleasure—nature, music, movement, touch, food, creativity, laughter, friendship, beauty, solitude—and notice which ones leave you feeling more resourced."},
+        {title:"Choose joy that actually restores you.",body:"Not everything pleasurable is restorative. Some forms of stimulation leave you more depleted afterward. Experiment with different kinds of pleasure: nature, music, movement, touch, food, creativity, laughter, friendship, beauty, or solitude, and notice which ones leave you feeling more resourced."},
         {title:"Let play exist without a purpose.",body:"Play is an activity where the process itself is enough. It can reconnect you with spontaneity and reduce the pressure to perform. Adults often need intentional permission to do things badly, pointlessly, and joyfully."},
         {title:"Receive beautiful moments without immediately documenting them.",body:"Constantly recording an experience can subtly move you from participating in it to observing yourself having it. Sometimes allow an experience to remain entirely yours. Let yourself see, taste, hear, feel, laugh, and remember without needing to turn it into something else."},
         {title:"Joy can be quiet.",body:"Expansion does not always feel like excitement. Sometimes it looks like feeling peaceful in your own home, waking up without dread, laughing easily, having energy for a conversation, enjoying your food, or realizing that you are no longer bracing for the next demand."}
@@ -617,7 +655,7 @@ const KIT = {
         {title:"Rootedness comes before sustainable expansion.",body:"A plant cannot continuously flower without roots, water, nutrients, and appropriate conditions. In the same way, expansion is more sustainable when sleep, nourishment, physical health, emotional regulation, supportive relationships, boundaries, and meaningful structure are maintained underneath it."},
         {title:"Let your life become larger without abandoning yourself.",body:"More work, more travel, more relationships, more visibility, more creativity, or more responsibility are not automatically signs of growth. Ask whether expansion is actually increasing your sense of aliveness and alignment. If becoming \"more\" requires returning to chronic self-neglect, it is not the kind of expansion you are looking for."},
         {title:"Let receiving be part of your bloom.",body:"A fuller life includes being supported, loved, witnessed, celebrated, taught, nourished, and cared for. You do not need to become endlessly self-sufficient to be well. Interdependence can be a sign of maturity rather than weakness."},
-        {title:"The destination is not constant wellness; it is a deeper relationship with yourself.",body:"There will still be difficult seasons, tired days, uncertainty, grief, illness, disappointment, and change. The goal is not to become someone who never struggles. It is to become someone who can recognize what she needs, respond with compassion, seek support when necessary, and continue returning to herself—again and again."}
+        {title:"The destination is not constant wellness; it is a deeper relationship with yourself.",body:"There will still be difficult seasons, tired days, uncertainty, grief, illness, disappointment, and change. The goal is not to become someone who never struggles. It is to become someone who can recognize what she needs, respond with compassion, seek support when necessary, and continue returning to herself, again and again."}
       ]}
     ]
   }
@@ -655,7 +693,10 @@ function pickPillar(id){
   document.getElementById('kbox2-q').textContent = chapter.q;
   document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>`
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
-      <div class="area-circle">${SUB_ICONS[a.id] || '✦'}</div>
+      <div class="area-circle">
+        ${SUB_ICONS[a.id] || '✦'}
+        <img class="area-icon-photo" src="bloom-again-images/${a.img}" alt="" onerror="this.remove()">
+      </div>
       <span class="area-lbl">${a.label}</span>
     </button>`).join('');
 
@@ -674,19 +715,49 @@ function selectArea(id){
   document.getElementById('tips-eyebrow').textContent = `${meta.title} · ${S.area.label}`;
   document.getElementById('tips-title').textContent = S.area.label;
 
-  document.getElementById('tips-list').innerHTML = S.area.tips.map(t=>`
-    <div class="tip-card">
-      <div class="tip-badge"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.remove()"></div>
-      <div class="tip-content">
-        <div class="tip-title">${t.title}</div>
-        <div class="tip-body">${t.body}</div>
-      </div>
-    </div>`).join('');
+  document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
+    <button class="insp-row" onclick="openInsp(${i})">
+      <span class="insp-row-title">${t.title}</span>
+      <span class="insp-row-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+    </button>`).join('');
 
   const box3=document.getElementById('kbox3'); box3.classList.add('open');
   document.getElementById('kconn-2').classList.add('show');
   scrollInto(box3);
 }
+
+/* Placeholder shown in the modal for any inspiration that doesn't have a
+   photo yet. Designed to look intentional, not like a missing asset —
+   swap it for a real photo just by adding an `img` (and optional `img2`)
+   filename to that tip's data, no other changes needed. */
+const INSP_PLACEHOLDER = `<span class="insp-photo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a2 2 0 0 0-2.8 0L3 20"/></svg></span>`;
+
+function inspPhotoFallback(imgEl){
+  imgEl.parentElement.innerHTML = INSP_PLACEHOLDER;
+}
+
+function renderInspPhoto(filename){
+  if(!filename) return `<div class="insp-photo">${INSP_PLACEHOLDER}</div>`;
+  return `<div class="insp-photo"><img src="bloom-again-images/graphics_subchapters/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
+}
+
+function openInsp(i){
+  const t = S.area.tips[i];
+  document.getElementById('insp-modal-title').textContent = t.title;
+  document.getElementById('insp-modal-text').innerHTML = t.body;
+  document.getElementById('insp-modal-media').innerHTML = renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
+  const modal = document.getElementById('insp-modal');
+  document.querySelector('.insp-modal-card').scrollTop = 0;
+  modal.classList.add('open');
+}
+
+function closeInsp(){
+  document.getElementById('insp-modal').classList.remove('open');
+}
+
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape') closeInsp();
+});
 
 function initParticles(){
   const container=document.getElementById('particles');
