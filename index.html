@@ -51,8 +51,9 @@ body{overflow-x:hidden}
 
 /* quick pick — appears once you enter the experience */
 .pick-section{max-width:920px;margin:0 auto;padding:16px 5vw 4px;text-align:center}
-.pick-title{font-size:clamp(22px,3.4vw,30px);margin-top:14px;margin-bottom:10px;line-height:1.3}
+.pick-title{font-size:clamp(22px,3.4vw,30px);margin-top:10px;margin-bottom:10px;line-height:1.3}
 .pick-sub{font-size:13px;color:var(--text-soft);margin-bottom:8px}
+.recognition-line{font-family:var(--serif);font-style:italic;font-size:clamp(14px,2.2vw,16.5px);color:var(--text-soft);max-width:36ch;margin:12px auto 2px;line-height:1.5}
 
 /* opening flower nav — the five chapters as the primary table of contents.
    Full-bleed wrap breaks out of .kit-page's 640px cap so the flower (left)
@@ -219,6 +220,7 @@ body{overflow-x:hidden}
     <!-- QUICK PICK — arrives as soon as you enter -->
     <div class="pick-section">
       <span class="eyebrow">Start Here</span>
+      <p class="recognition-line">Why does ordinary life seem to cost you so much more energy than it costs everyone else?</p>
       <h1 class="pick-title serif">Where do you need relief first?</h1>
       <p class="pick-sub">The flower is your map, soil to petals. Choose a layer to begin.</p>
     </div>
@@ -269,10 +271,10 @@ body{overflow-x:hidden}
       <span class="eyebrow">The Soil, Not The Flower</span>
 
       <div class="companion-copy">
-        <p class="companion-lead">This isn't about becoming better at coping. It's about figuring out what conditions you actually need to grow in.</p>
-        <p>If you've already been through a First Aid Kit style crash, you know how to survive a bad day. This is for afterward: the months where you have a little capacity back and you start asking why you keep ending up here in the first place.</p>
-        <p>Five layers, soil to petals: your environment, your relationships, your body, your identity, and what becomes possible once things loosen up. They hold together as one system here, not five separate to-do lists.</p>
-        <p>And if you've spent years hearing that you're too sensitive, too intense, too much, or too something: that's worth paying attention to. You don't need a diagnosis to deserve a life that actually fits you. But if a lot of this keeps making things click into place, it might be worth exploring what neurodivergence looks like for you specifically.</p>
+        <p class="companion-lead">Maybe the problem was never that you need better coping skills. Maybe your life has been asking more of you than it reasonably should, and no amount of self-improvement was ever going to fix that.</p>
+        <p>If you've already been through a crash, you know how to survive a bad day. This is for after that: the months where you have a little capacity back and you start wondering why you keep ending up here in the first place.</p>
+        <p>Five layers, soil to petals: your environment, your relationships, your body, your identity, and what becomes possible once the pressure eases. Different ways of asking the same question: what conditions actually let you feel like yourself? They hold together as one system here, not five separate to-do lists.</p>
+        <p>If ordinary life has always seemed to cost you more than it costs everyone else, if you can function for a while and then completely crash, if rest helps for a minute and then you're right back here: that isn't you being dramatic or bad at adulting. You don't need a diagnosis to deserve an environment that actually works for you. And if a lot of this keeps making things click into place, it might be worth exploring what neurodivergence looks like for you specifically.</p>
         <p>Come back to any layer whenever something in your life needs it. There's no order to follow and no chapter to finish before another one counts.</p>
         <p class="companion-arc">From surviving → to restoring → to reconnecting → to blooming.</p>
       </div>
@@ -412,11 +414,11 @@ const CHAPTER_REFLECT = {
 /* One small, contextual note per chapter. Not medical advice, not a
    diagnosis, just lived experience and reflection. */
 const CHAPTER_DISCLAIMER = {
-  environment: "Small note: this is lived experience and pattern-spotting about environments, not professional advice for your specific situation. Take what fits, leave what doesn't.",
-  relationships: "Small note: this is lived experience, not couples or family therapy. If a relationship ever feels unsafe, please talk to someone qualified, not just this page.",
-  body: "Small note: this is lived experience and educational reflection on nervous-system patterns, not medical advice. If something here worries you, a doctor is worth the conversation.",
-  identity: "Small note: this is personal reflection, not a diagnosis or a psychological assessment. Take what resonates, leave what doesn't.",
-  expansion: "Small note: this is lived experience and encouragement, not therapy. Go at whatever pace actually works for you, not the pace this page suggests."
+  environment: "Small note: this is lived experience and pattern-spotting, not professional advice for your exact situation. Take what fits, skip what doesn't.",
+  relationships: "Small note: this is lived experience, not couples or family therapy. If a relationship ever feels unsafe, please talk to someone qualified, not just a webpage.",
+  body: "Small note: this is lived experience and reflection on nervous-system patterns, not medical advice. If something here genuinely worries you, a doctor's worth the conversation.",
+  identity: "Small note: this is personal reflection, not a diagnosis. Take what resonates, leave the rest.",
+  expansion: "Small note: this is lived experience and encouragement, not therapy. Go at whatever pace actually works for you, not the pace this page is excited about."
 };
 
 const FLOWER_META = [
