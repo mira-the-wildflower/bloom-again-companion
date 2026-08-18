@@ -42,8 +42,8 @@ body{overflow-x:hidden}
 .cover-mockup-mobile{display:none}
 @media(max-width:760px){
   .cover-mockup-desktop{display:none}
-  .cover-mockup-mobile{display:block;max-width:420px;max-height:82vh;aspect-ratio:1008/1067}
-  .cover-mockup-mobile .cover-mockup-btn{bottom:-14%;font-size:10px;padding:9px 20px}
+  .cover-mockup-mobile{display:block;max-width:420px;max-height:82vh;aspect-ratio:2138/1253}
+  .cover-mockup-mobile .cover-mockup-btn{bottom:8.5%;font-size:10px;padding:9px 20px}
 }
 .cta{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 34px;border-radius:999px;cursor:pointer;transition:all .3s ease}
 .cta:hover{background:var(--accent);color:var(--bg-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,178,154,.3)}
@@ -58,6 +58,9 @@ body{overflow-x:hidden}
    Full-bleed wrap breaks out of .kit-page's 640px cap so the flower (left)
    and chapter list (right) can sit apart as a proper two-column composition. */
 .opening-flower-wrap{width:100vw;position:relative;left:50%;transform:translateX(-50%)}
+.soil-quote{max-width:500px;margin:2px auto 22px;padding:0 6vw;text-align:center}
+.soil-quote p{font-family:var(--serif);font-style:italic;font-size:clamp(15px,2.6vw,18px);line-height:1.55;color:var(--text)}
+.soil-quote cite{display:block;margin-top:9px;font-family:var(--sans);font-style:normal;font-size:10.5px;letter-spacing:.1em;color:var(--text-muted);text-transform:uppercase}
 .opening-flower{display:flex;align-items:center;justify-content:space-between;gap:18px 40px;flex-wrap:wrap;max-width:940px;margin:18px auto 8px;padding:0 6vw}
 .petal-nav-list{display:flex;flex-direction:column;gap:3px;flex:1 1 300px;max-width:360px}
 .petal-btn{display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
@@ -118,6 +121,8 @@ body{overflow-x:hidden}
 
 .kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:rgba(122,152,164,.38);backdrop-filter:blur(8px);margin-bottom:0}
 .kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(18px,3vw,22px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
+.chapter-reflect{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 24px;line-height:1.6}
+.chapter-disclaimer{font-size:11px;color:var(--text-muted);text-align:center;max-width:40ch;margin:26px auto 0;line-height:1.6}
 .kbox-step{color:var(--accent);font-style:normal}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
@@ -193,11 +198,11 @@ body{overflow-x:hidden}
 <div id="s-cover" class="screen active">
   <div class="cover-simple">
     <div class="cover-mockup-wrap cover-mockup-desktop">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-ipad-mockup-square.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
   </div>
@@ -249,6 +254,11 @@ body{overflow-x:hidden}
     </div>
     </div>
 
+    <div class="soil-quote">
+      <p>"When a flower doesn't bloom, you fix the environment in which it grows, not the flower."</p>
+      <cite>Alexander Den Heijer</cite>
+    </div>
+
     <!-- ZERO CAPACITY ENTRY -->
     <div class="crisis-entry">
       <button class="crisis-btn" onclick="goTo('zero')">Read This First If You Have Zero Capacity</button>
@@ -256,12 +266,14 @@ body{overflow-x:hidden}
 
     <!-- WHOLE-GUIDE OVERVIEW (was the First Aid Kit's self-upsell block) -->
     <div class="companion-ad">
-      <span class="eyebrow">You Have The Whole Guide</span>
+      <span class="eyebrow">The Soil, Not The Flower</span>
 
       <div class="companion-copy">
-        <p class="companion-lead">Five layers, from soil to petals. This is the complete Bloom Again journey.</p>
-        <p>Body and energy, relationships, environment, identity, and expansion hold together as one system here, not five separate tip lists.</p>
-        <p>Come back to any layer whenever your nervous system needs it. There's no order you have to follow and no chapter you have to finish before another one counts.</p>
+        <p class="companion-lead">This isn't about becoming better at coping. It's about figuring out what conditions you actually need to grow in.</p>
+        <p>If you've already been through a First Aid Kit style crash, you know how to survive a bad day. This is for afterward: the months where you have a little capacity back and you start asking why you keep ending up here in the first place.</p>
+        <p>Five layers, soil to petals: your environment, your relationships, your body, your identity, and what becomes possible once things loosen up. They hold together as one system here, not five separate to-do lists.</p>
+        <p>And if you've spent years hearing that you're too sensitive, too intense, too much, or too something: that's worth paying attention to. You don't need a diagnosis to deserve a life that actually fits you. But if a lot of this keeps making things click into place, it might be worth exploring what neurodivergence looks like for you specifically.</p>
+        <p>Come back to any layer whenever something in your life needs it. There's no order to follow and no chapter to finish before another one counts.</p>
         <p class="companion-arc">From surviving → to restoring → to reconnecting → to blooming.</p>
       </div>
 
@@ -274,7 +286,9 @@ body{overflow-x:hidden}
     <!-- BOX: sub-area icons (appears once a pillar is picked) -->
     <div class="kbox expand" id="kbox2">
       <h2 class="kbox-q"><span class="kbox-step">1.</span> <span id="kbox2-q"></span></h2>
+      <p class="chapter-reflect" id="chapter-reflect"></p>
       <div class="area-icons" id="area-icons"></div>
+      <p class="chapter-disclaimer" id="chapter-disclaimer"></p>
     </div>
 
     <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -385,6 +399,26 @@ const SUB_ICONS = {
   bloom: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M9 10c-2.5 0-4 1.7-4 4"/><path d="M15 10c2.5 0 4 1.7 4 4"/><path d="M12 11v10"/></svg>'
 };
 
+/* One musing prompt per chapter. These are for noticing, not for solving,
+   so there's no input or result tied to them on purpose. */
+const CHAPTER_REFLECT = {
+  environment: "What environments make you forget to check the clock, and what do they have that the rest of your life doesn't?",
+  relationships: "Which people leave you more tired even on the days you actually enjoyed seeing them?",
+  body: "What does your body ask for on an ordinary Tuesday, before you talk yourself out of it?",
+  identity: "What would you drop first if nobody was around to notice?",
+  expansion: "What did you love before you had to survive anything?"
+};
+
+/* One small, contextual note per chapter. Not medical advice, not a
+   diagnosis, just lived experience and reflection. */
+const CHAPTER_DISCLAIMER = {
+  environment: "Small note: this is lived experience and pattern-spotting about environments, not professional advice for your specific situation. Take what fits, leave what doesn't.",
+  relationships: "Small note: this is lived experience, not couples or family therapy. If a relationship ever feels unsafe, please talk to someone qualified, not just this page.",
+  body: "Small note: this is lived experience and educational reflection on nervous-system patterns, not medical advice. If something here worries you, a doctor is worth the conversation.",
+  identity: "Small note: this is personal reflection, not a diagnosis or a psychological assessment. Take what resonates, leave what doesn't.",
+  expansion: "Small note: this is lived experience and encouragement, not therapy. Go at whatever pace actually works for you, not the pace this page suggests."
+};
+
 const FLOWER_META = [
   {id:'expansion',    layer:'Petals', title:'Expansion',      frame:'Self-expression & aliveness'},
   {id:'identity',     layer:'Stigma', title:'Identity',       frame:'Inner work & intuition'},
@@ -430,7 +464,7 @@ const KIT = {
         {title:'Let boredom happen on purpose',body:"Resist the reflexive reach for your phone in an idle moment, even just once today. Unstructured, screen-free time is what lets your brain's <strong>default mode network</strong> do the quiet background processing that constant input never allows."}
       ]},
       {id:'time',label:'Time',img:'ba-16_calendar-circled.png',tips:[
-        {title:"Recovery doesn't come with homework",img:'timeoff.png',body:"You don't need a flawless morning routine or a five-step plan to be resting correctly. If you have two free hours, you're allowed to spend both of them lying down and doing absolutely nothing else. Turning rest into another task to perform defeats its entire biological purpose, which is <strong>letting your system actually downshift</strong>."},
+        {title:"Recovery doesn't come with homework",img:'timeoff.png',body:"You don't need a flawless morning routine or a five-step plan to be resting correctly. If you have two free hours, lying down and doing absolutely nothing else is a completely legitimate use of both of them. Turning rest into another task to perform defeats its entire biological purpose, which is <strong>letting your system actually downshift</strong>."},
         {title:'Give yourself room between things',img:'hour of work.png',body:"The transition between one demand and the next is where your nervous system gets the chance to downshift from high alert back toward calm. Skip it, and stress just keeps accumulating unprocessed. Even sixty seconds of nothing between tasks counts as real recovery. <strong>Transitions aren't wasted minutes.</strong> They're where the reset actually happens."},
         {title:'Ask what can simply disappear',img:'nodecisions.png',body:"When your capacity is already low, the answer isn't a better system for fitting more in. It's actively removing things from the list. Your energy today is a <strong>finite, non-negotiable resource</strong>, not a productivity problem to optimize around. Some of what feels urgent can simply wait. Let it."},
         {title:'Protect one buffer block a day',body:"A literal, scheduled block of nothing between two demanding things does real work. It's the difference between one stressor ending before the next begins, instead of stacking. Unbuffered days keep your <strong>anticipatory stress</strong> running continuously, even during the calm parts."},
@@ -459,7 +493,7 @@ const KIT = {
         {title:'Notice the guilt, then check the facts',body:"Guilt after a boundary is common and doesn't automatically mean you did something wrong. It often just means you're breaking an old pattern. <strong>Anticipatory guilt</strong> fades faster than it feels like it will in the moment."}
       ]},
       {id:'attachment',label:'Attachment',img:'ba-08_book-pressed-botanicals.png',tips:[
-        {title:"Don't let exhaustion write the verdict",img:'attachment.jpg',body:"When you're running on empty, your brain's threat-detection system tilts toward the <strong>worst-case read</strong> of almost everything, where a delayed reply can start to feel like rejection. This is a known effect of depletion, not a reliable signal about the relationship. Give yourself permission to postpone big conclusions until you've actually recovered."},
+        {title:"Don't let exhaustion write the verdict",img:'attachment.jpg',body:"When you're running on empty, your brain's threat-detection system tilts toward the <strong>worst-case read</strong> of almost everything, where a delayed reply can start to feel like rejection. This is a known effect of depletion, not a reliable signal about the relationship. Postpone the big conclusions until you've actually recovered. Your brain is not a trustworthy narrator right now."},
         {title:'One safe person beats ten conversations',img:'coregulation.jpg',body:"Your nervous system doesn't need maximum contact. It needs contact that actually feels safe. Time with one calm, trustworthy person can do more for your <strong>regulation</strong> than a full day of surface-level interaction, because safety, not quantity, is what your body is tracking. Choose depth over volume while you're depleted."},
         {title:"Needing reassurance isn't weakness",img:'comfort2.jpg',body:"Humans are wired to regulate partly through each other. This isn't a flaw to override. It's basic <strong>nervous-system architecture</strong>. Wanting closeness when you're overwhelmed doesn't mean you're too dependent; it means your body is doing exactly what it's built to do. Let yourself reach for it without the extra layer of shame."},
         {title:'Ask before you assume',body:"A short, direct question, like \"are we okay?\", resolves uncertainty faster than hours spent privately interpreting someone's tone. Left unchecked, ambiguity keeps your <strong>threat-detection system</strong> quietly scanning for confirmation of the worst case."},
@@ -485,7 +519,7 @@ const KIT = {
       {id:'receiving',label:'Support',img:'ba-02_notebook-pen.png',tips:[
         {title:'Let people actually help you',img:'food.png',body:"Food, groceries, errands, childcare, a ride somewhere. Support doesn't have to be emotional or deep to genuinely count. Accepting practical help isn't weakness; it's <strong>redistributing the load</strong> your system is currently unable to carry alone. Say yes to the small offers. They add up more than they seem to."},
         {title:'Make the ask concrete',img:'warmmeals.png',body:'"Could you bring me dinner tonight?" is something a person can actually act on. "Can you support me?" often just creates more decisions for them to make. Vague requests <strong>quietly increase the very decision fatigue</strong> you\'re trying to escape, for both of you. Specific, small, and doable beats big and abstract every time.'},
-        {title:"Receiving doesn't require repayment",img:'heart.png',body:"You're allowed to accept care without immediately calculating how you'll pay it back. That reflex is often less about fairness and more about <strong>discomfort with vulnerability</strong>, since being on the receiving end can feel exposed even when it's exactly what you need. Reciprocity can wait until you actually have the capacity for it again."},
+        {title:"Receiving doesn't require repayment",img:'heart.png',body:"You don't owe anyone an instant repayment plan for basic kindness. That reflex to immediately calculate how you'll pay it back is often less about fairness and more about <strong>discomfort with vulnerability</strong>, since being on the receiving end can feel exposed even when it's exactly what you need. Reciprocity can wait until you actually have the capacity for it again."},
         {title:'Practice receiving something small today',body:"A compliment, a coffee someone offers to buy, help carrying something. Let one small thing in today without deflecting it. <strong>Receiving</strong> is a practiced skill, not a fixed trait, and it gets easier with small reps."},
         {title:'Say thank you and stop there',body:"You don't need to immediately offer something back to balance the scale. Resisting the urge to reciprocate on the spot interrupts the reflex that treats every gift as a <strong>debt</strong> instead of a gift."},
         {title:"Let your ask be smaller than you think it needs to be",body:'Could you check in on me this week? is a completely reasonable, small request. You don\'t need a full crisis to justify asking for help. Small requests are the ones people can actually meet <strong>consistently</strong>.'}
@@ -507,7 +541,7 @@ const KIT = {
         {title:'Sleep is maintenance, not a reward',img:'sleep.jpg',body:"Most adults need somewhere around <strong>seven to nine hours</strong> to actually recover, and a consistent bedtime matters almost as much as the total. It's what keeps your body's internal clock, and the cortisol rhythm tied to it, predictable. You don't need to earn rest by finishing everything first. Needing more sleep than usual right now is data, not laziness."},
         {title:'Make the room aggressively boring',img:'sleep.png',body:"Dark, cool, quiet, and comfortable isn't excessive. It's the actual baseline your body needs to fall and stay asleep. Even small amounts of light can suppress the <strong>melatonin</strong> your brain relies on to initiate rest, so an eye mask and earplugs can matter more than they seem to, especially when your sensory system is already running hot."},
         {title:'Protect the hour before bed',img:'cozy.png',body:"Screens, stimulating content, and emotionally charged conversations right before sleep keep your <strong>stress-response system</strong> active exactly when it needs to be winding down. Blue light in particular can delay melatonin release for hours, not minutes. A slow, boring, low-stimulation wind-down isn't precious. It's what actually lets your body cross the line into real rest."},
-        {title:'A wind-down routine works better than willpower',body:"The same few steps in the same order each night, dim lights, same drink, same playlist, teach your body to associate the sequence with sleep itself. This kind of <strong>conditioned cueing</strong> works even on nights your mind is busy."},
+        {title:'A wind-down routine works better than willpower',body:"The same few steps in the same order each night, dim lights, same drink, same playlist, teach your body to read the sequence as \"we're doing this now.\" It works even on nights your mind won't cooperate, because your body stopped needing your mind's permission."},
         {title:"Get out of bed if you're not sleeping",body:"Lying awake and frustrated trains your brain to associate the bed with wakefulness instead of rest. Getting up briefly and returning when drowsy protects the <strong>bed-sleep association</strong> your body relies on."},
         {title:'Morning light matters as much as evening dark',body:"Getting natural light within the first hour of waking helps anchor your <strong>circadian rhythm</strong>, which makes falling asleep at night noticeably easier. It's a small, five-minute habit with an outsized effect."}
       ]},
@@ -541,7 +575,7 @@ const KIT = {
         {title:"Your threshold shrinks when you're exhausted",img:'comfy.png',body:"Something you'd normally shrug off can suddenly feel completely unbearable, and that's not you being dramatic. Depletion genuinely <strong>lowers your available filtering capacity</strong>, the same mental resource that would otherwise screen out minor irritations. Your tolerance isn't fixed; it moves with how much you already have on board. Treat a lower threshold as real, not something to push past."},
         {title:"One sense at a time when you're overloaded",body:"When everything feels like too much, deliberately reducing just one input, like turning off music or dimming one light, can be enough to tip you back under threshold. You don't need to fix the whole environment, just lower the total <strong>sensory load</strong> a little."},
         {title:'Weight and pressure are legitimate tools',body:"A weighted blanket, a firm hug, or pressing your palms together applies deep pressure that measurably calms the nervous system through the <strong>vagus nerve</strong>. This isn't a preference for comfort. It's a physiological lever."},
-        {title:'Sensitivity is information, not a malfunction',body:"Noticing more than other people do isn't a flaw to override. It's how a highly attuned <strong>nervous system</strong> is built to work. The goal isn't to feel less. It's to have enough support that feeling this much is sustainable."}
+        {title:'Sensitivity is information, not a malfunction',body:"Noticing more than other people do isn't a flaw to override. Some brains are simply built to take in more, faster, whether that's sound, light, texture, or a room's mood, and if that's you, the standard advice to \"just relax\" was never going to work. The goal isn't to feel less. It's to build a life with enough support that feeling this much is sustainable."}
       ]},
       {id:'breath',label:'Breath',img:'ba-01_hourglass-leaf.png',tips:[
         {title:"Don't force a huge breath",img:'breathing2.jpg',body:"For some people, big deliberate deep breaths can actually increase dizziness or panic rather than easing it. The shift in <strong>carbon dioxide levels</strong> from over-breathing can paradoxically mimic the very anxiety you're trying to calm. Keep it gentle and small. There's no prize for the most dramatic inhale."},
@@ -691,6 +725,8 @@ function pickPillar(id){
 
   const chapter = KIT[id];
   document.getElementById('kbox2-q').textContent = chapter.q;
+  document.getElementById('chapter-reflect').textContent = CHAPTER_REFLECT[id];
+  document.getElementById('chapter-disclaimer').textContent = CHAPTER_DISCLAIMER[id];
   document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>`
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
