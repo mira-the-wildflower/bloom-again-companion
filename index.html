@@ -100,6 +100,26 @@ body{overflow-x:hidden}
   .petal-icon{animation:none}
 }
 
+/* Environment is the suggested starting chapter on mobile: a quiet, permanent
+   visual nudge (deeper border + faint warm wash) plus one extra settling
+   pulse after the general tap cue finishes, so it reads as "start here"
+   without looking like an alert or an ad. */
+@media(hover:none) and (pointer:coarse){
+  .petal-btn[data-pillar="environment"]{background:rgba(232,178,154,.05);border-radius:16px}
+  .petal-btn[data-pillar="environment"] .petal-icon{
+    border-color:var(--accent-deep);
+    border-width:2px;
+    animation:petalTapCue 1s ease-out 1.16s both, envStartCue 1.4s ease-in-out 2.4s 2 both;
+  }
+}
+@keyframes envStartCue{
+  0%,100%{box-shadow:0 0 0 3px rgba(232,178,154,.12)}
+  50%{box-shadow:0 0 0 7px rgba(232,178,154,.26)}
+}
+@media(prefers-reduced-motion:reduce){
+  .petal-btn[data-pillar="environment"] .petal-icon{animation:none}
+}
+
 /* quiet "where to start" aside — a small caption under the flower photo,
    not a standalone UI block */
 .flower-hint{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--text-muted);max-width:190px;margin:8px auto 0;line-height:1.5}
@@ -174,7 +194,8 @@ body{overflow-x:hidden}
 @media(max-width:900px){
   .opening-hero{gap:26px 0}
   .opening-letter{order:-1;max-width:480px;flex-basis:100%}
-  .flower-block{flex-basis:100%;max-width:520px}
+  .pick-section{order:0;flex-basis:100%}
+  .flower-block{order:1;flex-basis:100%;max-width:520px}
 }
 @media(max-width:640px){
   .opening-letter{padding:22px 20px}
@@ -183,7 +204,7 @@ body{overflow-x:hidden}
   .opening-flower{flex-wrap:nowrap;justify-content:flex-start;gap:14px;margin-top:10px}
   .flower-wrap{flex:0 0 auto}
   .flower-illustration{width:104px}
-  .flower-hint{font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;font-size:10px;line-height:1.4;color:var(--text-soft);max-width:104px;margin-top:7px}
+  .flower-hint{font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;font-size:9.5px;line-height:1.35;color:var(--text-soft);max-width:146px;margin-top:7px}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
   .petal-btn{padding:6px 4px;gap:8px}
   .petal-icon{width:34px;height:34px}
@@ -200,6 +221,32 @@ body{overflow-x:hidden}
   .petal-btn{padding:5px 3px;gap:6px}
   .fl-layer{font-size:8.5px}
   .fl-title{font-size:12.5px}
+}
+
+/* DESKTOP ONLY — flower as true page center, chapters ~1cm to its right and
+   vertically centered on it, headline moved below the row. Grid's 1fr/auto/1fr
+   columns keep the middle (flower+chapters) column centered regardless of the
+   letter's width, since the letter and the empty right column balance out. */
+@media(min-width:901px){
+  /* flower-block and opening-flower become invisible wrappers on desktop —
+     their children (flower-wrap, petal-nav-list) act as direct grid items
+     so the fixed-width middle column keeps the flower itself exactly on the
+     page's true center, independent of the letter's or chapters' width. */
+  .opening-hero{display:grid;grid-template-columns:1fr 230px 1fr;align-items:start;column-gap:0}
+  .opening-letter{grid-column:1;grid-row:1;justify-self:start}
+  .flower-block{display:contents}
+  .opening-flower{display:contents}
+  .flower-wrap{grid-column:2;grid-row:1;justify-self:center;align-self:center;position:relative}
+  .petal-nav-list{grid-column:3;grid-row:1;justify-self:start;align-self:center;margin-left:38px;max-width:320px}
+  .pick-section{grid-column:1/-1;grid-row:2;justify-self:center;margin-top:22px}
+  .flower-hint{
+    position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    margin-top:10px;white-space:nowrap;
+    font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;
+    font-size:13px;color:var(--text);max-width:none;
+  }
+  .crisis-btn{font-size:12.5px;color:#FFFFFF}
+  .soil-quote{max-width:640px}
 }
 
 /* sub-area icons */
@@ -247,6 +294,12 @@ body{overflow-x:hidden}
 .insp-modal-title{font-family:var(--serif);font-style:italic;font-size:clamp(21px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
 .insp-modal-text{font-size:16px;line-height:1.5;color:var(--text-soft)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
+.insp-modal-text p{margin-bottom:12px}
+.insp-modal-text p:last-child{margin-bottom:0}
+.insp-modal-text ul{list-style:none;margin:12px 0;padding:0}
+.insp-modal-text li{position:relative;padding-left:22px;margin-bottom:9px;line-height:1.45}
+.insp-modal-text li:last-child{margin-bottom:0}
+.insp-modal-text li::before{content:'';position:absolute;left:3px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
@@ -297,12 +350,14 @@ body{overflow-x:hidden}
         <p>Enjoy the experience.</p>
       </div>
 
+      <!-- HEADLINE — mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
+      <div class="pick-section">
+        <span class="eyebrow">Start Here</span>
+        <h1 class="pick-title serif">Where do you need relief first?</h1>
+      </div>
+
       <!-- FLOWER + FIVE CHAPTERS — the main interactive heart of the page -->
       <div class="flower-block">
-        <div class="pick-section">
-          <span class="eyebrow">Start Here</span>
-          <h1 class="pick-title serif">Where do you need relief first?</h1>
-        </div>
         <div class="opening-flower">
           <div class="flower-wrap">
             <img class="flower-illustration" src="bloom-again-images/flower-illustration.png" alt="Bloom Again flower, soil to petals">
@@ -426,7 +481,7 @@ body{overflow-x:hidden}
     </button>
     <div class="insp-modal-media" id="insp-modal-media"></div>
     <h3 class="insp-modal-title" id="insp-modal-title"></h3>
-    <p class="insp-modal-text" id="insp-modal-text"></p>
+    <div class="insp-modal-text" id="insp-modal-text"></div>
   </div>
 </div>
 
@@ -499,24 +554,24 @@ const KIT = {
       ]},
       {id:'work',label:'Work',img:'ba-21_mechanical-timer.png',tips:[
         {title:"Sick leave isn't something you earn",img:'timeoff.png',body:"If you're genuinely unwell, taking time off is care, not indulgence. Pushing through keeps your body <strong>stressed</strong> long after the workday ends, and that's part of why burnout builds up instead of going away. Rest isn't a reward for reaching collapse. You're allowed to take it the moment you notice you need it."},
-        {title:'Protect yourself from constant switching',img:'digital detox.png',body:"Every time you jump between a message, a task, and a meeting, part of your focus stays stuck on the last thing even as you move to the next. Fewer notifications, fewer open tabs, fewer things happening at once all mean less of that <strong>leftover static</strong> building up. When you're already worn out, constant switching costs more than it seems to."},
+        {title:'Protect yourself from constant switching',img:'digital detox.png',body:"<p>Every time you jump between a message, a task, and a meeting, part of your focus stays stuck on the last thing even as you move to the next. A few ways to cut down on that <strong>leftover static</strong>:</p><ul><li>Turn off notifications you don't need</li><li>Close extra tabs</li><li>Do fewer things at once</li></ul><p>When you're already worn out, constant switching costs more than it seems to.</p>"},
         {title:'Build a wall between work and rest',img:'hour of work.png',body:"If you work from home, try not to turn your bed into your desk. Your body needs at least one space that only means safety, not tasks. Even ten quiet minutes away from work lets your body <strong>settle down</strong> a little. Keeping distance from work isn't disloyalty. It's what makes it possible to keep going at all."},
         {title:'Name the ask before you agree to it',img:'timeoff.png',body:"Try asking, \"What exactly do you need, and by when?\" It turns a vague request into something you can actually plan for. Open-ended asks quietly weigh on your mind until they're resolved. A little <strong>clarity</strong> closes that loop before it starts costing you."},
         {title:"Let your body move between blocks",img:'digital detox.png',body:"Standing, stretching, or stepping outside for two minutes between tasks isn't wasted time. It's what lets your body <strong>reset</strong> before the next thing lands. Sitting still for hours keeps you quietly tense the whole time, even if you don't notice it."},
         {title:'Do one thing at a time, on purpose',img:'hour of work.png',body:"Every time you switch tasks, it costs you real focus, even when the tasks feel small. Closing extra tabs and finishing one thing before starting the next isn't slower. Most of the time it's actually <strong>faster</strong>, and it costs you a lot less."}
       ]},
       {id:'physical',label:'Physical',img:'ba-06_potted-plant-window.png',tips:[
-        {title:'Turn down the sensory volume',img:'noisereducitons.jpg',body:"Harsh lighting, background noise, strong smells, and scratchy fabric all add up, especially when you're already running low. If you're a highly sensitive person, your body takes in more of the world around you than most, so it needs more <strong>relief</strong> too. Softening even one of these at a time is a real, meaningful thing to do for yourself."},
-        {title:'Make your bedroom boringly calm',img:'sleepMAIN.jpg',body:"Even dim light at night can make it harder for your body to feel sleepy and truly rest. An eye mask, blackout curtains, and low, warm lighting aren't extra. They're real <strong>support</strong> for a tired body. The calmer your room looks, the easier it is to settle into it."},
+        {title:'Turn down the sensory volume',img:'noisereducitons.jpg',body:"<p>Harsh lighting, background noise, strong smells, and scratchy fabric all add up, especially when you're already running low. Try softening just one of these at a time:</p><ul><li>Lighting</li><li>Noise</li><li>Smell</li><li>What's touching your skin</li></ul><p>If you're a highly sensitive person, your body takes in more of the world around you than most, so it needs more <strong>relief</strong> too.</p>"},
+        {title:'Make your bedroom boringly calm',img:'sleepMAIN.jpg',body:"<p>Even dim light at night can make it harder for your body to feel sleepy and truly rest. None of this is extra, it's real <strong>support</strong> for a tired body:</p><ul><li>An eye mask</li><li>Blackout curtains</li><li>Low, warm lighting</li></ul><p>The calmer your room looks, the easier it is to settle into it.</p>"},
         {title:'Regulate before you reach the edge',img:'diffuser.png',body:"Your ability to handle stimulation isn't fixed. It shrinks the more tired you are. Waiting until you're already overwhelmed to slow things down is like trying to put out a fire once it's already spread. Easing off <strong>early</strong>, before you hit your limit, works far better."},
-        {title:'Layer softness where your body touches things',img:'noisereducitons.jpg',body:"A cushion, a blanket, or socks instead of bare feet on a cold floor are small, physical comforts that tell your body it's <strong>safe</strong>. This isn't indulgence. It's one more gentle signal that lets your body stand down."},
+        {title:'Layer softness where your body touches things',img:'noisereducitons.jpg',body:"<p>Small, physical comforts tell your body it's <strong>safe</strong>:</p><ul><li>A cushion</li><li>A blanket</li><li>Socks instead of bare feet on a cold floor</li></ul><p>This isn't indulgence. It's one more gentle signal that lets your body stand down.</p>"},
         {title:'Let fresh air do some of the work',img:'sleepMAIN.jpg',body:"Opening a window for even a few minutes changes the air around you enough to genuinely help you feel <strong>calmer</strong>. It costs nothing, and it asks nothing of you except letting the air move."},
         {title:"Keep one low-stimulation hour non-negotiable",img:'diffuser.png',body:"Pick one hour a day with dim light, no screens, and as little noise as possible, and protect it like you would a meeting. You don't have unlimited room to take things in. A guaranteed quiet hour gives your mind somewhere reliable to <strong>recover</strong>."}
       ]},
       {id:'digital',label:'Digital',img:'ba-12_phone-facedown.png',tips:[
         {title:"Scrolling isn't the same as resting",img:'time off the phone.png',body:"Your phone can keep your mind fully busy even while your body sits still, which means scrolling can look like rest without actually giving you any. Try putting your phone somewhere out of reach, not just face down. A little <strong>distance</strong> is what actually breaks the habit of reaching for it."},
         {title:'Notifications are tiny alarms',img:'digital detox.png',body:"Each ping is a small, unexpected jolt. Not knowing when the next one is coming is exactly what keeps a stressed body on edge, since it can never fully relax while waiting. Turning off what you don't truly need isn't about discipline. It's about giving your body one less reason to stay <strong>tense</strong> all day."},
-        {title:'Choose real recovery over more input',img:'comfy.png',body:"Audiobooks at low volume, familiar music, darkness, silence, or simply lying still with nothing playing can restore you more than another hour of content ever will. Real rest needs less coming in, not just something <strong>different</strong> coming in. Your body can't tell the difference between \"useful\" scrolling and any other kind of overload."},
+        {title:'Choose real recovery over more input',img:'comfy.png',body:"<p>Real rest needs less coming in, not just something <strong>different</strong> coming in. A few things that can restore you more than another hour of content ever will:</p><ul><li>Audiobooks at low volume</li><li>Familiar music</li><li>Darkness or silence</li><li>Simply lying still with nothing playing</li></ul><p>Your body can't tell the difference between \"useful\" scrolling and any other kind of overload.</p>"},
         {title:'Batch the checking instead of banning it',img:'time off the phone.png',body:"Set fixed times to check, say 10am and 4pm. That satisfies the urge to look without leaving you at its mercy all day. Checking at random times keeps pulling you back, the same way it would with a slot machine. A simple <strong>schedule</strong> quietly breaks that pattern."},
         {title:'Curate what reaches you, not just how often',img:'digital detox.png',body:"Muting or unfollowing accounts that reliably make you feel envious or not-enough isn't overly sensitive. It's basic care for yourself. Comparing yourself to others happens without you even noticing, which is why you can feel <strong>worse</strong> before you've figured out why."},
         {title:'Let boredom happen on purpose',img:'comfy.png',body:"Try resisting the urge to reach for your phone in an idle moment, even just once today. Unstructured, screen-free time is what lets your mind quietly process things in the background, something constant input never <strong>allows</strong>."}
@@ -534,7 +589,7 @@ const KIT = {
         {title:'Let convenience be a real recovery tool',img:'warmmeals.png',body:"Paying for delivery, ready-made meals, or a bit of cleaning help isn't wasteful. When it stops you from running yourself into the ground, it's a real investment in your <strong>recovery</strong>, not a luxury. Staying well is worth more, long term, than the money you'd save doing everything yourself."},
         {title:"Exhaustion isn't a financial character flaw",img:'heart.png',body:"Financial stress is genuinely hard on your body. It isn't a personal failing you should be able to think your way out of. Ongoing stress makes it harder to think clearly about money, which can trap you in a cycle that has <strong>nothing to do with willpower</strong>. Getting real, practical support here helps steady everything else too."},
         {title:"Automate what you can so willpower isn't required",img:'finances.png',body:"Auto-pay and auto-transfer take recurring decisions off your plate completely. Every bill you have to remember and act on by hand is a small, ongoing drain on your attention. Automating it gives that <strong>attention</strong> back to you."},
-        {title:"Separate 'must decide now' from 'can wait'",img:'warmmeals.png',body:"Make two short lists: what genuinely needs a decision this week, and everything else. That keeps money stress from feeling like one giant, blurry weight. Your mind handles a few clear priorities far better than one long, <strong>tangled</strong> one."},
+        {title:"Separate 'must decide now' from 'can wait'",img:'warmmeals.png',body:"<p>Make two short lists to keep money stress from feeling like one giant, blurry weight:</p><ul><li>What genuinely needs a decision this week</li><li>Everything else, it can wait</li></ul><p>Your mind handles a few clear priorities far better than one long, <strong>tangled</strong> one.</p>"},
         {title:'Let one trusted person see the numbers with you',img:'heart.png',body:"Money stress tends to isolate. Most people carry it quietly, which only adds shame on top of an already heavy load. Sharing the actual numbers with one person you trust <strong>lightens</strong> that weight, even if they can't fix anything."}
       ]}
     ]
@@ -575,7 +630,7 @@ const KIT = {
         {title:'One honest sentence beats a performed smile',img:'cozy.png',body:"\"I'm a bit low on energy today\" costs less than keeping up a cheerful front you don't feel. Pretending to be fine is genuinely tiring, and dropping it, even partway, with people you trust <strong>frees up real energy</strong>."}
       ]},
       {id:'receiving',label:'Support',img:'ba-02_notebook-pen.png',tips:[
-        {title:'Let people actually help you',img:'food.png',body:"Food, groceries, errands, a ride somewhere. Support doesn't have to be emotional or deep to genuinely count. Accepting practical help isn't weakness. It's <strong>sharing the load</strong> you can't carry alone right now. Say yes to the small offers. They add up more than they seem to."},
+        {title:'Let people actually help you',img:'food.png',body:"<p>Support doesn't have to be emotional or deep to genuinely count. It can be as simple as:</p><ul><li>Food or groceries</li><li>Errands</li><li>A ride somewhere</li></ul><p>Accepting practical help isn't weakness. It's <strong>sharing the load</strong> you can't carry alone right now. Say yes to the small offers. They add up more than they seem to.</p>"},
         {title:'Make the ask concrete',img:'warmmeals.png',body:'"Could you bring me dinner tonight?" is something a person can actually act on. "Can you support me?" often just creates more decisions for them to make. Vague requests quietly add to the very <strong>overwhelm</strong> you\'re trying to escape, for both of you. Specific and small beats big and vague every time.'},
         {title:"Receiving doesn't require repayment",img:'heart.png',body:"You don't owe anyone an instant plan to pay them back for basic kindness. That urge to immediately even the score is often less about fairness and more about how <strong>uncomfortable</strong> it can feel to simply receive something. Paying it forward can wait until you actually have the energy for it again."},
         {title:'Practice receiving something small today',img:'food.png',body:"A compliment, a coffee someone offers to buy, help carrying something. Let one small thing in today without brushing it off. <strong>Receiving well</strong> is a skill you can practice, not something you either have or don't, and it gets easier with small tries."},
@@ -599,13 +654,13 @@ const KIT = {
         {title:'Sleep is maintenance, not a reward',img:'sleep.jpg',body:"Most adults need somewhere around <strong>seven to nine hours</strong> to actually recover, and going to bed around the same time each night matters almost as much as the total. That's what keeps your body's internal clock steady and predictable. You don't need to earn rest by finishing everything first. Needing more sleep than usual right now is real, not laziness."},
         {title:'Make the room aggressively boring',img:'sleep.png',body:"Dark, cool, quiet, and comfortable isn't excessive. It's what your body actually needs to fall and stay asleep. Even a little light can make it harder for your brain to <strong>wind down</strong>, so an eye mask and earplugs can matter more than they seem to, especially if you're sensitive."},
         {title:'Protect the hour before bed',img:'cozy.png',body:"Screens, stimulating shows, and heavy conversations right before sleep keep your body <strong>alert</strong> exactly when it needs to be winding down. Bright light from screens can delay feeling sleepy for hours, not minutes. A slow, boring, low-stimulation wind-down isn't precious. It's what actually lets your body cross the line into real rest."},
-        {title:'A wind-down routine works better than willpower',img:'sleep.jpg',body:"The same few steps in the same order each night, dim lights, the same drink, the same playlist, teach your body to read the sequence as \"we're doing this now.\" It works even on nights your mind won't cooperate, because your body <strong>stops needing permission</strong> from your mind."},
+        {title:'A wind-down routine works better than willpower',img:'sleep.jpg',body:"<p>The same few steps in the same order each night teach your body to read the sequence as \"we're doing this now\":</p><ul><li>Dim the lights</li><li>The same drink</li><li>The same playlist</li></ul><p>It works even on nights your mind won't cooperate, because your body <strong>stops needing permission</strong> from your mind.</p>"},
         {title:"Get out of bed if you're not sleeping",img:'sleep.png',body:"Lying awake and frustrated teaches your brain to connect the bed with being awake instead of resting. Getting up for a bit and going back when you're drowsy protects that <strong>bed-means-rest</strong> connection."},
         {title:'Morning light matters as much as evening dark',img:'cozy.png',body:"Getting natural light within the first hour of waking helps set your body's <strong>internal clock</strong>, which makes falling asleep at night noticeably easier. It's a small, five-minute habit with a big effect."}
       ]},
       {id:'nourishment',label:'Nourishment',img:'ba-07_tea-linen.png',tips:[
         {title:"Feed the system before the willpower runs out",img:'nourishment.jpg',body:"Your brain and body run on real fuel, not determination. Coffee and willpower alone will eventually borrow energy you don't have to repay. Skipping meals can make you feel <strong>anxious and foggy</strong>, which can make an already-hard day feel even harder. Eat regularly, even if every meal is extremely simple."},
-        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"Aim for a bit of <strong>protein at each meal</strong>, like yogurt with fruit, eggs and toast, or rice with chicken or tofu. Protein helps keep your blood sugar and mood steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel."},
+        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"<p>Aim for a bit of <strong>protein at each meal</strong>. A few easy combinations:</p><ul><li>Yogurt with fruit</li><li>Eggs and toast</li><li>Rice with chicken or tofu</li></ul><p>Protein helps keep your blood sugar and mood steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel.</p>"},
         {title:'Hydration is nervous-system maintenance',img:'warmmeals.png',body:"Water and regular meals cover most ordinary needs, but if you've been sweating a lot, sick, or losing a lot of fluids, <strong>electrolytes</strong> genuinely matter, since even mild dehydration can worsen your mood and focus. You don't need anything fancy, but not drinking enough will quietly work against everything else you're trying to do."},
         {title:'Keep something easy within reach',img:'nourishment.jpg',body:"Nuts, fruit, crackers, anything that takes zero preparation, kept close by on genuinely low-energy days. The gap between hungry and fed matters more than how <strong>perfect</strong> the food is. Just eating something comes first."},
         {title:"There's no such thing as a bad meal on a hard day",img:'healthy snack.png',body:"Whatever you can manage to eat when you're worn out is the right meal. Eating less on a hard day only adds physical stress on top of emotional stress, working <strong>against</strong> you, not for you."},
@@ -615,7 +670,7 @@ const KIT = {
         {title:"Let your body discharge what it's holding",img:'movement2.jpg',body:"Stress doesn't just disappear once a stressful moment ends. Gentle movement is one of the most effective ways to help your body actually <strong>let go of it</strong>. This might mean walking slowly around the room, not a workout. The goal is release, not performance."},
         {title:'Choose circulation over intensity',img:'sport.png',body:"A few minutes of gentle walking, stretching, or simply changing position gets blood and oxygen moving without adding extra stress the way harder exercise can when you're already worn out. On a very low-energy day, this small amount isn't a lesser version of movement. It's the <strong>right amount</strong> for where your body actually is."},
         {title:'Let your body set the ceiling',img:'cozy.png',body:"If movement leaves you noticeably worse afterward instead of better, that's useful information, not a failure to push through. Pushing an already-tired body can leave you feeling <strong>worse</strong>, not better. Scaling back isn't giving up. It's listening to a signal your body is actively sending you."},
-        {title:"Movement doesn't have to look like exercise",img:'movement2.jpg',body:"Dancing in your kitchen, shaking out your hands, or rolling your shoulders, anything that moves your body counts, and doesn't need a workout label to count. Your body responds to <strong>motion itself</strong>, not to how structured it looks."},
+        {title:"Movement doesn't have to look like exercise",img:'movement2.jpg',body:"<p>Anything that moves your body counts, and doesn't need a workout label to count:</p><ul><li>Dancing in your kitchen</li><li>Shaking out your hands</li><li>Rolling your shoulders</li></ul><p>Your body responds to <strong>motion itself</strong>, not to how structured it looks.</p>"},
         {title:'Shaking is an actual stress-release mechanism',img:'sport.png',body:"Many animals physically tremble after a scare passes to let go of built-up tension. People have the same instinct, just more suppressed. A few minutes of deliberate shaking or bouncing can mimic that same natural <strong>release</strong>."},
         {title:"Rest days are part of the plan, not a failure of it",img:'cozy.png',body:"A body that never gets time to recover between movement stays a little bit tense, even from gentle activity. Planned rest supports you just as much as the <strong>movement</strong> itself does."}
       ]},
@@ -629,7 +684,7 @@ const KIT = {
       ]},
       {id:'sensory',label:'Sensory',img:'ba-13_candle-lavender.png',tips:[
         {title:'Lower the input before you try to calm down',img:'diffuser.png',body:"Darkness, quiet, soft fabric, and a comfortable temperature all reduce how much your brain has to process at once. Trying to \"calm down\" while still surrounded by noise and light is an uphill battle. Turning things down often has to come <strong>first</strong>, before you can feel calmer, not after."},
-        {title:'Build a tiny sensory emergency kit',img:'noisereducitons.jpg',body:"Earplugs, an eye mask, a soft layer, water, and easy food, kept together somewhere easy to grab, mean you don't have to pull comfort together from scratch mid-overwhelm. Pressure and soft texture genuinely <strong>help calm your body</strong>, which is part of why weighted or textured items reliably help. Small, ready tools matter more than they look like they should."},
+        {title:'Build a tiny sensory emergency kit',img:'noisereducitons.jpg',body:"<p>Keep a few things together somewhere easy to grab, so you don't have to pull comfort together from scratch mid-overwhelm:</p><ul><li>Earplugs</li><li>An eye mask</li><li>A soft layer</li><li>Water</li><li>Easy food</li></ul><p>Pressure and soft texture genuinely <strong>help calm your body</strong>, which is part of why weighted or textured items reliably help. Small, ready tools matter more than they look like they should.</p>"},
         {title:"Your threshold shrinks when you're exhausted",img:'comfy.png',body:"Something you'd normally shrug off can suddenly feel completely unbearable, and that's not you being dramatic. Being worn out genuinely <strong>lowers what you can filter out</strong>, the same thing that would otherwise screen out minor irritations. Your tolerance isn't fixed. It moves with how much you already have on board. Treat a lower threshold as real, not something to push past."},
         {title:"One sense at a time when you're overloaded",img:'diffuser.png',body:"When everything feels like too much, turning down just one thing, like turning off music or dimming one light, can be enough to bring you back under your limit. You don't need to fix the whole room, just lower the total <strong>noise</strong> a little."},
         {title:'Weight and pressure are legitimate tools',img:'noisereducitons.jpg',body:"A weighted blanket, a firm hug, or pressing your palms together applies gentle pressure that genuinely calms your body. This isn't just a preference for comfort. It's a real, <strong>physical</strong> effect."},
@@ -639,7 +694,7 @@ const KIT = {
         {title:"Don't force a huge breath",img:'breathing2.jpg',body:"For some people, big deliberate deep breaths can actually increase dizziness or panic instead of easing it. Breathing too hard can <strong>backfire</strong> and mimic the very anxiety you're trying to calm. Keep it gentle and small. There's no prize for the most dramatic inhale."},
         {title:'Let the exhale run a little longer',img:'breathing.jpg',body:"Breathe in naturally, then let the breath out stretch a little longer and slower than the breath in, without forcing or counting rigidly. A longer exhale genuinely helps <strong>calm your body</strong>, and it's measurably one of the fastest ways to slow down a racing heart. Small and unforced still works."},
         {title:'Let breath be an invitation, not a task',img:'comfy.png',body:"The goal was never to hit some perfect, impressive state of calm on command. That expectation alone can add pressure that defeats the whole point. Give your body a few minutes of slightly slower, easier breathing and let that genuinely be <strong>enough</strong>, whether or not it feels dramatically different afterward. Small shifts still count as real ones."},
-        {title:'Try box breathing when your mind is racing',img:'breathing2.jpg',body:"Breathe in for four counts, hold for four, breathe out for four, hold for four. The structure itself gives a racing mind something concrete to follow. This works the same way a longer exhale does, just with an easier <strong>rhythm</strong> to hold onto."},
+        {title:'Try box breathing when your mind is racing',img:'breathing2.jpg',body:"<p>The structure itself gives a racing mind something concrete to follow:</p><ul><li>Breathe in for 4 counts</li><li>Hold for 4</li><li>Breathe out for 4</li><li>Hold for 4</li></ul><p>This works the same way a longer exhale does, just with an easier <strong>rhythm</strong> to hold onto.</p>"},
         {title:"Sighing is your body already trying to help",img:'breathing.jpg',body:"A spontaneous sigh is your body's built-in way to reset your breathing and release tension. It's not a sign of exasperation. Two purposeful sighs, a long breath out followed by a short one, can help you get that same <strong>reset</strong> on purpose."},
         {title:"Breathe from your belly, not your chest",img:'comfy.png',body:"Shallow chest breathing keeps your body signaling alertness, while breathing that expands your belly helps your body <strong>calm down</strong>. Placing a hand on your stomach and feeling it rise is enough to check which one you're doing."}
       ]}
@@ -665,7 +720,7 @@ const KIT = {
         {title:"You are allowed to enjoy your life before everything is resolved.",img:'cozy.png',body:"There will probably always be something unfinished or imperfect. If joy is waiting for everything to be under control first, it can end up waiting forever. You're allowed moments of pleasure and connection right <strong>alongside</strong> the unfinished parts."}
       ]},
       {id:'self-trust',label:'Self-Trust',img:'ba-22_compass-map.png',tips:[
-        {title:"Self-trust is built through listening to yourself and responding.",body:"Trust grows when you notice something and actually respond to it. Notice you're tired and rest. Notice you're hungry and eat. Notice a boundary and honor it. Each time, you teach yourself that what you feel matters. Self-trust isn't about always being certain. It's about knowing you won't <strong>abandon yourself</strong>."},
+        {title:"Self-trust is built through listening to yourself and responding.",body:"<p>Trust grows when you notice something and actually respond to it:</p><ul><li>Notice you're tired, and rest</li><li>Notice you're hungry, and eat</li><li>Notice a boundary, and honor it</li></ul><p>Each time, you teach yourself that what you feel matters. Self-trust isn't about always being certain. It's about knowing you won't <strong>abandon yourself</strong>.</p>"},
         {title:"You do not need to know everything before taking the next step.",body:"Overthinking often tries to create certainty where there isn't any. Instead of asking whether you can guarantee the outcome, ask whether you know enough for just the <strong>next small step</strong>. You can move forward and still be open to changing course."},
         {title:"Learn the language of your own body.",body:"Over time you can get to know your own patterns, energy, appetite, sleep, tension, mood, and what wears you out. This isn't about treating every feeling as an alarm. It's about getting to know your body instead of <strong>overriding it</strong> on autopilot."},
         {title:"Your boundaries become stronger when you believe your discomfort matters.",body:"A boundary usually starts as a quiet feeling before it becomes something you say out loud. Try noticing resentment, dread, or tiredness as information, instead of judging yourself for feeling it. You don't have to act on every feeling, but you can get <strong>curious</strong> about what it's telling you."},
@@ -675,14 +730,14 @@ const KIT = {
       {id:'shame',label:'Shame',img:'ba-15_papers-lifted.png',tips:[
         {title:"Meet the parts of yourself you learned to hide with curiosity.",body:"Shame grows in secrecy, in thoughts like \"I'm too much\" or \"something is wrong with me.\" Curiosity changes the question from \"What's wrong with me?\" to \"What happened, and what do I need?\" This doesn't excuse hurtful behavior. It creates enough <strong>safety</strong> to actually understand and change it."},
         {title:"A difficult experience does not have to become a negative identity.",body:"A hard season, failure, or rejection can start to feel like who you are, not just something that happened. Try separating the two: \"I went through something difficult\" is different from \"I am difficult.\" That difference leaves <strong>room to recover</strong>."},
-        {title:"You can hold accountability without attacking yourself.",body:"Being kind to yourself isn't the same as avoiding responsibility. People are often more able to make honest repairs when they're not busy defending themselves from shame. A useful order: notice what happened, understand why, fix what you can, learn, and then let the <strong>rest go</strong>."},
+        {title:"You can hold accountability without attacking yourself.",body:"<p>Being kind to yourself isn't the same as avoiding responsibility. People are often more able to make honest repairs when they're not busy defending themselves from shame. A useful order:</p><ul><li>Notice what happened</li><li>Understand why</li><li>Fix what you can</li><li>Learn</li><li>Then let the <strong>rest</strong> go</li></ul>"},
         {title:"Your sensitivity is not evidence of weakness.",body:"Sensitivity means taking in more, and it can be exhausting without enough time to recover. Instead of treating it as a flaw or a superpower, treat it as something that just needs the right conditions. The goal isn't to feel less. It's to be <strong>better supported</strong>."},
         {title:"Shame often softens when you stop comparing your inside to someone else's outside.",body:"Comparison leaves out context. You rarely know someone else's health, history, or what's really going on for them. If comparing yourself keeps leaving you feeling not-enough, turn your attention back to your own path. What's <strong>changing</strong>? What's becoming possible for you now?"},
         {title:"You do not have to punish yourself into becoming better.",img:'letting go.png',body:"Fear can create short-term change, but lasting change usually needs enough safety to try, fail, and learn. Notice whether your inner critic is actually helping you grow, or just keeping you afraid. Real growth tends to come from <strong>kindness</strong>, not from being hard on yourself."}
       ]},
       {id:'self-talk',label:'Self-Talk',img:'ba-02_notebook-pen.png',tips:[
         {title:"Make your inner voice somewhere you can safely return to.",body:"The way you talk to yourself becomes part of the environment your mind lives in. Constant criticism creates a very different inner climate than honest, kind guidance does. You don't need forced positivity. Just aim for words that are <strong>true and kind</strong>."},
-        {title:"Replace judgment with useful information.",body:"Instead of \"I'm so lazy,\" try \"What's making this hard?\" Instead of \"I'm failing,\" try \"What isn't working?\" This turns your self-talk from punishment into something you can actually <strong>use</strong>."},
+        {title:"Replace judgment with useful information.",body:"<p>Try trading judgment for a useful question:</p><ul><li>Instead of \"I'm so lazy,\" try \"What's making this hard?\"</li><li>Instead of \"I'm failing,\" try \"What isn't working?\"</li></ul><p>This turns your self-talk from punishment into something you can actually <strong>use</strong>.</p>"},
         {title:"Speak to yourself as someone whose future you care about.",body:"Think of every thought as part of a relationship you're building with yourself over years. You wouldn't want that relationship built only on criticism. You can still hold high standards and want to grow, while the underlying message stays: <strong>\"I'm with you.\"</strong>"},
         {title:"Notice the difference between motivation and pressure.",body:"Pressure says, \"If you don't do this, you're worthless.\" Motivation says, \"This matters to me, so I want to do it.\" One uses fear, the other uses meaning. As your energy comes back, try building more of your life around what genuinely <strong>matters to you</strong>, not what scares you into moving."},
         {title:"Give yourself language for complexity.",body:"Two things can be true at once. You can be grateful and exhausted. Successful and struggling. Loving and angry. You don't need to force complicated feelings into simple boxes. Give yourself room to hold the <strong>whole picture</strong>."},
@@ -713,7 +768,7 @@ const KIT = {
         {title:"Create before you know what it is for.",body:"Creativity grows when there's room to try things without judging them right away. Make something just because you're curious. Let it be <strong>messy</strong>, private, and unfinished if it needs to be."},
         {title:"Protect a small part of your life from optimization.",body:"Not everything has to become a skill, a habit, or something to show for it. Keeping one thing just for you protects the simple <strong>joy</strong> of making it, and reminds you your life isn't a to-do list."},
         {title:"Creativity needs both energy and spaciousness.",body:"A tired mind can struggle to come up with new ideas because so much of it is busy just getting through the day. As your energy comes back, protect some unstructured time. Ideas often show up when your mind isn't being <strong>pulled</strong> in every direction."},
-        {title:"Let your environment invite creation.",body:"Keep materials out where you can see them. Make the first step easy. A notebook on the table, an instrument within reach, a few art supplies out, can make it easier to actually <strong>start</strong>."},
+        {title:"Let your environment invite creation.",body:"<p>Keep materials out where you can see them. Make the first step easy:</p><ul><li>A notebook on the table</li><li>An instrument within reach</li><li>A few art supplies out</li></ul><p>Small things like this can make it easier to actually <strong>start</strong>.</p>"},
         {title:"Allow your creative identity to be larger than your output.",body:"You don't have to make things constantly to call yourself creative. Creativity is also a way of seeing the world: noticing connections, solving problems, telling stories, cooking, or simply <strong>making meaning</strong>."},
         {title:"Make room for work that surprises you.",body:"When perfectionism eases up, creativity gets to be more playful. Follow the odd ideas. Try things you're not naturally good at yet. Growth means being okay with feeling like a <strong>beginner</strong> again for a while."}
       ]},
@@ -736,7 +791,7 @@ const KIT = {
       {id:'joy',label:'Joy',img:'ba-14_hammock-trees.png',tips:[
         {title:"Let pleasure become part of your health, not something you earn afterward.",img:'heart.png',body:"Joy isn't a reward for finishing everything on your list. Good, pleasant moments support your mood, your motivation, and your connection to others. Let yourself enjoy things alongside your responsibilities, instead of always putting it off until <strong>everything's done</strong>."},
         {title:"Pay attention to what makes you feel alive.",body:"Notice the moments when you feel more awake, curious, or connected. Those moments are clues about what belongs in a life that actually nourishes you. Jot them down if it helps. After being depleted, it can take a little time to <strong>recognize</strong> what you enjoy again."},
-        {title:"Choose joy that actually restores you.",img:'natural light.png',body:"Not everything that feels good is actually restful. Some things leave you more tired afterward. Try a few different kinds of pleasure, nature, music, movement, food, friendship, and notice which ones actually leave you feeling <strong>more full</strong>, not less."},
+        {title:"Choose joy that actually restores you.",img:'natural light.png',body:"<p>Not everything that feels good is actually restful. Some things leave you more tired afterward. Try a few different kinds of pleasure and notice which ones actually leave you feeling <strong>more full</strong>, not less:</p><ul><li>Nature</li><li>Music</li><li>Movement</li><li>Food</li><li>Friendship</li></ul>"},
         {title:"Let play exist without a purpose.",body:"Play is something you do just because doing it is enough. It can bring back a sense of spontaneity and take off the pressure to perform. Adults often need real permission to do something badly, pointlessly, and <strong>joyfully</strong>."},
         {title:"Receive beautiful moments without immediately documenting them.",body:"Constantly recording a moment can quietly pull you out of actually living it. Sometimes let an experience stay just yours. Let yourself see it, feel it, and remember it, without needing to <strong>turn it into something else</strong> first."},
         {title:"Joy can be quiet.",body:"Growth doesn't always feel exciting. Sometimes it looks like feeling at peace in your own home, waking up without dread, laughing easily, or realizing you're not <strong>bracing</strong> for the next thing anymore."}
