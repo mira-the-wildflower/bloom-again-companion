@@ -62,10 +62,10 @@ body{overflow-x:hidden}
 .opening-hero{display:flex;align-items:center;justify-content:center;gap:40px 72px;flex-wrap:wrap;max-width:1400px;margin:30px auto 12px;padding:0 6vw}
 
 /* Mira's note */
-.opening-letter{flex:1 1 320px;max-width:400px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:26px;padding:32px 30px;transition:opacity .3s ease}
+.opening-letter{flex:1 1 300px;max-width:380px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:26px 26px;transition:opacity .3s ease}
 .opening-letter.hide{display:none}
-.opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--text);margin-bottom:16px}
-.opening-letter p{font-size:14.5px;line-height:1.75;color:var(--text-soft);margin-bottom:14px}
+.opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:12px}
+.opening-letter p{font-size:13.5px;line-height:1.6;color:var(--text-soft);margin-bottom:11px}
 .opening-letter-signoff{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text);margin-top:18px;margin-bottom:4px}
 
 /* flower + five chapters — the main interactive heart of the page */
@@ -86,38 +86,11 @@ body{overflow-x:hidden}
    not a standalone UI block */
 .flower-hint{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--text-muted);max-width:190px;margin:8px auto 0;line-height:1.5}
 
-@media(max-width:900px){
-  .opening-hero{gap:26px 0}
-  .opening-letter{order:-1;max-width:480px;flex-basis:100%}
-  .flower-block{flex-basis:100%;max-width:520px}
-}
-@media(max-width:640px){
-  .opening-letter{padding:26px 24px}
-  .opening-flower{flex-wrap:nowrap;justify-content:flex-start;gap:14px;margin-top:10px}
-  .flower-wrap{flex:0 0 auto}
-  .flower-illustration{width:104px}
-  .flower-hint{font-size:9.5px;max-width:104px;margin-top:6px}
-  .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
-  .petal-btn{padding:6px 4px;gap:8px}
-  .petal-icon{width:34px;height:34px}
-  .petal-icon svg{width:16px;height:16px}
-  .fl-title{font-size:13.5px}
-}
-@media(max-width:400px){
-  .flower-illustration{width:86px}
-  .flower-hint{max-width:86px}
-  .petal-icon{width:30px;height:30px}
-  .petal-icon svg{width:14px;height:14px}
-  .petal-btn{padding:5px 3px;gap:6px}
-  .fl-layer{font-size:8.5px}
-  .fl-title{font-size:12.5px}
-}
-
-/* soil quote — sits after the zero-capacity button, quiet and understated */
-.soil-quote{max-width:560px;margin:8px auto 4px;padding:0 6vw;text-align:center;transition:opacity .3s ease}
+/* soil quote — sits after the zero-capacity button; a real focal point now */
+.soil-quote{max-width:620px;margin:14px auto 6px;padding:0 6vw;text-align:center;transition:opacity .3s ease}
 .soil-quote.hide{display:none}
-.soil-quote p{font-family:var(--serif);font-style:italic;font-size:clamp(15px,2.4vw,17px);line-height:1.55;color:var(--text-soft)}
-.soil-quote cite{display:block;margin-top:9px;font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:.1em;color:var(--text-muted);text-transform:uppercase}
+.soil-quote p{font-family:var(--serif);font-style:italic;font-size:clamp(19px,4.4vw,25px);line-height:1.5;color:var(--text)}
+.soil-quote cite{display:block;margin-top:11px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.1em;color:var(--text-muted);text-transform:uppercase}
 
 /* back to top — quiet, mobile only (desktop hero fits without it) */
 .back-to-top-wrap{display:none;text-align:center;margin:26px auto 0;transition:opacity .3s ease}
@@ -129,11 +102,10 @@ body{overflow-x:hidden}
 /* zero-capacity entry + page */
 .crisis-entry{padding:0 5vw 6px;text-align:center;transition:opacity .3s ease}
 .crisis-entry.hide{display:none}
-.crisis-btn{display:block;width:100%;max-width:560px;margin:0 auto;background:var(--rose);color:var(--bg-dark);border:1.5px solid rgba(245,236,224,.3);border-radius:14px;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;cursor:pointer;transition:all .28s ease;line-height:1.5}
+.crisis-btn{display:block;width:100%;max-width:560px;margin:0 auto;background:var(--rose);color:var(--bg-dark);border:1.5px solid rgba(245,236,224,.3);border-radius:14px;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;cursor:pointer;transition:all .28s ease;line-height:1.5;white-space:nowrap}
 .crisis-btn:hover{background:var(--rose-light);border-color:var(--rose-light);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.18)}
 .crisis-btn:active{transform:translateY(0);filter:brightness(.96)}
 .crisis-btn:focus-visible{outline:2px solid var(--rose-light);outline-offset:3px}
-.crisis-btn:hover{background:var(--accent);color:var(--bg-dark);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.18)}
 
 #s-zero{background:var(--bg-dark)}
 .zero-page{max-width:600px;margin:0 auto;padding:56px 24px 90px}
@@ -180,6 +152,37 @@ body{overflow-x:hidden}
 .flower-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
 .flower-illustration{width:min(230px,48vw);height:auto;display:block;filter:drop-shadow(0 10px 22px rgba(20,30,35,.22))}
 @media(max-width:520px){.fl-title{font-size:15px}.fl-frame{display:none}}
+
+@media(max-width:900px){
+  .opening-hero{gap:26px 0}
+  .opening-letter{order:-1;max-width:480px;flex-basis:100%}
+  .flower-block{flex-basis:100%;max-width:520px}
+}
+@media(max-width:640px){
+  .opening-letter{padding:22px 20px}
+  .opening-letter-greeting{font-size:17px;margin-bottom:10px}
+  .opening-letter p{font-size:13px;margin-bottom:10px}
+  .opening-flower{flex-wrap:nowrap;justify-content:flex-start;gap:14px;margin-top:10px}
+  .flower-wrap{flex:0 0 auto}
+  .flower-illustration{width:104px}
+  .flower-hint{font-size:9.5px;max-width:104px;margin-top:6px}
+  .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
+  .petal-btn{padding:6px 4px;gap:8px}
+  .petal-icon{width:34px;height:34px}
+  .petal-icon svg{width:16px;height:16px}
+  .fl-title{font-size:13.5px}
+  .crisis-btn{font-size:10.5px;letter-spacing:.02em;padding:12px 10px}
+}
+@media(max-width:400px){
+  .flower-illustration{width:86px}
+  .flower-hint{max-width:86px}
+  .crisis-btn{font-size:9.3px;letter-spacing:0;padding:11px 6px}
+  .petal-icon{width:30px;height:30px}
+  .petal-icon svg{width:14px;height:14px}
+  .petal-btn{padding:5px 3px;gap:6px}
+  .fl-layer{font-size:8.5px}
+  .fl-title{font-size:12.5px}
+}
 
 /* sub-area icons */
 .area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 20px}
@@ -267,7 +270,7 @@ body{overflow-x:hidden}
 
       <!-- MIRA'S NOTE -->
       <div class="opening-letter" id="opening-letter">
-        <p class="opening-letter-greeting">Hey lovely,</p>
+        <p class="opening-letter-greeting">Hey, dear</p>
         <p>I'm really glad you're here. If you found your way here from Instagram, thank you for trusting me enough to come along for this little journey.</p>
         <p>This isn't about fixing yourself or learning to cope better with a life that doesn't fit. It's about getting curious about what actually helps you bloom, and what might need to change around you.</p>
         <p>Dip in, skip things, come back whenever you want. There's nothing to complete here.</p>
