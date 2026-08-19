@@ -133,6 +133,11 @@ body{overflow-x:hidden}
 .soil-quote p{font-family:var(--serif);font-style:italic;font-size:clamp(19px,4.4vw,25px);line-height:1.5;color:var(--text)}
 .soil-quote cite{display:block;margin-top:11px;font-family:var(--sans);font-style:normal;font-size:12px;letter-spacing:.1em;color:var(--text-muted);text-transform:uppercase}
 
+/* post-hero stack — wraps button+quote+hint so desktop can reorder them via
+   flex `order` without touching mobile's natural DOM order at all */
+.post-hero-stack{display:flex;flex-direction:column}
+.desktop-hint{display:none}
+
 /* back to top — quiet, mobile only (desktop hero fits without it) */
 .back-to-top-wrap{display:none;text-align:center;margin:26px auto 0;transition:opacity .3s ease}
 .back-to-top-wrap.hide{display:none !important}
@@ -149,14 +154,14 @@ body{overflow-x:hidden}
 .crisis-btn:focus-visible{outline:2px solid var(--rose-light);outline-offset:3px}
 
 #s-zero{background:var(--bg-dark)}
-.zero-page{max-width:600px;margin:0 auto;padding:56px 24px 90px}
-.zero-hdr{text-align:center;margin-bottom:44px;position:relative}
-.zero-lead{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3.4vw,25px);line-height:1.7;color:var(--text);text-align:center;margin-bottom:26px}
+.zero-page{max-width:600px;margin:0 auto;padding:40px 24px 70px}
+.zero-hdr{text-align:center;margin-bottom:26px;position:relative}
+.zero-lead{font-family:var(--sans);font-style:normal;font-weight:500;font-size:clamp(18px,3vw,22px);line-height:1.45;color:var(--text);text-align:center;margin-bottom:12px}
 .zero-lead.tight{margin-bottom:0}
-.zero-lead-group{margin-bottom:30px}
-.zero-plain{font-size:16px;line-height:1.8;color:var(--text-soft);text-align:center;margin-bottom:8px}
-.zero-divider{border:none;border-top:1px dashed rgba(245,236,224,.2);margin:38px 0 30px}
-.zero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.8vw,22px);color:var(--accent);text-align:center;margin-bottom:28px}
+.zero-lead-group{margin-bottom:16px}
+.zero-plain{font-size:15px;line-height:1.55;color:var(--text-soft);text-align:center;margin-bottom:6px}
+.zero-divider{border:none;border-top:1px dashed rgba(245,236,224,.2);margin:20px 0 16px}
+.zero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.8vw,22px);color:var(--accent);text-align:center;margin-bottom:20px}
 .zero-steps{display:flex;flex-direction:column;gap:12px;margin-bottom:22px}
 .zero-step{display:flex;gap:16px;align-items:flex-start;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:16px;padding:18px 20px}
 .zero-step-n{width:28px;height:28px;border-radius:50%;background:rgba(232,178,154,.16);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
@@ -243,15 +248,17 @@ body{overflow-x:hidden}
   .petal-nav-list{grid-column:3;grid-row:2;justify-self:start;align-self:center;margin-left:38px;max-width:320px}
   .pick-section{grid-column:1/-1;grid-row:1;justify-self:center;margin-top:0;margin-bottom:8px}
   .pick-section .eyebrow{display:none}
-  .pick-arrow{display:inline-block;vertical-align:middle;width:34px;height:auto;margin-left:10px;color:var(--accent-deep)}
-  .flower-hint{
-    position:absolute;top:100%;left:50%;transform:translateX(-50%);
-    margin-top:10px;white-space:nowrap;
-    font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;
-    font-size:13px;color:var(--text);max-width:none;
-  }
+  .pick-arrow{display:inline-block;vertical-align:middle;width:78px;height:auto;margin-left:10px;margin-bottom:14px}
+  .flower-hint{display:none}
   .crisis-btn{font-size:12.5px;color:#FFFFFF}
-  .soil-quote{max-width:640px}
+
+  /* quote sits right under the flower+chapters row; hint (new copy) follows it;
+     button moves to last — reordered via flex, mobile DOM order untouched */
+  .soil-quote{max-width:640px;order:1;margin-top:8px}
+  .desktop-hint{display:block;order:2;text-align:center;max-width:520px;margin:18px auto 0;padding:0 5vw}
+  .desktop-hint-label{display:block;font-family:var(--sans);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);margin-bottom:6px}
+  .desktop-hint p{font-family:var(--sans);font-style:normal;font-weight:500;font-size:14px;line-height:1.5;color:var(--text-soft)}
+  .crisis-entry{order:3;margin-top:24px}
 }
 
 /* sub-area icons */
@@ -358,10 +365,7 @@ body{overflow-x:hidden}
       <!-- HEADLINE — mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
-        <h1 class="pick-title serif">Where do you need relief first?<svg class="pick-arrow" viewBox="0 0 40 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M3 8 Q 18 1 32 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M23 12 L32 15 L28 23" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></h1>
+        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="bloom-again-images/arrow-curved.png" alt="" aria-hidden="true"></h1>
       </div>
 
       <!-- FLOWER + FIVE CHAPTERS — the main interactive heart of the page -->
@@ -399,15 +403,29 @@ body{overflow-x:hidden}
     </div>
     </div>
 
-    <!-- ZERO CAPACITY ENTRY -->
-    <div class="crisis-entry">
-      <button class="crisis-btn" onclick="goTo('zero')">Read This First If You Have Zero Capacity</button>
-    </div>
+    <!-- POST-HERO STACK — mobile: button then quote (unchanged, natural DOM order).
+         desktop: reordered via flex `order` to quote, then hint, then button, without
+         touching mobile at all. -->
+    <div class="post-hero-stack">
 
-    <!-- SOIL QUOTE — after the zero-capacity option, quiet, reinforces the philosophy -->
-    <div class="soil-quote">
-      <p>"When a flower doesn't bloom, you fix the environment in which it grows, not the flower."</p>
-      <cite>Alexander Den Heijer</cite>
+      <!-- ZERO CAPACITY ENTRY -->
+      <div class="crisis-entry">
+        <button class="crisis-btn" onclick="goTo('zero')">Read This First If You Have Zero Capacity</button>
+      </div>
+
+      <!-- SOIL QUOTE — after the zero-capacity option, quiet, reinforces the philosophy -->
+      <div class="soil-quote">
+        <p>"When a flower doesn't bloom, you fix the environment in which it grows, not the flower."</p>
+        <cite>Alexander Den Heijer</cite>
+      </div>
+
+      <!-- DESKTOP-ONLY HINT — replaces the small under-flower caption on desktop;
+           mobile keeps its own separate .flower-hint under the flower image. -->
+      <div class="desktop-hint">
+        <span class="desktop-hint-label">Hint:</span>
+        <p>Start with the Environment chapter and move your way up to Expansion.</p>
+      </div>
+
     </div>
 
     <!-- BACK TO TOP — quiet, mobile only -->
@@ -449,7 +467,7 @@ body{overflow-x:hidden}
     <p class="zero-plain">Less noise. Less input. Less explaining. Less performing. Less deciding.</p>
     <p class="zero-plain">More food. More fluids. More sleep. More darkness. More quiet. More support.</p>
 
-    <div class="zero-lead-group" style="margin-top:30px">
+    <div class="zero-lead-group" style="margin-top:16px">
       <p class="zero-lead">You don't have to become functional today.</p>
       <p class="zero-lead tight">You need to create the conditions in which your body can begin to recover.</p>
     </div>
