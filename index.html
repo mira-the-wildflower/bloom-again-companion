@@ -53,6 +53,7 @@ body{overflow-x:hidden}
 /* quick pick — sits at the top of the flower/chapter block */
 .pick-section{max-width:520px;margin:0 auto;padding:0 5vw 6px;text-align:center}
 .pick-title{font-size:clamp(23px,3.2vw,29px);margin-top:8px;margin-bottom:0;line-height:1.3}
+.pick-arrow{display:none}
 
 /* opening hero — Mira's letter on one side, the flower+chapters as the
    dominant, centered focal point on the other. Full-bleed wrap breaks out
@@ -65,7 +66,7 @@ body{overflow-x:hidden}
 .opening-letter{flex:1 1 300px;max-width:380px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:26px 26px;transition:opacity .3s ease}
 .opening-letter.hide{display:none}
 .opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:12px}
-.opening-letter p{font-size:13.5px;line-height:1.6;color:var(--text-soft);margin-bottom:11px}
+.opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:13.5px;line-height:1.6;color:var(--text-soft);margin-bottom:11px}
 .opening-letter-signoff{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text);margin-top:18px;margin-bottom:4px}
 
 /* flower + five chapters — the main interactive heart of the page */
@@ -199,12 +200,13 @@ body{overflow-x:hidden}
 }
 @media(max-width:640px){
   .opening-letter{padding:22px 20px}
-  .opening-letter-greeting{font-size:17px;margin-bottom:10px}
-  .opening-letter p{font-size:13px;margin-bottom:10px}
+  .opening-letter-greeting{font-size:23px;margin-bottom:10px}
+  .opening-letter-signoff{font-size:22px}
+  .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:13px;margin-bottom:10px}
   .opening-flower{flex-wrap:nowrap;justify-content:flex-start;gap:14px;margin-top:10px}
   .flower-wrap{flex:0 0 auto}
   .flower-illustration{width:104px}
-  .flower-hint{font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;font-size:9.5px;line-height:1.35;color:var(--text-soft);max-width:146px;margin-top:7px}
+  .flower-hint{font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;font-size:8.5px;line-height:1.35;color:var(--text-soft);max-width:86px;margin-top:7px}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
   .petal-btn{padding:6px 4px;gap:8px}
   .petal-icon{width:34px;height:34px}
@@ -214,7 +216,6 @@ body{overflow-x:hidden}
 }
 @media(max-width:400px){
   .flower-illustration{width:86px}
-  .flower-hint{max-width:86px}
   .crisis-btn{font-size:9.3px;letter-spacing:0;padding:11px 6px}
   .petal-icon{width:30px;height:30px}
   .petal-icon svg{width:14px;height:14px}
@@ -233,12 +234,14 @@ body{overflow-x:hidden}
      so the fixed-width middle column keeps the flower itself exactly on the
      page's true center, independent of the letter's or chapters' width. */
   .opening-hero{display:grid;grid-template-columns:1fr 230px 1fr;align-items:start;column-gap:0}
-  .opening-letter{grid-column:1;grid-row:1;justify-self:start}
+  .opening-letter{grid-column:1;grid-row:2;justify-self:start}
   .flower-block{display:contents}
   .opening-flower{display:contents}
-  .flower-wrap{grid-column:2;grid-row:1;justify-self:center;align-self:center;position:relative}
-  .petal-nav-list{grid-column:3;grid-row:1;justify-self:start;align-self:center;margin-left:38px;max-width:320px}
-  .pick-section{grid-column:1/-1;grid-row:2;justify-self:center;margin-top:22px}
+  .flower-wrap{grid-column:2;grid-row:2;justify-self:center;align-self:center;position:relative}
+  .petal-nav-list{grid-column:3;grid-row:2;justify-self:start;align-self:center;margin-left:38px;max-width:320px}
+  .pick-section{grid-column:1/-1;grid-row:1;justify-self:center;margin-top:0;margin-bottom:8px}
+  .pick-section .eyebrow{display:none}
+  .pick-arrow{display:block;margin:6px auto 0;width:56px;height:auto;color:var(--accent-deep);transform:translateX(48px)}
   .flower-hint{
     position:absolute;top:100%;left:50%;transform:translateX(-50%);
     margin-top:10px;white-space:nowrap;
@@ -354,6 +357,11 @@ body{overflow-x:hidden}
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
         <h1 class="pick-title serif">Where do you need relief first?</h1>
+        <svg class="pick-arrow" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M7 7 C 17 4, 34 9, 43 24 C 47 30, 49 35, 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M42 32 Q 47 36 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M44 46 Q 48 43 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
       </div>
 
       <!-- FLOWER + FIVE CHAPTERS — the main interactive heart of the page -->
@@ -659,12 +667,12 @@ const KIT = {
         {title:'Morning light matters as much as evening dark',img:'cozy.png',body:"Getting natural light within the first hour of waking helps set your body's <strong>internal clock</strong>, which makes falling asleep at night noticeably easier. It's a small, five-minute habit with a big effect."}
       ]},
       {id:'nourishment',label:'Nourishment',img:'ba-07_tea-linen.png',tips:[
-        {title:"Feed the system before the willpower runs out",img:'nourishment.jpg',body:"Your brain and body run on real fuel, not determination. Coffee and willpower alone will eventually borrow energy you don't have to repay. Skipping meals can make you feel <strong>anxious and foggy</strong>, which can make an already-hard day feel even harder. Eat regularly, even if every meal is extremely simple."},
-        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"<p>Aim for a bit of <strong>protein at each meal</strong>. A few easy combinations:</p><ul><li>Yogurt with fruit</li><li>Eggs and toast</li><li>Rice with chicken or tofu</li></ul><p>Protein helps keep your blood sugar and mood steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel.</p>"},
+        {title:'Pair carbs with real protein',img:'healthy snack.png',body:"<p>Aim for a bit of <strong>protein at each meal</strong>. Some options do more for you than others:</p><ul><li><strong>Steak or other quality beef</strong>, one of the most nutrient-dense choices you can reach for. Beyond protein, it's a strong source of iron, zinc, vitamin B12, and selenium, nutrients that support energy, recovery, and muscle maintenance</li><li>Eggs and toast, a simple, nourishing combination</li><li>Chicken with rice, a practical protein-and-carb pairing that's easy on energy and recovery</li><li>Yogurt with fruit, a lighter option that still counts</li></ul><p>Protein helps keep your blood sugar and mood steadier than carbs alone. You don't need a perfect \"clean\" meal. You need consistent, real fuel.</p>"},
         {title:'Hydration is nervous-system maintenance',img:'warmmeals.png',body:"Water and regular meals cover most ordinary needs, but if you've been sweating a lot, sick, or losing a lot of fluids, <strong>electrolytes</strong> genuinely matter, since even mild dehydration can worsen your mood and focus. You don't need anything fancy, but not drinking enough will quietly work against everything else you're trying to do."},
-        {title:'Keep something easy within reach',img:'nourishment.jpg',body:"Nuts, fruit, crackers, anything that takes zero preparation, kept close by on genuinely low-energy days. The gap between hungry and fed matters more than how <strong>perfect</strong> the food is. Just eating something comes first."},
-        {title:"There's no such thing as a bad meal on a hard day",img:'healthy snack.png',body:"Whatever you can manage to eat when you're worn out is the right meal. Eating less on a hard day only adds physical stress on top of emotional stress, working <strong>against</strong> you, not for you."},
-        {title:'Warm food does more than fill you up',img:'warmmeals.png',body:"A warm meal or drink can genuinely help you feel calmer, beyond just the food itself. It's tied to the same comfort your body reads as <strong>safety</strong>. Warmth is a real, physical comfort, not just a preference."}
+        {title:'What you eat affects how tired you feel',img:'nourishment.jpg',body:"Heavily processed food, packaged snacks, fast food, sugary drinks, tends to be low in the nutrients your body actually needs, and it can spike and crash your blood sugar, which leaves you more tired, not less. You don't have to overhaul everything at once. Choosing real, simple food more often than not is one of the more meaningful changes you can make for your <strong>energy</strong> over time."},
+        {title:'Warm food does more than fill you up',img:'warmmeals.png',body:"A warm meal or drink can genuinely help you feel calmer, beyond just the food itself. It's tied to the same comfort your body reads as <strong>safety</strong>. Warmth is a real, physical comfort, not just a preference."},
+        {title:'A few supplements can round out real food',img:'nourishment.jpg',body:"<p>Food comes first, but depending on your diet and what your body actually needs, a few supplements can help fill in the gaps:</p><ul><li><strong>Vitamin D3 + K2</strong>, supports bone health and how your body uses calcium. How much you need depends on your diet, sun exposure, and blood levels, so it isn't automatically necessary for everyone</li><li><strong>Omega-3</strong>, supports heart health, brain function, and a balanced inflammation response. Fatty fish is a good source too, if that works better for you</li><li><strong>Beef liver capsules</strong>, a concentrated source of B12, vitamin A, copper, and iron. Worth checking the dose so you don't get too much vitamin A on top of what you already eat</li><li><strong>Magnesium glycinate</strong>, supports muscle and nerve function, relaxation, sleep, and energy. This form tends to be gentler on the stomach than other kinds</li></ul><p>None of these are magic or required. They're simply tools that can help, depending on what your body and your diet actually need.</p>"},
+        {title:"Eating still counts as caring for yourself",img:'nourishment.jpg',body:"When you're this exhausted, food can feel like one more thing to manage. But skipping meals tends to make everything harder to carry, your mood, your focus, the whole day. You don't need a real meal. A few simple bites is still <strong>enough</strong>, and it still counts as care."}
       ]},
       {id:'movement',label:'Movement',img:'ba-11_yoga-mat-leaf.png',tips:[
         {title:"Let your body discharge what it's holding",img:'movement2.jpg',body:"Stress doesn't just disappear once a stressful moment ends. Gentle movement is one of the most effective ways to help your body actually <strong>let go of it</strong>. This might mean walking slowly around the room, not a workout. The goal is release, not performance."},
