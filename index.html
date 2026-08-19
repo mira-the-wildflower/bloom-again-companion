@@ -43,8 +43,10 @@ body{overflow-x:hidden}
 .cover-mockup-mobile{display:none}
 @media(max-width:760px){
   .cover-mockup-desktop{display:none}
-  .cover-mockup-mobile{display:block;max-width:420px;max-height:82vh;aspect-ratio:1008/1067}
-  .cover-mockup-mobile .cover-mockup-btn{bottom:6%;font-size:11px;padding:9px 20px}
+  .cover-mockup-mobile{display:flex;flex-direction:column;align-items:center;max-width:420px}
+  .cover-mockup-mobile .cover-mockup-img{width:auto;height:auto;max-width:100%;max-height:72vh;aspect-ratio:1008/1067}
+  .cover-mockup-mobile .cover-mockup-btn{position:static;left:auto;bottom:auto;transform:none;margin-top:20px;font-size:11px;padding:9px 20px}
+  .cover-mockup-mobile .cover-mockup-btn:hover{transform:translateY(-2px)}
 }
 .cta{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 34px;border-radius:999px;cursor:pointer;transition:all .3s ease}
 .cta:hover{background:var(--accent);color:var(--bg-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,178,154,.3)}
@@ -241,7 +243,7 @@ body{overflow-x:hidden}
   .petal-nav-list{grid-column:3;grid-row:2;justify-self:start;align-self:center;margin-left:38px;max-width:320px}
   .pick-section{grid-column:1/-1;grid-row:1;justify-self:center;margin-top:0;margin-bottom:8px}
   .pick-section .eyebrow{display:none}
-  .pick-arrow{display:block;margin:6px auto 0;width:56px;height:auto;color:var(--accent-deep);transform:translateX(48px)}
+  .pick-arrow{display:inline-block;vertical-align:middle;width:34px;height:auto;margin-left:10px;color:var(--accent-deep)}
   .flower-hint{
     position:absolute;top:100%;left:50%;transform:translateX(-50%);
     margin-top:10px;white-space:nowrap;
@@ -324,7 +326,7 @@ body{overflow-x:hidden}
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
   </div>
@@ -356,12 +358,10 @@ body{overflow-x:hidden}
       <!-- HEADLINE — mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
-        <h1 class="pick-title serif">Where do you need relief first?</h1>
-        <svg class="pick-arrow" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M7 7 C 17 4, 34 9, 43 24 C 47 30, 49 35, 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M42 32 Q 47 36 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path d="M44 46 Q 48 43 50 40" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
+        <h1 class="pick-title serif">Where do you need relief first?<svg class="pick-arrow" viewBox="0 0 40 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 8 Q 18 1 32 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M23 12 L32 15 L28 23" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg></h1>
       </div>
 
       <!-- FLOWER + FIVE CHAPTERS — the main interactive heart of the page -->
@@ -672,7 +672,7 @@ const KIT = {
         {title:'What you eat affects how tired you feel',img:'nourishment.jpg',body:"Heavily processed food, packaged snacks, fast food, sugary drinks, tends to be low in the nutrients your body actually needs, and it can spike and crash your blood sugar, which leaves you more tired, not less. You don't have to overhaul everything at once. Choosing real, simple food more often than not is one of the more meaningful changes you can make for your <strong>energy</strong> over time."},
         {title:'Warm food does more than fill you up',img:'warmmeals.png',body:"A warm meal or drink can genuinely help you feel calmer, beyond just the food itself. It's tied to the same comfort your body reads as <strong>safety</strong>. Warmth is a real, physical comfort, not just a preference."},
         {title:'A few supplements can round out real food',img:'nourishment.jpg',body:"<p>Food comes first, but depending on your diet and what your body actually needs, a few supplements can help fill in the gaps:</p><ul><li><strong>Vitamin D3 + K2</strong>, supports bone health and how your body uses calcium. How much you need depends on your diet, sun exposure, and blood levels, so it isn't automatically necessary for everyone</li><li><strong>Omega-3</strong>, supports heart health, brain function, and a balanced inflammation response. Fatty fish is a good source too, if that works better for you</li><li><strong>Beef liver capsules</strong>, a concentrated source of B12, vitamin A, copper, and iron. Worth checking the dose so you don't get too much vitamin A on top of what you already eat</li><li><strong>Magnesium glycinate</strong>, supports muscle and nerve function, relaxation, sleep, and energy. This form tends to be gentler on the stomach than other kinds</li></ul><p>None of these are magic or required. They're simply tools that can help, depending on what your body and your diet actually need.</p>"},
-        {title:"Eating still counts as caring for yourself",img:'nourishment.jpg',body:"When you're this exhausted, food can feel like one more thing to manage. But skipping meals tends to make everything harder to carry, your mood, your focus, the whole day. You don't need a real meal. A few simple bites is still <strong>enough</strong>, and it still counts as care."}
+        {title:"Eating counts as caring for yourself",img:'nourishment.jpg',body:"When you're this exhausted, food can feel like one more thing to manage. But skipping meals tends to make everything harder to carry, your mood, your focus, the whole day. You don't need a real meal. A few simple bites is still <strong>enough</strong>, and it still counts as care."}
       ]},
       {id:'movement',label:'Movement',img:'ba-11_yoga-mat-leaf.png',tips:[
         {title:"Let your body discharge what it's holding",img:'movement2.jpg',body:"Stress doesn't just disappear once a stressful moment ends. Gentle movement is one of the most effective ways to help your body actually <strong>let go of it</strong>. This might mean walking slowly around the room, not a workout. The goal is release, not performance."},
