@@ -289,6 +289,7 @@ body{overflow-x:hidden}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 .tips-lead{font-size:15px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
 .insp-list{display:flex;flex-direction:column;gap:12px}
+@media(min-width:641px){.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}}
 .insp-card{display:grid;grid-template-columns:64px 1fr;grid-template-areas:"media head" "media prev";column-gap:14px;row-gap:7px;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:18px;padding:14px 16px;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
 .insp-card.no-media{grid-template-columns:1fr;grid-template-areas:"head" "prev"}
 .insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45)}
