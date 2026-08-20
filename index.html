@@ -290,17 +290,16 @@ body{overflow-x:hidden}
 .tips-lead{font-size:15px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
 .insp-list{display:flex;flex-direction:column;gap:12px}
 @media(min-width:641px){.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}}
-.insp-card{display:grid;grid-template-columns:64px 1fr;grid-template-areas:"media head" "media prev";column-gap:14px;row-gap:7px;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:18px;padding:14px 16px;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
-.insp-card.no-media{grid-template-columns:1fr;grid-template-areas:"head" "prev"}
+.insp-card{display:flex;flex-direction:column;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
 .insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45)}
-.insp-card-media{grid-area:media;width:64px;height:64px;border-radius:16px;flex-shrink:0;overflow:hidden;background:rgba(245,236,224,.07);border:1px solid rgba(245,236,224,.16);align-self:start}
+.insp-card-media{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(245,236,224,.07)}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
-.insp-card-head{grid-area:head;display:flex;align-items:center;gap:10px}
-.insp-card-open{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .22s ease}
-.insp-card-open svg{width:14px;height:14px}
-.insp-card:hover .insp-card-open{background:rgba(232,178,154,.2)}
-.insp-card-title{font-family:var(--sans);font-weight:700;font-style:normal;font-size:16.5px;color:#FFFFFF;line-height:1.32}
-.insp-card-preview{grid-area:prev;font-size:14px;line-height:1.55;color:var(--text-soft);margin:0}
+.insp-card-body{padding:16px 18px 18px}
+.insp-card-label{display:block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:19px;color:#FFFFFF;line-height:1.3;margin-bottom:14px}
+.insp-card-cta{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:20px;padding:7px 14px;transition:all .22s ease}
+.insp-card-cta svg{width:11px;height:11px}
+.insp-card:hover .insp-card-cta{background:rgba(232,178,154,.18)}
 
 /* inspiration modal — this is where the actual content and photos live */
 .insp-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
@@ -913,42 +912,16 @@ function selectArea(id){
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
       ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
-      <span class="insp-card-head">
-        <span class="insp-card-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
+      <span class="insp-card-body">
+        <span class="insp-card-label">${S.area.label}</span>
         <span class="insp-card-title">${t.title}</span>
+        <span class="insp-card-cta">More detail<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
       </span>
-      <span class="insp-card-preview">${tipPreview(t.body)}</span>
     </button>`).join('');
 
   const box3=document.getElementById('kbox3'); box3.classList.add('open');
   document.getElementById('kconn-2').classList.add('show');
   scrollInto(box3);
-}
-
-/* Derives a short plain-text teaser from a tip's full (HTML) body, for the
-   card preview line. Bullet-list bodies get their <li>s joined into a
-   flowing sentence before the same sentence-trim logic runs, so the
-   preview never revs into raw markup. The modal keeps showing the full,
-   untouched body — this is a read-only summary, not a content change. */
-function tipPreview(body){
-  const ulIdx = body.indexOf('<ul>');
-  const source = ulIdx !== -1 ? body.slice(0, ulIdx) : body;
-  const plain = source
-    .replace(/<\/p>/g,' ')
-    .replace(/<[^>]+>/g,'')
-    .replace(/\s+/g,' ')
-    .trim();
-  const sentences = plain.match(/[^.!?]+[.!?]+["'”’,;:]*(?:\s+|$)/g) || [plain];
-  let out = '';
-  for(const s of sentences){
-    const next = out + s;
-    if(out && next.length > 165) break;
-    out = next;
-    if(out.length >= 90) break;
-  }
-  out = out.trim();
-  if(out.endsWith(':')) out = out.slice(0,-1) + '…';
-  return out || plain.slice(0,150).trim();
 }
 
 /* Placeholder shown in the modal for any inspiration that doesn't have a
