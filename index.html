@@ -288,15 +288,20 @@ body{overflow-x:hidden}
 .tips-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 .tips-lead{font-size:15px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
-.insp-list{display:flex;flex-direction:column;gap:12px}
-@media(min-width:641px){.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}}
+.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+/* on desktop the 3-across tip cards break out of .kit-page's 640px cap,
+   same full-bleed technique as .opening-hero-wrap, so the larger hero
+   images get real room instead of being squeezed into the page column */
+@media(min-width:641px){
+  #kbox3{width:calc(100vw - 48px);max-width:960px;position:relative;left:50%;transform:translateX(-50%)}
+  .insp-list{grid-template-columns:repeat(3,1fr);gap:16px}
+}
 .insp-card{display:flex;flex-direction:column;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
 .insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45)}
 .insp-card-media{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(245,236,224,.07)}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
 .insp-card-body{padding:16px 18px 18px}
-.insp-card-label{display:block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
-.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:19px;color:#FFFFFF;line-height:1.3;margin-bottom:14px}
+.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:16px;color:#FFFFFF;line-height:1.3;margin-bottom:14px}
 .insp-card-cta{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:20px;padding:7px 14px;transition:all .22s ease}
 .insp-card-cta svg{width:11px;height:11px}
 .insp-card:hover .insp-card-cta{background:rgba(232,178,154,.18)}
@@ -913,7 +918,6 @@ function selectArea(id){
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
       ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
       <span class="insp-card-body">
-        <span class="insp-card-label">${S.area.label}</span>
         <span class="insp-card-title">${t.title}</span>
         <span class="insp-card-cta">More detail<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
       </span>
