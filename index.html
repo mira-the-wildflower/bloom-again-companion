@@ -721,7 +721,7 @@ const KIT = {
         {title:"Your capacity shifts, and that's biology, not inconsistency",img:'periods.jpg',body:"Your hormones rise and fall across your cycle, and that genuinely affects your <strong>mood, energy, and pain</strong>. Your baseline isn't constant, and it was never supposed to be. Illness, poor sleep, and stress add on top of that. Knowing roughly where you are in your cycle can explain a lot of what you're feeling today."},
         {title:'Track the pattern instead of the blame',img:'hormonebalance.jpg',body:"The days before your period often bring more anxiety and lower stress tolerance for many people. It's not a personal failing. It's a <strong>hormonal shift</strong> with a name. Writing down what you notice, cycle after cycle, turns confusion into information. Bring anything persistent or severe to a doctor rather than carrying it alone."},
         {title:'Work with your rhythm, not against it',img:'hormones.jpg',body:"If you already know certain days or weeks tend to be harder, ease up on yourself before you get there, rather than waiting for a crash to force the issue. Working with your <strong>actual rhythm</strong>, instead of expecting the same from yourself every day, isn't lower standards. It's working with the body you actually have."},
-        {title:'Understanding your period',img:'periodcycle.jpg',img2:'periodcycle.png',body:"Energy, mood, sleep, and appetite all shift across your cycle, not just physical symptoms. A fuller picture, tracked over a few months, shows you your real <strong>pattern</strong>, not just its most obvious part."},
+        {title:'Understanding your period',img:'periodcycle.jpg',modalImg:'periodcycle.png',body:"Your menstrual cycle involves natural changes in hormones, mainly estrogen and progesterone, throughout the month.<br><br>These hormonal shifts can affect your energy, stress levels, emotions, sleep, and overall mood.<br><br>Before and during your period, hormone levels drop, which can make you feel more tired, emotional, irritable, anxious, or overwhelmed.<br><br>If you are highly sensitive, you may experience emotions and sensory input more deeply, which can sometimes make these changes feel more intense.<br><br>This does not mean your sensitivity is caused by your hormones. Rather, hormonal changes can temporarily lower your ability to cope with stress and make existing feelings feel stronger.<br><br>Understanding your cycle can help you recognise these patterns and respond to yourself with more patience, compassion, and self care."},
         {title:'Plan demanding tasks around your higher-energy days',img:'hormones.png',body:"If you notice a consistent stretch where focus and stamina are naturally higher, save your heaviest tasks for it when you can. Working with your <strong>rhythm</strong> instead of a flat schedule isn't inefficient. It's realistic."},
         {title:'Perimenopause can start earlier than expected',img:'perimenopause.jpg',body:"Shifts in mood, sleep, and stress tolerance can begin years before your periods change noticeably, and are often mistaken for something else. Naming <strong>hormonal change</strong> as a possibility, rather than assuming it's purely in your head, can change how you get support."}
       ]},
@@ -947,9 +947,11 @@ function openInsp(i){
   const t = S.area.tips[i];
   document.getElementById('insp-modal-title').textContent = t.title;
   document.getElementById('insp-modal-text').innerHTML = t.body;
-  document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
-    ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
-    : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
+  document.getElementById('insp-modal-media').innerHTML = t.modalImg
+    ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.modalImg}" alt="" onerror="this.parentElement.remove()"></div>`
+    : (t.imgFull && t.img
+        ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
+        : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : ''));
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
