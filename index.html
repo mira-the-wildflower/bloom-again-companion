@@ -203,6 +203,7 @@ body{overflow-x:hidden}
 
 /* flower nav labels: shared by the opening flower nav */
 .fl-layer{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block}
+.petal-num{display:none;font-size:11px;letter-spacing:.04em;color:var(--accent);font-weight:700}
 .fl-title{font-family:var(--sans);font-weight:700;font-style:normal;font-size:17px;color:#FFFFFF;line-height:1.2;display:block}
 .fl-frame{font-size:10.5px;color:var(--text-muted);line-height:1.3;display:block}
 .flower-wrap{position:relative;display:flex;flex-direction:column;align-items:center}
@@ -220,24 +221,33 @@ body{overflow-x:hidden}
   .opening-letter-greeting{font-size:23px;margin-bottom:10px}
   .opening-letter-signoff{font-size:22px}
   .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:13px;margin-bottom:10px}
-  .opening-flower{flex-wrap:nowrap;justify-content:flex-start;gap:14px;margin-top:10px}
+  .opening-flower{flex-wrap:nowrap;justify-content:center;gap:10px;margin-top:10px}
   .flower-wrap{flex:0 0 auto}
-  .flower-illustration{width:104px}
-  .flower-hint{font-family:var(--sans);font-style:normal;font-weight:600;letter-spacing:.01em;font-size:8.5px;line-height:1.35;color:var(--text-soft);max-width:86px;margin-top:7px}
+  .flower-illustration{width:150px;min-width:150px}
+  .flower-hint{display:none}
+  .pick-section{display:none}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
-  .petal-btn{padding:6px 4px;gap:8px}
-  .petal-icon{width:34px;height:34px}
-  .petal-icon svg{width:16px;height:16px}
+  .petal-btn{padding:5px 8px}
+  .petal-icon{width:40px;height:40px}
+  .petal-icon svg{width:18px;height:18px}
   .fl-title{font-size:13.5px}
-  .crisis-btn{font-size:10.5px;letter-spacing:.02em;padding:12px 10px}
+  .fl-layer{display:none}
+  .petal-num{display:block}
+  .crisis-btn{font-size:11px;letter-spacing:.02em;padding:12px 10px;color:#FFFFFF}
+
+  /* soft pulse on the Environment icon, the recommended starting chapter,
+     so it reads as clickable before anyone taps a locked-looking one */
+  @keyframes envIconCue{
+    0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,178,154,.4)}
+    50%{transform:scale(1.06);box-shadow:0 0 0 7px rgba(232,178,154,0)}
+  }
+  .petal-btn[data-pillar="environment"]:not(.sel) .petal-icon{animation:envIconCue 2.6s ease-in-out infinite}
+
+  .feedback-box .cta{font-size:10px;padding:12px 26px}
 }
 @media(max-width:400px){
-  .flower-illustration{width:86px}
-  .crisis-btn{font-size:9.3px;letter-spacing:0;padding:11px 6px}
-  .petal-icon{width:30px;height:30px}
-  .petal-icon svg{width:14px;height:14px}
-  .petal-btn{padding:5px 3px;gap:6px}
-  .fl-layer{font-size:8.5px}
+  .flower-illustration{width:120px;min-width:120px}
+  .crisis-btn{font-size:9.8px;letter-spacing:0;padding:11px 6px}
   .fl-title{font-size:12.5px}
 }
 
@@ -405,23 +415,23 @@ body{overflow-x:hidden}
           <div class="petal-nav-list" id="petal-nav-list">
             <button class="petal-btn" data-pillar="expansion" onclick="pickPillar('expansion')">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg></span>
-              <span class="petal-text"><span class="fl-layer">Petals</span><span class="fl-title">Expansion</span><span class="fl-frame">Self-expression &amp; aliveness</span></span>
+              <span class="petal-text"><span class="fl-layer">Petals</span><span class="petal-num">5.</span><span class="fl-title">Expansion</span><span class="fl-frame">Self-expression &amp; aliveness</span></span>
             </button>
             <button class="petal-btn" data-pillar="identity" onclick="pickPillar('identity')">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 4.8v2.2"/><path d="M12 17v2.2"/><path d="M4.8 12h2.2"/><path d="M17 12h2.2"/><path d="M7 7l1.6 1.6"/><path d="M15.4 15.4 17 17"/><path d="M17 7l-1.6 1.6"/><path d="M8.6 15.4 7 17"/></svg></span>
-              <span class="petal-text"><span class="fl-layer">Stigma</span><span class="fl-title">Identity</span><span class="fl-frame">Inner work &amp; intuition</span></span>
+              <span class="petal-text"><span class="fl-layer">Stigma</span><span class="petal-num">4.</span><span class="fl-title">Identity</span><span class="fl-frame">Inner work &amp; intuition</span></span>
             </button>
             <button class="petal-btn" data-pillar="body" onclick="pickPillar('body')">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V6"/><path d="M12 15c-2.1.2-4.2-.9-5-3.3"/><path d="M12 10.2c2.1-.3 3.9-1.6 4.4-4"/></svg></span>
-              <span class="petal-text"><span class="fl-layer">Stem</span><span class="fl-title">Body Stability</span><span class="fl-frame">Regulation &amp; energy</span></span>
+              <span class="petal-text"><span class="fl-layer">Stem</span><span class="petal-num">3.</span><span class="fl-title">Body Stability</span><span class="fl-frame">Regulation &amp; energy</span></span>
             </button>
             <button class="petal-btn" data-pillar="relationships" onclick="pickPillar('relationships')">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-3.2 1-4.3 4.3-5.3 9.3"/><path d="M12 10c-1.6 2.2-2.1 5.3-2.1 8.3"/><path d="M12 10c1.6 2.2 2.1 5.3 2.1 8.3"/><path d="M12 10c3.2 1 4.3 4.3 5.3 9.3"/></svg></span>
-              <span class="petal-text"><span class="fl-layer">Roots</span><span class="fl-title">Relationships</span><span class="fl-frame">Stability &amp; safety</span></span>
+              <span class="petal-text"><span class="fl-layer">Roots</span><span class="petal-num">2.</span><span class="fl-title">Relationships</span><span class="fl-frame">Stability &amp; safety</span></span>
             </button>
             <button class="petal-btn" data-pillar="environment" onclick="pickPillar('environment')">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg></span>
-              <span class="petal-text"><span class="fl-layer">Soil</span><span class="fl-title">Environment</span><span class="fl-frame">Input &amp; nourishment</span></span>
+              <span class="petal-text"><span class="fl-layer">Soil</span><span class="petal-num">1.</span><span class="fl-title">Environment</span><span class="fl-frame">Input &amp; nourishment</span></span>
             </button>
           </div>
         </div>
