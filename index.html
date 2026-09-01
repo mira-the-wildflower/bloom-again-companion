@@ -195,6 +195,11 @@ body{overflow-x:hidden}
 
 .expand{max-height:0;opacity:0;overflow:hidden;transform:translateY(20px);transition:max-height .8s cubic-bezier(.4,0,.2,1),opacity .7s ease,transform .7s ease;margin-top:0}
 .expand.open{max-height:1600px;opacity:1;transform:translateY(0);margin-top:0;overflow:visible}
+/* collapsed boxes keep their own top/bottom padding + border even at
+   max-height:0 (padding can't shrink below its set value), which was
+   leaving real blank space behind every unopened box. Zero it only while
+   collapsed so opening one still gets its normal padding back. */
+.expand:not(.open){padding-top:0;padding-bottom:0;border-width:0}
 
 /* flower nav labels: shared by the opening flower nav */
 .fl-layer{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block}
