@@ -334,6 +334,10 @@ body{overflow-x:hidden}
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
 
+/* FEEDBACK: quiet footer box linking out to the standalone feedback form */
+.feedback-box{max-width:440px;margin:30px auto 0;padding-top:24px;border-top:1px dashed rgba(245,236,224,.2);text-align:center}
+.feedback-note{font-size:11.5px;line-height:1.55;color:var(--text-muted);margin:14px auto 0;max-width:36ch}
+
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(245,236,224,.18);border-radius:4px}
@@ -465,6 +469,12 @@ body{overflow-x:hidden}
       <div class="tips-eyebrow"><span class="eyebrow" id="tips-eyebrow"></span></div>
       <h2 class="tips-title" id="tips-title"></h2>
       <div id="tips-list" class="insp-list"></div>
+    </div>
+
+    <!-- FEEDBACK: quiet link out to the standalone feedback form -->
+    <div class="feedback-box">
+      <a class="cta" href="https://bloom-again.life/feedback" target="_blank" rel="noopener">I'd Love Your Feedback</a>
+      <p class="feedback-note">I'm currently working on Edition Two of the full Companion, and want to make this as helpful as possible for anyone who needs relief.</p>
     </div>
   </div>
 </div>
