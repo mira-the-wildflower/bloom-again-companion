@@ -185,6 +185,14 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.2vw,23px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6;opacity:.92}
 .chapter-disclaimer{font-size:13px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
+/* Body & Energy only: a short, non-duplicating pointer to the First Aid
+   Kit's zero-capacity screen, for anyone opening this chapter while too
+   depleted for six subchapters. Hidden for every other chapter. */
+.chapter-firstaid{display:none}
+.chapter-firstaid.show{display:block;margin:26px auto 0;max-width:460px;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);border-radius:18px;padding:20px 22px;text-align:center}
+.firstaid-eyebrow{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.firstaid-copy{font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:8px}
+.firstaid-close{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-muted);line-height:1.5}
 .kbox-step{color:var(--accent);font-style:normal}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
@@ -268,6 +276,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .tips-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
 .tips-subtitle{font-family:var(--sans);font-size:13px;color:var(--text-muted);text-align:center;margin:0 0 22px;letter-spacing:.02em}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
+/* short compassionate intro paragraph on the subchapter landing page, and
+   the closing takeaway line beneath its six cards. Both are optional per
+   sub-area (only the Body chapter sets them for now); empty string = no
+   layout change for chapters that don't use them. */
+.tips-intro{font-size:14.5px;color:var(--text-soft);text-align:center;max-width:46ch;margin:0 auto 22px;line-height:1.6}
+.tips-area-takeaway{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text-soft);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6}
 /* Marks a placeholder field still awaiting real research/writing, so it
    reads as "not finished yet" at a glance rather than blending in as
    finished copy. Swap for real content any time, no markup changes needed. */
@@ -348,6 +362,27 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-text li{position:relative;padding-left:22px;margin-bottom:9px;line-height:1.45}
 .insp-modal-text li:last-child{margin-bottom:0}
 .insp-modal-text li::before{content:'';position:absolute;left:3px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+
+/* Structured entry layout (Body & Energy chapter only, for now): a labeled
+   sequence of short sections instead of one free-text blob. Every other
+   chapter keeps rendering the plain .insp-modal-text blob above untouched;
+   openInsp() decides which to use per entry. */
+.insp-sec-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:18px 0 6px}
+.insp-modal-text>.insp-sec-label:first-of-type{margin-top:0}
+.insp-sec-body{margin-bottom:4px}
+.insp-sec-list{list-style:none;margin:8px 0 4px;padding:0}
+.insp-sec-list li{position:relative;padding-left:22px;margin-bottom:8px;line-height:1.45}
+.insp-sec-list li::before{content:'';position:absolute;left:3px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+/* Safety callout: distinct bordered/tinted block for "when to seek more
+   support," so it reads as a gentle flag, not an alarm, but still stands
+   apart from the surrounding narrative text. */
+.insp-safety{margin:18px 0;padding:14px 16px;border-radius:14px;background:rgba(232,178,154,.1);border:1.5px solid rgba(232,178,154,.4)}
+.insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.insp-safety p{margin:0}
+.insp-safety p:last-child{color:var(--text-soft)}
+.insp-takeaway{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text);line-height:1.5;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.14)}
+.insp-sources-label{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:16px 0 4px}
+.insp-sources{font-size:12.5px;color:var(--text-muted);line-height:1.5;margin-bottom:0}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
@@ -464,6 +499,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="area-icons" id="area-icons"></div>
       <p class="chapter-takeaway" id="chapter-takeaway"></p>
       <p class="chapter-disclaimer" id="chapter-disclaimer"></p>
+      <div class="chapter-firstaid" id="chapter-firstaid"></div>
     </div>
 
     <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -473,7 +509,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="tips-eyebrow"><span class="eyebrow" id="tips-eyebrow"></span></div>
       <h2 class="tips-title" id="tips-title"></h2>
       <p class="tips-subtitle" id="tips-subtitle"></p>
+      <p class="tips-intro" id="tips-intro"></p>
       <div id="tips-list" class="insp-list"></div>
+      <p class="tips-area-takeaway" id="tips-area-takeaway"></p>
     </div>
   </div>
 </div>
@@ -722,53 +760,330 @@ relationships:{
     q:"What helps you feel supported, engaged, and alive in your body?",
     takeaway:"Your body is not an obstacle to overcome. It is part of the information you can use to build a more supportive life.",
     subs:[
-      {id:'sleep',label:'Sleep & Recovery',subtitle:'Rest Without Earning It',img:'ba-18_lamp-book.png',tips:[
-        {title:"“I'm exhausted, but I can't seem to switch off.”",img:'dimlighting.jpg',body:"<p><strong>A little understanding:</strong> being exhausted and wired at the same time is a real, common state, not a contradiction you're imagining.</p><p><strong>Why this might happen:</strong> screens, stimulating shows, and heavy conversations right before sleep can keep your body alert exactly when it needs to be winding down.</p><p><strong>What might help:</strong> a slower, lower-stimulation wind-down in the hour before bed isn't precious, it's what tends to help your body cross the line into real rest. Even ten quieter minutes still counts.</p><p><strong>A gentle reminder:</strong> switching off is a process, not a switch, it's allowed to take a little while.</p>"},
-        {title:"“I sleep, but I still don't feel rested.”",body:"<p><strong>A little understanding:</strong> hours asleep and feeling rested aren't always the same thing, that gap is frustrating and real.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: non-restorative sleep, the difference between sleep duration and sleep quality, and when it's worth bringing to a doctor versus adjusting at home first.]</span></p><p><strong>What might help:</strong> a dark, cool, quiet, comfortable room helps many people's bodies fall and stay asleep more deeply, an eye mask or earplugs can matter more than they seem to.</p><p><strong>A gentle reminder:</strong> if this stays persistent despite trying things that usually help, that's worth mentioning to a doctor, not just pushing through.</p>"},
-        {title:"“I'm tired all day, then suddenly wide awake at night.”",mode:"Restore",img:'morninglight.jpg',body:"<p><strong>A little understanding:</strong> a body that's tired all day but alert at night isn't broken, its internal clock is just out of step with the day.</p><p><strong>Why this might happen:</strong> getting natural light within the first hour or two of waking can help set your body's internal clock, which may make falling asleep at night a bit easier over time.</p><p><strong>What might help:</strong> try morning light on the days it's possible, and pair it with a wind-down in the evening, both ends of the day help set the same clock.</p><p><strong>A gentle reminder:</strong> it's a small habit worth trying, and skipping it on a hard morning isn't a setback.</p>"},
-        {title:"“I feel guilty resting when there are things I could be doing.”",mode:"Restore",img:'sleep.jpg',body:"<p><strong>A little understanding:</strong> the guilt is common, but it isn't a reliable measure of whether you actually need the rest.</p><p><strong>Why this might happen:</strong> most adults need somewhere around seven to nine hours to actually recover, and you don't need to earn rest by finishing everything first.</p><p><strong>What might help:</strong> let needing more sleep than usual right now be real, not laziness, and let the tasks wait for the version of you that's actually rested.</p><p><strong>A gentle reminder:</strong> rest is maintenance, not a reward you have to qualify for.</p>"},
-        {title:"“I keep pushing until my body forces me to stop.”",body:"<p><strong>A little understanding:</strong> waiting for your body to force a stop usually means the earlier, quieter signals weren't loud enough to catch your attention, not that there weren't any.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: the earlier physical signals that tend to precede a forced stop, concrete enough to actually notice before collapse.]</span></p><p><strong>What might help:</strong> if you're lying awake frustrated, getting up for a bit and coming back when you're drowsy protects the connection between bed and rest, rather than teaching your body that bed means lying there pushing through.</p><p><strong>A gentle reminder:</strong> noticing you're pushing is already a step ahead of not noticing at all.</p>"},
-        {title:"“I don't know what real recovery is supposed to feel like.”",body:"<p><strong>A little understanding:</strong> not knowing what rested is supposed to feel like, after a long stretch without it, is more common than it seems.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: what genuine recovery tends to feel like physically and mentally, as distinct from simply being less acutely exhausted.]</span></p><p><strong>What might help:</strong> somewhere around seven to nine hours, at a consistent time, is a reasonable starting marker, along with noticing whether your body's internal clock feels steadier over a couple of weeks.</p><p><strong>A gentle reminder:</strong> you're allowed to not recognize rested yet, and still be moving toward it.</p>"}
+      {id:'sleep',label:'Sleep & Recovery',subtitle:'Rest Without Earning It',img:'ba-18_lamp-book.png',
+        intro:"Rest is maintenance, not a reward you have to earn first. This space looks at why sleep and recovery can feel just out of reach, and what tends to actually help your body wind down.",
+        takeaway:"Real recovery is something you build toward, not a switch you flip. Small, steady wind-down habits matter more than any single night.",
+        tips:[
+        {title:"“I'm exhausted, but I can't seem to switch off.”",img:'dimlighting.jpg',
+          recognition:"Being exhausted and wired at the same time is a real, common state, not a contradiction you're imagining.",
+          happening:"This can sometimes happen when screens, stimulating shows, or heavy conversations right before bed keep your body alert exactly when it needs to be winding down.",
+          contribute:["Screen time or stimulating content close to bedtime","A day that stayed mentally 'on' with no transition before bed"],
+          tryThis:["Build a slower, lower stimulation wind down in the hour before bed","Let even ten quieter minutes count, it doesn't have to be a long routine"],
+          reframe:"Switching off is a process, not a switch, it's allowed to take a little while.",
+          takeaway:"A short, low stimulation wind down helps your body cross the line into rest, it doesn't need to be long to count.",
+          sources:["Sleep Foundation: sleep hygiene basics","NHS: tips to get to sleep"]},
+        {title:"“I sleep, but I still don't feel rested.”",
+          recognition:"Hours asleep and feeling rested aren't always the same thing, that gap is frustrating and real.",
+          happening:"This can sometimes point to non restorative sleep, where the quality of sleep matters as much as how many hours you get.",
+          contribute:["Sleep that's frequently interrupted, even briefly","An irregular sleep schedule that shifts night to night"],
+          tryThis:["Keep the room dark, cool, and quiet, an eye mask or earplugs can matter more than they seem to","Try to keep a consistent sleep and wake time, even on lower demand days"],
+          reframe:"If this stays persistent despite trying things that usually help, that's worth mentioning to a doctor, not just pushing through.",
+          seekSupport:"If you consistently wake unrested despite enough hours and a reasonably good sleep environment, or you notice loud snoring, gasping, or long pauses in breathing during sleep, it's worth raising with a doctor. These can point to something a GP can actually help with.",
+          takeaway:"Feeling unrested despite enough hours is information, not a personal failing, and it's a reasonable thing to bring to a doctor.",
+          sources:["NHS: sleep and tiredness","Sleep Foundation: sleep quality versus sleep quantity"]},
+        {title:"“I'm tired all day, then suddenly wide awake at night.”",mode:"Restore",img:'morninglight.jpg',
+          recognition:"A body that's tired all day but alert at night isn't broken, its internal clock is just out of step with the day.",
+          happening:"This can sometimes happen when your body's internal clock drifts out of sync with daylight hours.",
+          contribute:["Little natural light exposure earlier in the day","Irregular wake times that shift the body's internal clock"],
+          tryThis:["Try getting natural light within the first hour or two of waking, on the days it's possible","Pair that with a wind down in the evening, both ends of the day help set the same clock"],
+          reframe:"It's a small habit worth trying, and skipping it on a hard morning isn't a setback.",
+          takeaway:"Morning light and an evening wind down work together to help reset the same internal clock.",
+          sources:["Sleep Foundation: circadian rhythm and light exposure"]},
+        {title:"“I feel guilty resting when there are things I could be doing.”",mode:"Restore",img:'sleep.jpg',
+          recognition:"The guilt is common, but it isn't a reliable measure of whether you actually need the rest.",
+          happening:"Most adults need somewhere around seven to nine hours to actually recover, and that need doesn't disappear just because there's more on the list.",
+          contribute:["A habit of treating rest as something to earn after tasks are finished","A to do list that never fully empties, so rest never feels allowed"],
+          tryThis:["Let needing more sleep than usual right now be real, not laziness","Let the tasks wait for the version of you that's actually rested"],
+          reframe:"Rest is maintenance, not a reward you have to qualify for.",
+          takeaway:"Rest doesn't need to be earned first, it's part of what lets you do anything else well.",
+          sources:["American Psychological Association: stress and sleep"]},
+        {title:"“I keep pushing until my body forces me to stop.”",
+          recognition:"Waiting for your body to force a stop usually means the earlier, quieter signals weren't loud enough to catch your attention, not that there weren't any.",
+          happening:"This can sometimes happen when early signs of tiredness, heavy eyes, irritability, trouble concentrating, get overridden often enough that they stop registering.",
+          contribute:["A pattern of overriding smaller signals of tiredness repeatedly","A schedule with little room to stop before exhaustion forces it"],
+          tryThis:["If you're lying awake frustrated, get up for a bit and come back when you're drowsy","Try noticing one early signal today, heavy eyes, a short temper, trouble focusing, as a cue to pause"],
+          reframe:"Noticing you're pushing is already a step ahead of not noticing at all.",
+          takeaway:"Catching an earlier, quieter signal is a skill that builds with practice, not something you either have or don't.",
+          sources:["Sleep Foundation: recognising sleep debt"]},
+        {title:"“My neck and shoulders never seem to relax.”",mode:"Restore",
+          recognition:"Carrying tension in your neck and shoulders without a clear cause is common, and it doesn't mean something is wrong with you.",
+          happening:"This can sometimes happen when stress or long periods of stillness, screens, desks, driving, lead the body to hold tension in the same places without you noticing it building.",
+          contribute:["Long stretches at a screen or desk with little movement","Carrying stress physically without realising it, especially in the shoulders and jaw"],
+          tryThis:["Roll your shoulders slowly a few times, or let your head drop gently side to side","Take a short break to change position every so often, even just standing up counts"],
+          reframe:"Chronic tension is something your body learned to hold, which means it's also something it can learn to release, gradually.",
+          seekSupport:"If the tension comes with ongoing pain, numbness, tingling, or doesn't ease at all with rest and movement, it's worth mentioning to a doctor or physiotherapist.",
+          takeaway:"Tension that's built up gradually tends to need gradual, repeated release, not one perfect stretch.",
+          sources:["NHS: neck pain","American Physical Therapy Association: posture and tension"]}
       ]},
-      {id:'nourishment',label:'Nourishment',subtitle:'Caring for Your Energy',img:'ba-07_tea-linen.png',tips:[
-        {title:"“I forget to eat until I feel absolutely awful.”",mode:"Restore",img:'healthydinner.jpg',body:"<p><strong>A little understanding:</strong> forgetting to eat until you feel terrible isn't carelessness, it's often a sign your attention is already stretched thin elsewhere.</p><p><strong>Why this might happen:</strong> what you eat, and how regularly, can affect how tired and foggy you feel, especially once you're already running low.</p><p><strong>What might help:</strong> toast with eggs, yogurt with fruit, or a bowl of beans and rice all count as a real meal. Something simple and regular beats something elaborate and skipped.</p><p><strong>A gentle reminder:</strong> you don't need a complicated or perfectly balanced plate every time.</p>"},
-        {title:"“Deciding what to eat feels like too much work.”",mode:"Restore",img:'warmmeals.png',body:"<p><strong>A little understanding:</strong> the decision itself can be the exhausting part, separate from the eating.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: decision fatigue specific to food choices, and why it can hit harder than other small daily decisions.]</span></p><p><strong>What might help:</strong> frozen meals, canned soup, takeout, and pre-cut vegetables are not a lesser way of eating, they're a realistic way of eating on a day when cooking from scratch isn't available to you.</p><p><strong>A gentle reminder:</strong> eating something is almost always better than the perfect version of eating nothing.</p>"},
-        {title:"“I know I need food, but I can't make myself prepare anything.”",mode:"Restore",body:"<p><strong>A little understanding:</strong> knowing you need to eat and having the capacity to prepare something are two separate things, especially when you're depleted.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: the gap between knowing a need and having the executive capacity to act on it, specific to food preparation.]</span></p><p><strong>What might help:</strong> convenience food is still food, a warm meal, however it got to your plate, can still feel genuinely comforting, and that comfort matters too.</p><p><strong>A gentle reminder:</strong> eating something is almost always better than the perfect version of eating nothing.</p>"},
-        {title:"“My energy feels unpredictable, and I don't know what my body needs.”",img:'protein.jpg',body:"<p><strong>A little understanding:</strong> unpredictable energy can be genuinely confusing to live with, and it's not something you're supposed to just know how to decode.</p><p><strong>Why this might happen:</strong> pairing carbohydrates with a bit of protein, eggs and toast, beans with rice, yogurt with fruit, can help many people's blood sugar and mood feel steadier than carbs alone, and heavily processed food can spike and then crash energy for some people.</p><p><strong>What might help:</strong> try adding a bit of protein to meals where you can, and notice over a week or two whether your energy feels any more even.</p><p><strong>A gentle reminder:</strong> you don't need a perfectly \"clean\" diet, consistent real fuel matters more than how it looks.</p>"},
-        {title:"“I want to care for myself without turning food into another project.”",mode:"Restore",body:"<p><strong>A little understanding:</strong> wanting to eat well without it becoming one more thing to manage perfectly is a completely reasonable boundary.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: the line between caring for your nutrition and turning food into another source of pressure, and how that line shifts depending on capacity.]</span></p><p><strong>What might help:</strong> simple counts as a real meal. You don't need a complicated or perfectly balanced plate every time, something simple and regular beats something elaborate and skipped.</p><p><strong>A gentle reminder:</strong> caring for yourself with food doesn't have to look like a project to count as real care.</p>"},
-        {title:"“Some days, feeding myself is the most I can manage.”",mode:"Restore",img:'warmmeals.png',body:"<p><strong>A little understanding:</strong> on the hardest days, getting fed at all is a genuine accomplishment, not a bare minimum to feel bad about.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: why basic self-care tasks take disproportionately more effort during depletion or burnout.]</span></p><p><strong>What might help:</strong> convenience food is still food, frozen meals, canned soup, takeout, and pre-cut vegetables are a realistic way of eating on a day when cooking from scratch isn't available to you.</p><p><strong>A gentle reminder:</strong> on those days, feeding yourself at all is the whole task, done well.</p>"}
+      {id:'nourishment',label:'Nourishment',subtitle:'Caring for Your Energy',img:'ba-07_tea-linen.png',
+        intro:"Food is fuel, not a performance. This space is about finding what regular, doable nourishment can look like when capacity is low.",
+        takeaway:"Something simple and regular beats something elaborate and skipped, every time.",
+        tips:[
+        {title:"“I forget to eat until I feel absolutely awful.”",mode:"Restore",img:'healthydinner.jpg',
+          recognition:"Forgetting to eat until you feel terrible isn't carelessness, it's often a sign your attention is already stretched thin elsewhere.",
+          happening:"What you eat, and how regularly, can affect how tired and foggy you feel, especially once you're already running low.",
+          contribute:["Attention and energy already stretched across other demands","A routine without regular, built in meal times"],
+          tryThis:["Keep something simple on hand, toast with eggs, yogurt with fruit, beans and rice","Try setting a phone reminder for meals on days you know you'll lose track"],
+          reframe:"You don't need a complicated or perfectly balanced plate every time.",
+          takeaway:"Something simple and regular beats something elaborate and skipped.",
+          sources:["NHS: eating well"]},
+        {title:"“Deciding what to eat feels like too much work.”",mode:"Restore",img:'warmmeals.png',
+          recognition:"The decision itself can be the exhausting part, separate from the eating.",
+          happening:"This can sometimes happen when decision fatigue builds up, food choices are small but frequent, and they add up over a day.",
+          contribute:["General decision fatigue from a demanding day","Too many open ended options with no default to fall back on"],
+          tryThis:["Keep a short list of 'no decision' meals you default to","Let frozen meals, canned soup, takeout, and pre cut vegetables count as real eating"],
+          reframe:"Eating something is almost always better than the perfect version of eating nothing.",
+          takeaway:"Having a default meal removes a decision you don't have spare capacity for.",
+          sources:["American Psychological Association: decision fatigue"]},
+        {title:"“I know I need food, but I can't make myself prepare anything.”",mode:"Restore",
+          recognition:"Knowing you need to eat and having the capacity to prepare something are two separate things, especially when you're depleted.",
+          happening:"This can sometimes happen when the gap between knowing a need and having the energy to act on it widens during depletion or burnout.",
+          contribute:["Low executive capacity after a demanding stretch","Expecting meal prep to look a certain way before it counts"],
+          tryThis:["Let convenience food be the plan, not a backup plan","Remember a warm meal, however it got to your plate, can still feel genuinely comforting"],
+          reframe:"Eating something is almost always better than the perfect version of eating nothing.",
+          takeaway:"On low capacity days, the easiest version of eating is still the right one.",
+          sources:["NHS: eating well"]},
+        {title:"“My energy feels unpredictable, and I don't know what my body needs.”",img:'protein.jpg',
+          recognition:"Unpredictable energy can be genuinely confusing to live with, and it's not something you're supposed to just know how to decode.",
+          happening:"Pairing carbohydrates with a bit of protein can help many people's blood sugar and mood feel steadier than carbohydrates alone, and heavily processed food can spike and then crash energy for some people.",
+          contribute:["Meals that are mostly refined carbohydrates without protein","Irregular meal timing that leaves long gaps between eating"],
+          tryThis:["Try adding a bit of protein to meals where you can, eggs and toast, beans with rice, yogurt with fruit","Notice over a week or two whether your energy feels any more even"],
+          reframe:"You don't need a perfectly clean diet, consistent real fuel matters more than how it looks.",
+          takeaway:"A small, repeatable change, like adding protein, is easier to sustain than an overhaul.",
+          sources:["Harvard T.H. Chan School of Public Health: nutrition and energy"]},
+        {title:"“I want to care for myself without turning food into another project.”",mode:"Restore",
+          recognition:"Wanting to eat well without it becoming one more thing to manage perfectly is a completely reasonable boundary.",
+          happening:"This can sometimes happen when self care advice starts to feel like another set of rules to follow correctly, rather than something that actually eases the day.",
+          contribute:["General pressure to eat perfectly from outside messaging","Treating food as a performance rather than ordinary care"],
+          tryThis:["Let simple count as a real meal, it doesn't need a project around it","Remember something simple and regular beats something elaborate and skipped"],
+          reframe:"Caring for yourself with food doesn't have to look like a project to count as real care.",
+          takeaway:"Simple, repeatable choices are still genuine self care.",
+          sources:["NHS: eating well"]},
+        {title:"“Some days, feeding myself is the most I can manage.”",mode:"Restore",img:'warmmeals.png',
+          recognition:"On the hardest days, getting fed at all is a genuine accomplishment, not a bare minimum to feel bad about.",
+          happening:"This can sometimes happen because basic tasks take disproportionately more effort during depletion or burnout, eating included.",
+          contribute:["Depletion or burnout that raises the effort cost of basic tasks","A day with little spare capacity left for anything beyond the essentials"],
+          tryThis:["Let convenience food be enough, frozen meals, canned soup, takeout, and pre cut vegetables all count","Lower the bar on purpose for today, and let that be fine"],
+          reframe:"On those days, feeding yourself at all is the whole task, done well.",
+          takeaway:"Some days the goal is simply fed, and that's a complete, reasonable goal.",
+          sources:["NHS: eating well"]}
       ]},
-      {id:'movement',label:'Movement & Activation',subtitle:'Finding Your Kind of Energy',img:'ba-11_yoga-mat-leaf.png',tips:[
-        {title:"“I'm so depleted that even moving feels impossible.”",mode:"Activate",img:'gooutside.jpg',body:"<p><strong>A little understanding:</strong> when you're this depleted, even small movement can feel like too much to ask, and that reaction makes sense.</p><p><strong>Why this might happen:</strong> you don't need a workout to benefit from moving, if you're depleted, a slow walk around the room or simply changing position isn't a lesser version of exercise, it's the right amount for where you actually are today.</p><p><strong>What might help:</strong> try the smallest possible version, changing position, a few stretches, and notice whether even that helps you feel less stuck in your body.</p><p><strong>A gentle reminder:</strong> the smallest version still counts as movement.</p>"},
-        {title:"“I'm stuck in bed, and I don't know where to begin.”",body:"<p><strong>A little understanding:</strong> not knowing where to begin from bed is a real barrier, not a lack of motivation.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: the gap between wanting to move and having the activation energy to start from a fully depleted state.]</span></p><p><strong>What might help:</strong> movement doesn't have to look like exercise, shaking out your hands, rolling your shoulders, or dancing in place for a few seconds all count. Your body responds to motion itself, not to how structured it looks.</p><p><strong>A gentle reminder:</strong> the beginning can be this small and still be a real beginning.</p>"},
-        {title:"“I know movement can help, but I can't face another thing I should do.”",mode:"Activate",body:"<p><strong>A little understanding:</strong> \"should\" can drain the appeal out of something that might otherwise feel good, that's a real effect, not resistance for its own sake.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: how turning movement into an obligation changes its effect, versus movement chosen because it might feel good.]</span></p><p><strong>What might help:</strong> a slow walk, a few stretches, or simply changing position isn't a lesser version of exercise, it's the right amount for where you actually are today, with nothing you \"should\" be doing instead.</p><p><strong>A gentle reminder:</strong> movement without the should attached is still allowed to help.</p>"},
-        {title:"“I'm physically restless, but I don't have the energy for exercise.”",mode:"Activate",img:'sport.png',body:"<p><strong>A little understanding:</strong> restlessness and low energy can coexist, that's not a sign you're doing something wrong.</p><p><strong>Why this might happen:</strong> a few minutes of easy walking, stretching, or simply changing position gets blood and oxygen moving without adding the extra strain harder exercise can when you're already worn out.</p><p><strong>What might help:</strong> dancing, shimmying, or bouncing to music doesn't need a mechanism to be worth doing, some people simply find rhythmic movement enjoyable or a good outlet for restlessness.</p><p><strong>A gentle reminder:</strong> if it feels silly, that's allowed too, try it because it might feel good, not because it's guaranteed to fix anything.</p>"},
-        {title:"“I feel more alive when I move, dance, or do something spontaneous.”",mode:"Activate",img:'movement2.jpg',body:"<p><strong>A little understanding:</strong> noticing that spontaneous movement makes you feel more alive is useful information about what your body is asking for.</p><p><strong>Why this might happen:</strong> some people simply find rhythmic, spontaneous movement enjoyable, energizing, or a good outlet, and that doesn't need a mechanism to be worth doing.</p><p><strong>What might help:</strong> let yourself follow that instinct on purpose, dancing in your kitchen or moving to music counts as real activation, not just a mood.</p><p><strong>A gentle reminder:</strong> trust what your own body tells you makes it feel alive, that's real data, not indulgence.</p>"},
-        {title:"“I can't tell whether I need to rest, move, or change something around me.”",body:"<p><strong>A little understanding:</strong> not being able to tell which one you need is common, especially when you're already depleted, that confusion is itself a signal worth listening to.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: how to tell apart the physical sensations of needing rest, needing movement, and needing environmental change, since they can feel similar from the inside.]</span></p><p><strong>What might help:</strong> if movement leaves you noticeably worse afterward instead of better, that's useful information, not a failure to push through, scaling back is listening to a signal, not giving up.</p><p><strong>A gentle reminder:</strong> you're allowed to try one option, notice it was wrong, and try another.</p>"}
+      {id:'movement',label:'Movement & Activation',subtitle:'Finding Your Kind of Energy',img:'ba-11_yoga-mat-leaf.png',
+        intro:"Movement here isn't about exercise targets, it's about finding the kind and amount of motion that actually matches your energy today.",
+        takeaway:"The smallest version of movement still counts, your body responds to motion itself, not to how structured it looks.",
+        tips:[
+        {title:"“I'm so depleted that even moving feels impossible.”",mode:"Activate",img:'gooutside.jpg',
+          recognition:"When you're this depleted, even small movement can feel like too much to ask, and that reaction makes sense.",
+          happening:"You don't need a workout to benefit from moving, a slow walk around the room or simply changing position is the right amount for where you actually are today.",
+          contribute:["Depletion that makes any effort feel disproportionately large","Equating movement with structured exercise, which raises the bar unnecessarily"],
+          tryThis:["Try the smallest possible version, changing position, a few stretches","Notice whether even that helps you feel less stuck in your body"],
+          reframe:"The smallest version still counts as movement.",
+          takeaway:"On depleted days, the goal is motion, not a workout.",
+          sources:["NHS: physical activity guidelines"]},
+        {title:"“I'm stuck in bed, and I don't know where to begin.”",
+          recognition:"Not knowing where to begin from bed is a real barrier, not a lack of motivation.",
+          happening:"This can sometimes happen when the gap between wanting to move and having the activation energy to start feels too wide to cross.",
+          contribute:["Low activation energy after a demanding stretch","Expecting the 'beginning' to look bigger than it needs to"],
+          tryThis:["Shake out your hands, roll your shoulders, or dance in place for a few seconds","Let your body respond to motion itself, not to how structured it looks"],
+          reframe:"The beginning can be this small and still be a real beginning.",
+          takeaway:"A few seconds of motion is a legitimate starting point, not a lesser one.",
+          sources:[]},
+        {title:"“I know movement can help, but I can't face another thing I should do.”",mode:"Activate",
+          recognition:"'Should' can drain the appeal out of something that might otherwise feel good, that's a real effect, not resistance for its own sake.",
+          happening:"This can sometimes happen when movement gets filed as an obligation rather than something chosen because it might feel good.",
+          contribute:["Movement framed as one more task on an already full list","General fatigue with obligations after a demanding stretch"],
+          tryThis:["Try a slow walk, a few stretches, or simply changing position, nothing you should be doing instead","Let it be optional, not another item to complete"],
+          reframe:"Movement without the should attached is still allowed to help.",
+          takeaway:"Removing the obligation doesn't remove the benefit.",
+          sources:[]},
+        {title:"“I'm physically restless, but I don't have the energy for exercise.”",mode:"Activate",img:'sport.png',
+          recognition:"Restlessness and low energy can coexist, that's not a sign you're doing something wrong.",
+          happening:"A few minutes of easy walking, stretching, or simply changing position gets blood and oxygen moving without adding the extra strain harder exercise can when you're already worn out.",
+          contribute:["Restlessness paired with genuinely low physical reserves","Treating exercise and movement as the same thing, when they don't have to be"],
+          tryThis:["Try dancing, shimmying, or bouncing to music, no mechanism required for it to be worth doing","Let it be about outlet, not output"],
+          reframe:"If it feels silly, that's allowed too, try it because it might feel good, not because it's guaranteed to fix anything.",
+          takeaway:"Easy, low stakes movement can meet restlessness without demanding energy you don't have.",
+          sources:[]},
+        {title:"“I feel more alive when I move, dance, or do something spontaneous.”",mode:"Activate",img:'movement2.jpg',
+          recognition:"Noticing that spontaneous movement makes you feel more alive is useful information about what your body is asking for.",
+          happening:"Some people simply find rhythmic, spontaneous movement enjoyable, energising, or a good outlet, and that doesn't need a mechanism to be worth doing.",
+          contribute:["A body that responds well to rhythm or spontaneity specifically","Energy that's better met by activation than by stillness"],
+          tryThis:["Let yourself follow that instinct on purpose, dancing in your kitchen counts as real activation","Keep music, or whatever sparks that feeling, easy to reach"],
+          reframe:"Trust what your own body tells you makes it feel alive, that's real data, not indulgence.",
+          takeaway:"If activation is what your body asks for, following that is self care, not just a mood.",
+          sources:[]},
+        {title:"“I can't tell whether I need to rest, move, or change something around me.”",
+          recognition:"Not being able to tell which one you need is common, especially when you're already depleted, that confusion is itself a signal worth listening to.",
+          happening:"This can sometimes happen because rest, movement, and environmental change can feel similar from the inside when you're already overloaded.",
+          contribute:["General depletion that blurs the signals between different needs","Limited chances lately to test what actually helps"],
+          tryThis:["Try one option and notice the effect, rather than waiting to be certain first","If movement leaves you noticeably worse afterward instead of better, that's useful information, not a failure to push through"],
+          reframe:"You're allowed to try one option, notice it was wrong, and try another.",
+          takeaway:"Trial and noticing is a legitimate way to find out what you actually need.",
+          sources:[]}
       ]},
-      {id:'hormones',label:'Cycles & Changing Capacity',subtitle:'Working With Your Rhythms',img:'ba-16_calendar-circled.png',tips:[
-        {title:"“Why can I do so much one week and so little the next?”",img:'periods.jpg',body:"<p><strong>A little understanding:</strong> that swing isn't inconsistency, it's closer to how bodies actually work.</p><p><strong>Why this might happen:</strong> hormones rise and fall across a menstrual cycle, and for many people that genuinely affects mood, energy, and pain, though illness, poor sleep, and stress add on top of that and sometimes matter more than the cycle itself.</p><p><strong>What might help:</strong> track roughly where you are in your cycle alongside how you're feeling, over a couple of months a pattern often becomes visible.</p><p><strong>A gentle reminder:</strong> your baseline isn't constant, and it was never supposed to be.</p>"},
-        {title:"“My energy changes, and I can't seem to plan around it.”",img:'heart.png',body:"<p><strong>A little understanding:</strong> trying to plan around energy that keeps shifting is genuinely hard, that's not a planning failure on your part.</p><p><strong>Why this might happen:</strong> your baseline isn't constant, and for many people it shifts across a cycle, illness, sleep, and stress add their own layer on top.</p><p><strong>What might help:</strong> if you already know certain days or weeks tend to be harder, easing up before you get there can help more than waiting for a crash to force the issue.</p><p><strong>A gentle reminder:</strong> planning around your actual pattern isn't lower standards, it's working with the body you actually have.</p>"},
-        {title:"“My period seems to affect my mood, focus, or energy.”",img:'periodcycle.jpg',body:"<p><strong>A little understanding:</strong> noticing a real connection between your cycle and how you feel is worth taking seriously, not dismissing as \"just hormones.\"</p><p><strong>Why this might happen:</strong> the days before a period often bring more anxiety and lower stress tolerance for many people, a hormonal shift with a name, even if sleep and stress are shaping it too.</p><p><strong>What might help:</strong> writing down what you notice, cycle after cycle, can turn confusion into information, and a rough, loosely-held map of your pattern is often more useful than ignoring it or treating it as a strict rule.</p><p><strong>A gentle reminder:</strong> bring anything persistent or severe to a doctor rather than carrying it alone.</p>"},
-        {title:"“I wonder whether hormones are contributing to how I feel.”",mode:"Connect",img:'perimenopause.jpg',body:"<p><strong>A little understanding:</strong> wondering about a hormonal contribution to how you feel is a reasonable question, not an overreaction.</p><p><strong>Why this might happen:</strong> shifts in mood, sleep, and stress tolerance can begin years before periods change noticeably, and are often mistaken for something else entirely.</p><p><strong>What might help:</strong> naming hormonal change as one possibility worth asking a doctor about, rather than assuming it's purely in your head or purely something else, can change how you get support.</p><p><strong>A gentle reminder:</strong> you don't need certainty before it's worth asking the question out loud.</p>"},
-        {title:"“I keep expecting myself to have the same capacity every day.”",body:"<p><strong>A little understanding:</strong> expecting flat, identical capacity every day sets you up to feel like you're failing on the days your body simply has less to give.</p><p><strong>Why this might happen:</strong> hormones rise and fall across a cycle, and that genuinely affects mood, energy, and pain for many people, on top of whatever else is already going on.</p><p><strong>What might help:</strong> notice your actual pattern over a few cycles instead of an assumed flat baseline, and plan around what you actually tend to have, not what you think you should have.</p><p><strong>A gentle reminder:</strong> your baseline isn't constant, and it was never supposed to be.</p>"},
-        {title:"“I want to understand my patterns without blaming everything on my cycle.”",body:"<p><strong>A little understanding:</strong> wanting a fuller, more accurate picture instead of one tidy explanation is a fair and useful instinct.</p><p><strong>Why this might happen:</strong> energy, mood, sleep, and appetite can all shift across a cycle, but plenty of that shifting has nothing to do with hormones at all, sleep, stress, and life events are shaping it at the same time.</p><p><strong>What might help:</strong> track a fuller picture over a few months, cycle phase alongside sleep, stress, and life events, rather than filtering everything through one lens.</p><p><strong>A gentle reminder:</strong> your cycle is one real factor among several, not the whole explanation.</p>"}
+      {id:'hormones',label:'Cycles & Changing Capacity',subtitle:'Working With Your Rhythms',img:'ba-16_calendar-circled.png',
+        intro:"Capacity isn't flat, and it was never supposed to be. This space is about noticing your own patterns, hormonal and otherwise, without turning them into the whole explanation.",
+        takeaway:"Your baseline shifts. Working with the pattern you actually have tends to go further than expecting a flat one.",
+        tips:[
+        {title:"“Why can I do so much one week and so little the next?”",img:'periods.jpg',
+          recognition:"That swing isn't inconsistency, it's closer to how bodies actually work.",
+          happening:"Hormones rise and fall across a menstrual cycle, and for many people that genuinely affects mood, energy, and pain, though illness, poor sleep, and stress add on top of that and sometimes matter more than the cycle itself.",
+          contribute:["Natural hormonal fluctuation across the menstrual cycle","Sleep, stress, or illness layered on top of that fluctuation"],
+          tryThis:["Track roughly where you are in your cycle alongside how you're feeling","Look for a pattern over a couple of months rather than judging from one week"],
+          reframe:"Your baseline isn't constant, and it was never supposed to be.",
+          takeaway:"A pattern tracked over months is more useful than any single week.",
+          sources:["NHS: menstrual cycle and hormones","American College of Obstetricians and Gynecologists"]},
+        {title:"“My energy changes, and I can't seem to plan around it.”",img:'heart.png',
+          recognition:"Trying to plan around energy that keeps shifting is genuinely hard, that's not a planning failure on your part.",
+          happening:"Your baseline isn't constant, and for many people it shifts across a cycle, illness, sleep, and stress add their own layer on top.",
+          contribute:["Cycle related shifts in energy and mood","Sleep or stress compounding those shifts further"],
+          tryThis:["If you already know certain days or weeks tend to be harder, ease up before you get there","Plan lighter days around your actual pattern rather than an assumed flat one"],
+          reframe:"Planning around your actual pattern isn't lower standards, it's working with the body you actually have.",
+          takeaway:"Easing up ahead of a known harder stretch tends to help more than waiting for a crash.",
+          sources:["NHS: menstrual cycle and hormones"]},
+        {title:"“My period seems to affect my mood, focus, or energy.”",img:'periodcycle.jpg',
+          recognition:"Noticing a real connection between your cycle and how you feel is worth taking seriously, not dismissing as just hormones.",
+          happening:"The days before a period often bring more anxiety and lower stress tolerance for many people, a hormonal shift with a name, even if sleep and stress are shaping it too.",
+          contribute:["Premenstrual hormonal shifts","Sleep and stress interacting with those shifts"],
+          tryThis:["Write down what you notice, cycle after cycle, to turn confusion into information","Hold the pattern loosely as a rough map, not a strict rule"],
+          reframe:"Bring anything persistent or severe to a doctor rather than carrying it alone.",
+          seekSupport:"If the mood or physical changes before your period are severe enough to disrupt daily life, work, or relationships most months, that can be a sign of something like PMDD, and it's worth discussing with a doctor. Effective support exists.",
+          takeaway:"A pattern you've written down is easier to act on, and easier to bring to a doctor if needed.",
+          sources:["NHS: premenstrual syndrome (PMS)","International Association for Premenstrual Disorders (IAPMD)"]},
+        {title:"“I wonder whether hormones are contributing to how I feel.”",mode:"Connect",img:'perimenopause.jpg',
+          recognition:"Wondering about a hormonal contribution to how you feel is a reasonable question, not an overreaction.",
+          happening:"Shifts in mood, sleep, and stress tolerance can begin years before periods change noticeably, and are often mistaken for something else entirely.",
+          contribute:["Perimenopausal hormonal shifts, which can start well before periods visibly change","Other causes that can look similar, like thyroid changes or sleep issues"],
+          tryThis:["Name hormonal change as one possibility worth asking a doctor about, rather than assuming it's purely in your head or purely something else","Keep a simple note of what you're noticing and when, to bring to that conversation"],
+          reframe:"You don't need certainty before it's worth asking the question out loud.",
+          seekSupport:"If you're noticing persistent changes in mood, sleep, or energy and you're in the age range where perimenopause is plausible, it's reasonable to raise this directly with a doctor, even if you're not sure it's that.",
+          takeaway:"Asking a doctor about a possibility is different from self diagnosing it, both are allowed.",
+          sources:["British Menopause Society","NHS: perimenopause"]},
+        {title:"“I keep expecting myself to have the same capacity every day.”",
+          recognition:"Expecting flat, identical capacity every day sets you up to feel like you're failing on the days your body simply has less to give.",
+          happening:"Hormones rise and fall across a cycle, and that genuinely affects mood, energy, and pain for many people, on top of whatever else is already going on.",
+          contribute:["An assumed flat baseline that doesn't match how bodies actually work","Cycle related or other fluctuation layered on top of daily demands"],
+          tryThis:["Notice your actual pattern over a few cycles instead of an assumed flat baseline","Plan around what you actually tend to have, not what you think you should have"],
+          reframe:"Your baseline isn't constant, and it was never supposed to be.",
+          takeaway:"The pattern you actually have is more useful to plan around than the one you think you should have.",
+          sources:[]},
+        {title:"“I want to understand my patterns without blaming everything on my cycle.”",
+          recognition:"Wanting a fuller, more accurate picture instead of one tidy explanation is a fair and useful instinct.",
+          happening:"Energy, mood, sleep, and appetite can all shift across a cycle, but plenty of that shifting has nothing to do with hormones at all, sleep, stress, and life events are shaping it at the same time.",
+          contribute:["Cycle related hormonal shifts as one contributing factor among several","Sleep, stress, or life events that can easily be overlooked in favour of a single explanation"],
+          tryThis:["Track a fuller picture over a few months, cycle phase alongside sleep, stress, and life events","Resist filtering everything through one lens, even a convenient one"],
+          reframe:"Your cycle is one real factor among several, not the whole explanation.",
+          takeaway:"A fuller picture tends to be more useful than a single, tidy cause.",
+          sources:[]}
       ]},
-      {id:'sensory',label:'Sensory Needs',subtitle:'Understanding Your Thresholds',img:'ba-13_candle-lavender.png',tips:[
-        {title:"“Things I usually tolerate suddenly feel unbearable.”",img:'dysreguation.jpg',body:"<p><strong>A little understanding:</strong> something you'd normally shrug off suddenly feeling unbearable isn't you being dramatic, it's a real shift in your threshold.</p><p><strong>Why this might happen:</strong> being worn out can genuinely lower what you're able to filter out, the same things that would otherwise fade into the background.</p><p><strong>What might help:</strong> treat a lower threshold on a hard day as real information, and reduce input proactively rather than waiting to push through it.</p><p><strong>A gentle reminder:</strong> your tolerance isn't fixed, it moves with how much you already have on board.</p>"},
-        {title:"“I don't notice I'm overwhelmed until I want to escape everything.”",img:'overstimrecovery.jpg',body:"<p><strong>A little understanding:</strong> not catching overwhelm until it's already intense is extremely common, not a failure of self-awareness.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: earlier, more subtle signs of sensory overload that tend to precede the \"need to escape\" feeling.]</span></p><p><strong>What might help:</strong> when everything feels like too much, turning down just one thing, music off, one light dimmed, can be enough to bring you back under your limit without needing to fix the whole room.</p><p><strong>A gentle reminder:</strong> reaching escape mode doesn't mean you missed the earlier signs, it often means there weren't any gaps to notice them in.</p>"},
-        {title:"“I need less input, but I don't know what to remove first.”",img:'overstimrecovery.jpg',body:"<p><strong>A little understanding:</strong> knowing you need less and not knowing where to start is a common sticking point, not indecision.</p><p><strong>Why this might happen:</strong> when everything feels like too much, it's rarely one single thing causing it, it's usually several inputs stacked together.</p><p><strong>What might help:</strong> turn down just one thing at a time, like turning off music or dimming one light, rather than trying to fix the whole environment at once.</p><p><strong>A gentle reminder:</strong> you don't need to fix the whole room, just lower the total input a little.</p>"},
-        {title:"“Sometimes silence helps, and sometimes it makes me feel worse.”",body:"<p><strong>A little understanding:</strong> needing silence one day and finding it unbearable the next isn't inconsistency, your system's needs genuinely shift.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: why total silence helps in some states and increases distress in others, and how to tell which one you're in.]</span></p><p><strong>What might help:</strong> keep a small sensory kit with a few different options, earplugs, soft music, a weighted layer, so you can experiment with what actually settles you in the moment rather than assuming silence is always the answer.</p><p><strong>A gentle reminder:</strong> there isn't one correct version of calm, only the one that works for you right now.</p>"},
-        {title:"“I feel embarrassed by how much noise, light, or touch affects me.”",img:'comfy.png',body:"<p><strong>A little understanding:</strong> feeling embarrassed about sensory needs is common, but it doesn't mean those needs are unreasonable.</p><p><strong>Why this might happen:</strong> noticing more than other people do isn't a flaw to fix, it's simply a different way some people's bodies take in the world, whether that's sound, light, texture, or a room's mood.</p><p><strong>What might help:</strong> let yourself ask for what actually helps, lower lighting, less noise, a specific fabric, without needing to justify it first.</p><p><strong>A gentle reminder:</strong> the goal isn't to feel less, it's to build a life with enough support that feeling this much is sustainable.</p>"},
-        {title:"“I want to recognise my limits before I reach breaking point.”",img:'diffuser.png',body:"<p><strong>A little understanding:</strong> wanting to catch your limit earlier, before it becomes a breaking point, is a skill you can build, not a trait you either have or don't.</p><p><strong>Why this might happen:</strong> trying to calm down while still surrounded by noise and light is an uphill battle for many people, turning things down often has to come first, before calm feels reachable, not after.</p><p><strong>What might help:</strong> notice the early, smaller signs, a bit of tension, a wish for quiet, and treat those as cues to turn something down, rather than waiting for the breaking point itself.</p><p><strong>A gentle reminder:</strong> catching it earlier each time is real progress, even if it's not perfect yet.</p>"}
+      {id:'sensory',label:'Sensory Needs',subtitle:'Understanding Your Thresholds',img:'ba-13_candle-lavender.png',
+        intro:"Sensory thresholds move, they're not a fixed setting. This space is about understanding your own limits and what helps when input is too much.",
+        takeaway:"The goal isn't to feel less, it's to build a life with enough support that feeling this much is sustainable.",
+        tips:[
+        {title:"“Everything feels too loud, bright, busy, or much.”",
+          recognition:"Feeling like everything is too loud, bright, busy, or much isn't an overreaction, it's a real shift in your threshold.",
+          happening:"Being worn out can genuinely lower what you're able to filter out, the same things that would otherwise fade into the background.",
+          contribute:["General fatigue or depletion lowering your sensory threshold","Several inputs stacking together rather than one single cause"],
+          tryThis:["Turn down just one thing, music off, one light dimmed, rather than trying to fix everything at once","Treat a lower threshold on a hard day as real information, and reduce input proactively"],
+          reframe:"Your tolerance isn't fixed, it moves with how much you already have on board.",
+          takeaway:"A lower threshold on a hard day is information, not a character flaw.",
+          sources:["NHS: sensory sensitivity and overload"]},
+        {title:"“Things I usually tolerate suddenly feel unbearable.”",img:'dysreguation.jpg',
+          recognition:"Something you'd normally shrug off suddenly feeling unbearable isn't you being dramatic, it's a real shift in your threshold.",
+          happening:"Being worn out can genuinely lower what you're able to filter out, the same things that would otherwise fade into the background.",
+          contribute:["Depletion or a demanding stretch lowering your usual threshold","Several smaller stressors stacking together rather than one obvious cause"],
+          tryThis:["Treat a lower threshold on a hard day as real information","Reduce input proactively rather than waiting to push through it"],
+          reframe:"Your tolerance isn't fixed, it moves with how much you already have on board.",
+          takeaway:"A shifting threshold is normal, not a sign something is wrong with you.",
+          sources:[]},
+        {title:"“I don't notice I'm overwhelmed until I want to escape everything.”",img:'overstimrecovery.jpg',
+          recognition:"Not catching overwhelm until it's already intense is extremely common, not a failure of self awareness.",
+          happening:"This can sometimes happen when the earlier, more subtle signs of sensory overload pass without being noticed, until the need to escape feeling arrives all at once.",
+          contribute:["Subtle early signs of overload that are easy to miss when busy","A day with little room to pause and check in"],
+          tryThis:["Turn down just one thing, music off, one light dimmed, to bring yourself back under your limit","Try noticing one small early sign today, tension, a wish for quiet, as practice for next time"],
+          reframe:"Reaching escape mode doesn't mean you missed the earlier signs, it often means there weren't any gaps to notice them in.",
+          takeaway:"Catching it a little earlier each time is a buildable skill, not an all or nothing trait.",
+          sources:[]},
+        {title:"“I need quiet, but I also get restless when everything is quiet.”",img:'diffuser.png',
+          recognition:"Needing quiet one moment and finding total silence unsettling the next isn't a contradiction, your system's needs genuinely shift.",
+          happening:"This can sometimes happen because quiet reduces one kind of input, sound, while removing a different kind of stimulation your body was also using, like background noise or motion.",
+          contribute:["A system that's sensitive to both too much and too little stimulation","Restlessness that isn't actually about noise level at all"],
+          tryThis:["Keep a few different sensory options on hand, like soft music or ambient sound, instead of defaulting straight to total silence","Experiment with what actually settles you right now, rather than assuming quiet is always the answer"],
+          reframe:"There isn't one correct version of calm, only the one that works for you right now.",
+          takeaway:"Quiet isn't automatically the answer, matching the input to what your body actually needs is.",
+          sources:[]},
+        {title:"“My body feels tense even when nothing is happening.”",
+          recognition:"Carrying physical tension even when things seem calm on the surface is common, and it doesn't always mean something is wrong.",
+          happening:"This can sometimes happen when a nervous system that's been on alert for a while takes a bit of time to register that the pressure has actually eased.",
+          contribute:["A recent stretch of higher demand or alertness that hasn't fully settled yet","General sensory load building without an obvious single trigger"],
+          tryThis:["Notice where you're holding tension, jaw, shoulders, hands, without needing to fix it immediately","Try a slow, gentle release, like unclenching your jaw or dropping your shoulders, and see if it eases even slightly"],
+          reframe:"Tension that lingers after things calm down isn't a malfunction, it often just takes longer to catch up.",
+          seekSupport:"If physical tension is constant, painful, or doesn't ease at all over time, it's worth mentioning to a doctor or physiotherapist rather than assuming it will resolve on its own.",
+          takeaway:"Your body can take a little while to catch up with a calmer moment, that lag isn't a problem to solve urgently.",
+          sources:["NHS: muscle tension and stress"]},
+        {title:"“I feel embarrassed by how much noise, light, or touch affects me.”",img:'comfy.png',
+          recognition:"Feeling embarrassed about sensory needs is common, but it doesn't mean those needs are unreasonable.",
+          happening:"Noticing more than other people do isn't a flaw to fix, it's simply a different way some people's bodies take in the world, whether that's sound, light, texture, or a room's mood.",
+          contribute:["A genuinely higher sensory sensitivity, which varies naturally between people","Past experiences of being dismissed for having these needs"],
+          tryThis:["Let yourself ask for what actually helps, lower lighting, less noise, a specific fabric","Practice naming the need plainly, without a long justification attached"],
+          reframe:"The goal isn't to feel less, it's to build a life with enough support that feeling this much is sustainable.",
+          takeaway:"Asking for what helps doesn't require proving the need first.",
+          sources:[]}
       ]},
-      {id:'breath',label:'Breath & Grounding',subtitle:'Finding What Helps in the Moment',img:'ba-01_hourglass-leaf.png',tips:[
-        {title:"“My thoughts are racing, and I can't find a pause.”",img:'breathing2.jpg',body:"<p><strong>A little understanding:</strong> racing thoughts with no pause in sight are exhausting, and wanting a way in is completely reasonable.</p><p><strong>Why this might happen:</strong> a racing mind often needs something concrete and structured to follow, rather than an open-ended instruction to \"just calm down.\"</p><p><strong>What might help:</strong> try box breathing if structure helps: in for 4 counts, hold for 4, out for 4, hold for 4. Skip the holds if they feel uncomfortable, the rhythm itself is what helps, not getting it exactly right.</p><p><strong>A gentle reminder:</strong> a small, structured pause still counts as a real one.</p>"},
-        {title:"“I feel disconnected from myself or what's happening around me.”",mode:"Restore",img:'comfy.png',body:"<p><strong>A little understanding:</strong> feeling disconnected from yourself or your surroundings is a real, disorienting experience, not something to push past quietly.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: feelings of disconnection or dissociation as a nervous-system response, and when they're worth bringing to a professional.]</span></p><p><strong>What might help:</strong> cold water on your wrists, pressing your feet into the floor, naming a few things you can see, or holding something textured can all help bring you back to the present moment without touching your breath at all.</p><p><strong>A gentle reminder:</strong> breathwork isn't the only grounding option, use whatever actually works for your body.</p>"},
-        {title:"“Being told to take a deep breath actually makes me more uncomfortable.”",img:'breathing2.jpg',body:"<p><strong>A little understanding:</strong> if deep breathing makes things worse instead of better, that's real and worth believing, not a sign you're doing it wrong.</p><p><strong>Why this might happen:</strong> for some people, big deliberate deep breaths can actually increase dizziness or panic instead of easing it, breathing too hard can backfire and mimic the very anxiety you're trying to calm.</p><p><strong>What might help:</strong> keep it small and easy if you try breath at all, or skip it entirely, there's no prize for the most dramatic inhale.</p><p><strong>A gentle reminder:</strong> if breathing exercises don't suit you, that's genuinely fine, there are other grounding options.</p>"},
-        {title:"“I need something simple to focus on when everything feels like too much.”",img:'breathing-new.jpg',body:"<p><strong>A little understanding:</strong> wanting one simple, concrete thing to anchor to when everything feels like too much is a reasonable, buildable need.</p><p><strong>Why this might happen:</strong> a racing or overwhelmed mind often settles more easily around something concrete and repeatable than an open instruction to relax.</p><p><strong>What might help:</strong> try letting the exhale run a little longer and slower than the inhale, without forcing or counting rigidly, many people find a longer exhale genuinely helps their body feel calmer.</p><p><strong>A gentle reminder:</strong> small and unforced still counts, and stopping if it feels uncomfortable is always allowed.</p>"},
-        {title:"“I don't know whether I need calming down or a change of scene.”",body:"<p><strong>A little understanding:</strong> not being sure which one you need is common, both can look similar from the inside.</p><p><strong>Why this might happen:</strong> <span class=\"content-todo\">[CONTENT TO DEVELOP: how to distinguish needing to regulate in place from needing an actual change in environment or situation.]</span></p><p><strong>What might help:</strong> try a small grounding option first, like naming a few things you can see or pressing your feet into the floor, and notice whether it settles things or whether what you actually need is to leave or change the room.</p><p><strong>A gentle reminder:</strong> you're allowed to try one and find out it was the wrong one.</p>"},
-        {title:"“Nothing seems to help when I'm overwhelmed, and I feel like I'm doing it wrong.”",mode:"Restore",img:'comfy.png',body:"<p><strong>A little understanding:</strong> feeling like you're doing it wrong when nothing seems to help is a common, discouraging place to land, and it's not actually a sign of failure.</p><p><strong>Why this might happen:</strong> breathing exercises simply don't work for everyone, and if focusing on your breath makes you more anxious instead of less, you're not doing it wrong.</p><p><strong>What might help:</strong> cold water on your wrists, pressing your feet into the floor, naming a few things you can see, or holding something textured can all help, without touching your breath at all.</p><p><strong>A gentle reminder:</strong> use whatever actually works for your body, that's not a lesser version of grounding, it's the right one for you.</p>"}
+      {id:'breath',label:'Breath & Grounding',subtitle:'Finding What Helps in the Moment',img:'ba-01_hourglass-leaf.png',
+        intro:"This is a space for noticing physical signs of strain, tension, breath holding, shakiness, and finding what actually helps in the moment. Not every strategy works for every body, and that's fine.",
+        takeaway:"Noticing a physical sign of strain is useful information, not something to monitor constantly or fix immediately.",
+        tips:[
+        {title:"“I keep clenching my jaw without realising it.”",
+          recognition:"Catching your jaw clenched without realising when it started is common, many people carry tension there without noticing.",
+          happening:"This can sometimes happen when stress or concentration settles into the jaw specifically, often without any accompanying feeling of being tense.",
+          contribute:["Stress or concentration that shows up physically before it registers mentally","A habit of clenching that's built up gradually, sometimes overnight during sleep"],
+          tryThis:["When you notice it, let your jaw drop open slightly and your tongue rest away from the roof of your mouth","Gently massage the muscle just in front of your ear, where the jaw hinges"],
+          reframe:"Noticing the clench at all, even after the fact, is useful, it's not a problem you failed to prevent.",
+          seekSupport:"If jaw tension comes with pain, clicking, or trouble opening your mouth fully, or if you wake with jaw or tooth pain, it's worth mentioning to a dentist or doctor. Grinding at night is common and treatable.",
+          takeaway:"A clenched jaw is worth noticing gently, not monitoring anxiously.",
+          sources:["American Dental Association: teeth grinding and jaw clenching","NHS: teeth grinding (bruxism)"]},
+        {title:"“My hands are clenched, and my whole body feels braced.”",
+          recognition:"Noticing your hands clenched and your body braced is a real physical signal, not something you're imagining or exaggerating.",
+          happening:"This can sometimes happen when the body stays physically prepared for something, even once the original reason for that readiness has passed.",
+          contribute:["A stretch of heightened alertness that hasn't fully settled yet","Bracing that's become a default posture rather than a response to something specific"],
+          tryThis:["Open and close your hands a few times, or press your palms flat against something solid for a moment","Let your shoulders drop and your jaw unclench at the same time, bracing often shows up in more than one place at once"],
+          reframe:"Bracing is something your body learned to do, which means it can also learn, gradually, to unclench.",
+          takeaway:"Releasing a brace is rarely instant, small, repeated noticing tends to help more than one big effort.",
+          sources:["NHS: muscle tension and stress"]},
+        {title:"“I hold my breath when I'm concentrating or stressed.”",img:'breathing-new.jpg',
+          recognition:"Holding your breath without meaning to during concentration or stress is a common, mostly unconscious habit.",
+          happening:"This can sometimes happen when focus or stress narrows attention so much that automatic breathing gets briefly overridden.",
+          contribute:["Deep concentration that temporarily overrides automatic breathing","Stress that tightens the chest or abdomen without your noticing"],
+          tryThis:["When you catch yourself, let the breath out slowly rather than gasping it back in","If it feels useful rather than another thing to manage, try an occasional gentle reminder to check in with your breathing during focused work"],
+          reframe:"Catching it after the fact still counts, you don't need to catch every single instance for noticing to help.",
+          takeaway:"This is a widely reported habit, not a sign that something is wrong with how you breathe.",
+          sources:["American Institute of Stress"]},
+        {title:"“I feel shaky or lightheaded when I'm overwhelmed.”",
+          recognition:"Feeling shaky or lightheaded when overwhelmed is a real physical response, and it makes sense that it would feel alarming.",
+          happening:"This can sometimes happen when stress affects breathing and blood flow in ways that produce shakiness or lightheadedness, though the same feelings can have other causes too, like low blood sugar, dehydration, or a separate medical issue.",
+          contribute:["Stress or overwhelm affecting breathing pattern or blood flow","Other contributing factors worth ruling out, like not having eaten, dehydration, or standing up quickly"],
+          tryThis:["If you can, sit or lie down somewhere stable until it passes","Sip water, and if it's been a while since you ate, have something small"],
+          reframe:"One episode tied to a clearly stressful moment isn't automatically a diagnosis of anything, it's worth noticing the pattern over time.",
+          seekSupport:"Treat shakiness or lightheadedness as a reason to check in with a doctor if it happens often, lasts more than a few minutes, or comes with chest pain, difficulty speaking, one sided weakness, fainting, or a pounding or irregular heartbeat. Those signs need medical attention, not self care. If they're severe or sudden, treat it as a medical emergency rather than waiting it out.",
+          takeaway:"Noticing this pattern is useful, and persistent or severe versions of it deserve a doctor's attention, not just a grounding technique.",
+          sources:["NHS: dizziness","American Heart Association: warning signs"]},
+        {title:"“My thoughts are racing, and I can't find a pause.”",img:'breathing2.jpg',
+          recognition:"Racing thoughts with no pause in sight are exhausting, and wanting a way in is completely reasonable.",
+          happening:"A racing mind often needs something concrete and structured to follow, rather than an open ended instruction to just calm down.",
+          contribute:["Mental load or stress that hasn't had a chance to settle","A moment with no structure or anchor offered, leaving thoughts to run freely"],
+          tryThis:["Try box breathing if structure helps, in for 4 counts, hold for 4, out for 4, hold for 4","Skip the holds if they feel uncomfortable, the rhythm itself is what helps, not getting it exactly right"],
+          reframe:"A small, structured pause still counts as a real one.",
+          takeaway:"Structure, not intensity, is usually what helps a racing mind settle.",
+          sources:[]},
+        {title:"“Nothing seems to help when I'm overwhelmed, and I feel like I'm doing it wrong.”",mode:"Restore",img:'comfy.png',
+          recognition:"Feeling like you're doing it wrong when nothing seems to help is a common, discouraging place to land, and it's not actually a sign of failure.",
+          happening:"Breathing exercises simply don't work for everyone, and if focusing on your breath makes you more anxious instead of less, you're not doing it wrong.",
+          contribute:["A grounding technique that doesn't suit how your particular body responds","Pressure to find the right technique, which can add its own stress"],
+          tryThis:["Try cold water on your wrists, pressing your feet into the floor, naming a few things you can see, or holding something textured","Let go of breath focused techniques entirely if they're not working for you"],
+          reframe:"Use whatever actually works for your body, that's not a lesser version of grounding, it's the right one for you.",
+          takeaway:"There's no single correct grounding technique, only the one that actually works for you.",
+          sources:[]}
       ]}
     ]
   },
@@ -923,6 +1238,14 @@ function pickPillar(id){
   document.getElementById('kbox2-q').textContent = chapter.q;
   document.getElementById('chapter-takeaway').textContent = chapter.takeaway || '';
   document.getElementById('chapter-disclaimer').textContent = CHAPTER_DISCLAIMER[id];
+  const firstaid = document.getElementById('chapter-firstaid');
+  if(id === 'body'){
+    firstaid.classList.add('show');
+    firstaid.innerHTML = `<p class="firstaid-eyebrow">A Gentle First-Aid Kit for When You're Running on Empty</p><p class="firstaid-copy">If six subchapters feel like too much right now, here's the short version: the basics first, rest without earning it, one less demand, one small boundary, letting someone help, and no need to force calm.</p><p class="firstaid-close">Come back to the fuller picture below whenever you have more to give.</p>`;
+  } else {
+    firstaid.classList.remove('show');
+    firstaid.innerHTML = '';
+  }
   document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>`
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
@@ -947,6 +1270,7 @@ function selectArea(id){
   document.getElementById('tips-eyebrow').textContent = `${meta.title} · ${S.area.label}`;
   document.getElementById('tips-title').textContent = S.area.subtitle || S.area.label;
   document.getElementById('tips-subtitle').textContent = '';
+  document.getElementById('tips-intro').textContent = S.area.intro || '';
 
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
@@ -956,6 +1280,7 @@ function selectArea(id){
         <span class="insp-card-cta">Read this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
       </span>
     </button>`).join('');
+  document.getElementById('tips-area-takeaway').textContent = S.area.takeaway || '';
 
   const box3=document.getElementById('kbox3'); box3.classList.add('open');
   document.getElementById('kconn-2').classList.add('show');
@@ -977,10 +1302,30 @@ function renderInspPhoto(filename){
   return `<div class="insp-photo"><img src="bloom-again-images/graphics_subchapters/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
 }
 
+/* Renders the new 9-field structured entry (Body & Energy chapter). Any
+   field can be left out of a given tip's data and its section just won't
+   print; order is fixed so it always reads: recognition -> what might be
+   happening -> what might contribute -> what you can try -> a gentler
+   reframe -> (optional) when to seek more support -> takeaway -> sources. */
+function renderStructuredTip(t){
+  let html = t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '';
+  if(t.recognition) html += `<p class="insp-sec-label">You might recognise this if&hellip;</p><p class="insp-sec-body">${t.recognition}</p>`;
+  if(t.happening) html += `<p class="insp-sec-label">What might be happening</p><p class="insp-sec-body">${t.happening}</p>`;
+  if(t.contribute && t.contribute.length) html += `<p class="insp-sec-label">What might contribute</p><ul class="insp-sec-list">${t.contribute.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  if(t.tryThis && t.tryThis.length) html += `<p class="insp-sec-label">What you can try</p><ul class="insp-sec-list">${t.tryThis.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+  if(t.reframe) html += `<p class="insp-sec-label">A gentler way to think about it</p><p class="insp-sec-body">${t.reframe}</p>`;
+  if(t.seekSupport) html += `<div class="insp-safety"><p class="insp-safety-label">When to seek more support</p><p>${t.seekSupport}</p></div>`;
+  if(t.takeaway) html += `<p class="insp-takeaway">${t.takeaway}</p>`;
+  if(t.sources && t.sources.length) html += `<p class="insp-sources-label">Sources &amp; further reading</p><p class="insp-sources">${t.sources.join(' &middot; ')}</p>`;
+  return html;
+}
+
 function openInsp(i){
   const t = S.area.tips[i];
   document.getElementById('insp-modal-title').textContent = t.title;
-  document.getElementById('insp-modal-text').innerHTML = (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
+  document.getElementById('insp-modal-text').innerHTML = t.recognition
+    ? renderStructuredTip(t)
+    : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
   document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
     ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
