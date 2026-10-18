@@ -335,13 +335,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-media{display:flex;gap:12px;justify-content:center;margin-bottom:22px}
 .insp-photo-full{width:100%;border-radius:20px;overflow:hidden;border:1px solid rgba(245,236,224,.18)}
 .insp-photo-full img{width:100%;height:auto;display:block}
-/* Subchapter landing-page hero photo (Level 3): sits above the six expression
-   cards, reuses the sub-area's own img field, falls back to the same quiet
-   placeholder mark used elsewhere so a missing photo never looks broken. */
-.area-hero{margin:18px 0 22px}
-.area-hero-img{width:100%;aspect-ratio:16/9;border-radius:20px;overflow:hidden;position:relative;background:linear-gradient(150deg,rgba(232,178,154,.28),rgba(196,212,184,.2));border:1px solid rgba(245,236,224,.18);display:flex;align-items:center;justify-content:center}
-.area-hero-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.area-hero-img .insp-photo-mark svg{width:34px;height:34px}
 .insp-photo{width:116px;height:116px;border-radius:22px;overflow:hidden;position:relative;flex-shrink:0;background:linear-gradient(150deg,rgba(232,178,154,.32),rgba(196,212,184,.24));border:1px solid rgba(245,236,224,.18);display:flex;align-items:center;justify-content:center}
 .insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .insp-photo-mark{color:var(--accent);opacity:.6}
@@ -480,7 +473,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="tips-eyebrow"><span class="eyebrow" id="tips-eyebrow"></span></div>
       <h2 class="tips-title" id="tips-title"></h2>
       <p class="tips-subtitle" id="tips-subtitle"></p>
-      <div class="area-hero" id="area-hero"></div>
       <div id="tips-list" class="insp-list"></div>
     </div>
   </div>
@@ -619,7 +611,7 @@ const FLOWER_META = [
 
 const KIT = {
 environment:{
-  q:"What in everyday life nourishes you, and what quietly drains you?",
+  q:"What in everyday life quietly drains you?",
     takeaway:"You do not need a perfect environment. You need fewer unnecessary drains and more conditions that help you function and feel well.",
     subs:[
       {id:'home',label:'Home',subtitle:"A Place to Exhale",img:'ba-17_curtain-window.png',tips:[
@@ -955,7 +947,6 @@ function selectArea(id){
   document.getElementById('tips-eyebrow').textContent = `${meta.title} · ${S.area.label}`;
   document.getElementById('tips-title').textContent = S.area.subtitle || S.area.label;
   document.getElementById('tips-subtitle').textContent = '';
-  document.getElementById('area-hero').innerHTML = renderAreaHero(S.area.img);
 
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
@@ -979,15 +970,6 @@ const INSP_PLACEHOLDER = `<span class="insp-photo-mark"><svg viewBox="0 0 24 24"
 
 function inspPhotoFallback(imgEl){
   imgEl.parentElement.innerHTML = INSP_PLACEHOLDER;
-}
-
-function areaHeroFallback(imgEl){
-  imgEl.parentElement.innerHTML = INSP_PLACEHOLDER;
-}
-
-function renderAreaHero(filename){
-  if(!filename) return `<div class="area-hero-img">${INSP_PLACEHOLDER}</div>`;
-  return `<div class="area-hero-img"><img src="bloom-again-images/${filename}" alt="" onerror="areaHeroFallback(this)"></div>`;
 }
 
 function renderInspPhoto(filename){
