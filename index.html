@@ -484,6 +484,17 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-text li:last-child{margin-bottom:0}
 .insp-modal-text li::before{content:'';position:absolute;left:3px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 
+/* Welcome Letter: a brighter, more spacious variant of the shared modal
+   text style above, toggled on only for the 3-slide welcome letter
+   (BEFORE_YOU_BLOOM) so a burnt-out reader can skim it easily. The 180
+   tip modals, which share this same #insp-modal-text element, never pick
+   this class up, see openInsp()/openIntro()/closeInsp(). */
+.insp-modal-text.letter-mode{font-size:18px;line-height:1.6;color:#FDFBF7}
+.insp-modal-text.letter-mode ul{margin:16px 0 20px}
+.insp-modal-text.letter-mode li{margin-bottom:13px;padding-left:26px}
+.insp-modal-text.letter-mode li::before{top:12px;width:6px;height:6px}
+.letter-highlight{color:#E8B4B8;font-weight:700}
+
 /* Warm emotional flow, every modal in the Companion: "Why this makes
    sense" (validation) -> "What might help" (low demand steps) -> "A
    gentle reframe" (a grounding closing line), then an optional collapsed
@@ -935,12 +946,9 @@ const CHAPTER_DISCLAIMER = {
    Core message threaded through all six: "You are not behind. You are not
    broken. You do not have to earn your way back to yourself." */
 const BEFORE_YOU_BLOOM = [
-  {title:"Welcome to Bloom Again",body:"This isn't a to-do list, and it isn't a program you have to finish correctly. It's a guide built on one idea: you don't change the flower, you change the soil. A flower doesn't need to be told to grow. It needs the right conditions, light, soil, water, and it grows on its own, in its own time. You are not a project to fix. You are a person whose conditions got harder than they should have been. Bloom Again walks through five parts of your life, environment, relationships, body, identity, and expansion, not because you're broken in five places, but because each one is a condition that can get a little easier. A good place to begin is Environment: easing the outside pressure first tends to make everything that follows lighter. But if something else is loudest for you right now, you're welcome to start there instead."},
-  {title:"When Your System Has Had Enough",body:"Maybe you don't feel dramatic enough to call it burnout. You're still functioning. You're still showing up. But something underneath has gone quiet, or loud, or both at once, and the usual things that used to help don't seem to reach it anymore. That's not weakness, and it isn't a character flaw. It's a nervous system that has been asked to cope for longer than it had support for. When a system has had enough, it doesn't always look like collapse. Sometimes it looks like doing everything right and still feeling like you're underwater. If that's where you are, you're not behind, and you haven't missed some window where healing was still possible. You're exactly where this guide is for."},
-  {title:"Sensitive, Passionate and Still Human",body:"If you've been called too sensitive, too intense, too much, this is for you too. Feeling things deeply isn't a defect in your design, it's one way a body and mind can be built, taking in more, faster, and holding onto it longer. Some readers also recognize bursts of energy followed by flatness, a mind that chases new interests hard and then drops them, or traits they associate with ADHD or other neurodivergence. You don't need a diagnosis for any of this to be real, and you don't need one to belong here. You don't need to become less. You need rooms, people, and routines that can actually hold the size of what you feel and the shape of how your energy moves. Passionate and sensitive are not the opposite of stable. With the right conditions, they're what makes a stable life feel alive instead of just managed."},
-  {title:"Rest Is Not the Only Answer",body:"Somewhere along the way, rest became the default prescription for everything. Tired? Rest. Overwhelmed? Rest. And sometimes that's exactly right. But rest alone doesn't always fix what's wrong, and if you've rested and still feel flat, restless, or strangely worse, that isn't you doing rest wrong. Some days your system needs restoration: stillness, quiet, less input. Other days it needs activation: movement, creativity, a reason to feel alive, meaningful stimulation instead of none. Regulation is not always calm. Throughout this guide you'll notice tips gently marked as Restore, Activate, Engage, or Connect, not a formula, just a way of naming what a moment might actually be asking for, so you can stop reaching for stillness when what you needed was a spark."},
-  {title:"The Flower Principle",body:"You don't change the flower. You change the soil. It's the idea underneath everything in this guide, and it's worth saying plainly once: you are not the problem to be solved. Your environment, your relationships, your body's signals, the identity you built to survive, and the space you have left for growth, these are the conditions a flower actually responds to. Change enough of those conditions, even imperfectly, even partially, and the flower does what flowers do. It doesn't need to be forced open. The five chapters ahead follow this order on purpose, soil, roots, stem, bud, bloom, because safety tends to come before growth. But the flower is a map, not a ladder. There's no rung to climb and no finish line to reach before you're allowed to call this working. You can come back to Soil for the tenth time, skip Expansion entirely for now, or sit in one chapter for months. A flower that goes quiet for a season isn't failing, and neither are you. If you're not sure where to start, start with the soil, easing the conditions pressing on you from outside tends to make everything that follows easier to reach."},
-  {title:"Start Where You Are",body:"You do not need to finish this guide to be allowed to feel better. You do not need to do every tip or agree with every page to still get something real out of it. Take what resonates, and leave the rest, genuinely, without guilt. This is meant to be returned to, not completed. If you're not sure where to begin, start with Environment, then Relationships: reducing the demands actually pressing on you from the outside tends to make the inner work in Identity and Expansion easier to reach. From there, go wherever is loudest for you. You are not behind. You are not broken. You do not have to earn your way back to yourself, you're already allowed to be here, exactly as tired, sensitive, and unfinished as you are right now."}
+  {title:"You Are Not a Project to Fix",body:"<p>You don't change the flower, you change the soil. &#127807;</p><p>If you've felt depleted, sensitive, or underwater lately:</p><ul><li>You are not broken.</li><li>You don't need a stricter routine or more discipline.</li><li><span class=\"letter-highlight\">Your system has simply been carrying too much for too long.</span></li></ul><p>Bloom Again is a gentle digital space built to help you ease the conditions around you, at your own natural pace.</p>"},
+  {title:"Rest Isn't the Only Answer",body:"<p>When you're burnt out, forcing quiet can sometimes make your brain feel more restless.</p><p>Inside this companion, you'll find four distinct modes of support:</p><ul><li>&#129750; <span class=\"letter-highlight\">RESTORE</span>: low-sensory quiet when running on empty.</li><li>&#9889; <span class=\"letter-highlight\">ACTIVATE</span>: a small spark of movement when feeling flat.</li><li>&#127912; <span class=\"letter-highlight\">ENGAGE</span>: absorbing, low-stakes creative focus.</li><li>&#129293; <span class=\"letter-highlight\">CONNECT</span>: gentle relational safety.</li></ul>"},
+  {title:"Start Where You Are",body:"<p>There is no finish line here, and no correct order to follow.</p><ul><li>Take what resonates, leave the rest without guilt.</li><li>Skip chapters or sit in one for months, the flower is a map, not a ladder.</li><li>Tap <span class=\"letter-highlight\">Save to Basket</span> on any tip to build your personal printout.</li></ul><p>You are allowed to be here exactly as tired, sensitive, and unfinished as you are right now. &#127800;</p>"}
 ];
 
 const FLOWER_META = [
@@ -1444,6 +1452,7 @@ function openInsp(i){
   const t = S.area.tips[i];
   currentInspTip = t;
   document.getElementById('insp-modal-title').textContent = t.title;
+  document.getElementById('insp-modal-text').classList.remove('letter-mode');
   document.getElementById('insp-modal-text').innerHTML = t.recognition
     ? renderStructuredTip(t)
     : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
@@ -1469,7 +1478,9 @@ function openIntro(i){
   currentInspTip = null;
   const piece = BEFORE_YOU_BLOOM[introIdx];
   document.getElementById('insp-modal-title').textContent = piece.title;
-  document.getElementById('insp-modal-text').innerHTML = piece.body;
+  const introTextEl = document.getElementById('insp-modal-text');
+  introTextEl.classList.add('letter-mode');
+  introTextEl.innerHTML = piece.body;
   document.getElementById('insp-modal-media').innerHTML = '';
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
