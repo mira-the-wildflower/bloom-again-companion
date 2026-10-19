@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bloom Again Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#7A98A4; --bg-deep:#6A8893; --bg-dark:#2a3438;
@@ -13,10 +13,10 @@
   --accent:#E8B29A; --accent-deep:#D88A70; --leaf:#C4D4B8;
   --rose:#D9938E; --rose-light:#F0C7C3;
   --border:rgba(245,236,224,.14);
-  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Brandon Grotesque','Inter',system-ui,sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
 body{overflow-x:hidden}
 
 /* particles */
@@ -69,7 +69,7 @@ body{overflow-x:hidden}
 .opening-letter{flex:1 1 300px;max-width:380px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:26px 26px;transition:opacity .3s ease}
 .opening-letter.hide{display:none}
 .opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:12px}
-.opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:13.5px;line-height:1.6;color:var(--text-soft);margin-bottom:11px}
+.opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:18px;line-height:1.65;color:var(--text-soft);margin-bottom:11px}
 .opening-letter-signoff{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text);margin-top:18px;margin-bottom:4px}
 
 /* five chapters: the main interactive heart of the page (no flower image,
@@ -162,7 +162,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .zero-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .zero-step{display:flex;gap:14px;align-items:flex-start;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:16px;padding:16px 18px}
 .zero-step-n{width:26px;height:26px;border-radius:50%;background:rgba(232,178,154,.16);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.zero-step-text{font-size:14.5px;font-weight:300;line-height:1.5;color:var(--text-soft);padding-top:2px}
+.zero-step-text{font-size:18px;font-weight:300;line-height:1.65;color:var(--text-soft);padding-top:2px}
 .zero-warn{background:rgba(232,178,154,.1);border:1.5px solid var(--accent);border-radius:16px;padding:20px 18px;display:flex;gap:14px;align-items:flex-start}
 .zero-warn-icon{flex-shrink:0;color:var(--accent);margin-top:1px}
 .zero-warn-icon svg{width:22px;height:22px}
@@ -190,9 +190,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    can still explore at her own pace. */
 .heavy-today{max-width:480px;margin:0 auto;text-align:center}
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
-.heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:42ch;margin:0 auto 16px}
+.heavy-today-sub{font-size:17px;color:var(--text-soft);line-height:1.6;max-width:42ch;margin:0 auto 16px}
 .heavy-select-wrap{position:relative;max-width:440px;margin:0 auto;text-align:left}
-.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#F3DCC8;border:1px solid #FDFBF7;border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:rgba(43,56,66,.65);transition:all .22s ease}
+.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#F3DCC8;border:1px solid #FDFBF7;border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:16px;color:rgba(43,56,66,.65);transition:all .22s ease}
 .heavy-select-trigger:hover{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
 .heavy-select-trigger.open{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
 .heavy-select-trigger.filled{background:var(--accent)}
@@ -202,7 +202,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-select-trigger.open .heavy-select-chevron{transform:rotate(180deg)}
 .heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:#FDFBF7;border-radius:16px}
 .heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1px solid var(--accent);overflow:auto}
-.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(43,56,66,.1);padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:#2B3842;cursor:pointer;transition:background .18s ease,color .18s ease}
+.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(43,56,66,.1);padding:13px 16px;font-family:var(--sans);font-size:16px;line-height:1.45;color:#2B3842;cursor:pointer;transition:background .18s ease,color .18s ease}
 .heavy-select-option:last-child{border-bottom:none}
 .heavy-select-option:hover{background:#F3DCC8}
 .heavy-select-option.sel{background:var(--accent);font-weight:600}
@@ -238,9 +238,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
 
 .kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:rgba(122,152,164,.38);backdrop-filter:blur(8px);margin-bottom:0}
-.kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.2vw,23px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
-.chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6;opacity:.92}
-.chapter-disclaimer{font-size:13px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
+.kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,26px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
+.chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.65;opacity:.92}
+.chapter-disclaimer{font-size:14px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
 .kbox-step{color:var(--accent);font-style:normal}
 
 /* FIRST-AID KIT WIDGET: lives across the whole 5-chapter overview, not
@@ -270,9 +270,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,178,154,.1);border-color:rgba(232,178,154,.35)}
   .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,178,154,.18)}
 }
-.firstaid-modal-sub{font-family:var(--sans);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
+.firstaid-modal-sub{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
-.firstaid-list li{font-size:13.5px;line-height:1.55;color:var(--text-soft)}
+.firstaid-list li{font-size:18px;line-height:1.65;color:var(--text-soft)}
 .firstaid-list li strong{color:var(--text);font-weight:600}
 .firstaid-footnote{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--text-muted);line-height:1.5;text-align:center}
 .firstaid-zero-link{text-align:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,236,224,.14)}
@@ -285,8 +285,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .expand.open{max-height:1600px;opacity:1;transform:translateY(0);margin-top:0;overflow:visible}
 
 /* flower nav labels: shared by the opening flower nav */
-.fl-layer{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block}
-.fl-title{font-family:var(--sans);font-weight:500;font-style:normal;font-size:21px;color:#FFFFFF;line-height:1.2;display:block}
+.fl-layer{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block}
+.fl-title{font-family:var(--sans);font-weight:700;font-style:normal;font-size:21px;color:#FDFBF7;line-height:1.25;display:block}
 .fl-frame{font-size:10.5px;color:var(--text-muted);line-height:1.3;display:block}
 @media(max-width:520px){.fl-title{font-size:19px}.fl-frame{display:none}}
 
@@ -301,7 +301,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .opening-letter{padding:22px 20px}
   .opening-letter-greeting{font-size:23px;margin-bottom:10px}
   .opening-letter-signoff{font-size:22px}
-  .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:13px;margin-bottom:10px}
+  .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:18px;margin-bottom:10px}
   .opening-flower{flex-wrap:nowrap;justify-content:center;gap:14px;margin-top:10px}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
   .petal-btn{padding:6px 4px;gap:8px}
@@ -313,8 +313,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-icon{width:30px;height:30px}
   .petal-icon svg{width:14px;height:14px}
   .petal-btn{padding:5px 3px;gap:6px}
-  .fl-layer{font-size:8.5px}
-  .fl-title{font-size:16.5px}
+  .fl-layer{font-size:10.5px}
+  .fl-title{font-size:17px}
 }
 
 /* DESKTOP ONLY: the video+letter and the "Let's start here" selector form
@@ -327,6 +327,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    real breathing room, they sit side by side instead. Either way this is
    still "alongside, or immediately above" per the brief. */
 @media(min-width:901px){
+  html,body{font-size:19px}
   .opening-hero{display:grid;grid-template-columns:1fr;justify-items:center;row-gap:24px}
   .opening-letter{grid-column:1;grid-row:1;max-width:420px;width:100%}
   .heavy-today{grid-column:1;grid-row:2;max-width:420px;width:100%}
@@ -372,8 +373,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 
 /* sub-area icons */
-.area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 20px}
-.area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:74px;transition:transform .25s}
+.area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
+.area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:132px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
 .area-circle{position:relative;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
 .area-circle svg{width:24px;height:24px}
@@ -383,31 +384,31 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,178,154,.18)}
 .area-icon-btn.sel .area-circle{background:rgba(232,178,154,.26);border-width:2px}
-.area-lbl{font-size:11px;letter-spacing:.08em;color:var(--text-soft);text-transform:uppercase;text-align:center;line-height:1.35}
+.area-lbl{font-size:14.5px;font-weight:700;letter-spacing:.02em;color:#FDFBF7;text-transform:uppercase;text-align:center;line-height:1.3;width:100%;overflow-wrap:break-word}
 
 /* inspiration overview: navigation only: headings + a small open button.
    All content/imagery lives in the modal (see below), not here. */
 .tips-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
-.tips-subtitle{font-family:var(--sans);font-size:13px;color:var(--text-muted);text-align:center;margin:0 0 22px;letter-spacing:.02em}
+.tips-subtitle{font-family:var(--sans);font-size:17px;font-weight:700;color:#FDFBF7;text-align:center;margin:0 0 22px;letter-spacing:.02em}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 /* short compassionate intro paragraph on the subchapter landing page, and
    the closing takeaway line beneath its six cards. Both are optional per
    sub-area (only the Body chapter sets them for now); empty string = no
    layout change for chapters that don't use them. */
-.tips-intro{font-size:17.5px;font-weight:500;color:#FDFBF7;opacity:.96;text-align:center;max-width:46ch;margin:0 auto 22px;line-height:1.55}
+.tips-intro{font-size:18px;font-weight:500;color:#FDFBF7;opacity:.96;text-align:center;max-width:46ch;margin:0 auto 22px;line-height:1.65}
 .tips-area-takeaway{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text-soft);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6}
 /* Marks a placeholder field still awaiting real research/writing, so it
    reads as "not finished yet" at a glance rather than blending in as
    finished copy. Swap for real content any time, no markup changes needed. */
 .content-todo{display:inline-block;font-style:italic;color:var(--text-muted);background:rgba(232,178,154,.12);border:1px dashed rgba(232,178,154,.45);border-radius:8px;padding:2px 8px;font-size:.93em}
-.tips-lead{font-size:15px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
-.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tips-lead{font-size:18px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
+.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 /* on desktop the 3-across tip cards break out of .kit-page's 640px cap,
    same full-bleed technique as .opening-hero-wrap, so the larger hero
    images get real room instead of being squeezed into the page column */
 @media(min-width:641px){
   #kbox3{width:calc(100vw - 48px);max-width:960px;position:relative;left:50%;transform:translateX(-50%)}
-  .insp-list{grid-template-columns:repeat(3,1fr);gap:16px}
+  .insp-list{grid-template-columns:repeat(3,1fr);gap:20px}
 }
 /* the whole card is a real <button>, so the entire thing (image, text, and
    background) has always been one tap target, not just the old "Read
@@ -418,7 +419,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-card:active{transform:translateY(-1px);box-shadow:0 4px 14px rgba(8,14,18,.18),0 0 0 1.5px rgba(232,178,154,.4)}
 .insp-card-media{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(245,236,224,.07)}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
-.insp-card-body{padding:16px 18px 18px}
+.insp-card-body{padding:24px}
 .insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:18px;color:#FDFBF7;line-height:1.45}
 
 /* Gentle, optional mode label (Restore / Activate / Engage / Connect). Never a
@@ -473,8 +474,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .insp-photo-mark{color:var(--accent);opacity:.6}
 .insp-photo-mark svg{width:28px;height:28px}
-.insp-modal-title{font-family:var(--serif);font-style:italic;font-size:clamp(21px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
-.insp-modal-text{font-size:17.5px;line-height:1.62;color:var(--text)}
+.insp-modal-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
+.insp-modal-text{font-size:18px;line-height:1.65;color:var(--text)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
 .insp-modal-text p{margin-bottom:12px}
 .insp-modal-text p:last-child{margin-bottom:0}
@@ -500,7 +501,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    "The science behind this" drawer at the very bottom. Section labels are
    sentence case and warm, never shouting, so a depleted reader's eye can
    land softly instead of scanning a clinical form. */
-.insp-sec-label{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.015em;color:var(--accent);margin:20px 0 7px}
+.insp-sec-label{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.015em;color:var(--accent);margin:20px 0 7px}
 .insp-modal-text>.insp-sec-label:first-of-type{margin-top:0}
 .insp-sec-body{margin-bottom:4px}
 .insp-sec-list{list-style:none;margin:8px 0 4px;padding:0}
@@ -513,7 +514,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .insp-safety p{margin:0}
 .insp-safety p:last-child{color:var(--text-soft)}
-.insp-takeaway{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text);line-height:1.55;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
+.insp-takeaway{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);line-height:1.65;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
 
 /* Collapsed by default so a depleted reader's first view of a modal stays
    calm and short; opens on tap into a plain-language explanation of the
@@ -527,7 +528,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-science-panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .insp-science.open .insp-science-panel{max-height:600px}
 .insp-science-inner{padding:2px 2px 10px}
-.insp-science-inner>p{font-size:15.5px;line-height:1.58;color:var(--text-soft);margin-bottom:10px}
+.insp-science-inner>p{font-size:18px;line-height:1.65;color:var(--text-soft);margin-bottom:10px}
 .insp-science-inner>p:last-child{margin-bottom:0}
 .insp-sources-label{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin:14px 0 4px}
 .insp-sources{font-size:12.5px;color:rgba(245,236,224,.62);line-height:1.5;margin-bottom:0}
@@ -569,7 +570,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-list{display:flex;flex-direction:column;gap:12px}
 .basket-card{position:relative;background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:16px;padding:16px 42px 16px 16px}
 .basket-card-quote{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text);line-height:1.4;margin-bottom:8px}
-.basket-card-tip{font-size:13.5px;color:var(--text-soft);line-height:1.5}
+.basket-card-tip{font-size:15px;color:var(--text-soft);line-height:1.55}
 .basket-card-tip ul{list-style:none;margin:0;padding:0}
 .basket-card-tip li{position:relative;padding-left:16px;margin-bottom:4px}
 .basket-card-tip li::before{content:'';position:absolute;left:3px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
