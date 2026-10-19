@@ -379,7 +379,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-circle{position:relative;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
 .area-circle svg{width:24px;height:24px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
-   bloom-again-images/ and it appears automatically, covering the icon
+   the root directory and it appears automatically, covering the icon
    fallback beneath. Nothing to wire up, no code changes needed. */
 .area-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,178,154,.18)}
@@ -631,11 +631,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 <div id="s-cover" class="screen active">
   <div class="cover-simple">
     <div class="cover-mockup-wrap cover-mockup-desktop">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
   </div>
@@ -662,9 +662,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
            (flex order below), alongside the low-demand selector on desktop. -->
       <div class="opening-letter" id="opening-letter">
         <div class="welcome-video-wrap">
-          <video class="welcome-video" controls preload="metadata" playsinline poster="bloom-again-video/mira-welcome-poster.jpg">
-            <source src="bloom-again-video/mira-welcome.mp4" type="video/mp4">
-            Your browser doesn't support embedded video. <a href="bloom-again-video/mira-welcome.mp4">Watch Mira's welcome video</a>.
+          <video class="welcome-video" controls preload="metadata" playsinline poster="mira-welcome-poster.jpg">
+            <source src="mira-welcome.mp4" type="video/mp4">
+            Your browser doesn't support embedded video. <a href="mira-welcome.mp4">Watch Mira's welcome video</a>.
           </video>
         </div>
         <button class="welcome-letter-btn" onclick="openIntro(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.5 3.2c0 5.5-7.5 10.1-7.5 10.1z"/></svg>My Welcome Letter to You</button>
@@ -695,7 +695,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <!-- HEADLINE: mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
-        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="bloom-again-images/arrow-curved.png" alt="" aria-hidden="true"></h1>
+        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="arrow-curved.png" alt="" aria-hidden="true"></h1>
       </div>
 
       <!-- FIVE CHAPTERS: the main interactive heart of the page. Order is
@@ -1355,7 +1355,7 @@ function pickPillar(id){
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
         ${SUB_ICONS[a.id] || '✦'}
-        <img class="area-icon-photo" src="bloom-again-images/${a.img}" alt="" onerror="this.remove()">
+        <img class="area-icon-photo" src="${a.img}" alt="" onerror="this.remove()">
       </div>
       <span class="area-lbl">${a.label}</span>
     </button>`).join('');
@@ -1379,7 +1379,7 @@ function selectArea(id){
 
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
-      ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
+      ${t.img ? `<span class="insp-card-media"><img src="${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
       <span class="insp-card-body">
         <span class="insp-card-title">${t.title}</span>
       </span>
@@ -1403,7 +1403,7 @@ function inspPhotoFallback(imgEl){
 
 function renderInspPhoto(filename){
   if(!filename) return `<div class="insp-photo">${INSP_PLACEHOLDER}</div>`;
-  return `<div class="insp-photo"><img src="bloom-again-images/graphics_subchapters/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
+  return `<div class="insp-photo"><img src="${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
 }
 
 /* Renders a tip's modal body. Every tip across all 180 now follows the
@@ -1461,7 +1461,7 @@ function openInsp(i){
     ? renderStructuredTip(t)
     : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
   document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
-    ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
+    ? `<div class="insp-photo-full"><img src="${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
