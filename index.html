@@ -192,19 +192,20 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
 .heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:42ch;margin:0 auto 16px}
 .heavy-select-wrap{position:relative;max-width:440px;margin:0 auto;text-align:left}
-.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:var(--bg-dark);border:1.5px solid rgba(245,236,224,.35);border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:var(--text-muted);transition:all .22s ease}
-.heavy-select-trigger:hover{border-color:var(--accent)}
-.heavy-select-trigger.open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,178,154,.18)}
-.heavy-select-trigger.filled .heavy-select-placeholder{color:var(--text)}
+.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#F2D6D8;border:1px solid #FDFBF7;border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:rgba(43,56,66,.65);transition:all .22s ease}
+.heavy-select-trigger:hover{border-color:#D9938E;box-shadow:0 0 0 3px rgba(232,178,154,.35)}
+.heavy-select-trigger.open{border-color:#D9938E;box-shadow:0 0 0 3px rgba(232,178,154,.35)}
+.heavy-select-trigger.filled{background:#E8B4B8}
+.heavy-select-trigger.filled .heavy-select-placeholder{color:#2B3842;font-weight:600}
 .heavy-select-placeholder{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.heavy-select-chevron{width:16px;height:16px;flex-shrink:0;color:var(--text-muted);transition:transform .25s ease}
+.heavy-select-chevron{width:16px;height:16px;flex-shrink:0;color:#2B3842;opacity:.6;transition:transform .25s ease}
 .heavy-select-trigger.open .heavy-select-chevron{transform:rotate(180deg)}
-.heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:var(--bg-dark);border-radius:16px}
-.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1.5px solid rgba(245,236,224,.22);overflow:auto}
-.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(245,236,224,.1);padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--text-soft);cursor:pointer;transition:background .18s ease,color .18s ease}
+.heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:#FDFBF7;border-radius:16px}
+.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1px solid #E8B4B8;overflow:auto}
+.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(43,56,66,.1);padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:#2B3842;cursor:pointer;transition:background .18s ease,color .18s ease}
 .heavy-select-option:last-child{border-bottom:none}
-.heavy-select-option:hover{background:rgba(245,236,224,.08);color:var(--text)}
-.heavy-select-option.sel{background:rgba(232,178,154,.14);color:var(--text)}
+.heavy-select-option:hover{background:#F2D6D8}
+.heavy-select-option.sel{background:#E8B4B8;font-weight:600}
 .heavy-select-option-emoji{flex-shrink:0;font-size:16px}
 
 /* the glow + badge a chosen chapter gets in the nav list below, separate
@@ -250,21 +251,25 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    chapter (or a support mode), so the view stays uncluttered. Same 5
    reminders either way, just a different container/trigger. */
 .kit-top-row{display:block}
-.firstaid-sidebar{display:none}
 @media(min-width:901px){
-  .kit-top-row{width:100vw;position:relative;left:50%;transform:translateX(-50%);display:flex;align-items:flex-start;justify-content:center;gap:40px;max-width:1760px;margin:0 auto;padding:0 6vw}
+  .kit-top-row{width:100vw;position:relative;left:50%;transform:translateX(-50%);display:flex;justify-content:center;max-width:1760px;margin:0 auto;padding:0 6vw}
   .kit-top-row .opening-hero-wrap{width:auto;position:static;left:auto;transform:none;flex:1 1 auto;min-width:0}
-  .firstaid-sidebar{display:block;flex:0 0 240px;max-width:240px;margin-top:30px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:24px 20px;text-align:center}
-  .firstaid-sidebar-img{width:100%;max-width:140px;height:auto;margin:0 auto 16px;display:block;border-radius:16px}
-  .firstaid-sidebar-title{font-family:var(--sans);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);line-height:1.4;margin-bottom:10px}
-  .firstaid-sidebar-sub{font-size:13px;color:var(--text-soft);line-height:1.5;margin-bottom:16px}
 }
-.firstaid-open-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:9px 26px;border-radius:999px;cursor:pointer;transition:all .25s ease}
-.firstaid-open-btn:hover{background:var(--accent);color:var(--bg-dark)}
 .firstaid-mobile-btn{display:block;width:100%;margin:14px auto 0;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);color:var(--accent);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:11px 16px;border-radius:999px;cursor:pointer;transition:all .25s ease;text-align:center}
 .firstaid-mobile-btn:hover{background:rgba(232,178,154,.16)}
 .firstaid-mobile-btn.hide{display:none}
 @media(min-width:901px){.firstaid-mobile-btn{display:none !important}}
+/* First-Aid grid card, desktop only: the sixth petal-nav-list button plus
+   the panel it opens, directly below the 3x2 grid. Mobile uses the
+   firstaid-mobile-btn/panel pair above instead, so both stay hidden here. */
+.firstaid-petal-btn{display:none}
+.firstaid-panel-grid{display:none}
+@media(min-width:901px){
+  .firstaid-petal-btn{display:flex}
+  .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,178,154,.1);border-color:rgba(232,178,154,.35)}
+  .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,178,154,.18)}
+  .firstaid-panel-grid{display:block;max-width:640px;margin-left:auto;margin-right:auto}
+}
 .firstaid-panel{width:100%;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease,margin-top .4s ease;margin-top:0}
 .firstaid-panel.open{max-height:600px;opacity:1;margin-top:16px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
@@ -333,9 +338,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
   /* the chapter grid itself: a real multi-column grid of cards, not the
      mobile single-column list, spanning the full hero width */
-  .flower-block{grid-column:1;grid-row:4;display:block;max-width:960px;width:100%;margin:0 auto}
+  .flower-block{grid-column:1;grid-row:4;display:block;max-width:1200px;width:100%;margin:0 auto}
   .opening-flower{display:block;margin-top:0}
-  .petal-nav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:none;flex:none}
+  .petal-nav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;flex:none}
   .petal-nav-list .petal-btn{flex-direction:column;text-align:center;gap:10px;padding:22px 16px;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14)}
   .petal-nav-list .petal-btn:hover{background:rgba(245,236,224,.09)}
   .petal-nav-list .petal-btn.sel{border-color:var(--accent)}
@@ -451,7 +456,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    export) rather than a forced 16:9 crop, so nothing gets cut off.
    preload="metadata" keeps the page light, the full file only loads
    once someone actually presses play. */
-.welcome-video-wrap{width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;margin-bottom:16px;background:rgba(232,178,154,.08);border:1px solid rgba(245,236,224,.16)}
+.welcome-video-wrap{width:100%;max-width:500px;aspect-ratio:4/3;border-radius:16px;overflow:hidden;margin:0 auto 16px;background:rgba(232,178,154,.08);border:1px solid rgba(245,236,224,.16)}
 .welcome-video{display:block;width:100%;height:100%;object-fit:cover}
 
 /* inspiration modal: this is where the actual content and photos live */
@@ -639,23 +644,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
          button now lives at the very end of the page, see post-hero-stack
          below). -->
     <div class="kit-top-row">
-    <aside class="firstaid-sidebar" id="firstaid-sidebar">
-      <img class="firstaid-sidebar-img" src="bloom-again-images/ba-18_lamp-book.png" alt="" aria-hidden="true" onerror="this.remove()">
-      <p class="firstaid-sidebar-title">First-aid kit reminders for when you're running on empty</p>
-      <p class="firstaid-sidebar-sub">If six subchapters feel like too much right now, start with the basics:</p>
-      <button class="firstaid-open-btn" id="firstaid-open-btn" onclick="toggleFirstAid('firstaid-panel-desktop', this)" aria-expanded="false">Open</button>
-      <div class="firstaid-panel" id="firstaid-panel-desktop">
-        <ul class="firstaid-list">
-          <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
-          <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
-          <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-          <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
-          <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
-        </ul>
-        <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
-        <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
-      </div>
-    </aside>
     <div class="opening-hero-wrap">
     <div class="opening-hero">
 
@@ -727,6 +715,28 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Bloom</span><span class="fl-title">Expansion</span><span class="fl-frame">Self-expression &amp; aliveness</span></span>
             </button>
+
+            <!-- FIRST-AID KIT, desktop only: the sixth card, same grid, same
+                 styling as the five chapters, filling out the 3x2 layout.
+                 Mobile keeps its own separate button at the end of the page
+                 (see .firstaid-mobile-btn below), so this one is hidden
+                 there to avoid two entry points. -->
+            <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="toggleFirstAid('firstaid-panel-desktop', this)" aria-expanded="false" aria-controls="firstaid-panel-desktop">
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="petal-text"><span class="fl-layer">Support</span><span class="fl-title">First-Aid Kit</span><span class="fl-frame">When you're running on empty</span></span>
+            </button>
+          </div>
+
+          <div class="firstaid-panel firstaid-panel-grid" id="firstaid-panel-desktop">
+            <ul class="firstaid-list">
+              <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
+              <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
+              <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
+              <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+              <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+            </ul>
+            <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+            <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
           </div>
         </div>
       </div>
