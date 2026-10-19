@@ -412,7 +412,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    same full-bleed technique as .opening-hero-wrap, so the wider horizontal
    cards get real room instead of being squeezed into the page column */
 @media(min-width:641px){
-  #kbox3{width:calc(100vw - 48px);max-width:960px;position:relative;left:50%;transform:translateX(-50%)}
+  #kbox3{width:calc(100vw - 48px);max-width:800px;position:relative;left:50%;transform:translateX(-50%)}
   .insp-list{grid-template-columns:repeat(2,1fr);gap:18px}
   .insp-card-media{width:100px;height:100px}
 }
@@ -942,6 +942,22 @@ const SUB_ICONS = {
   bloom: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M9 10c-2.5 0-4 1.7-4 4"/><path d="M15 10c2.5 0 4 1.7 4 4"/><path d="M12 11v10"/></svg>'
 };
 
+/* Hand-picked representative photo per subchapter circle, overriding the
+   "first illustrated tip" default below wherever that default didn't
+   actually read as the subchapter at a glance. Only subchapters curated
+   so far are listed here, everything else keeps falling back to its
+   first illustrated tip automatically. Never pulls from the 6 main-chapter
+   photos (chapter-*.jpg), those stay on the main chapter circles only. */
+const SUB_REP_IMG = {
+  sleep: 'sleep-01.jpg',
+  nourishment: 'nourishment-02.jpg',
+  movement: 'movement-04.jpg',
+  hormones: 'hormones-03.jpg',
+  sensory: 'sensory-02.jpg',
+  breath: 'breath-04.jpg',
+  time: 'time-03.jpg'
+};
+
 /* One small, contextual note per chapter. Not medical advice, not a
    diagnosis, just lived experience and reflection. */
 const CHAPTER_DISCLAIMER = {
@@ -1091,11 +1107,12 @@ function pickPillar(id){
   hideFirstAidMobileBtn();
   document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>{
     const repTip = a.tips.find(t=>t.img);
+    const repImg = SUB_REP_IMG[a.id] || (repTip ? repTip.img : null);
     return `
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
         ${SUB_ICONS[a.id] || '✦'}
-        ${repTip ? `<img class="area-icon-photo" src="new_images/${repTip.img}" alt="" onerror="this.remove()">` : ''}
+        ${repImg ? `<img class="area-icon-photo" src="new_images/${repImg}" alt="" onerror="this.remove()">` : ''}
       </div>
       <span class="area-lbl">${a.label}</span>
     </button>`;
