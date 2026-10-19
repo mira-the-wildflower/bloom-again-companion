@@ -181,6 +181,38 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kit-back:hover{color:var(--text)}
 .kit-hdr-logo{height:40px;width:auto;opacity:.9;filter:drop-shadow(0 1px 6px rgba(42,52,56,.14))}
 
+/* "WHAT FEELS HEAVY TODAY?" low-demand selector: the very first thing on
+   the kit screen, above the chapter overview. Five relatable, tappable
+   statements, no chapter names or decision-making required. Tapping one
+   scrolls to and glows the matching chapter in the nav list below, and
+   shows a quiet confirmation banner rather than forcing her into that
+   chapter, she can still explore at her own pace. */
+.heavy-today{max-width:640px;margin:0 auto 34px;text-align:center}
+.heavy-today-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:46ch;margin:0 auto 18px}
+.heavy-today-grid{display:flex;flex-direction:column;gap:9px}
+.heavy-today-btn{display:flex;align-items:center;gap:12px;text-align:left;background:rgba(245,236,224,.05);border:1.5px solid rgba(245,236,224,.16);border-radius:16px;padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--text-soft);cursor:pointer;transition:all .22s ease}
+.heavy-today-btn:hover{background:rgba(245,236,224,.1);color:var(--text)}
+.heavy-today-btn.sel{background:rgba(232,178,154,.14);border-color:var(--accent);color:var(--text)}
+.heavy-today-emoji{flex-shrink:0;font-size:17px}
+.heavy-today-banner{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease,opacity .4s ease,margin-top .4s ease;margin-top:0}
+.heavy-today-banner.show{max-height:160px;opacity:1;margin-top:16px}
+.heavy-today-banner-inner{display:flex;flex-direction:column;align-items:center;gap:10px;background:rgba(232,178,154,.1);border:1px solid rgba(232,178,154,.32);border-radius:16px;padding:15px 18px}
+.heavy-today-banner p{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);line-height:1.5}
+.heavy-today-clear{background:transparent;border:1px solid rgba(245,236,224,.3);color:var(--text-muted);font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:7px 18px;border-radius:999px;cursor:pointer;transition:all .22s ease}
+.heavy-today-clear:hover{background:rgba(245,236,224,.1);color:var(--text)}
+
+/* the glow a tapped chapter gets in the nav list below, separate from the
+   permanent .petal-btn-start cue and from .sel (actually picking it) */
+.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px}
+.petal-btn.heavy-glow .petal-icon{animation:heavyGlowPulse 1.8s ease-out 2}
+@keyframes heavyGlowPulse{
+  0%{box-shadow:0 0 0 0 rgba(232,178,154,.45)}
+  70%{box-shadow:0 0 0 12px rgba(232,178,154,0)}
+  100%{box-shadow:0 0 0 0 rgba(232,178,154,0)}
+}
+@media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
+
 .kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:rgba(122,152,164,.38);backdrop-filter:blur(8px);margin-bottom:0}
 .kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.2vw,23px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6;opacity:.92}
@@ -337,24 +369,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-mode-connect{background:rgba(212,181,176,.32);color:#F2DAD7;border-color:rgba(212,181,176,.5)}
 .insp-modal-text .insp-mode{margin-bottom:14px}
 
-/* SUPPORT MODE FILTER: a second, optional way into the tip library, next
-   to picking a chapter. Lets a reader go straight to what a moment is
-   actually asking for (Restore / Activate / Engage / Connect) instead of
-   defaulting to a chapter, or to rest. Cuts across all five chapters. */
-.mode-entry{padding:4px 5vw 6px;text-align:center;transition:opacity .3s ease}
-.mode-entry.hide{display:none}
-.mode-entry-label{font-family:var(--sans);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px}
-.mode-chip-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:560px;margin:0 auto}
-.mode-chip{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 16px;border-radius:999px;cursor:pointer;background:rgba(245,236,224,.06);border:1.5px solid rgba(245,236,224,.22);color:var(--text-soft);transition:all .22s ease}
-.mode-chip:hover{background:rgba(245,236,224,.14);color:var(--text)}
-.mode-chip.sel{color:var(--bg-dark)}
-.mode-chip-restore.sel{background:#B8CDD6;border-color:#B8CDD6}
-.mode-chip-activate.sel{background:#E8B29A;border-color:#E8B29A}
-.mode-chip-engage.sel{background:#C4D4B8;border-color:#C4D4B8}
-.mode-chip-connect.sel{background:#D4B5B0;border-color:#D4B5B0}
-.mode-desc{font-size:13.5px;line-height:1.6;color:var(--text-soft);max-width:48ch;margin:0 auto 22px;text-align:center}
-.mode-empty{font-size:13.5px;line-height:1.6;color:var(--text-muted);max-width:44ch;margin:10px auto;text-align:center;font-style:italic}
-.insp-card-eyebrow{display:block;font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+/* NOTE: the old top-level "browse by support mode" chip filter (Restore /
+   Activate / Engage / Connect, as clickable pills above the chapter list)
+   was removed per Mira's request, too much to decode at a glance. The mode
+   badges themselves live on, quietly, inside each tip's own modal (see
+   .insp-mode below), just not as a page-level filter anymore. */
 .insp-modal-intro-nav{display:none;align-items:center;justify-content:space-between;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid rgba(245,236,224,.14)}
 .insp-modal-intro-nav.show{display:flex}
 .insp-modal-intro-btn{background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);border-radius:999px;padding:9px 16px;font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:all .2s ease}
@@ -556,6 +575,26 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <img src="bloom-again-logo.png" class="kit-hdr-logo" alt="Bloom Again">
     </div>
 
+    <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in, above everything
+         else. No chapter names, no analysis, just tap what's true. -->
+    <div class="heavy-today" id="heavy-today">
+      <p class="heavy-today-eyebrow">Not sure where to start today?</p>
+      <p class="heavy-today-sub">You don't need to analyze your burnout. Just tap what feels true right now:</p>
+      <div class="heavy-today-grid">
+        <button class="heavy-today-btn" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-today-emoji">&#129657;</span><span>I've been absorbing someone else's mood or drama and feel emotionally empty.</span></button>
+        <button class="heavy-today-btn" data-target="body" onclick="pickHeavyToday(this,'body')"><span class="heavy-today-emoji">&#127911;</span><span>Everything is too loud, too bright, or too fast, my senses are fried.</span></button>
+        <button class="heavy-today-btn" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-today-emoji">&#128683;</span><span>I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</span></button>
+        <button class="heavy-today-btn" data-target="identity" onclick="pickHeavyToday(this,'identity')"><span class="heavy-today-emoji">&#128230;</span><span>I feel like I have to do everything perfectly or it all falls apart.</span></button>
+        <button class="heavy-today-btn" data-target="environment" onclick="pickHeavyToday(this,'environment')"><span class="heavy-today-emoji">&#128483;&#65039;</span><span>Misunderstandings, family demands, or unspoken mental load are crushing me.</span></button>
+      </div>
+      <div class="heavy-today-banner" id="heavy-today-banner">
+        <div class="heavy-today-banner-inner">
+          <p>We've found your sanctuary for today. Start here, or explore at your own pace. &#127803;</p>
+          <button class="heavy-today-clear" onclick="clearHeavyToday()">Clear Selection</button>
+        </div>
+      </div>
+    </div>
+
     <!-- OPENING HERO: Mira's note beside the flower + five chapters, plus
          the First-Aid Kit widget (desktop sidebar box here; the mobile
          toggle button lives down inside the chapter list itself, see
@@ -627,8 +666,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
         </div>
         <!-- MOBILE ONLY: First-Aid Kit toggle, sitting right under the chapter
              list. Hidden entirely on desktop (the sidebar box covers it there),
-             and hides itself once a chapter or support mode is picked, via
-             pickPillar()/pickMode()/initKit() below. -->
+             and hides itself once a chapter is picked, via pickPillar()/initKit()
+             below. -->
         <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="toggleFirstAid('firstaid-panel-mobile', this)" aria-expanded="false">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
         <div class="firstaid-panel" id="firstaid-panel-mobile">
           <ul class="firstaid-list">
@@ -662,19 +701,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
         <cite>Alexander Den Heijer</cite>
       </div>
 
-      <!-- SUPPORT MODE FILTER: a second way in, by what you need right now
-           rather than by chapter. Mutually exclusive with the chapter flow
-           below, picking a mode closes it, and picking a chapter closes this. -->
-      <div class="mode-entry">
-        <p class="mode-entry-label">Or browse by what you need right now</p>
-        <div class="mode-chip-row">
-          <button class="mode-chip mode-chip-restore" data-mode="Restore" onclick="pickMode('Restore')">Restore</button>
-          <button class="mode-chip mode-chip-activate" data-mode="Activate" onclick="pickMode('Activate')">Activate</button>
-          <button class="mode-chip mode-chip-engage" data-mode="Engage" onclick="pickMode('Engage')">Engage</button>
-          <button class="mode-chip mode-chip-connect" data-mode="Connect" onclick="pickMode('Connect')">Connect</button>
-        </div>
-      </div>
-
     </div>
 
     <!-- BACK TO TOP: quiet, mobile only -->
@@ -691,13 +717,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     </div>
 
     <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-
-    <!-- BOX: support-mode results (appears once a mode chip is picked) -->
-    <div class="kbox expand" id="kbox-mode">
-      <h2 class="kbox-q"><span id="mode-title"></span></h2>
-      <p class="mode-desc" id="mode-desc"></p>
-      <div id="mode-tips-list" class="insp-list"></div>
-    </div>
 
     <!-- BOX 3: 3 tips + CTA -->
     <div class="kbox expand" id="kbox3">
@@ -1153,16 +1172,14 @@ function initKit(){
   S = {chapter:null, area:null};
   document.getElementById('kbox2').classList.remove('open');
   document.getElementById('kbox3').classList.remove('open');
-  document.getElementById('kbox-mode').classList.remove('open');
   document.getElementById('kconn-2').classList.remove('show');
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('sel'));
-  document.querySelectorAll('.mode-chip').forEach(b=>b.classList.remove('sel'));
   document.getElementById('opening-letter').classList.remove('hide');
   document.querySelector('.crisis-entry').classList.remove('hide');
   document.querySelector('.soil-quote').classList.remove('hide');
-  document.querySelector('.mode-entry').classList.remove('hide');
   document.querySelector('.back-to-top-wrap').classList.remove('hide');
   showFirstAidMobileBtn();
+  clearHeavyToday();
 }
 
 /* FIRST-AID KIT WIDGET: one shared toggle for both surfaces (the desktop
@@ -1190,15 +1207,30 @@ function showFirstAidMobileBtn(){
   if(btn) btn.classList.remove('hide');
 }
 
+/* "WHAT FEELS HEAVY TODAY?" selector: a tap here never opens a chapter on
+   its own, it just points at one, by scrolling to and glowing the matching
+   button in the chapter nav below and showing a quiet confirmation. She
+   still chooses whether to actually tap into it. */
+function pickHeavyToday(btn, chapterId){
+  document.querySelectorAll('.heavy-today-btn').forEach(b=>b.classList.toggle('sel', b===btn));
+  document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('heavy-glow', b.dataset.pillar===chapterId));
+  document.getElementById('heavy-today-banner').classList.add('show');
+  const target = document.querySelector(`#petal-nav-list .petal-btn[data-pillar="${chapterId}"]`);
+  if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+}
+function clearHeavyToday(){
+  document.querySelectorAll('.heavy-today-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
+  const banner = document.getElementById('heavy-today-banner');
+  if(banner) banner.classList.remove('show');
+}
+
 function pickPillar(id){
   S.chapter = id; S.area = null;
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('sel', b.dataset.pillar===id));
-  document.querySelectorAll('.mode-chip').forEach(b=>b.classList.remove('sel'));
-  document.getElementById('kbox-mode').classList.remove('open');
   document.getElementById('opening-letter').classList.add('hide');
   document.querySelector('.crisis-entry').classList.add('hide');
   document.querySelector('.soil-quote').classList.add('hide');
-  document.querySelector('.mode-entry').classList.add('hide');
   document.querySelector('.back-to-top-wrap').classList.add('hide');
 
   const chapter = KIT[id];
@@ -1245,65 +1277,6 @@ function selectArea(id){
   const box3=document.getElementById('kbox3'); box3.classList.add('open');
   document.getElementById('kconn-2').classList.add('show');
   scrollInto(box3);
-}
-
-/* SUPPORT MODE FILTER: a second, optional way into the tip library,
-   independent of the chapter flow above. Gathers every tip across all
-   five chapters that carries the chosen mode, regardless of which
-   sub-area it lives in, so a reader who feels flat and restless can go
-   straight to Activate instead of defaulting to Restore. */
-const MODE_META = {
-  Restore:{hint:"When you feel depleted, overwhelmed or overloaded.",examples:"Reducing demands, eating, sleeping, taking a break, simplifying decisions, lowering sensory input, physical comfort, or asking for practical help."},
-  Activate:{hint:"When you feel flat, restless, disconnected or stuck.",examples:"Enjoyable movement, music, novelty, a short creative activity, a change of environment, or other stimulation that genuinely suits you."},
-  Engage:{hint:"When you feel ready for meaningful effort.",examples:"A purposeful challenge, an absorbing project, a clear task, creative work, structured focus, or working alongside another person, with room for real breaks."},
-  Connect:{hint:"When you need belonging, interpersonal support or a sense of being understood.",examples:"Time with a trusted person, asking for help, sharing something difficult, quiet companionship, or appropriate professional support."}
-};
-
-function pickMode(mode){
-  document.querySelectorAll('.mode-chip').forEach(b=>b.classList.toggle('sel', b.dataset.mode===mode));
-  document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('sel'));
-  document.getElementById('kbox2').classList.remove('open');
-  document.getElementById('kbox3').classList.remove('open');
-  document.getElementById('kconn-2').classList.remove('show');
-  document.getElementById('opening-letter').classList.add('hide');
-  document.querySelector('.crisis-entry').classList.add('hide');
-  document.querySelector('.soil-quote').classList.add('hide');
-  document.querySelector('.back-to-top-wrap').classList.add('hide');
-  hideFirstAidMobileBtn();
-
-  const meta = MODE_META[mode];
-  document.getElementById('mode-title').textContent = mode;
-  document.getElementById('mode-desc').textContent = `${meta.hint} ${meta.examples}`;
-
-  const results = [];
-  Object.keys(KIT).forEach(chId=>{
-    const chMeta = FLOWER_META.find(m=>m.id===chId);
-    KIT[chId].subs.forEach(area=>{
-      area.tips.forEach((t,i)=>{
-        if(t.mode===mode) results.push({chId, areaId:area.id, i, title:t.title, img:t.img, chLabel:chMeta.title, areaLabel:area.label});
-      });
-    });
-  });
-
-  document.getElementById('mode-tips-list').innerHTML = results.length ? results.map(r=>`
-    <button class="insp-card${r.img ? '' : ' no-media'}" onclick="openModeTip('${r.chId}','${r.areaId}',${r.i})">
-      ${r.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${r.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
-      <span class="insp-card-body">
-        <span class="insp-card-eyebrow">${r.chLabel} &middot; ${r.areaLabel}</span>
-        <span class="insp-card-title">${r.title}</span>
-        <span class="insp-card-cta">Read this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
-      </span>
-    </button>`).join('') : `<p class="mode-empty">Nothing is tagged ${mode} yet, these tags are added where they clearly fit, never forced on a tip that doesn't. Browse by chapter instead for now.</p>`;
-
-  const boxMode = document.getElementById('kbox-mode');
-  boxMode.classList.add('open');
-  scrollInto(boxMode);
-}
-
-function openModeTip(chapterId, areaId, tipIndex){
-  S.chapter = chapterId;
-  S.area = KIT[chapterId].subs.find(a=>a.id===areaId);
-  openInsp(tipIndex);
 }
 
 /* Placeholder shown in the modal for any inspiration that doesn't have a
