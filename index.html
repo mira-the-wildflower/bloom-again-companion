@@ -631,11 +631,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 <div id="s-cover" class="screen active">
   <div class="cover-simple">
     <div class="cover-mockup-wrap cover-mockup-desktop">
-      <img class="cover-mockup-img" src="cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
+      <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
       <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
     </div>
   </div>
@@ -695,7 +695,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <!-- HEADLINE: mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
-        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="arrow-curved.png" alt="" aria-hidden="true"></h1>
+        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="bloom-again-images/arrow-curved.png" alt="" aria-hidden="true"></h1>
       </div>
 
       <!-- FIVE CHAPTERS: the main interactive heart of the page. Order is
@@ -1355,7 +1355,7 @@ function pickPillar(id){
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
         ${SUB_ICONS[a.id] || '✦'}
-        <img class="area-icon-photo" src="${a.img}" alt="" onerror="this.remove()">
+        <img class="area-icon-photo" src="bloom-again-images/${a.img}" alt="" onerror="this.remove()">
       </div>
       <span class="area-lbl">${a.label}</span>
     </button>`).join('');
@@ -1379,7 +1379,7 @@ function selectArea(id){
 
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
-      ${t.img ? `<span class="insp-card-media"><img src="${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
+      ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
       <span class="insp-card-body">
         <span class="insp-card-title">${t.title}</span>
       </span>
@@ -1403,7 +1403,7 @@ function inspPhotoFallback(imgEl){
 
 function renderInspPhoto(filename){
   if(!filename) return `<div class="insp-photo">${INSP_PLACEHOLDER}</div>`;
-  return `<div class="insp-photo"><img src="${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
+  return `<div class="insp-photo"><img src="bloom-again-images/graphics_subchapters/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
 }
 
 /* Renders a tip's modal body. Every tip across all 180 now follows the
@@ -1461,7 +1461,7 @@ function openInsp(i){
     ? renderStructuredTip(t)
     : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
   document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
-    ? `<div class="insp-photo-full"><img src="${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
+    ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
