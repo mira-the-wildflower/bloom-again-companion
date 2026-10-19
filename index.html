@@ -402,25 +402,29 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    finished copy. Swap for real content any time, no markup changes needed. */
 .content-todo{display:inline-block;font-style:italic;color:var(--text-muted);background:rgba(232,178,154,.12);border:1px dashed rgba(232,178,154,.45);border-radius:8px;padding:2px 8px;font-size:.93em}
 .tips-lead{font-size:18px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
-.insp-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-/* on desktop the 3-across tip cards break out of .kit-page's 640px cap,
-   same full-bleed technique as .opening-hero-wrap, so the larger hero
-   images get real room instead of being squeezed into the page column */
+.insp-list{display:grid;grid-template-columns:1fr;gap:14px}
+/* on desktop the 2-across tip cards break out of .kit-page's 640px cap,
+   same full-bleed technique as .opening-hero-wrap, so the wider horizontal
+   cards get real room instead of being squeezed into the page column */
 @media(min-width:641px){
   #kbox3{width:calc(100vw - 48px);max-width:960px;position:relative;left:50%;transform:translateX(-50%)}
-  .insp-list{grid-template-columns:repeat(3,1fr);gap:20px}
+  .insp-list{grid-template-columns:repeat(2,1fr);gap:18px}
+  .insp-card-media{width:100px;height:100px}
 }
 /* the whole card is a real <button>, so the entire thing (image, text, and
    background) has always been one tap target, not just the old "Read
    this" pill. That pill is gone now, per Mira's request, the hover/active
-   lift and glow below are the only affordance needed to read as tappable. */
-.insp-card{display:flex;flex-direction:column;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
+   lift and glow below are the only affordance needed to read as tappable.
+   Cards are now horizontal (photo left, title and a short preview line
+   right) rather than photo-on-top, still opening the same full modal. */
+.insp-card{display:flex;flex-direction:row;align-items:center;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:14px;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
 .insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,178,154,.35)}
 .insp-card:active{transform:translateY(-1px);box-shadow:0 4px 14px rgba(8,14,18,.18),0 0 0 1.5px rgba(232,178,154,.4)}
-.insp-card-media{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(245,236,224,.07)}
+.insp-card-media{flex:0 0 auto;width:84px;height:84px;border-radius:14px;overflow:hidden;background:rgba(245,236,224,.07);border:1.5px solid rgba(245,236,224,.3);margin-right:16px}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
-.insp-card-body{padding:24px}
-.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:18px;color:#FDFBF7;line-height:1.45}
+.insp-card-body{padding:0;flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:16px;color:#FDFBF7;line-height:1.35}
+.insp-card-takeaway{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-family:var(--sans);font-weight:400;font-size:13px;color:var(--text-soft);line-height:1.45}
 
 /* Gentle, optional mode label (Restore / Activate / Engage / Connect). Never a
    diagnosis, never forced on a tip, just a quiet hint for which kind of
@@ -1108,9 +1112,10 @@ function selectArea(id){
 
   document.getElementById('tips-list').innerHTML = S.area.tips.map((t,i)=>`
     <button class="insp-card${t.img ? '' : ' no-media'}" onclick="openInsp(${i})">
-      ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
+      ${t.img ? `<span class="insp-card-media"><img src="new_images/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
       <span class="insp-card-body">
         <span class="insp-card-title">${t.title}</span>
+        ${t.takeaway ? `<span class="insp-card-takeaway">${t.takeaway}</span>` : ''}
       </span>
     </button>`).join('');
   document.getElementById('tips-area-takeaway').textContent = S.area.takeaway || '';
@@ -1132,7 +1137,7 @@ function inspPhotoFallback(imgEl){
 
 function renderInspPhoto(filename){
   if(!filename) return `<div class="insp-photo">${INSP_PLACEHOLDER}</div>`;
-  return `<div class="insp-photo"><img src="bloom-again-images/graphics_subchapters/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
+  return `<div class="insp-photo"><img src="new_images/${filename}" alt="" onerror="inspPhotoFallback(this)"></div>`;
 }
 
 /* Renders a tip's modal body. Every tip across all 180 now follows the
@@ -1190,7 +1195,7 @@ function openInsp(i){
     ? renderStructuredTip(t)
     : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
   document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
-    ? `<div class="insp-photo-full"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
+    ? `<div class="insp-photo-full"><img src="new_images/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
