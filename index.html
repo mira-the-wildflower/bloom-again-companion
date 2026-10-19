@@ -80,8 +80,9 @@ body{overflow-x:hidden}
 .petal-btn{display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
 .petal-btn:hover{background:rgba(245,236,224,.08)}
 .petal-btn.sel{background:rgba(232,178,154,.14)}
-.petal-icon{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease}
-.petal-icon svg{width:23px;height:23px}
+.petal-icon{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
+.petal-icon svg{width:30px;height:30px}
+.petal-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .petal-btn:hover .petal-icon{background:rgba(232,178,154,.18)}
 .petal-btn.sel .petal-icon{background:rgba(232,178,154,.26);border-width:2px}
 .petal-text{display:flex;flex-direction:column}
@@ -305,13 +306,13 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .opening-flower{flex-wrap:nowrap;justify-content:center;gap:14px;margin-top:10px}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
   .petal-btn{padding:6px 4px;gap:8px}
-  .petal-icon{width:34px;height:34px}
-  .petal-icon svg{width:16px;height:16px}
+  .petal-icon{width:50px;height:50px}
+  .petal-icon svg{width:20px;height:20px}
   .fl-title{font-size:17.5px}
 }
 @media(max-width:400px){
-  .petal-icon{width:30px;height:30px}
-  .petal-icon svg{width:14px;height:14px}
+  .petal-icon{width:44px;height:44px}
+  .petal-icon svg{width:18px;height:18px}
   .petal-btn{padding:5px 3px;gap:6px}
   .fl-layer{font-size:10.5px}
   .fl-title{font-size:17px}
@@ -374,10 +375,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 /* sub-area icons */
 .area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
-.area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:132px;transition:transform .25s}
+.area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:144px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{position:relative;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
-.area-circle svg{width:24px;height:24px}
+.area-circle{position:relative;width:80px;height:80px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
+.area-circle svg{width:32px;height:32px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
    the root directory and it appears automatically, covering the icon
    fallback beneath. Nothing to wire up, no code changes needed. */
@@ -711,23 +712,23 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
         <div class="opening-flower">
           <div class="petal-nav-list" id="petal-nav-list">
             <button class="petal-btn petal-btn-start" data-pillar="environment" onclick="pickPillar('environment')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg><img class="petal-icon-photo" src="new_images/chapter-environment.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Soil</span><span class="fl-title">Environment</span><span class="fl-frame">Input &amp; nourishment</span></span>
             </button>
             <button class="petal-btn" data-pillar="relationships" onclick="pickPillar('relationships')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-3.2 1-4.3 4.3-5.3 9.3"/><path d="M12 10c-1.6 2.2-2.1 5.3-2.1 8.3"/><path d="M12 10c1.6 2.2 2.1 5.3 2.1 8.3"/><path d="M12 10c3.2 1 4.3 4.3 5.3 9.3"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-3.2 1-4.3 4.3-5.3 9.3"/><path d="M12 10c-1.6 2.2-2.1 5.3-2.1 8.3"/><path d="M12 10c1.6 2.2 2.1 5.3 2.1 8.3"/><path d="M12 10c3.2 1 4.3 4.3 5.3 9.3"/></svg><img class="petal-icon-photo" src="new_images/chapter-relationships.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Roots</span><span class="fl-title">Relationships</span><span class="fl-frame">Stability &amp; safety</span></span>
             </button>
             <button class="petal-btn" data-pillar="body" onclick="pickPillar('body')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V6"/><path d="M12 15c-2.1.2-4.2-.9-5-3.3"/><path d="M12 10.2c2.1-.3 3.9-1.6 4.4-4"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V6"/><path d="M12 15c-2.1.2-4.2-.9-5-3.3"/><path d="M12 10.2c2.1-.3 3.9-1.6 4.4-4"/></svg><img class="petal-icon-photo" src="new_images/chapter-body.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Stem</span><span class="fl-title">Body &amp; Energy</span><span class="fl-frame">Regulation &amp; energy</span></span>
             </button>
             <button class="petal-btn" data-pillar="identity" onclick="pickPillar('identity')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2c-2.4 2.1-3 5.7-1.3 8.7a1.6 1.6 0 0 0 2.6 0c1.7-3 1.1-6.6-1.3-8.7z"/><path d="M12 12.9v8.1"/><path d="M12 16.2c-1.4 0-2.6-.8-3.1-2"/><path d="M12 16.2c1.4 0 2.6-.8 3.1-2"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2c-2.4 2.1-3 5.7-1.3 8.7a1.6 1.6 0 0 0 2.6 0c1.7-3 1.1-6.6-1.3-8.7z"/><path d="M12 12.9v8.1"/><path d="M12 16.2c-1.4 0-2.6-.8-3.1-2"/><path d="M12 16.2c1.4 0 2.6-.8 3.1-2"/></svg><img class="petal-icon-photo" src="new_images/chapter-identity.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Bud</span><span class="fl-title">Identity</span><span class="fl-frame">Inner work &amp; intuition</span></span>
             </button>
             <button class="petal-btn" data-pillar="expansion" onclick="pickPillar('expansion')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg><img class="petal-icon-photo" src="new_images/chapter-expansion.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Bloom</span><span class="fl-title">Expansion</span><span class="fl-frame">Self-expression &amp; aliveness</span></span>
             </button>
 
@@ -737,7 +738,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
                  (see .firstaid-mobile-btn below), so this one is hidden
                  there to avoid two entry points. -->
             <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg><img class="petal-icon-photo" src="new_images/chapter-firstaid.jpg" alt="" onerror="this.remove()"></span>
               <span class="petal-text"><span class="fl-layer">Support</span><span class="fl-title">First-Aid Kit</span><span class="fl-frame">When you're running on empty</span></span>
             </button>
           </div>
