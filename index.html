@@ -192,20 +192,20 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
 .heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:42ch;margin:0 auto 16px}
 .heavy-select-wrap{position:relative;max-width:440px;margin:0 auto;text-align:left}
-.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#F2D6D8;border:1px solid #FDFBF7;border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:rgba(43,56,66,.65);transition:all .22s ease}
-.heavy-select-trigger:hover{border-color:#D9938E;box-shadow:0 0 0 3px rgba(232,178,154,.35)}
-.heavy-select-trigger.open{border-color:#D9938E;box-shadow:0 0 0 3px rgba(232,178,154,.35)}
-.heavy-select-trigger.filled{background:#E8B4B8}
-.heavy-select-trigger.filled .heavy-select-placeholder{color:#2B3842;font-weight:600}
+.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#F3DCC8;border:1px solid #FDFBF7;border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:rgba(43,56,66,.65);transition:all .22s ease}
+.heavy-select-trigger:hover{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
+.heavy-select-trigger.open{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
+.heavy-select-trigger.filled{background:var(--accent)}
+.heavy-select-trigger.filled .heavy-select-placeholder{color:#FFFFFF;font-weight:600}
 .heavy-select-placeholder{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .heavy-select-chevron{width:16px;height:16px;flex-shrink:0;color:#2B3842;opacity:.6;transition:transform .25s ease}
 .heavy-select-trigger.open .heavy-select-chevron{transform:rotate(180deg)}
 .heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:#FDFBF7;border-radius:16px}
-.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1px solid #E8B4B8;overflow:auto}
+.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1px solid var(--accent);overflow:auto}
 .heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(43,56,66,.1);padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:#2B3842;cursor:pointer;transition:background .18s ease,color .18s ease}
 .heavy-select-option:last-child{border-bottom:none}
-.heavy-select-option:hover{background:#F2D6D8}
-.heavy-select-option.sel{background:#E8B4B8;font-weight:600}
+.heavy-select-option:hover{background:#F3DCC8}
+.heavy-select-option.sel{background:var(--accent);font-weight:600}
 .heavy-select-option-emoji{flex-shrink:0;font-size:16px}
 
 /* the glow + badge a chosen chapter gets in the nav list below, separate
@@ -258,20 +258,19 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .firstaid-mobile-btn{display:block;width:100%;margin:14px auto 0;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);color:var(--accent);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:11px 16px;border-radius:999px;cursor:pointer;transition:all .25s ease;text-align:center}
 .firstaid-mobile-btn:hover{background:rgba(232,178,154,.16)}
 .firstaid-mobile-btn.hide{display:none}
+.heavy-today.hide{display:none}
 @media(min-width:901px){.firstaid-mobile-btn{display:none !important}}
-/* First-Aid grid card, desktop only: the sixth petal-nav-list button plus
-   the panel it opens, directly below the 3x2 grid. Mobile uses the
-   firstaid-mobile-btn/panel pair above instead, so both stay hidden here. */
+/* First-Aid grid card, desktop only: the sixth petal-nav-list button,
+   styled like the five chapter cards. Mobile uses firstaid-mobile-btn
+   above instead. Both open the same firstaid-modal popup now, see
+   openFirstAidModal()/closeFirstAidModal(). */
 .firstaid-petal-btn{display:none}
-.firstaid-panel-grid{display:none}
 @media(min-width:901px){
   .firstaid-petal-btn{display:flex}
   .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,178,154,.1);border-color:rgba(232,178,154,.35)}
   .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,178,154,.18)}
-  .firstaid-panel-grid{display:block;max-width:640px;margin-left:auto;margin-right:auto}
 }
-.firstaid-panel{width:100%;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease,margin-top .4s ease;margin-top:0}
-.firstaid-panel.open{max-height:600px;opacity:1;margin-top:16px}
+.firstaid-modal-sub{font-family:var(--sans);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .firstaid-list li{font-size:13.5px;line-height:1.55;color:var(--text-soft)}
 .firstaid-list li strong{color:var(--text);font-weight:600}
@@ -732,22 +731,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
                  Mobile keeps its own separate button at the end of the page
                  (see .firstaid-mobile-btn below), so this one is hidden
                  there to avoid two entry points. -->
-            <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="toggleFirstAid('firstaid-panel-desktop', this)" aria-expanded="false" aria-controls="firstaid-panel-desktop">
+            <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Support</span><span class="fl-title">First-Aid Kit</span><span class="fl-frame">When you're running on empty</span></span>
             </button>
-          </div>
-
-          <div class="firstaid-panel firstaid-panel-grid" id="firstaid-panel-desktop">
-            <ul class="firstaid-list">
-              <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
-              <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
-              <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-              <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
-              <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
-            </ul>
-            <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
-            <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
           </div>
         </div>
       </div>
@@ -773,18 +760,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
            page. Hidden entirely on desktop (the sidebar box covers it
            there), and hides itself once a chapter is picked, via
            pickPillar()/initKit() below. -->
-      <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="toggleFirstAid('firstaid-panel-mobile', this)" aria-expanded="false">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
-      <div class="firstaid-panel" id="firstaid-panel-mobile">
-        <ul class="firstaid-list">
-          <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
-          <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
-          <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-          <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
-          <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
-        </ul>
-        <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
-        <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
-      </div>
+      <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
 
     </div>
 
@@ -876,6 +852,30 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <span class="insp-modal-intro-count" id="insp-intro-count"></span>
       <button class="insp-modal-intro-btn" id="insp-intro-next" onclick="introStep(1)">Next ›</button>
     </div>
+  </div>
+</div>
+
+<!-- FIRST-AID KIT: a real, closable popup instead of an inline panel that
+     used to stay expanded in the page even after picking a different
+     chapter. Both entry points (the desktop grid card and the mobile
+     button) open this same modal now, see openFirstAidModal(). -->
+<div class="insp-modal" id="firstaid-modal">
+  <div class="insp-modal-scrim" onclick="closeFirstAidModal()"></div>
+  <div class="insp-modal-card">
+    <button class="insp-modal-close" onclick="closeFirstAidModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <h3 class="insp-modal-title">First-Aid Kit</h3>
+    <p class="firstaid-modal-sub">When you're running on empty</p>
+    <ul class="firstaid-list">
+      <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
+      <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
+      <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
+      <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+      <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+    </ul>
+    <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+    <p class="firstaid-zero-link"><button type="button" onclick="closeFirstAidModal(); goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
   </div>
 </div>
 
@@ -1259,29 +1259,29 @@ function initKit(){
   document.getElementById('opening-letter').classList.remove('hide');
   document.querySelector('.soil-quote').classList.remove('hide');
   document.querySelector('.back-to-top-wrap').classList.remove('hide');
+  const heavyToday = document.getElementById('heavy-today');
+  if(heavyToday) heavyToday.classList.remove('hide');
   showFirstAidMobileBtn();
   clearHeavyToday();
 }
 
-/* FIRST-AID KIT WIDGET: one shared toggle for both surfaces (the desktop
-   sidebar's "Open" button and the mobile button itself), plus two small
-   helpers that hide/show the mobile button only, since on mobile it needs
-   to disappear once she's looking at a specific chapter or mode, to keep
-   that view uncluttered. The desktop sidebar never hides. */
-function toggleFirstAid(panelId, btn){
-  const panel = document.getElementById(panelId);
-  if(!panel) return;
-  const open = panel.classList.toggle('open');
-  if(btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  if(btn && btn.classList.contains('firstaid-open-btn')) btn.textContent = open ? 'Close' : 'Open';
+/* FIRST-AID KIT WIDGET: a real, closable popup (not an inline panel that
+   used to stay expanded in the page, including across a chapter switch).
+   Both the desktop grid card and the mobile button open the same modal.
+   Two small helpers hide/show the mobile button itself, since on mobile it
+   needs to disappear once she's looking at a specific chapter or mode, to
+   keep that view uncluttered. The desktop grid card never hides. */
+function openFirstAidModal(){
+  document.getElementById('firstaid-modal').classList.add('open');
+}
+function closeFirstAidModal(){
+  const modal = document.getElementById('firstaid-modal');
+  if(modal) modal.classList.remove('open');
 }
 function hideFirstAidMobileBtn(){
   const btn = document.getElementById('firstaid-mobile-btn');
   if(!btn) return;
   btn.classList.add('hide');
-  const panel = document.getElementById('firstaid-panel-mobile');
-  if(panel) panel.classList.remove('open');
-  btn.setAttribute('aria-expanded', 'false');
 }
 function showFirstAidMobileBtn(){
   const btn = document.getElementById('firstaid-mobile-btn');
@@ -1341,6 +1341,9 @@ function pickPillar(id){
   document.getElementById('opening-letter').classList.add('hide');
   document.querySelector('.soil-quote').classList.add('hide');
   document.querySelector('.back-to-top-wrap').classList.add('hide');
+  const heavyToday = document.getElementById('heavy-today');
+  if(heavyToday) heavyToday.classList.add('hide');
+  closeFirstAidModal();
 
   const chapter = KIT[id];
   document.getElementById('kbox2-q').textContent = chapter.q;
@@ -1499,7 +1502,7 @@ function introStep(delta){
 }
 
 document.addEventListener('keydown', e=>{
-  if(e.key === 'Escape'){ closeInsp(); closeBasket(); }
+  if(e.key === 'Escape'){ closeInsp(); closeBasket(); closeFirstAidModal(); }
 });
 
 /* MY FLOWER BASKET: lets a reader collect her favorite micro-steps
