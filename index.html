@@ -309,6 +309,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-icon{width:50px;height:50px}
   .petal-icon svg{width:20px;height:20px}
   .fl-title{font-size:17.5px}
+  .area-circle{width:50px;height:50px}
+  .area-circle svg{width:20px;height:20px}
 }
 @media(max-width:400px){
   .petal-icon{width:44px;height:44px}
@@ -316,6 +318,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-btn{padding:5px 3px;gap:6px}
   .fl-layer{font-size:10.5px}
   .fl-title{font-size:17px}
+  .area-circle{width:44px;height:44px}
+  .area-circle svg{width:18px;height:18px}
 }
 
 /* DESKTOP ONLY: the video+letter and the "Let's start here" selector form
@@ -377,15 +381,15 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
 .area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:144px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{position:relative;width:80px;height:80px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
-.area-circle svg{width:32px;height:32px}
+.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
+.area-circle svg{width:30px;height:30px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
    the root directory and it appears automatically, covering the icon
    fallback beneath. Nothing to wire up, no code changes needed. */
 .area-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,178,154,.18)}
 .area-icon-btn.sel .area-circle{background:rgba(232,178,154,.26);border-width:2px}
-.area-lbl{font-size:14.5px;font-weight:700;letter-spacing:.02em;color:#FDFBF7;text-transform:uppercase;text-align:center;line-height:1.3;width:100%;overflow-wrap:break-word}
+.area-lbl{font-family:var(--sans);font-size:15px;font-weight:700;font-style:normal;letter-spacing:.01em;color:#FDFBF7;text-align:center;line-height:1.3;width:100%;overflow-wrap:break-word}
 
 /* inspiration overview: navigation only: headings + a small open button.
    All content/imagery lives in the modal (see below), not here. */
@@ -1085,14 +1089,17 @@ function pickPillar(id){
   document.getElementById('chapter-takeaway').textContent = chapter.takeaway || '';
   document.getElementById('chapter-disclaimer').textContent = CHAPTER_DISCLAIMER[id];
   hideFirstAidMobileBtn();
-  document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>`
+  document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>{
+    const repTip = a.tips.find(t=>t.img);
+    return `
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
         ${SUB_ICONS[a.id] || '✦'}
-        <img class="area-icon-photo" src="bloom-again-images/${a.img}" alt="" onerror="this.remove()">
+        ${repTip ? `<img class="area-icon-photo" src="new_images/${repTip.img}" alt="" onerror="this.remove()">` : ''}
       </div>
       <span class="area-lbl">${a.label}</span>
-    </button>`).join('');
+    </button>`;
+  }).join('');
 
   document.getElementById('kbox3').classList.remove('open');
   document.getElementById('kconn-2').classList.remove('show');
