@@ -31,6 +31,7 @@ body{overflow-x:hidden}
 /* type */
 .eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent)}
 .serif{font-family:var(--serif);font-style:italic;font-weight:400}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* cover: exact mockup image + button */
 #s-cover{overflow-y:auto;background:var(--bg);display:flex;align-items:center;justify-content:center}
@@ -137,13 +138,12 @@ body{overflow-x:hidden}
 .back-to-top-btn:hover{background:rgba(245,236,224,.08);color:var(--text)}
 /* mobile is compact enough now that this button isn't needed there either; left hidden everywhere */
 
-/* zero-capacity entry + page */
-.crisis-entry{padding:0 5vw 6px;text-align:center;transition:opacity .3s ease}
-.crisis-entry.hide{display:none}
-.crisis-btn{display:block;width:100%;max-width:560px;margin:0 auto;background:var(--rose);color:#FFFFFF;border:1.5px solid rgba(245,236,224,.3);border-radius:14px;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;cursor:pointer;transition:all .28s ease;line-height:1.5;white-space:nowrap}
-.crisis-btn:hover{background:var(--rose-light);border-color:var(--rose-light);transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.18)}
-.crisis-btn:active{transform:translateY(0);filter:brightness(.96)}
-.crisis-btn:focus-visible{outline:2px solid var(--rose-light);outline-offset:3px}
+/* NOTE: the old "Read this first if you have zero capacity" button that
+   used to live on the landing page is gone, per Mira's request. The
+   .zero-page screen it opened is still here below (real crisis-support
+   content, not safe to just delete), it's reachable now via the quiet
+   "Having zero capacity today?" link inside the First-Aid Kit panel (see
+   .firstaid-zero-link) instead of a loud button on the main flow. */
 /* Project-wide keyboard focus state: every clickable control here is already
    a real <button>, this just makes keyboard navigation visible without
    changing anything about mouse/touch interaction. */
@@ -181,31 +181,54 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kit-back:hover{color:var(--text)}
 .kit-hdr-logo{height:40px;width:auto;opacity:.9;filter:drop-shadow(0 1px 6px rgba(42,52,56,.14))}
 
-/* "WHAT FEELS HEAVY TODAY?" low-demand selector: the very first thing on
-   the kit screen, above the chapter overview. Five relatable, tappable
-   statements, no chapter names or decision-making required. Tapping one
-   scrolls to and glows the matching chapter in the nav list below, and
-   shows a quiet confirmation banner rather than forcing her into that
-   chapter, she can still explore at her own pace. */
-.heavy-today{max-width:640px;margin:0 auto 34px;text-align:center}
-.heavy-today-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:46ch;margin:0 auto 18px}
-.heavy-today-grid{display:flex;flex-direction:column;gap:9px}
-.heavy-today-btn{display:flex;align-items:center;gap:12px;text-align:left;background:rgba(245,236,224,.05);border:1.5px solid rgba(245,236,224,.16);border-radius:16px;padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--text-soft);cursor:pointer;transition:all .22s ease}
-.heavy-today-btn:hover{background:rgba(245,236,224,.1);color:var(--text)}
-.heavy-today-btn.sel{background:rgba(232,178,154,.14);border-color:var(--accent);color:var(--text)}
-.heavy-today-emoji{flex-shrink:0;font-size:17px}
-.heavy-today-banner{max-height:0;opacity:0;overflow:hidden;transition:max-height .5s ease,opacity .4s ease,margin-top .4s ease;margin-top:0}
-.heavy-today-banner.show{max-height:160px;opacity:1;margin-top:16px}
-.heavy-today-banner-inner{display:flex;flex-direction:column;align-items:center;gap:10px;background:rgba(232,178,154,.1);border:1px solid rgba(232,178,154,.32);border-radius:16px;padding:15px 18px}
-.heavy-today-banner p{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);line-height:1.5}
-.heavy-today-clear{background:transparent;border:1px solid rgba(245,236,224,.3);color:var(--text-muted);font-family:var(--sans);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:7px 18px;border-radius:999px;cursor:pointer;transition:all .22s ease}
-.heavy-today-clear:hover{background:rgba(245,236,224,.1);color:var(--text)}
+/* "LET'S START HERE" low-demand selector: right after the welcome video,
+   above the chapter overview. A single search-styled field, not a wall of
+   buttons, tapping/clicking it opens a short dropdown of relatable
+   statements, no chapter names or typing required. Picking one scrolls to
+   and glows the matching chapter in the nav list below, with a small badge
+   attached right to that chapter, rather than forcing her into it, she
+   can still explore at her own pace. */
+.heavy-today{max-width:480px;margin:0 auto;text-align:center}
+.heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
+.heavy-today-sub{font-size:14.5px;color:var(--text-soft);line-height:1.55;max-width:42ch;margin:0 auto 16px}
+.heavy-select-wrap{position:relative;max-width:440px;margin:0 auto;text-align:left}
+.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:var(--bg-dark);border:1.5px solid rgba(245,236,224,.35);border-radius:16px;padding:15px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;color:var(--text-muted);transition:all .22s ease}
+.heavy-select-trigger:hover{border-color:var(--accent)}
+.heavy-select-trigger.open{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,178,154,.18)}
+.heavy-select-trigger.filled .heavy-select-placeholder{color:var(--text)}
+.heavy-select-placeholder{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.heavy-select-chevron{width:16px;height:16px;flex-shrink:0;color:var(--text-muted);transition:transform .25s ease}
+.heavy-select-trigger.open .heavy-select-chevron{transform:rotate(180deg)}
+.heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:var(--bg-dark);border-radius:16px}
+.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1.5px solid rgba(245,236,224,.22);overflow:auto}
+.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(245,236,224,.1);padding:13px 16px;font-family:var(--sans);font-size:13.5px;line-height:1.4;color:var(--text-soft);cursor:pointer;transition:background .18s ease,color .18s ease}
+.heavy-select-option:last-child{border-bottom:none}
+.heavy-select-option:hover{background:rgba(245,236,224,.08);color:var(--text)}
+.heavy-select-option.sel{background:rgba(232,178,154,.14);color:var(--text)}
+.heavy-select-option-emoji{flex-shrink:0;font-size:16px}
 
-/* the glow a tapped chapter gets in the nav list below, separate from the
-   permanent .petal-btn-start cue and from .sel (actually picking it) */
-.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px}
+/* the glow + badge a chosen chapter gets in the nav list below, separate
+   from the permanent .petal-btn-start cue and from .sel (actually picking
+   it). The badge text is constant, so it's pure CSS content, no extra
+   markup duplicated per chapter. Clears itself the moment any chapter is
+   actually opened (pickPillar), or on a fresh visit to the kit screen. */
+.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px;flex-wrap:wrap}
 .petal-btn.heavy-glow .petal-icon{animation:heavyGlowPulse 1.8s ease-out 2}
+.petal-btn.heavy-glow::after{
+  content:"This chapter will help you most for now \1F33B";
+  flex:1 1 100%;
+  display:inline-block;
+  width:fit-content;
+  margin-top:8px;
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.01em;
+  color:var(--bg-dark);
+  background:var(--accent);
+  border-radius:999px;
+  padding:6px 14px;
+}
 @keyframes heavyGlowPulse{
   0%{box-shadow:0 0 0 0 rgba(232,178,154,.45)}
   70%{box-shadow:0 0 0 12px rgba(232,178,154,0)}
@@ -248,6 +271,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .firstaid-list li{font-size:13.5px;line-height:1.55;color:var(--text-soft)}
 .firstaid-list li strong{color:var(--text);font-weight:600}
 .firstaid-footnote{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--text-muted);line-height:1.5;text-align:center}
+.firstaid-zero-link{text-align:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,236,224,.14)}
+.firstaid-zero-link button{background:none;border:none;padding:0;font-family:var(--sans);font-size:12px;color:var(--text-muted);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.firstaid-zero-link button:hover{color:var(--text)}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
 
@@ -263,8 +289,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(max-width:900px){
   .opening-hero{gap:26px 0}
   .opening-letter{order:-1;max-width:480px;flex-basis:100%}
-  .pick-section{order:0;flex-basis:100%}
-  .flower-block{order:1;flex-basis:100%;max-width:520px}
+  .heavy-today{order:0;flex-basis:100%;max-width:480px}
+  .pick-section{order:1;flex-basis:100%}
+  .flower-block{order:2;flex-basis:100%;max-width:520px}
 }
 @media(max-width:640px){
   .opening-letter{padding:22px 20px}
@@ -277,10 +304,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-icon{width:34px;height:34px}
   .petal-icon svg{width:16px;height:16px}
   .fl-title{font-size:17.5px}
-  .crisis-btn{font-size:10.5px;letter-spacing:.02em;padding:12px 10px}
 }
 @media(max-width:400px){
-  .crisis-btn{font-size:9.3px;letter-spacing:0;padding:11px 6px}
   .petal-icon{width:30px;height:30px}
   .petal-icon svg{width:14px;height:14px}
   .petal-btn{padding:5px 3px;gap:6px}
@@ -288,27 +313,58 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .fl-title{font-size:16.5px}
 }
 
-/* DESKTOP ONLY: letter and chapter nav sit side by side as a centered pair
-   (the flower used to pivot this layout; now the grid just centers the
-   letter+nav pair directly), headline moved above the row. */
+/* DESKTOP ONLY: the video+letter and the "Let's start here" selector form
+   one hero, the chapter headline sits below that, then the five chapters
+   render as their own spacious grid, no longer squeezed into a single
+   column beside the letter. Between 901 and 1299px there usually isn't
+   room for the First-Aid sidebar, the letter AND the selector side by
+   side without squeezing all three, so the hero stacks (letter above
+   selector, both centered) in that range; past 1300px, where there's
+   real breathing room, they sit side by side instead. Either way this is
+   still "alongside, or immediately above" per the brief. */
 @media(min-width:901px){
-  .opening-hero{display:grid;grid-template-columns:auto auto;justify-content:center;column-gap:48px;align-items:start}
-  .opening-letter{grid-column:1;grid-row:2;justify-self:end;align-self:center}
-  .flower-block{display:contents}
-  .opening-flower{display:contents}
-  .petal-nav-list{grid-column:2;grid-row:2;justify-self:start;align-self:center;max-width:320px}
-  .pick-section{grid-column:1/-1;grid-row:1;justify-self:center;margin-top:0;margin-bottom:8px;max-width:1200px;width:100%}
+  .opening-hero{display:grid;grid-template-columns:1fr;justify-items:center;row-gap:24px}
+  .opening-letter{grid-column:1;grid-row:1;max-width:420px;width:100%}
+  .heavy-today{grid-column:1;grid-row:2;max-width:420px;width:100%}
+  .pick-section{grid-column:1;grid-row:3;margin-top:0;margin-bottom:8px;max-width:1200px;width:100%}
   .pick-section .eyebrow{display:none}
   .pick-title{white-space:nowrap}
   .pick-arrow{display:inline-block;vertical-align:middle;width:52px;height:auto;margin-left:8px;margin-bottom:10px}
-  .crisis-btn{font-size:12.5px}
 
-  /* quote sits right under the letter+nav row; hint (new copy) follows it;
-     button moves to last, reordered via flex, mobile DOM order untouched */
-  .soil-quote{max-width:680px;padding:0 16px;order:1;margin-top:8px}
+  /* the chapter grid itself: a real multi-column grid of cards, not the
+     mobile single-column list, spanning the full hero width */
+  .flower-block{grid-column:1;grid-row:4;display:block;max-width:960px;width:100%;margin:0 auto}
+  .opening-flower{display:block;margin-top:0}
+  .petal-nav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:none;flex:none}
+  .petal-nav-list .petal-btn{flex-direction:column;text-align:center;gap:10px;padding:22px 16px;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14)}
+  .petal-nav-list .petal-btn:hover{background:rgba(245,236,224,.09)}
+  .petal-nav-list .petal-btn.sel{border-color:var(--accent)}
+  .petal-nav-list .petal-text{align-items:center}
+  /* the heavy-glow badge's mobile ::after uses flex:1 1 100% to force a new
+     line in the ROW layout there; in this COLUMN card layout that same
+     rule would grow to fill the card's leftover height instead, so it's
+     cancelled back to a normal, content-sized pill here. */
+  .petal-nav-list .petal-btn.heavy-glow::after{flex:0 0 auto;margin-top:10px}
+
+  /* quote sits right under the chapter grid; the mobile First-Aid button
+     stays hidden here (the sidebar covers it), so no reorder trick is
+     needed anymore, natural DOM order already puts the quote first. */
+  .soil-quote{max-width:680px;padding:0 16px;margin-top:8px}
   .soil-quote p{line-height:1.25}
   .quote-desktop-break{display:inline}
-  .crisis-entry{order:3;margin-top:24px}
+}
+
+/* WIDE DESKTOP: once there's genuinely enough room (sidebar + letter +
+   selector side by side without squeezing), let the video and the "Let's
+   start here" selector sit alongside each other instead of stacked. */
+@media(min-width:1300px){
+  .opening-hero{grid-template-columns:auto auto;justify-content:center;column-gap:48px;justify-items:stretch}
+  .opening-letter{grid-column:1;grid-row:1;justify-self:end;max-width:380px;width:auto}
+  .heavy-today{grid-column:2;grid-row:1;justify-self:start;max-width:380px;width:auto;text-align:left}
+  .heavy-today-sub{margin-left:0;margin-right:0}
+  .heavy-select-wrap{margin:0}
+  .pick-section{grid-column:1/-1;grid-row:2}
+  .flower-block{grid-column:1/-1;grid-row:3}
 }
 
 /* sub-area icons */
@@ -334,7 +390,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    the closing takeaway line beneath its six cards. Both are optional per
    sub-area (only the Body chapter sets them for now); empty string = no
    layout change for chapters that don't use them. */
-.tips-intro{font-size:14.5px;color:var(--text-soft);text-align:center;max-width:46ch;margin:0 auto 22px;line-height:1.6}
+.tips-intro{font-size:17.5px;font-weight:500;color:#FDFBF7;opacity:.96;text-align:center;max-width:46ch;margin:0 auto 22px;line-height:1.55}
 .tips-area-takeaway{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text-soft);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6}
 /* Marks a placeholder field still awaiting real research/writing, so it
    reads as "not finished yet" at a glance rather than blending in as
@@ -349,15 +405,17 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   #kbox3{width:calc(100vw - 48px);max-width:960px;position:relative;left:50%;transform:translateX(-50%)}
   .insp-list{grid-template-columns:repeat(3,1fr);gap:16px}
 }
-.insp-card{display:flex;flex-direction:column;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:all .22s ease}
-.insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45)}
+/* the whole card is a real <button>, so the entire thing (image, text, and
+   background) has always been one tap target, not just the old "Read
+   this" pill. That pill is gone now, per Mira's request, the hover/active
+   lift and glow below are the only affordance needed to read as tappable. */
+.insp-card{display:flex;flex-direction:column;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
+.insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,178,154,.35)}
+.insp-card:active{transform:translateY(-1px);box-shadow:0 4px 14px rgba(8,14,18,.18),0 0 0 1.5px rgba(232,178,154,.4)}
 .insp-card-media{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(245,236,224,.07)}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
 .insp-card-body{padding:16px 18px 18px}
-.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:16px;color:#FFFFFF;line-height:1.3;margin-bottom:14px}
-.insp-card-cta{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:20px;padding:7px 14px;transition:all .22s ease}
-.insp-card-cta svg{width:11px;height:11px}
-.insp-card:hover .insp-card-cta{background:rgba(232,178,154,.18)}
+.insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:18px;color:#FDFBF7;line-height:1.45}
 
 /* Gentle, optional mode label (Restore / Activate / Engage / Connect). Never a
    diagnosis, never forced on a tip, just a quiet hint for which kind of
@@ -575,30 +633,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <img src="bloom-again-logo.png" class="kit-hdr-logo" alt="Bloom Again">
     </div>
 
-    <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in, above everything
-         else. No chapter names, no analysis, just tap what's true. -->
-    <div class="heavy-today" id="heavy-today">
-      <p class="heavy-today-eyebrow">Not sure where to start today?</p>
-      <p class="heavy-today-sub">You don't need to analyze your burnout. Just tap what feels true right now:</p>
-      <div class="heavy-today-grid">
-        <button class="heavy-today-btn" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-today-emoji">&#129657;</span><span>I've been absorbing someone else's mood or drama and feel emotionally empty.</span></button>
-        <button class="heavy-today-btn" data-target="body" onclick="pickHeavyToday(this,'body')"><span class="heavy-today-emoji">&#127911;</span><span>Everything is too loud, too bright, or too fast, my senses are fried.</span></button>
-        <button class="heavy-today-btn" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-today-emoji">&#128683;</span><span>I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</span></button>
-        <button class="heavy-today-btn" data-target="identity" onclick="pickHeavyToday(this,'identity')"><span class="heavy-today-emoji">&#128230;</span><span>I feel like I have to do everything perfectly or it all falls apart.</span></button>
-        <button class="heavy-today-btn" data-target="environment" onclick="pickHeavyToday(this,'environment')"><span class="heavy-today-emoji">&#128483;&#65039;</span><span>Misunderstandings, family demands, or unspoken mental load are crushing me.</span></button>
-      </div>
-      <div class="heavy-today-banner" id="heavy-today-banner">
-        <div class="heavy-today-banner-inner">
-          <p>We've found your sanctuary for today. Start here, or explore at your own pace. &#127803;</p>
-          <button class="heavy-today-clear" onclick="clearHeavyToday()">Clear Selection</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- OPENING HERO: Mira's note beside the flower + five chapters, plus
-         the First-Aid Kit widget (desktop sidebar box here; the mobile
-         toggle button lives down inside the chapter list itself, see
-         .flower-block below). -->
+    <!-- OPENING HERO: video first (mobile), then the "Let's start here"
+         low-demand selector, then the chapter headline + grid, plus the
+         First-Aid Kit widget (desktop sidebar box here; the mobile toggle
+         button now lives at the very end of the page, see post-hero-stack
+         below). -->
     <div class="kit-top-row">
     <aside class="firstaid-sidebar" id="firstaid-sidebar">
       <img class="firstaid-sidebar-img" src="bloom-again-images/ba-18_lamp-book.png" alt="" aria-hidden="true" onerror="this.remove()">
@@ -614,12 +653,14 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
           <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
         </ul>
         <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+        <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
       </div>
     </aside>
     <div class="opening-hero-wrap">
     <div class="opening-hero">
 
-      <!-- MIRA'S NOTE -->
+      <!-- MIRA'S NOTE: the welcome video, first thing on the page on mobile
+           (flex order below), alongside the low-demand selector on desktop. -->
       <div class="opening-letter" id="opening-letter">
         <div class="welcome-video-wrap">
           <video class="welcome-video" controls preload="metadata" playsinline poster="bloom-again-video/mira-welcome-poster.jpg">
@@ -630,6 +671,28 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
         <button class="welcome-letter-btn" onclick="openIntro(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.5 3.2c0 5.5-7.5 10.1-7.5 10.1z"/></svg>My Welcome Letter to You</button>
       </div>
 
+      <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in, right after the
+           video. No typing required, a tap/click opens a short dropdown of
+           relatable statements, no chapter names, no analysis needed. -->
+      <div class="heavy-today" id="heavy-today">
+        <h2 class="heavy-today-heading serif">Let's start here</h2>
+        <p class="heavy-today-sub">You don't need to analyze your burnout. Just choose what feels true right now:</p>
+        <div class="heavy-select-wrap">
+          <button type="button" class="heavy-select-trigger" id="heavy-select-trigger" onclick="toggleHeavySelect()" aria-haspopup="listbox" aria-expanded="false" aria-controls="heavy-select-dropdown">
+            <span class="heavy-select-placeholder" id="heavy-select-placeholder">What feels most relatable right now?</span>
+            <svg class="heavy-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="heavy-select-dropdown" id="heavy-select-dropdown" role="listbox">
+            <button class="heavy-select-option" role="option" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-select-option-emoji">&#129657;</span><span>I've been absorbing someone else's mood or drama and feel emotionally empty.</span></button>
+            <button class="heavy-select-option" role="option" data-target="body" onclick="pickHeavyToday(this,'body')"><span class="heavy-select-option-emoji">&#127911;</span><span>Everything is too loud, too bright, or too fast, my senses are fried.</span></button>
+            <button class="heavy-select-option" role="option" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-select-option-emoji">&#128683;</span><span>I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</span></button>
+            <button class="heavy-select-option" role="option" data-target="identity" onclick="pickHeavyToday(this,'identity')"><span class="heavy-select-option-emoji">&#128230;</span><span>I feel like I have to do everything perfectly or it all falls apart.</span></button>
+            <button class="heavy-select-option" role="option" data-target="environment" onclick="pickHeavyToday(this,'environment')"><span class="heavy-select-option-emoji">&#128483;&#65039;</span><span>Misunderstandings, family demands, or unspoken mental load are crushing me.</span></button>
+          </div>
+        </div>
+        <p class="sr-only" id="heavy-today-announce" role="status" aria-live="polite"></p>
+      </div>
+
       <!-- HEADLINE: mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
       <div class="pick-section">
         <span class="eyebrow">Start Here</span>
@@ -638,7 +701,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
       <!-- FIVE CHAPTERS: the main interactive heart of the page. Order is
            deliberately top-to-bottom logical (soil up to bloom), now that
-           there's no flower image to carry that ordering visually. -->
+           there's no flower image to carry that ordering visually. On
+           desktop this renders as a spacious grid rather than a single
+           column (see @media(min-width:901px)). -->
       <div class="flower-block">
         <div class="opening-flower">
           <div class="petal-nav-list" id="petal-nav-list">
@@ -664,41 +729,40 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
             </button>
           </div>
         </div>
-        <!-- MOBILE ONLY: First-Aid Kit toggle, sitting right under the chapter
-             list. Hidden entirely on desktop (the sidebar box covers it there),
-             and hides itself once a chapter is picked, via pickPillar()/initKit()
-             below. -->
-        <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="toggleFirstAid('firstaid-panel-mobile', this)" aria-expanded="false">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
-        <div class="firstaid-panel" id="firstaid-panel-mobile">
-          <ul class="firstaid-list">
-            <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
-            <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
-            <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-            <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
-            <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
-          </ul>
-          <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
-        </div>
       </div>
 
     </div>
     </div>
     </div>
 
-    <!-- POST-HERO STACK: mobile: button then quote (unchanged, natural DOM order).
-         desktop: reordered via flex `order` to quote, then hint, then button, without
-         touching mobile at all. -->
+    <!-- POST-HERO STACK: mobile: quote then the First-Aid button, in natural
+         DOM order, both sit at the true end of the page now. desktop: the
+         quote is the only one of these actually visible here (the First-Aid
+         button is desktop-hidden, the sidebar covers that there), so no
+         reordering trick is needed anymore. -->
     <div class="post-hero-stack">
 
-      <!-- ZERO CAPACITY ENTRY -->
-      <div class="crisis-entry">
-        <button class="crisis-btn" onclick="goTo('zero')">Read This First If You Have Zero Capacity</button>
-      </div>
-
-      <!-- SOIL QUOTE: after the zero-capacity option, quiet, reinforces the philosophy -->
+      <!-- SOIL QUOTE -->
       <div class="soil-quote">
         <p>"When a flower doesn't bloom, <br class="quote-desktop-break">you fix the environment in which it grows, not the flower."</p>
         <cite>Alexander Den Heijer</cite>
+      </div>
+
+      <!-- MOBILE ONLY: First-Aid Kit toggle, now the very last thing on the
+           page. Hidden entirely on desktop (the sidebar box covers it
+           there), and hides itself once a chapter is picked, via
+           pickPillar()/initKit() below. -->
+      <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="toggleFirstAid('firstaid-panel-mobile', this)" aria-expanded="false">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
+      <div class="firstaid-panel" id="firstaid-panel-mobile">
+        <ul class="firstaid-list">
+          <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
+          <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
+          <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
+          <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+          <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+        </ul>
+        <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+        <p class="firstaid-zero-link"><button type="button" onclick="goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
       </div>
 
     </div>
@@ -1175,7 +1239,6 @@ function initKit(){
   document.getElementById('kconn-2').classList.remove('show');
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('sel'));
   document.getElementById('opening-letter').classList.remove('hide');
-  document.querySelector('.crisis-entry').classList.remove('hide');
   document.querySelector('.soil-quote').classList.remove('hide');
   document.querySelector('.back-to-top-wrap').classList.remove('hide');
   showFirstAidMobileBtn();
@@ -1207,29 +1270,57 @@ function showFirstAidMobileBtn(){
   if(btn) btn.classList.remove('hide');
 }
 
-/* "WHAT FEELS HEAVY TODAY?" selector: a tap here never opens a chapter on
-   its own, it just points at one, by scrolling to and glowing the matching
-   button in the chapter nav below and showing a quiet confirmation. She
-   still chooses whether to actually tap into it. */
+/* "LET'S START HERE" selector: a search-styled trigger that opens a short
+   dropdown of 5 relatable statements, no typing needed. Picking one never
+   opens a chapter on its own, it just points at one, scrolling to and
+   glowing the matching button in the chapter nav below (with a small
+   attached badge, pure CSS, see .petal-btn.heavy-glow::after), and fills
+   the trigger with what she picked so it reads like a normal select. She
+   still chooses whether to actually tap into the suggested chapter. */
+function toggleHeavySelect(forceOpen){
+  const trigger = document.getElementById('heavy-select-trigger');
+  const dropdown = document.getElementById('heavy-select-dropdown');
+  if(!trigger || !dropdown) return;
+  const open = typeof forceOpen === 'boolean' ? forceOpen : !dropdown.classList.contains('open');
+  dropdown.classList.toggle('open', open);
+  trigger.classList.toggle('open', open);
+  trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+document.addEventListener('click', e=>{
+  const wrap = document.querySelector('.heavy-select-wrap');
+  if(wrap && !wrap.contains(e.target)) toggleHeavySelect(false);
+});
 function pickHeavyToday(btn, chapterId){
-  document.querySelectorAll('.heavy-today-btn').forEach(b=>b.classList.toggle('sel', b===btn));
+  const label = btn.textContent.trim();
+  const placeholder = document.getElementById('heavy-select-placeholder');
+  if(placeholder) placeholder.textContent = label;
+  const trigger = document.getElementById('heavy-select-trigger');
+  if(trigger) trigger.classList.add('filled');
+  document.querySelectorAll('.heavy-select-option').forEach(o=>o.classList.toggle('sel', o===btn));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('heavy-glow', b.dataset.pillar===chapterId));
-  document.getElementById('heavy-today-banner').classList.add('show');
+  toggleHeavySelect(false);
+  const announce = document.getElementById('heavy-today-announce');
+  if(announce) announce.textContent = 'This chapter will help you most for now: ' + (FLOWER_META.find(m=>m.id===chapterId)?.title || chapterId);
   const target = document.querySelector(`#petal-nav-list .petal-btn[data-pillar="${chapterId}"]`);
-  if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+  if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 150);
 }
 function clearHeavyToday(){
-  document.querySelectorAll('.heavy-today-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.heavy-select-option').forEach(o=>o.classList.remove('sel'));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
-  const banner = document.getElementById('heavy-today-banner');
-  if(banner) banner.classList.remove('show');
+  const placeholder = document.getElementById('heavy-select-placeholder');
+  if(placeholder) placeholder.textContent = 'What feels most relatable right now?';
+  const trigger = document.getElementById('heavy-select-trigger');
+  if(trigger) trigger.classList.remove('filled');
+  const announce = document.getElementById('heavy-today-announce');
+  if(announce) announce.textContent = '';
+  toggleHeavySelect(false);
 }
 
 function pickPillar(id){
   S.chapter = id; S.area = null;
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('sel', b.dataset.pillar===id));
+  document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
   document.getElementById('opening-letter').classList.add('hide');
-  document.querySelector('.crisis-entry').classList.add('hide');
   document.querySelector('.soil-quote').classList.add('hide');
   document.querySelector('.back-to-top-wrap').classList.add('hide');
 
@@ -1269,7 +1360,6 @@ function selectArea(id){
       ${t.img ? `<span class="insp-card-media"><img src="bloom-again-images/graphics_subchapters/${t.img}" alt="" onerror="this.parentElement.remove()"></span>` : ''}
       <span class="insp-card-body">
         <span class="insp-card-title">${t.title}</span>
-        <span class="insp-card-cta">Read this<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></span>
       </span>
     </button>`).join('');
   document.getElementById('tips-area-takeaway').textContent = S.area.takeaway || '';
