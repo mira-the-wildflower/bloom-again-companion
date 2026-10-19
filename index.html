@@ -185,15 +185,37 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.2vw,23px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.6;opacity:.92}
 .chapter-disclaimer{font-size:13px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
-/* Body & Energy only: a short, non-duplicating pointer to the First Aid
-   Kit's zero-capacity screen, for anyone opening this chapter while too
-   depleted for six subchapters. Hidden for every other chapter. */
-.chapter-firstaid{display:none}
-.chapter-firstaid.show{display:block;margin:26px auto 0;max-width:460px;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);border-radius:18px;padding:20px 22px;text-align:center}
-.firstaid-eyebrow{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.firstaid-copy{font-size:14px;color:var(--text-soft);line-height:1.6;margin-bottom:8px}
-.firstaid-close{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-muted);line-height:1.5}
 .kbox-step{color:var(--accent);font-style:normal}
+
+/* FIRST-AID KIT WIDGET: lives across the whole 5-chapter overview, not
+   gated to one chapter. Desktop: a persistent square sidebar box to the
+   left of the opening hero (letter + chapter nav), always there regardless
+   of which chapter is picked. Mobile: a small toggle button underneath the
+   chapter list instead, which hides itself once she taps into a specific
+   chapter (or a support mode), so the view stays uncluttered. Same 5
+   reminders either way, just a different container/trigger. */
+.kit-top-row{display:block}
+.firstaid-sidebar{display:none}
+@media(min-width:901px){
+  .kit-top-row{width:100vw;position:relative;left:50%;transform:translateX(-50%);display:flex;align-items:flex-start;justify-content:center;gap:40px;max-width:1760px;margin:0 auto;padding:0 6vw}
+  .kit-top-row .opening-hero-wrap{width:auto;position:static;left:auto;transform:none;flex:1 1 auto;min-width:0}
+  .firstaid-sidebar{display:block;flex:0 0 240px;max-width:240px;margin-top:30px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:24px 20px;text-align:center}
+  .firstaid-sidebar-img{width:100%;max-width:140px;height:auto;margin:0 auto 16px;display:block;border-radius:16px}
+  .firstaid-sidebar-title{font-family:var(--sans);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);line-height:1.4;margin-bottom:10px}
+  .firstaid-sidebar-sub{font-size:13px;color:var(--text-soft);line-height:1.5;margin-bottom:16px}
+}
+.firstaid-open-btn{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:9px 26px;border-radius:999px;cursor:pointer;transition:all .25s ease}
+.firstaid-open-btn:hover{background:var(--accent);color:var(--bg-dark)}
+.firstaid-mobile-btn{display:block;width:100%;margin:14px auto 0;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);color:var(--accent);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:11px 16px;border-radius:999px;cursor:pointer;transition:all .25s ease;text-align:center}
+.firstaid-mobile-btn:hover{background:rgba(232,178,154,.16)}
+.firstaid-mobile-btn.hide{display:none}
+@media(min-width:901px){.firstaid-mobile-btn{display:none !important}}
+.firstaid-panel{width:100%;max-height:0;opacity:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease,margin-top .4s ease;margin-top:0}
+.firstaid-panel.open{max-height:600px;opacity:1;margin-top:16px}
+.firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.firstaid-list li{font-size:13.5px;line-height:1.55;color:var(--text-soft)}
+.firstaid-list li strong{color:var(--text);font-weight:600}
+.firstaid-footnote{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--text-muted);line-height:1.5;text-align:center}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
 
@@ -418,17 +440,99 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-sources-label{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin:14px 0 4px}
 .insp-sources{font-size:12.5px;color:rgba(245,236,224,.62);line-height:1.5;margin-bottom:0}
 
+/* Save button, inside every tip modal. Sits at the very bottom of the
+   flow, after the reframe and the (optional) science drawer, so saving
+   reads as the last gentle action once someone has actually read the
+   tip, not a distraction competing with the content above it. */
+.save-tip-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:22px;padding:13px 18px;border-radius:999px;background:rgba(245,236,224,.08);border:1.5px solid rgba(245,236,224,.22);color:var(--text-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .22s ease}
+.save-tip-btn:hover{background:rgba(245,236,224,.14);color:var(--text)}
+.save-tip-btn.saved{background:rgba(232,178,154,.22);border-color:var(--accent);color:var(--accent)}
+.save-tip-btn.saved:hover{background:rgba(232,178,154,.3)}
+
+/* Floating "My flower basket" button: fixed to the viewport, not any one
+   screen, so it's reachable no matter where a reader is in the app.
+   Sits below the inspiration modal's z-index (200) so an open tip modal
+   always covers it rather than floating on top of that reading. */
+#open-basket-btn{position:fixed;top:16px;right:16px;z-index:150;display:flex;align-items:center;gap:7px;background:rgba(42,52,56,.82);backdrop-filter:blur(6px);border:1.5px solid rgba(245,236,224,.22);color:var(--text);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:9px 16px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(8,14,18,.3);transition:all .22s ease}
+#open-basket-btn:hover{background:rgba(42,52,56,.95);border-color:var(--accent)}
+#open-basket-btn.has-items{border-color:var(--accent);color:var(--accent)}
+#basket-count{font-weight:700}
+
+/* "My flower basket" overlay: same modal language as the inspiration
+   modal (scrim, rounded card, slide-up), so it feels like part of the
+   same app instead of a bolted-on feature. */
+.basket-modal{position:fixed;inset:0;z-index:210;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
+.basket-modal.open{opacity:1;pointer-events:all}
+.basket-modal-scrim{position:absolute;inset:0;background:rgba(20,28,32,.6);backdrop-filter:blur(3px)}
+.basket-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
+.basket-modal.open .basket-modal-card{transform:translateY(0) scale(1)}
+.basket-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
+.basket-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
+.basket-modal-title{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--text);text-align:center;margin-bottom:6px}
+.basket-modal-sub{font-family:var(--sans);font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:13.5px;font-weight:700;letter-spacing:.04em;padding:13px 18px;cursor:pointer;margin-bottom:22px;transition:all .22s ease}
+.print-btn:hover{background:var(--text);transform:translateY(-1px)}
+.print-btn:disabled{opacity:.4;cursor:default;transform:none}
+
+.basket-list{display:flex;flex-direction:column;gap:12px}
+.basket-card{position:relative;background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:16px;padding:16px 42px 16px 16px}
+.basket-card-quote{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text);line-height:1.4;margin-bottom:8px}
+.basket-card-tip{font-size:13.5px;color:var(--text-soft);line-height:1.5}
+.basket-card-tip ul{list-style:none;margin:0;padding:0}
+.basket-card-tip li{position:relative;padding-left:16px;margin-bottom:4px}
+.basket-card-tip li::before{content:'';position:absolute;left:3px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.basket-card-reframe{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-soft);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,236,224,.14)}
+.basket-card-remove{position:absolute;top:14px;right:12px;width:26px;height:26px;border-radius:50%;background:none;border:none;color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;transition:all .2s ease}
+.basket-card-remove:hover{background:rgba(217,147,142,.18);color:var(--rose)}
+.basket-empty{text-align:center;font-size:14px;line-height:1.7;color:var(--text-soft);padding:30px 10px;font-style:italic}
+
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
 
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(245,236,224,.18);border-radius:4px}
+
+/* "My Gentle Reminders" print stylesheet. Its own small, calm palette,
+   separate from the app's dusty blue/peach theme on screen: warm cream
+   paper, muted slate blue for headers, soft blush rose for mode badges
+   and dividers. Everything that isn't the basket content is hidden, so
+   printing to PDF produces a clean one or two page keepsake rather than
+   a screenshot of the app. */
+@media print{
+  @page{margin:0.6in}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html, body{background:#FDFBF7 !important}
+  body *{visibility:hidden}
+  .basket-modal, .basket-modal *{visibility:visible}
+  .basket-modal{position:static;inset:auto;opacity:1;pointer-events:all;padding:0;background:#FDFBF7}
+  .basket-modal-scrim{display:none}
+  .basket-modal-card{position:static;max-width:none;max-height:none;overflow:visible;background:#FDFBF7;border:none;border-radius:0;padding:0;box-shadow:none;transform:none}
+  .basket-modal-close, .print-btn{display:none !important}
+  .basket-modal-title{display:none}
+  .basket-modal-sub{display:none}
+  .basket-modal-card::before{content:"My Gentle Reminders";display:block;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:30px;text-align:center;margin-bottom:22px}
+  .basket-list{display:block;column-count:2;column-gap:28px}
+  .basket-card{background:#FFFFFF;border:1px solid #F2D6D8;border-radius:10px;padding:16px 18px;margin-bottom:16px;break-inside:avoid;page-break-inside:avoid;display:inline-block;width:100%}
+  .basket-card-quote{font-family:Georgia,serif;color:#4A6B7C;font-size:14px}
+  .basket-card-tip, .basket-card-tip li{color:#5A5048;font-size:12px}
+  .basket-card-tip li::before{background:#E8B4B8}
+  .basket-card-remove{display:none}
+  .insp-mode{background:#F2D6D8 !important;color:#8A5A5F !important;border-color:#E8B4B8 !important}
+  .basket-card-reframe{display:block;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:12.5px;margin-top:8px;padding-top:8px;border-top:1px solid #F2D6D8}
+  .basket-empty{display:none}
+}
 </style>
 </head>
 <body>
 
 <div class="particles" id="particles"></div>
+
+<!-- FLOWER BASKET: fixed across every screen, not inside any one of them,
+     so it's reachable no matter where a reader currently is. -->
+<button id="open-basket-btn" onclick="openBasket()" aria-label="Open my flower basket">
+  &#128140; My flower basket (<span id="basket-count">0</span>)
+</button>
 
 <!-- COVER -->
 <div id="s-cover" class="screen active">
@@ -452,7 +556,27 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <img src="bloom-again-logo.png" class="kit-hdr-logo" alt="Bloom Again">
     </div>
 
-    <!-- OPENING HERO: Mira's note beside the flower + five chapters -->
+    <!-- OPENING HERO: Mira's note beside the flower + five chapters, plus
+         the First-Aid Kit widget (desktop sidebar box here; the mobile
+         toggle button lives down inside the chapter list itself, see
+         .flower-block below). -->
+    <div class="kit-top-row">
+    <aside class="firstaid-sidebar" id="firstaid-sidebar">
+      <img class="firstaid-sidebar-img" src="bloom-again-images/ba-18_lamp-book.png" alt="" aria-hidden="true" onerror="this.remove()">
+      <p class="firstaid-sidebar-title">First-aid kit reminders for when you're running on empty</p>
+      <p class="firstaid-sidebar-sub">If six subchapters feel like too much right now, start with the basics:</p>
+      <button class="firstaid-open-btn" id="firstaid-open-btn" onclick="toggleFirstAid('firstaid-panel-desktop', this)" aria-expanded="false">Open</button>
+      <div class="firstaid-panel" id="firstaid-panel-desktop">
+        <ul class="firstaid-list">
+          <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
+          <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
+          <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
+          <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+          <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+        </ul>
+        <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+      </div>
+    </aside>
     <div class="opening-hero-wrap">
     <div class="opening-hero">
 
@@ -501,8 +625,24 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
             </button>
           </div>
         </div>
+        <!-- MOBILE ONLY: First-Aid Kit toggle, sitting right under the chapter
+             list. Hidden entirely on desktop (the sidebar box covers it there),
+             and hides itself once a chapter or support mode is picked, via
+             pickPillar()/pickMode()/initKit() below. -->
+        <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="toggleFirstAid('firstaid-panel-mobile', this)" aria-expanded="false">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
+        <div class="firstaid-panel" id="firstaid-panel-mobile">
+          <ul class="firstaid-list">
+            <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
+            <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
+            <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
+            <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+            <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+          </ul>
+          <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
+        </div>
       </div>
 
+    </div>
     </div>
     </div>
 
@@ -548,7 +688,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="area-icons" id="area-icons"></div>
       <p class="chapter-takeaway" id="chapter-takeaway"></p>
       <p class="chapter-disclaimer" id="chapter-disclaimer"></p>
-      <div class="chapter-firstaid" id="chapter-firstaid"></div>
     </div>
 
     <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -633,6 +772,22 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <span class="insp-modal-intro-count" id="insp-intro-count"></span>
       <button class="insp-modal-intro-btn" id="insp-intro-next" onclick="introStep(1)">Next ›</button>
     </div>
+  </div>
+</div>
+
+<!-- MY FLOWER BASKET: saved tips, rendered as short cards, with a print
+     button that uses the branded @media print stylesheet above to turn
+     this same overlay into a calm, exportable PDF. -->
+<div class="basket-modal" id="basket-modal">
+  <div class="basket-modal-scrim" onclick="closeBasket()"></div>
+  <div class="basket-modal-card">
+    <button class="basket-modal-close" onclick="closeBasket()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <h3 class="basket-modal-title">My Flower Basket</h3>
+    <p class="basket-modal-sub">Your saved tips, gathered in one place.</p>
+    <button class="print-btn" id="basket-print-btn" onclick="window.print()">&#128196; Download My Gentle Reminders</button>
+    <div class="basket-list" id="basket-list"></div>
   </div>
 </div>
 
@@ -978,6 +1133,7 @@ expansion:{
 
 let S = {chapter:null, area:null};
 let introIdx = -1;
+let currentInspTip = null;
 
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -1006,6 +1162,32 @@ function initKit(){
   document.querySelector('.soil-quote').classList.remove('hide');
   document.querySelector('.mode-entry').classList.remove('hide');
   document.querySelector('.back-to-top-wrap').classList.remove('hide');
+  showFirstAidMobileBtn();
+}
+
+/* FIRST-AID KIT WIDGET: one shared toggle for both surfaces (the desktop
+   sidebar's "Open" button and the mobile button itself), plus two small
+   helpers that hide/show the mobile button only, since on mobile it needs
+   to disappear once she's looking at a specific chapter or mode, to keep
+   that view uncluttered. The desktop sidebar never hides. */
+function toggleFirstAid(panelId, btn){
+  const panel = document.getElementById(panelId);
+  if(!panel) return;
+  const open = panel.classList.toggle('open');
+  if(btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if(btn && btn.classList.contains('firstaid-open-btn')) btn.textContent = open ? 'Close' : 'Open';
+}
+function hideFirstAidMobileBtn(){
+  const btn = document.getElementById('firstaid-mobile-btn');
+  if(!btn) return;
+  btn.classList.add('hide');
+  const panel = document.getElementById('firstaid-panel-mobile');
+  if(panel) panel.classList.remove('open');
+  btn.setAttribute('aria-expanded', 'false');
+}
+function showFirstAidMobileBtn(){
+  const btn = document.getElementById('firstaid-mobile-btn');
+  if(btn) btn.classList.remove('hide');
 }
 
 function pickPillar(id){
@@ -1023,14 +1205,7 @@ function pickPillar(id){
   document.getElementById('kbox2-q').textContent = chapter.q;
   document.getElementById('chapter-takeaway').textContent = chapter.takeaway || '';
   document.getElementById('chapter-disclaimer').textContent = CHAPTER_DISCLAIMER[id];
-  const firstaid = document.getElementById('chapter-firstaid');
-  if(id === 'body'){
-    firstaid.classList.add('show');
-    firstaid.innerHTML = `<p class="firstaid-eyebrow">A Gentle First-Aid Kit for When You're Running on Empty</p><p class="firstaid-copy">If six subchapters feel like too much right now, here's the short version: the basics first, rest without earning it, one less demand, one small boundary, letting someone help, and no need to force calm.</p><p class="firstaid-close">Come back to the fuller picture below whenever you have more to give.</p>`;
-  } else {
-    firstaid.classList.remove('show');
-    firstaid.innerHTML = '';
-  }
+  hideFirstAidMobileBtn();
   document.getElementById('area-icons').innerHTML = chapter.subs.map(a=>`
     <button class="area-icon-btn" data-area="${a.id}" onclick="selectArea('${a.id}')">
       <div class="area-circle">
@@ -1094,6 +1269,7 @@ function pickMode(mode){
   document.querySelector('.crisis-entry').classList.add('hide');
   document.querySelector('.soil-quote').classList.add('hide');
   document.querySelector('.back-to-top-wrap').classList.add('hide');
+  hideFirstAidMobileBtn();
 
   const meta = MODE_META[mode];
   document.getElementById('mode-title').textContent = mode;
@@ -1179,6 +1355,9 @@ function renderStructuredTip(t){
     if(t.science.sources && t.science.sources.length) html += `<p class="insp-sources-label">Sources &amp; further reading</p><p class="insp-sources">${t.science.sources.join(' &middot; ')}</p>`;
     html += `</div></div></div>`;
   }
+  const id = tipSlug(t.title);
+  const saved = isTipSaved(id);
+  html += `<button class="save-tip-btn${saved ? ' saved' : ''}" data-id="${id}" onclick="toggleSaveTip(this)">${saved ? '&#129360; Saved in my basket' : '&#127800; Save this tip in my basket'}</button>`;
   return html;
 }
 
@@ -1190,6 +1369,7 @@ function toggleInspScience(btn){
 
 function openInsp(i){
   const t = S.area.tips[i];
+  currentInspTip = t;
   document.getElementById('insp-modal-title').textContent = t.title;
   document.getElementById('insp-modal-text').innerHTML = t.recognition
     ? renderStructuredTip(t)
@@ -1213,6 +1393,7 @@ function closeInsp(){
    section is read in order rather than picked tip by tip. */
 function openIntro(i){
   introIdx = i;
+  currentInspTip = null;
   const piece = BEFORE_YOU_BLOOM[introIdx];
   document.getElementById('insp-modal-title').textContent = piece.title;
   document.getElementById('insp-modal-text').innerHTML = piece.body;
@@ -1234,8 +1415,107 @@ function introStep(delta){
 }
 
 document.addEventListener('keydown', e=>{
-  if(e.key === 'Escape') closeInsp();
+  if(e.key === 'Escape'){ closeInsp(); closeBasket(); }
 });
+
+/* MY FLOWER BASKET: lets a reader collect her favorite micro-steps
+   across every chapter and export them as a calm, one or two page PDF
+   (window.print(), styled by the @media print block above). Only the
+   quote, mode, practical step, and closing reframe are saved, never the
+   full modal, so a "basket" stays a short list of reminders rather than
+   a copy of the whole book. */
+const BASKET_KEY = 'bloom_flower_basket';
+
+function tipSlug(title){
+  return title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,64);
+}
+
+function getBasket(){
+  try{ return JSON.parse(localStorage.getItem(BASKET_KEY)) || []; }
+  catch(e){ return []; }
+}
+
+function setBasket(arr){
+  try{ localStorage.setItem(BASKET_KEY, JSON.stringify(arr)); }
+  catch(e){ /* storage unavailable (private browsing, quota); basket just won't persist */ }
+  updateBasketCount();
+}
+
+function isTipSaved(id){
+  return getBasket().some(x=>x.id===id);
+}
+
+function buildBasketRecord(t, id){
+  return {
+    id,
+    quote: t.title,
+    mode: t.mode || '',
+    tip: Array.isArray(t.tryThis) ? t.tryThis : (t.tryThis ? [t.tryThis] : []),
+    reframe: t.takeaway || t.reframe || ''
+  };
+}
+
+function updateBasketCount(){
+  const n = getBasket().length;
+  const countEl = document.getElementById('basket-count');
+  if(countEl) countEl.textContent = n;
+  const btn = document.getElementById('open-basket-btn');
+  if(btn) btn.classList.toggle('has-items', n > 0);
+}
+
+function toggleSaveTip(btn){
+  const id = btn.dataset.id;
+  const basket = getBasket();
+  const idx = basket.findIndex(x=>x.id===id);
+  if(idx > -1){
+    basket.splice(idx, 1);
+    btn.classList.remove('saved');
+    btn.innerHTML = '&#127800; Save this tip in my basket';
+  } else if(currentInspTip){
+    basket.push(buildBasketRecord(currentInspTip, id));
+    btn.classList.add('saved');
+    btn.innerHTML = '&#129360; Saved in my basket';
+  }
+  setBasket(basket);
+}
+
+function removeFromBasket(id){
+  setBasket(getBasket().filter(x=>x.id!==id));
+  renderBasket();
+}
+
+function renderBasket(){
+  const basket = getBasket();
+  const list = document.getElementById('basket-list');
+  const printBtn = document.getElementById('basket-print-btn');
+  if(printBtn) printBtn.disabled = basket.length === 0;
+  if(!basket.length){
+    list.innerHTML = `<p class="basket-empty">Your basket is currently empty. Tap &lsquo;Save this tip in my basket&rsquo; inside any pop-up to gather your gentle reminders here. &#127800;</p>`;
+    return;
+  }
+  list.innerHTML = basket.map(item => `
+    <div class="basket-card">
+      <button class="basket-card-remove" onclick="removeFromBasket('${item.id}')" aria-label="Remove from basket">&#10005;</button>
+      ${item.mode ? `<span class="insp-mode insp-mode-${item.mode.toLowerCase()}">${item.mode}</span>` : ''}
+      <p class="basket-card-quote">${item.quote}</p>
+      <div class="basket-card-tip">${item.tip.length > 1
+        ? `<ul>${item.tip.map(x=>`<li>${x}</li>`).join('')}</ul>`
+        : (item.tip[0] || '')}</div>
+      ${item.reframe ? `<p class="basket-card-reframe">${item.reframe}</p>` : ''}
+    </div>
+  `).join('');
+}
+
+function openBasket(){
+  renderBasket();
+  document.getElementById('basket-modal').classList.add('open');
+}
+
+function closeBasket(){
+  document.getElementById('basket-modal').classList.remove('open');
+}
+
+updateBasketCount();
 
 function initParticles(){
   const container=document.getElementById('particles');
