@@ -63,11 +63,8 @@ body{overflow-x:hidden}
 .opening-hero{display:flex;align-items:center;justify-content:center;gap:40px 72px;flex-wrap:wrap;max-width:1400px;margin:30px auto 12px;padding:0 6vw}
 
 /* Mira's note */
-.opening-letter{flex:0 1 220px;max-width:220px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
+.opening-letter{flex:1 1 480px;max-width:480px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
 .opening-letter.hide{display:none}
-.opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:12px}
-.opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:18px;line-height:1.65;color:var(--text-soft);margin-bottom:11px}
-.opening-letter-signoff{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text);margin-top:18px;margin-bottom:4px}
 
 /* five chapters: the main interactive heart of the page (no flower image,
    this list of buttons is the whole navigation now) */
@@ -192,10 +189,16 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today{max-width:480px;margin:0 auto;text-align:center}
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
 .heavy-today-sub{font-size:17px;color:var(--text-soft);line-height:1.6;max-width:42ch;margin:0 auto 16px}
-.heavy-box-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;margin:0 auto}
-.heavy-box{flex:1 1 140px;max-width:170px;background:#D2DEC7;border:1px solid #FDFBF7;border-radius:16px;padding:16px 14px;font-family:var(--sans);font-size:14px;line-height:1.4;color:#2B3842;cursor:pointer;text-align:left;transition:all .22s ease}
-.heavy-box:hover{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35);transform:translateY(-2px)}
-.heavy-box.sel{background:var(--accent);font-weight:600}
+.heavy-card-grid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;margin:0 auto;text-align:left}
+@media(min-width:641px){.heavy-card-grid{grid-template-columns:repeat(2,1fr)}}
+.heavy-card{display:flex;flex-direction:row;align-items:center;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:12px;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
+.heavy-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,178,154,.35)}
+.heavy-card.sel{border-color:var(--accent);background:rgba(232,178,154,.16)}
+.heavy-card-media{flex:0 0 auto;width:64px;height:64px;border-radius:14px;overflow:hidden;background:rgba(245,236,224,.07);border:1.5px solid rgba(245,236,224,.3);margin-right:14px}
+.heavy-card-media img{width:100%;height:100%;object-fit:cover;display:block}
+.heavy-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.heavy-card-title{font-family:var(--sans);font-weight:800;font-size:15px;color:#FDFBF7;line-height:1.35}
+.heavy-card-sub{font-family:var(--sans);font-weight:400;font-size:12.5px;color:var(--text-soft);line-height:1.42;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .heavy-today-announce-text{min-height:22px;margin-top:14px;font-family:var(--sans);font-size:15px;font-weight:600;color:#FFFFFF}
 
 /* the glow + badge a chosen chapter gets in the nav list below, separate
@@ -282,15 +285,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 @media(max-width:900px){
   .opening-hero{gap:26px 0}
-  .opening-letter{order:-1;max-width:260px;flex-basis:100%}
+  .opening-letter{order:-1;max-width:480px;flex-basis:100%}
   .heavy-today{order:0;flex-basis:100%;max-width:480px}
   .flower-block{order:2;flex-basis:100%;max-width:520px}
 }
 @media(max-width:640px){
-  .opening-letter{padding:22px 20px}
-  .opening-letter-greeting{font-size:23px;margin-bottom:10px}
-  .opening-letter-signoff{font-size:22px}
-  .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:18px;margin-bottom:10px}
   .opening-flower{flex-wrap:nowrap;justify-content:center;gap:14px;margin-top:10px}
   .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
   .petal-btn{padding:6px 4px;gap:8px}
@@ -322,7 +321,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(min-width:901px){
   html,body{font-size:19px}
   .opening-hero{display:grid;grid-template-columns:1fr;justify-items:center;row-gap:24px}
-  .opening-letter{grid-column:1;grid-row:1;max-width:220px;width:100%}
+  .opening-letter{grid-column:1;grid-row:1;max-width:640px;width:100%}
   .heavy-today{grid-column:1;grid-row:2;max-width:920px;width:100%}
 
   /* the chapter grid itself: a real multi-column grid of cards, not the
@@ -353,7 +352,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    start here" selector sit alongside each other instead of stacked. */
 @media(min-width:1300px){
   .opening-hero{grid-template-columns:1fr}
-  .opening-letter{grid-column:1;grid-row:1;justify-self:center;max-width:220px;width:100%}
+  .opening-letter{grid-column:1;grid-row:1;justify-self:center;max-width:640px;width:100%}
   .heavy-today{grid-column:1;grid-row:2;justify-self:center;max-width:1040px;width:100%}
   .flower-block{grid-column:1;grid-row:3}
 }
@@ -442,13 +441,18 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .intro-link{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-soft);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:6px 2px;margin-top:4px;text-decoration:underline;text-decoration-color:rgba(245,236,224,.35);text-underline-offset:3px;transition:color .2s ease}
 .intro-link:hover{color:var(--text)}
 
-/* "My Welcome Letter to You": a cute, rosy pill button, warmer and softer
-   than the Zero Capacity button, serif italic so it reads like an invitation. */
-.welcome-envelope-btn{display:flex;flex-direction:column;align-items:center;gap:10px;background:none;border:none;cursor:pointer;padding:14px;transition:transform .25s ease}
-.welcome-envelope-btn:hover{transform:translateY(-2px)}
-.welcome-envelope-icon{width:52px;height:52px;color:var(--rose);transition:color .25s ease}
-.welcome-envelope-btn:hover .welcome-envelope-icon{color:var(--rose-light)}
-.welcome-envelope-label{font-family:var(--sans);font-size:13.5px;font-weight:500;letter-spacing:.02em;color:var(--text-soft)}
+/* "My Welcome Letter to You": now a full photo banner, Mira's own floral
+   artwork, the logo, and a rosy, semi-transparent pill button with a cute
+   envelope icon, warmer and more inviting than a plain small button. */
+.welcome-banner{position:relative;width:100%;border-radius:24px;overflow:hidden;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px 18px;box-shadow:0 14px 34px rgba(8,14,18,.28)}
+.welcome-banner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%}
+.welcome-banner-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,52,56,.55) 0%,rgba(42,52,56,0) 32%,rgba(42,52,56,0) 62%,rgba(42,52,56,.64) 100%)}
+.welcome-banner-logo{position:relative;z-index:1;height:32px;width:auto;filter:drop-shadow(0 2px 8px rgba(8,14,18,.45))}
+.welcome-envelope-btn{position:relative;z-index:1;display:flex;align-items:center;gap:9px;background:rgba(232,178,154,.4);border:1.5px solid rgba(253,251,247,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:999px;padding:12px 22px;cursor:pointer;transition:background .25s ease,transform .25s ease}
+.welcome-envelope-btn:hover{background:rgba(232,178,154,.58);transform:translateY(-2px)}
+.welcome-envelope-icon{width:19px;height:19px;color:#FDFBF7;flex-shrink:0}
+.welcome-envelope-label{font-family:var(--serif);font-style:italic;font-size:16px;color:#FDFBF7}
+@media(max-width:480px){.welcome-banner{aspect-ratio:4/5;padding:18px 14px}.welcome-banner-logo{height:28px}}
 
 /* Mira's welcome video. Native aspect ratio (4:3, matching the actual
    export) rather than a forced 16:9 crop, so nothing gets cut off.
@@ -677,31 +681,74 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     <div class="opening-hero-wrap">
     <div class="opening-hero">
 
-      <!-- MIRA'S NOTE: the welcome video, first thing on the page on mobile
+      <!-- MIRA'S NOTE: a photo banner (her own floral artwork, the logo,
+           and a rosy envelope button), first thing on the page on mobile
            (flex order below), alongside the low-demand selector on desktop. -->
       <div class="opening-letter" id="opening-letter">
-        <button class="welcome-envelope-btn" onclick="openIntro(0)">
-          <svg class="welcome-envelope-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>
-          <span class="welcome-envelope-label">my welcome letter to you</span>
-        </button>
+        <div class="welcome-banner">
+          <img class="welcome-banner-bg" src="welcome-banner.jpg" alt="" aria-hidden="true">
+          <div class="welcome-banner-scrim"></div>
+          <img class="welcome-banner-logo" src="bloom-again-logo.png" alt="Bloom Again">
+          <button class="welcome-envelope-btn" onclick="openIntro(0)">
+            <svg class="welcome-envelope-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>
+            <span class="welcome-envelope-label">my welcome letter to you</span>
+          </button>
+        </div>
       </div>
 
       <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in. No typing
-           required, five plain statements sit right next to each other as
-           boxes, no chapter names, no analysis needed. Picking one never
-           opens a chapter on its own, it just points at one (see
-           pickHeavyToday), scrolling to and glowing the matching button in
-           the chapter nav below, and announces it in heavy-today-announce.
-           She still chooses whether to actually tap into the suggestion. -->
+           required, six photo cards sit next to each other, no chapter
+           names, no analysis needed. Picking one never opens a chapter on
+           its own, it just points at one (see pickHeavyToday), scrolling
+           to and glowing the matching button in the chapter nav below, and
+           announces it in heavy-today-announce. She still chooses whether
+           to actually tap into the suggestion. -->
       <div class="heavy-today" id="heavy-today">
         <h2 class="heavy-today-heading serif">Now let's start here</h2>
         <p class="heavy-today-sub">Just choose what feels most true right now:</p>
-        <div class="heavy-box-row" role="group" aria-label="Choose what feels most true right now">
-          <button type="button" class="heavy-box" data-target="environment" onclick="pickHeavyToday(this,'environment')">Misunderstandings, family demands, or unspoken mental load are crushing me.</button>
-          <button type="button" class="heavy-box" data-target="relationships" onclick="pickHeavyToday(this,'relationships')">I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</button>
-          <button type="button" class="heavy-box" data-target="body" onclick="pickHeavyToday(this,'body')">Everything is too loud, too bright, or too fast, my senses are fried.</button>
-          <button type="button" class="heavy-box" data-target="identity" onclick="pickHeavyToday(this,'identity')">I feel like I have to do everything perfectly or it all falls apart.</button>
-          <button type="button" class="heavy-box" data-target="expansion" onclick="pickHeavyToday(this,'expansion')">I've lost touch with what used to make me feel alive.</button>
+        <div class="heavy-card-grid" role="group" aria-label="Choose what feels most true right now">
+          <button type="button" class="heavy-card" data-target="environment" onclick="pickHeavyToday(this,'environment')">
+            <span class="heavy-card-media"><img src="new_images/home-04.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">Misunderstandings, family demands, or unspoken mental load are crushing me.</span>
+              <span class="heavy-card-sub">Not everything heavy has to be carried in your own head.</span>
+            </span>
+          </button>
+          <button type="button" class="heavy-card" data-target="relationships" onclick="pickHeavyToday(this,'relationships')">
+            <span class="heavy-card-media"><img src="new_images/boundaries-04.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</span>
+              <span class="heavy-card-sub">Boundaries aren't selfish, they're what makes connection sustainable.</span>
+            </span>
+          </button>
+          <button type="button" class="heavy-card" data-target="body" onclick="pickHeavyToday(this,'body')">
+            <span class="heavy-card-media"><img src="new_images/sensory-07.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">Everything is too loud, too bright, or too fast, my senses are fried.</span>
+              <span class="heavy-card-sub">A fried nervous system isn't a flaw, it's information.</span>
+            </span>
+          </button>
+          <button type="button" class="heavy-card" data-target="identity" onclick="pickHeavyToday(this,'identity')">
+            <span class="heavy-card-media"><img src="new_images/roles-05.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">I feel like I have to do everything perfectly or it all falls apart.</span>
+              <span class="heavy-card-sub">Nothing is actually held together by your exhaustion.</span>
+            </span>
+          </button>
+          <button type="button" class="heavy-card" data-target="expansion" onclick="pickHeavyToday(this,'expansion')">
+            <span class="heavy-card-media"><img src="new_images/bloom-02.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">I've lost touch with what used to make me feel alive.</span>
+              <span class="heavy-card-sub">That spark usually isn't gone, it's just buried under depletion.</span>
+            </span>
+          </button>
+          <button type="button" class="heavy-card" data-target="relationships" onclick="pickHeavyToday(this,'relationships')">
+            <span class="heavy-card-media"><img src="new_images/receiving-01.jpg" alt=""></span>
+            <span class="heavy-card-body">
+              <span class="heavy-card-title">I feel like I have to do everything myself, and I don't know how to ask for help.</span>
+              <span class="heavy-card-sub">Needing support isn't a burden you're putting on someone, it's part of being human.</span>
+            </span>
+          </button>
         </div>
         <p class="heavy-today-announce-text" id="heavy-today-announce" role="status" aria-live="polite"></p>
       </div>
@@ -1102,15 +1149,14 @@ function showFirstAidMobileBtn(){
   if(btn) btn.classList.remove('hide');
 }
 
-/* "NOW LET'S START HERE" selector: five plain statements sit as boxes,
-   no typing needed. Picking one never opens a chapter on its own, it
-   just points at one, scrolling to and glowing the matching button in
-   the chapter nav below (with a small attached badge, pure CSS, see
-   .petal-btn.heavy-glow::after), and announces it via
-   heavy-today-announce. She still chooses whether to actually tap into
-   the suggested chapter. */
+/* "NOW LET'S START HERE" selector: six photo cards, no typing needed.
+   Picking one never opens a chapter on its own, it just points at one,
+   scrolling to and glowing the matching button in the chapter nav below
+   (with a small attached badge, pure CSS, see .petal-btn.heavy-glow::after),
+   and announces it via heavy-today-announce. She still chooses whether to
+   actually tap into the suggested chapter. */
 function pickHeavyToday(btn, chapterId){
-  document.querySelectorAll('.heavy-box').forEach(o=>o.classList.toggle('sel', o===btn));
+  document.querySelectorAll('.heavy-card').forEach(o=>o.classList.toggle('sel', o===btn));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('heavy-glow', b.dataset.pillar===chapterId));
   const announce = document.getElementById('heavy-today-announce');
   if(announce) announce.textContent = 'This chapter will help you most for now: ' + (FLOWER_META.find(m=>m.id===chapterId)?.title || chapterId);
@@ -1118,7 +1164,7 @@ function pickHeavyToday(btn, chapterId){
   if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 150);
 }
 function clearHeavyToday(){
-  document.querySelectorAll('.heavy-box').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.heavy-card').forEach(o=>o.classList.remove('sel'));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
   const announce = document.getElementById('heavy-today-announce');
   if(announce) announce.textContent = '';
