@@ -33,25 +33,25 @@ body{overflow-x:hidden}
 .serif{font-family:var(--serif);font-style:italic;font-weight:400}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* cover: exact mockup image + button */
+/* cover: full-bleed hero photo + bottom scrim + button, matching the
+   First-Aid Kit's own cover pattern. Replaces the old device-mockup image +
+   button layout, now that the cover photo itself carries the Bloom Again /
+   Full Companion branding baked into the artwork. One image at every width,
+   object-fit:cover handles the responsive crop, no separate mobile asset
+   needed. */
 #s-cover{overflow-y:auto;background:var(--bg);display:flex;align-items:center;justify-content:center}
 .cover-simple{display:flex;flex-direction:column;align-items:center;padding:24px;max-width:1200px;margin:0 auto;width:100%}
-.cover-mockup-wrap{position:relative;width:100%;margin:0 auto}
-.cover-mockup-img{width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 20px 46px rgba(0,0,0,.28))}
-.cover-mockup-btn{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}
-.cover-mockup-desktop{display:block;max-width:1080px;max-height:92vh;aspect-ratio:2138/1253}
-.cover-mockup-desktop .cover-mockup-btn{bottom:8.5%}
-.cover-mockup-mobile{display:none}
+.cover-hero{position:relative;width:100%;max-width:1080px;margin:0 auto;aspect-ratio:1600/948;border-radius:20px;overflow:hidden;box-shadow:0 20px 46px rgba(0,0,0,.28)}
+.cover-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
+.cover-hero-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,28,32,0) 58%,rgba(20,28,32,.6) 100%);pointer-events:none}
+.cover-hero-btn{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);white-space:nowrap}
 @media(max-width:760px){
-  .cover-mockup-desktop{display:none}
-  .cover-mockup-mobile{display:flex;flex-direction:column;align-items:center;max-width:420px}
-  .cover-mockup-mobile .cover-mockup-img{width:auto;height:auto;max-width:100%;max-height:72vh;aspect-ratio:1008/1067}
-  .cover-mockup-mobile .cover-mockup-btn{position:static;left:auto;bottom:auto;transform:none;margin-top:20px;font-size:11px;padding:9px 20px}
-  .cover-mockup-mobile .cover-mockup-btn:hover{transform:translateY(-2px)}
+  .cover-hero{border-radius:14px}
+  .cover-hero-btn{font-size:10px;padding:11px 20px;bottom:5%}
 }
 .cta{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 34px;border-radius:999px;cursor:pointer;transition:all .3s ease}
 .cta:hover{background:var(--accent);color:var(--bg-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,178,154,.3)}
-.cover-mockup-btn.cta:hover{transform:translateX(-50%) translateY(-2px)}
+.cover-hero-btn.cta:hover{transform:translateX(-50%) translateY(-2px)}
 
 /* quick pick: sits at the top of the flower/chapter block */
 
@@ -76,8 +76,8 @@ body{overflow-x:hidden}
    dark one, so it stands apart from the five chapters at a glance. */
 .petal-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .35s ease}
 .petal-btn:hover .petal-bg{transform:scale(1.045)}
-.petal-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(22,15,11,.64),rgba(12,8,6,.86))}
-.firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(156,30,16,.52),rgba(94,12,8,.82))}
+.petal-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(22,15,11,.4),rgba(12,8,6,.62))}
+.firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(156,30,16,.32),rgba(94,12,8,.58))}
 .petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
 .petal-icon-photo{display:none}
@@ -139,7 +139,12 @@ body{overflow-x:hidden}
 /* mobile is compact enough now that this button isn't needed there either; left hidden everywhere */
 
 /* feedback link: quiet, always-visible wrap at the true end of the page */
+/* feedback link: deliberately smaller and plainer than the other pill
+   CTAs on the page, near-white text on a transparent/outline pill instead
+   of the solid accent fill, so it reads as a quiet aside. */
 .feedback-wrap{text-align:center;margin:36px auto 0}
+.feedback-wrap .kit-cta-btn{background:transparent;border:1px solid rgba(245,236,224,.35);color:var(--text);font-size:10px;padding:8px 18px;box-shadow:none}
+.feedback-wrap .kit-cta-btn:hover{background:rgba(245,236,224,.08);color:var(--text);transform:none;box-shadow:none}
 
 /* NOTE: the old "Read this first if you have zero capacity" button that
    used to live on the landing page is gone, per Mira's request. The
@@ -184,7 +189,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kit-back:hover{color:var(--text)}
 .kit-hdr-logo{height:40px;width:auto;opacity:.9;filter:drop-shadow(0 1px 6px rgba(42,52,56,.14))}
 
-/* "LET'S START HERE" low-demand selector: right after the welcome video,
+/* "LET'S START HERE" low-demand selector: right after the welcome letter,
    above the chapter overview. A single search-styled field, not a wall of
    buttons, tapping/clicking it opens a short dropdown of relatable
    statements, no chapter names or typing required. Picking one scrolls to
@@ -194,6 +199,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today{max-width:480px;margin:0 auto;text-align:center}
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
 .heavy-today-sub{font-size:17px;color:var(--text-soft);line-height:1.6;max-width:42ch;margin:0 auto 16px}
+/* the six cards below are closed by default, this line doubles as the
+   dropdown trigger that opens them, same wording, just clickable now */
+.heavy-today-trigger{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:17px;color:var(--text-soft);line-height:1.6;padding:4px 0;margin-bottom:16px;text-decoration:underline;text-decoration-color:rgba(245,236,224,.35);text-underline-offset:4px;transition:color .2s ease}
+.heavy-today-trigger:hover{color:var(--text)}
+.heavy-today-chevron{width:14px;height:14px;flex-shrink:0;transition:transform .25s ease}
+.heavy-today-trigger.open .heavy-today-chevron{transform:rotate(180deg)}
 .heavy-card-grid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;margin:0 auto;text-align:left}
 @media(min-width:641px){.heavy-card-grid{grid-template-columns:repeat(2,1fr)}}
 .heavy-card{display:flex;flex-direction:row;align-items:center;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:12px;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
@@ -295,25 +306,29 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 @media(max-width:640px){
   .opening-flower{flex-wrap:nowrap;justify-content:center;gap:14px;margin-top:10px}
-  .petal-nav-list{flex:1 1 auto;max-width:none;min-width:0;gap:0}
-  .petal-btn{padding:6px 4px;gap:8px}
+  /* six chapter cards as a 2-across grid on phones, 2 and 2 and 2, instead
+     of one long stacked list, same full-photo card look the desktop grid
+     uses, just two per row instead of three. */
+  .petal-nav-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;flex:none;max-width:none;min-width:0}
+  .petal-btn{flex-direction:column;text-align:center;gap:8px;padding:16px 10px;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14)}
+  .petal-nav-list .petal-text{align-items:center}
   .petal-icon{width:50px;height:50px}
   .petal-icon svg{width:20px;height:20px}
-  .fl-title{font-size:17.5px}
+  .fl-title{font-size:14.5px}
   .area-circle{width:50px;height:50px}
   .area-circle svg{width:20px;height:20px}
 }
 @media(max-width:400px){
   .petal-icon{width:44px;height:44px}
   .petal-icon svg{width:18px;height:18px}
-  .petal-btn{padding:5px 3px;gap:6px}
+  .petal-btn{padding:12px 8px;gap:6px}
   .fl-layer{font-size:10.5px}
-  .fl-title{font-size:17px}
+  .fl-title{font-size:13.5px}
   .area-circle{width:44px;height:44px}
   .area-circle svg{width:18px;height:18px}
 }
 
-/* DESKTOP ONLY: the video+letter and the "Let's start here" selector form
+/* DESKTOP ONLY: the letter and the "Let's start here" selector form
    one hero, the chapter headline sits below that, then the five chapters
    render as their own spacious grid, no longer squeezed into a single
    column beside the letter. Between 901 and 1299px there usually isn't
@@ -351,7 +366,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 
 /* WIDE DESKTOP: once there's genuinely enough room (sidebar + letter +
-   selector side by side without squeezing), let the video and the "Let's
+   selector side by side without squeezing), let the letter and the "Let's
    start here" selector sit alongside each other instead of stacked. */
 @media(min-width:1300px){
   .opening-hero{grid-template-columns:1fr}
@@ -460,15 +475,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .intro-link:hover{color:var(--text)}
 
 /* "My Welcome Letter to You": now gates entry itself on the cover screen,
-   see .cover-mockup-btn below. The letter modal (BEFORE_YOU_BLOOM /
+   see .cover-hero-btn below. The letter modal (BEFORE_YOU_BLOOM /
    openIntro) is unchanged, only the trigger that opens it moved. */
-
-/* Mira's welcome video. Native aspect ratio (4:3, matching the actual
-   export) rather than a forced 16:9 crop, so nothing gets cut off.
-   preload="metadata" keeps the page light, the full file only loads
-   once someone actually presses play. */
-.welcome-video-wrap{width:100%;max-width:500px;aspect-ratio:4/3;border-radius:16px;overflow:hidden;margin:0 auto 16px;background:rgba(232,178,154,.08);border:1px solid rgba(245,236,224,.16)}
-.welcome-video{display:block;width:100%;height:100%;object-fit:cover}
 
 /* inspiration modal: this is where the actual content and photos live */
 .insp-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
@@ -672,13 +680,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 <!-- COVER -->
 <div id="s-cover" class="screen active">
   <div class="cover-simple">
-    <div class="cover-mockup-wrap cover-mockup-desktop">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
-      <button class="cta cover-mockup-btn" onclick="openIntro(0)">My Welcome Letter to You &nbsp;›</button>
-    </div>
-    <div class="cover-mockup-wrap cover-mockup-mobile">
-      <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
-      <button class="cta cover-mockup-btn" onclick="openIntro(0)">My Welcome Letter to You &nbsp;›</button>
+    <div class="cover-hero">
+      <img class="cover-hero-img" src="companion-cover-hero.jpg" alt="Bloom Again Full Companion, here to help you unpack overwhelm, redesign your environment, and expand your capacity for true aliveness">
+      <div class="cover-hero-scrim"></div>
+      <button class="cta cover-hero-btn" onclick="openIntro(0)">My Welcome Letter to You &nbsp;›</button>
     </div>
   </div>
 </div>
@@ -696,7 +701,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
          sidebar box here; the mobile toggle button now lives at the very
          end of the page, see post-hero-stack below). The welcome letter
          now gates entry on the cover screen instead of living here, see
-         .cover-mockup-btn and BEFORE_YOU_BLOOM. -->
+         .cover-hero-btn and BEFORE_YOU_BLOOM. -->
     <div class="kit-top-row">
     <div class="opening-hero-wrap">
     <div class="opening-hero">
@@ -710,8 +715,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
            to actually tap into the suggestion. -->
       <div class="heavy-today" id="heavy-today">
         <h2 class="heavy-today-heading serif">Now let's start here</h2>
-        <p class="heavy-today-sub">Just choose what feels most true right now:</p>
-        <div class="heavy-card-grid" role="group" aria-label="Choose what feels most true right now">
+        <button type="button" class="heavy-today-trigger" id="heavy-today-trigger" onclick="toggleHeavyToday()" aria-expanded="false" aria-controls="heavy-card-grid">
+          <span>Choose what feels most true right now:</span>
+          <svg class="heavy-today-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="heavy-card-grid expand" id="heavy-card-grid" role="group" aria-label="Choose what feels most true right now">
           <button type="button" class="heavy-card" data-target="environment" onclick="pickHeavyToday(this,'environment')">
             <span class="heavy-card-media"><img src="new_images/home-04.jpg" alt=""></span>
             <span class="heavy-card-body">
@@ -1186,6 +1194,16 @@ function showFirstAidMobileBtn(){
   if(btn) btn.classList.remove('hide');
 }
 
+/* Closed by default so the chapter grid sits higher on the page, phones
+   especially, opens to show the six cards exactly as they already looked. */
+function toggleHeavyToday(){
+  const grid = document.getElementById('heavy-card-grid');
+  const trigger = document.getElementById('heavy-today-trigger');
+  const open = grid.classList.toggle('open');
+  trigger.classList.toggle('open', open);
+  trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
 /* "NOW LET'S START HERE" selector: six photo cards, no typing needed.
    Picking one never opens a chapter on its own, it just points at one,
    scrolling to and glowing the matching button in the chapter nav below
@@ -1205,6 +1223,10 @@ function clearHeavyToday(){
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
   const announce = document.getElementById('heavy-today-announce');
   if(announce) announce.textContent = '';
+  const grid = document.getElementById('heavy-card-grid');
+  const trigger = document.getElementById('heavy-today-trigger');
+  if(grid) grid.classList.remove('open');
+  if(trigger){ trigger.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); }
 }
 
 function confirmExpansionEntry(){
@@ -1392,9 +1414,7 @@ function openIntro(i){
   const introTextEl = document.getElementById('insp-modal-text');
   introTextEl.classList.add('letter-mode');
   introTextEl.innerHTML = piece.body;
-  document.getElementById('insp-modal-media').innerHTML = introIdx === 0
-    ? '<div class="welcome-video-wrap"><video class="welcome-video" controls preload="metadata" playsinline poster="mira-welcome-poster.jpg"><source src="mira-welcome.mp4" type="video/mp4">Your browser doesn\'t support embedded video. <a href="mira-welcome.mp4">Watch Mira\'s welcome video</a>.</video></div>'
-    : '';
+  document.getElementById('insp-modal-media').innerHTML = '';
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
