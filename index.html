@@ -62,10 +62,6 @@ body{overflow-x:hidden}
 .opening-hero-wrap{width:100vw;position:relative;left:50%;transform:translateX(-50%)}
 .opening-hero{display:flex;align-items:center;justify-content:center;gap:40px 72px;flex-wrap:wrap;max-width:1400px;margin:30px auto 12px;padding:0 6vw}
 
-/* Mira's note */
-.opening-letter{flex:1 1 480px;max-width:480px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
-.opening-letter.hide{display:none}
-
 /* five chapters: the main interactive heart of the page (no flower image,
    this list of buttons is the whole navigation now) */
 .flower-block{flex:1 1 340px;max-width:360px;display:flex;flex-direction:column;align-items:center}
@@ -285,7 +281,6 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 @media(max-width:900px){
   .opening-hero{gap:26px 0}
-  .opening-letter{order:-1;max-width:480px;flex-basis:100%}
   .heavy-today{order:0;flex-basis:100%;max-width:480px}
   .flower-block{order:2;flex-basis:100%;max-width:520px}
 }
@@ -321,12 +316,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(min-width:901px){
   html,body{font-size:19px}
   .opening-hero{display:grid;grid-template-columns:1fr;justify-items:center;row-gap:24px}
-  .opening-letter{grid-column:1;grid-row:1;max-width:640px;width:100%}
-  .heavy-today{grid-column:1;grid-row:2;max-width:920px;width:100%}
+  .heavy-today{grid-column:1;grid-row:1;max-width:920px;width:100%}
 
   /* the chapter grid itself: a real multi-column grid of cards, not the
      mobile single-column list, spanning the full hero width */
-  .flower-block{grid-column:1;grid-row:3;display:block;max-width:1200px;width:100%;margin:0 auto}
+  .flower-block{grid-column:1;grid-row:2;display:block;max-width:1200px;width:100%;margin:0 auto}
   .opening-flower{display:block;margin-top:0}
   .petal-nav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;flex:none}
   .petal-nav-list .petal-btn{flex-direction:column;text-align:center;gap:10px;padding:22px 16px;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14)}
@@ -352,9 +346,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    start here" selector sit alongside each other instead of stacked. */
 @media(min-width:1300px){
   .opening-hero{grid-template-columns:1fr}
-  .opening-letter{grid-column:1;grid-row:1;justify-self:center;max-width:640px;width:100%}
-  .heavy-today{grid-column:1;grid-row:2;justify-self:center;max-width:1040px;width:100%}
-  .flower-block{grid-column:1;grid-row:3}
+  .heavy-today{grid-column:1;grid-row:1;justify-self:center;max-width:1040px;width:100%}
+  .flower-block{grid-column:1;grid-row:2}
 }
 
 /* sub-area icons */
@@ -438,21 +431,28 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-intro-btn:hover{background:rgba(245,236,224,.18);color:var(--text)}
 .insp-modal-intro-btn:disabled{opacity:.35;cursor:default}
 .insp-modal-intro-count{font-family:var(--sans);font-size:11.5px;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase}
+
+/* ENTER NOW: a quiet, always-visible skip link, shown only while the
+   welcome letter is open, so a reader never feels trapped reading it
+   before she can get to the kit itself. */
+.insp-letter-skip{display:none;position:relative;z-index:1;text-align:center;margin:-6px 0 14px}
+.insp-letter-skip.show{display:block}
+.insp-letter-skip-btn{background:none;border:none;color:var(--text-muted);font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;padding:4px 8px;transition:color .2s ease}
+.insp-letter-skip-btn:hover{color:var(--accent)}
+
+/* a soft orange pulse on Next, so it's clear there's more to read */
+@keyframes introNextPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(216,138,112,.5)}
+  50%{box-shadow:0 0 0 8px rgba(216,138,112,0)}
+}
+#insp-intro-next.pulse{background:var(--accent-deep);color:#FDFBF7;border-color:var(--accent-deep);animation:introNextPulse 1.8s ease-in-out infinite}
+#insp-intro-next.pulse:hover{background:var(--accent);animation-play-state:paused}
 .intro-link{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-soft);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:6px 2px;margin-top:4px;text-decoration:underline;text-decoration-color:rgba(245,236,224,.35);text-underline-offset:3px;transition:color .2s ease}
 .intro-link:hover{color:var(--text)}
 
-/* "My Welcome Letter to You": now a full photo banner, Mira's own floral
-   artwork, the logo, and a rosy, semi-transparent pill button with a cute
-   envelope icon, warmer and more inviting than a plain small button. */
-.welcome-banner{position:relative;width:100%;border-radius:24px;overflow:hidden;aspect-ratio:16/10;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:20px 18px;box-shadow:0 14px 34px rgba(8,14,18,.28)}
-.welcome-banner-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%}
-.welcome-banner-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,52,56,.55) 0%,rgba(42,52,56,0) 32%,rgba(42,52,56,0) 62%,rgba(42,52,56,.64) 100%)}
-.welcome-banner-logo{position:relative;z-index:1;height:32px;width:auto;filter:drop-shadow(0 2px 8px rgba(8,14,18,.45))}
-.welcome-envelope-btn{position:relative;z-index:1;display:flex;align-items:center;gap:9px;background:rgba(232,178,154,.4);border:1.5px solid rgba(253,251,247,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:999px;padding:12px 22px;cursor:pointer;transition:background .25s ease,transform .25s ease}
-.welcome-envelope-btn:hover{background:rgba(232,178,154,.58);transform:translateY(-2px)}
-.welcome-envelope-icon{width:19px;height:19px;color:#FDFBF7;flex-shrink:0}
-.welcome-envelope-label{font-family:var(--serif);font-style:italic;font-size:16px;color:#FDFBF7}
-@media(max-width:480px){.welcome-banner{aspect-ratio:4/5;padding:18px 14px}.welcome-banner-logo{height:28px}}
+/* "My Welcome Letter to You": now gates entry itself on the cover screen,
+   see .cover-mockup-btn below. The letter modal (BEFORE_YOU_BLOOM /
+   openIntro) is unchanged, only the trigger that opens it moved. */
 
 /* Mira's welcome video. Native aspect ratio (4:3, matching the actual
    export) rather than a forced 16:9 crop, so nothing gets cut off.
@@ -491,12 +491,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    (BEFORE_YOU_BLOOM) so a burnt-out reader can skim it easily. The 180
    tip modals, which share this same #insp-modal-text element, never pick
    this class up, see openInsp()/openIntro()/closeInsp(). */
-.insp-modal-text.letter-mode{font-size:18px;line-height:1.6;color:#FDFBF7}
-.insp-modal-text.letter-mode ul{margin:16px 0 20px}
-.insp-modal-text.letter-mode li{margin-bottom:13px;padding-left:26px}
-.insp-modal-text.letter-mode li::before{top:12px;width:6px;height:6px}
+.insp-modal-text.letter-mode{font-size:15.5px;line-height:1.62;color:#FDFBF7}
+.insp-modal-text.letter-mode ul{margin:14px 0 18px}
+.insp-modal-text.letter-mode li{margin-bottom:11px;padding-left:24px}
+.insp-modal-text.letter-mode li::before{top:10px;width:5.5px;height:5.5px}
 .letter-highlight{color:#E8B4B8;font-weight:700}
-.letter-fineprint{font-size:13.5px;line-height:1.5;color:var(--text-muted)}
+.letter-fineprint{font-size:12.5px;line-height:1.5;color:var(--text-muted)}
 
 /* Warm emotional flow, every modal in the Companion: "Why this makes
    sense" (validation) -> "What might help" (low demand steps) -> "A
@@ -570,8 +570,16 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .print-btn:hover{background:var(--text);transform:translateY(-1px)}
 .print-btn:disabled{opacity:.4;cursor:default;transform:none}
 
+.basket-tabs{display:flex;gap:6px;margin-bottom:18px}
+.basket-tab-btn{flex:1 1 auto;min-width:0;background:rgba(245,236,224,.07);border:1px solid rgba(245,236,224,.16);border-radius:14px;color:var(--text-soft);font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.01em;line-height:1.3;padding:9px 6px;cursor:pointer;text-align:center;transition:all .22s ease}
+.basket-tab-btn:hover{background:rgba(245,236,224,.12);color:var(--text)}
+.basket-tab-btn.sel{background:var(--accent);border-color:var(--accent);color:var(--bg-dark)}
+.basket-tab-panel{display:none}
+.basket-tab-panel.sel{display:block}
+.basket-print-title{display:none}
 .basket-list{display:flex;flex-direction:column;gap:12px}
-.basket-card{position:relative;background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:16px;padding:16px 42px 16px 16px}
+.basket-card{position:relative;display:flex;align-items:flex-start;gap:14px;background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:16px;padding:16px 42px 16px 16px}
+.basket-card-body{flex:1;min-width:0}
 .basket-card-quote{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text);line-height:1.4;margin-bottom:8px}
 .basket-card-tip{font-size:15px;color:var(--text-soft);line-height:1.55}
 .basket-card-tip ul{list-style:none;margin:0;padding:0}
@@ -580,13 +588,19 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-card-reframe{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-soft);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,236,224,.14)}
 .basket-card-remove{position:absolute;top:14px;right:12px;width:26px;height:26px;border-radius:50%;background:none;border:none;color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;transition:all .2s ease}
 .basket-card-remove:hover{background:rgba(217,147,142,.18);color:var(--rose)}
-.basket-card-photo{display:block;width:100%;height:84px;object-fit:cover;border-radius:10px;margin-bottom:10px}
+.basket-card-photo{flex:0 0 auto;width:64px;height:64px;object-fit:cover;border-radius:12px;margin:0}
 .basket-empty{text-align:center;font-size:14px;line-height:1.7;color:var(--text-soft);padding:30px 10px;font-style:italic}
-.basket-outlook{background:rgba(232,178,154,.1);border:1px solid rgba(232,178,154,.32);border-radius:16px;padding:16px 18px;margin-bottom:18px;display:none}
+.basket-outlook{display:none;align-items:flex-start;gap:14px;background:rgba(232,178,154,.1);border:1px solid rgba(232,178,154,.32);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+.basket-outlook-body{flex:1;min-width:0}
 .basket-outlook-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .basket-outlook-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0}
-.basket-outlook-photo{display:block;width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px}
-.basket-invite{display:none}
+.basket-outlook-photo{flex:0 0 auto;width:84px;height:84px;object-fit:cover;border-radius:14px;margin:0}
+.basket-invite{background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.28);border-radius:16px;padding:18px 16px;text-align:center}
+.basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.basket-invite-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0 0 14px}
+.basket-invite-btn{display:inline-block;background:var(--accent);color:var(--bg-dark);font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.03em;text-decoration:none;padding:12px 26px;border-radius:999px;margin-bottom:8px;transition:all .22s ease}
+.basket-invite-btn:hover{background:var(--text);transform:translateY(-1px)}
+.basket-invite-url{font-family:var(--sans);font-size:11.5px;color:var(--text-muted);margin:0}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .expansion-gate-actions{display:flex;flex-direction:column;gap:12px;margin-top:26px}
@@ -614,29 +628,25 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .basket-modal{position:static;inset:auto;opacity:1;pointer-events:all;padding:0;background:#FDFBF7}
   .basket-modal-scrim{display:none}
   .basket-modal-card{position:static;max-width:none;max-height:none;overflow:visible;background:#FDFBF7;border:none;border-radius:0;padding:0;box-shadow:none;transform:none}
-  .basket-modal-close, .print-btn{display:none !important}
+  .basket-modal-close, .print-btn, .basket-tabs{display:none !important}
   .basket-modal-title{display:none}
   .basket-modal-sub{display:none}
-  .basket-modal-card::before{content:"My Gentle Reminders";display:block;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:30px;text-align:center;margin-bottom:22px}
+  .basket-invite, #basket-panel-invite{display:none !important}
+  .basket-print-title{display:block !important;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:30px;text-align:center;margin-bottom:22px}
   .basket-list{display:block;column-count:2;column-gap:28px}
-  .basket-card{background:#FFFFFF;border:1px solid #F2D6D8;border-radius:10px;padding:16px 18px;margin-bottom:16px;break-inside:avoid;page-break-inside:avoid;display:inline-block;width:100%}
+  .basket-card{background:#FFFFFF;border:1px solid #F2D6D8;border-radius:10px;padding:16px 18px;margin-bottom:16px;break-inside:avoid;page-break-inside:avoid;display:flex;align-items:flex-start;gap:10px;width:100%}
   .basket-card-quote{font-family:Georgia,serif;color:#4A6B7C;font-size:14px}
   .basket-card-tip, .basket-card-tip li{color:#5A5048;font-size:12px}
   .basket-card-tip li::before{background:#E8B4B8}
-  .basket-card-photo{height:70px;margin-bottom:8px}
+  .basket-card-photo{width:56px;height:56px;border-radius:8px;margin:0}
   .basket-card-remove{display:none}
   .insp-mode{background:#F2D6D8 !important;color:#8A5A5F !important;border-color:#E8B4B8 !important}
   .basket-card-reframe{display:block;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:12.5px;margin-top:8px;padding-top:8px;border-top:1px solid #F2D6D8}
   .basket-empty{display:none}
-  .basket-outlook{background:#F9EFE9;border:1px solid #F2D6D8;border-radius:10px;padding:14px 18px;margin-bottom:22px;break-inside:avoid;page-break-inside:avoid;column-span:all}
+  .basket-outlook{display:flex;align-items:flex-start;gap:12px;background:#F9EFE9;border:1px solid #F2D6D8;border-radius:10px;padding:14px 18px;margin-bottom:0;break-inside:avoid;page-break-inside:avoid}
   .basket-outlook-eyebrow{font-family:Georgia,serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A5A5F}
   .basket-outlook-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:13px}
-  .basket-outlook-photo{height:110px;border-radius:8px;margin-bottom:10px}
-  .basket-invite{display:block;background:#F9EFE9;border:1px solid #F2D6D8;border-radius:10px;padding:14px 18px;margin-bottom:22px;break-inside:avoid;page-break-inside:avoid;column-span:all;text-align:center}
-  .basket-invite-eyebrow{font-family:Georgia,serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A5A5F;margin-bottom:6px}
-  .basket-invite-text{font-family:Georgia,serif;color:#4A6B7C;font-size:12.5px;line-height:1.5;margin:0 auto 10px;max-width:460px}
-  .basket-invite-btn{display:inline-block;background:#E8B4B8;color:#FFFFFF;font-family:Georgia,serif;font-weight:700;font-size:12.5px;text-decoration:none;padding:8px 20px;border-radius:999px;margin-bottom:4px}
-  .basket-invite-url{font-family:Georgia,serif;font-size:10.5px;color:#8A5A5F;margin:0}
+  .basket-outlook-photo{width:70px;height:70px;border-radius:8px;margin:0}
 }
 </style>
 </head>
@@ -655,11 +665,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   <div class="cover-simple">
     <div class="cover-mockup-wrap cover-mockup-desktop">
       <img class="cover-mockup-img" src="bloom-again-images/cover-companion.png" alt="Bloom Again Companion, the full guide for your nervous system">
-      <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
+      <button class="cta cover-mockup-btn" onclick="openIntro(0)">My Welcome Letter to You &nbsp;›</button>
     </div>
     <div class="cover-mockup-wrap cover-mockup-mobile">
       <img class="cover-mockup-img" src="bloom-again-images/cover-companion-mobile-new.png" alt="Bloom Again Companion, the full guide for your nervous system">
-      <button class="cta cover-mockup-btn" onclick="goTo('kit')">Start Now &nbsp;›</button>
+      <button class="cta cover-mockup-btn" onclick="openIntro(0)">My Welcome Letter to You &nbsp;›</button>
     </div>
   </div>
 </div>
@@ -672,29 +682,15 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <img src="bloom-again-logo.png" class="kit-hdr-logo" alt="Bloom Again">
     </div>
 
-    <!-- OPENING HERO: video first (mobile), then the "Let's start here"
-         low-demand selector, then the chapter headline + grid, plus the
-         First-Aid Kit widget (desktop sidebar box here; the mobile toggle
-         button now lives at the very end of the page, see post-hero-stack
-         below). -->
+    <!-- OPENING HERO: the "Let's start here" low-demand selector, then the
+         chapter headline + grid, plus the First-Aid Kit widget (desktop
+         sidebar box here; the mobile toggle button now lives at the very
+         end of the page, see post-hero-stack below). The welcome letter
+         now gates entry on the cover screen instead of living here, see
+         .cover-mockup-btn and BEFORE_YOU_BLOOM. -->
     <div class="kit-top-row">
     <div class="opening-hero-wrap">
     <div class="opening-hero">
-
-      <!-- MIRA'S NOTE: a photo banner (her own floral artwork, the logo,
-           and a rosy envelope button), first thing on the page on mobile
-           (flex order below), alongside the low-demand selector on desktop. -->
-      <div class="opening-letter" id="opening-letter">
-        <div class="welcome-banner">
-          <img class="welcome-banner-bg" src="welcome-banner.jpg" alt="" aria-hidden="true">
-          <div class="welcome-banner-scrim"></div>
-          <img class="welcome-banner-logo" src="bloom-again-logo.png" alt="Bloom Again">
-          <button class="welcome-envelope-btn" onclick="openIntro(0)">
-            <svg class="welcome-envelope-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>
-            <span class="welcome-envelope-label">my welcome letter to you</span>
-          </button>
-        </div>
-      </div>
 
       <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in. No typing
            required, six photo cards sit next to each other, no chapter
@@ -931,6 +927,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     <button class="insp-modal-close" onclick="closeInsp()" aria-label="Close">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
     </button>
+    <div class="insp-letter-skip" id="insp-letter-skip">
+      <button type="button" class="insp-letter-skip-btn" onclick="closeInsp()">Enter the Experience Now &nbsp;›</button>
+    </div>
     <div class="insp-modal-media" id="insp-modal-media"></div>
     <h3 class="insp-modal-title" id="insp-modal-title"></h3>
     <div class="insp-modal-text" id="insp-modal-text"></div>
@@ -977,15 +976,33 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     </button>
     <h3 class="basket-modal-title">My Flower Basket</h3>
     <p class="basket-modal-sub">Your saved tips, gathered in one place.</p>
-    <div class="basket-outlook" id="basket-outlook"></div>
-    <div class="basket-invite" id="basket-invite">
-      <p class="basket-invite-eyebrow">Want to talk it through?</p>
-      <p class="basket-invite-text">I'm not a therapist or a doctor, just someone who has lived through burnout myself, who is highly sensitive and neurodivergent too, and who would love to brainstorm this with you and think through some ideas together. I'm opening a small waiting list for 1:1 calls.</p>
-      <a class="basket-invite-btn" href="https://bloom-again-vpkzmm.subscribepage.io" target="_blank" rel="noopener">Join the Waiting List</a>
-      <p class="basket-invite-url">bloom-again-vpkzmm.subscribepage.io</p>
+
+    <div class="basket-tabs">
+      <button class="basket-tab-btn sel" data-tab="reminders" onclick="switchBasketTab('reminders')">My Gentle Reminders</button>
+      <button class="basket-tab-btn" data-tab="takeaway" onclick="switchBasketTab('takeaway')">My Takeaway</button>
+      <button class="basket-tab-btn" data-tab="invite" onclick="switchBasketTab('invite')">1:1 Call Invites</button>
     </div>
-    <button class="print-btn" id="basket-print-btn" onclick="window.print()">&#128196; Download My Gentle Reminders</button>
-    <div class="basket-list" id="basket-list"></div>
+
+    <div class="basket-tab-panel sel" data-panel="reminders" id="basket-panel-reminders">
+      <p class="basket-print-title">My Gentle Reminders</p>
+      <button class="print-btn" id="basket-print-btn-reminders" onclick="window.print()">&#128196; Download PDF</button>
+      <div class="basket-list" id="basket-list"></div>
+    </div>
+
+    <div class="basket-tab-panel" data-panel="takeaway" id="basket-panel-takeaway">
+      <p class="basket-print-title">My Takeaway</p>
+      <div class="basket-outlook" id="basket-outlook"></div>
+      <button class="print-btn" id="basket-print-btn-takeaway" onclick="window.print()">&#128196; Download PDF</button>
+    </div>
+
+    <div class="basket-tab-panel" data-panel="invite" id="basket-panel-invite">
+      <div class="basket-invite" id="basket-invite">
+        <p class="basket-invite-eyebrow">Want to talk it through?</p>
+        <p class="basket-invite-text">I'm not a therapist or a doctor, just someone who has lived through burnout myself, who is highly sensitive and neurodivergent too, and who would love to brainstorm this with you and think through some ideas together. I'm opening a small waiting list for 1:1 calls.</p>
+        <a class="basket-invite-btn" href="https://bloom-again-vpkzmm.subscribepage.io" target="_blank" rel="noopener">Join the Waiting List</a>
+        <p class="basket-invite-url">bloom-again-vpkzmm.subscribepage.io</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1117,7 +1134,8 @@ function initKit(){
   document.getElementById('kbox3').classList.remove('open');
   document.getElementById('kconn-2').classList.remove('show');
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('sel'));
-  document.getElementById('opening-letter').classList.remove('hide');
+  const openingLetter = document.getElementById('opening-letter');
+  if(openingLetter) openingLetter.classList.remove('hide');
   document.querySelector('.soil-quote').classList.remove('hide');
   document.querySelector('.back-to-top-wrap').classList.remove('hide');
   const heavyToday = document.getElementById('heavy-today');
@@ -1187,7 +1205,8 @@ function pickPillar(id){
   S.chapter = id; S.area = null;
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('sel', b.dataset.pillar===id));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
-  document.getElementById('opening-letter').classList.add('hide');
+  const openingLetter = document.getElementById('opening-letter');
+  if(openingLetter) openingLetter.classList.add('hide');
   document.querySelector('.soil-quote').classList.add('hide');
   document.querySelector('.back-to-top-wrap').classList.add('hide');
   const heavyToday = document.getElementById('heavy-today');
@@ -1317,6 +1336,7 @@ function toggleInspScience(btn){
 function openInsp(i){
   const t = S.area.tips[i];
   currentInspTip = t;
+  document.getElementById('insp-letter-skip').classList.remove('show');
   document.getElementById('insp-modal-title').textContent = t.title;
   document.getElementById('insp-modal-text').classList.remove('letter-mode');
   document.getElementById('insp-modal-text').innerHTML = t.recognition
@@ -1331,9 +1351,15 @@ function openInsp(i){
 }
 
 function closeInsp(){
+  const wasLetterGate = introIdx !== -1;
   document.getElementById('insp-modal').classList.remove('open');
   document.getElementById('insp-modal-intro-nav').classList.remove('show');
+  document.getElementById('insp-letter-skip').classList.remove('show');
   introIdx = -1;
+  /* The welcome letter now gates entry from the cover screen, closing it
+     any way (Done, the X, the scrim, Escape, or "Enter the Experience
+     Now") should always carry her on into the kit itself. */
+  if(wasLetterGate) goTo('kit');
 }
 
 /* BEFORE YOU BLOOM: steps through BEFORE_YOU_BLOOM in the same insp-modal
@@ -1353,10 +1379,13 @@ function openIntro(i){
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
+  document.getElementById('insp-letter-skip').classList.add('show');
   const nav = document.getElementById('insp-modal-intro-nav');
   nav.classList.add('show');
   document.getElementById('insp-intro-prev').disabled = introIdx === 0;
-  document.getElementById('insp-intro-next').textContent = introIdx === BEFORE_YOU_BLOOM.length - 1 ? 'Done' : 'Next ›';
+  const isLast = introIdx === BEFORE_YOU_BLOOM.length - 1;
+  document.getElementById('insp-intro-next').textContent = isLast ? 'Done' : 'Next ›';
+  document.getElementById('insp-intro-next').classList.toggle('pulse', !isLast);
   document.getElementById('insp-intro-count').textContent = `${introIdx + 1} / ${BEFORE_YOU_BLOOM.length}`;
 }
 
@@ -1514,21 +1543,28 @@ function removeFromBasket(id){
   renderBasket();
 }
 
+function switchBasketTab(tab){
+  document.querySelectorAll('.basket-tab-btn').forEach(b=>b.classList.toggle('sel', b.dataset.tab===tab));
+  document.querySelectorAll('.basket-tab-panel').forEach(p=>p.classList.toggle('sel', p.dataset.panel===tab));
+}
+
 function renderBasket(){
   const basket = getBasket();
   const list = document.getElementById('basket-list');
   const outlookEl = document.getElementById('basket-outlook');
-  const printBtn = document.getElementById('basket-print-btn');
-  if(printBtn) printBtn.disabled = basket.length === 0;
+  const printBtnReminders = document.getElementById('basket-print-btn-reminders');
+  const printBtnTakeaway = document.getElementById('basket-print-btn-takeaway');
+  if(printBtnReminders) printBtnReminders.disabled = basket.length === 0;
+  if(printBtnTakeaway) printBtnTakeaway.disabled = basket.length === 0;
   if(outlookEl){
     if(!basket.length){
       outlookEl.style.display = 'none';
       outlookEl.innerHTML = '';
     } else {
       const outlook = computeOutlook(basket);
-      outlookEl.style.display = 'block';
+      outlookEl.style.display = 'flex';
       const outlookPhoto = outlook.chapter ? `<img class="basket-outlook-photo" src="new_images/chapter-${outlook.chapter}.jpg" alt="" onerror="this.remove()">` : '';
-      outlookEl.innerHTML = `${outlookPhoto}<div class="basket-outlook-eyebrow">${outlook.eyebrow}</div><p class="basket-outlook-text">${outlook.text}</p>`;
+      outlookEl.innerHTML = `${outlookPhoto}<div class="basket-outlook-body"><div class="basket-outlook-eyebrow">${outlook.eyebrow}</div><p class="basket-outlook-text">${outlook.text}</p></div>`;
     }
   }
   if(!basket.length){
@@ -1539,17 +1575,20 @@ function renderBasket(){
     <div class="basket-card">
       <button class="basket-card-remove" onclick="removeFromBasket('${item.id}')" aria-label="Remove from basket">&#10005;</button>
       ${item.img ? `<img class="basket-card-photo" src="new_images/${item.img}" alt="" onerror="this.remove()">` : ''}
-      ${item.mode ? `<span class="insp-mode insp-mode-${item.mode.toLowerCase()}">${item.mode}</span>` : ''}
-      <p class="basket-card-quote">${item.quote}</p>
-      <div class="basket-card-tip">${item.tip.length > 1
-        ? `<ul>${item.tip.map(x=>`<li>${x}</li>`).join('')}</ul>`
-        : (item.tip[0] || '')}</div>
-      ${item.reframe ? `<p class="basket-card-reframe">${item.reframe}</p>` : ''}
+      <div class="basket-card-body">
+        ${item.mode ? `<span class="insp-mode insp-mode-${item.mode.toLowerCase()}">${item.mode}</span>` : ''}
+        <p class="basket-card-quote">${item.quote}</p>
+        <div class="basket-card-tip">${item.tip.length > 1
+          ? `<ul>${item.tip.map(x=>`<li>${x}</li>`).join('')}</ul>`
+          : (item.tip[0] || '')}</div>
+        ${item.reframe ? `<p class="basket-card-reframe">${item.reframe}</p>` : ''}
+      </div>
     </div>
   `).join('');
 }
 
 function openBasket(){
+  switchBasketTab('reminders');
   renderBasket();
   document.getElementById('basket-modal').classList.add('open');
 }
