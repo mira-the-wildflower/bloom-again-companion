@@ -54,9 +54,6 @@ body{overflow-x:hidden}
 .cover-mockup-btn.cta:hover{transform:translateX(-50%) translateY(-2px)}
 
 /* quick pick: sits at the top of the flower/chapter block */
-.pick-section{max-width:520px;margin:0 auto;padding:0 5vw 6px;text-align:center}
-.pick-title{font-size:clamp(23px,3.2vw,29px);margin-top:8px;margin-bottom:0;line-height:1.3}
-.pick-arrow{display:none}
 
 /* opening hero: Mira's letter on one side, the flower+chapters as the
    dominant, centered focal point on the other. Full-bleed wrap breaks out
@@ -66,7 +63,7 @@ body{overflow-x:hidden}
 .opening-hero{display:flex;align-items:center;justify-content:center;gap:40px 72px;flex-wrap:wrap;max-width:1400px;margin:30px auto 12px;padding:0 6vw}
 
 /* Mira's note */
-.opening-letter{flex:1 1 300px;max-width:380px;background:rgba(245,236,224,.06);border:1px solid rgba(232,178,154,.3);border-radius:24px;padding:26px 26px;transition:opacity .3s ease}
+.opening-letter{flex:0 1 220px;max-width:220px;display:flex;align-items:center;justify-content:center;transition:opacity .3s ease}
 .opening-letter.hide{display:none}
 .opening-letter-greeting{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);margin-bottom:12px}
 .opening-letter p:not(.opening-letter-greeting):not(.opening-letter-signoff){font-size:18px;line-height:1.65;color:var(--text-soft);margin-bottom:11px}
@@ -195,22 +192,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today{max-width:480px;margin:0 auto;text-align:center}
 .heavy-today-heading{font-size:clamp(22px,4vw,27px);color:var(--text);margin-bottom:8px;line-height:1.25}
 .heavy-today-sub{font-size:17px;color:var(--text-soft);line-height:1.6;max-width:42ch;margin:0 auto 16px}
-.heavy-select-wrap{position:relative;max-width:440px;margin:0 auto;text-align:left}
-.heavy-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;background:#D2DEC7;border:1px solid #FDFBF7;border-radius:999px;padding:15px 22px;cursor:pointer;font-family:var(--sans);font-size:16px;color:rgba(43,56,66,.65);transition:all .22s ease}
-.heavy-select-trigger:hover{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
-.heavy-select-trigger.open{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35)}
-.heavy-select-trigger.filled{background:var(--accent)}
-.heavy-select-trigger.filled .heavy-select-placeholder{color:#FFFFFF;font-weight:600}
-.heavy-select-placeholder{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.heavy-select-chevron{width:16px;height:16px;flex-shrink:0;color:#2B3842;opacity:.6;transition:transform .25s ease}
-.heavy-select-trigger.open .heavy-select-chevron{transform:rotate(180deg)}
-.heavy-select-dropdown{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease,margin-top .3s ease;background:#FDFBF7;border-radius:16px}
-.heavy-select-dropdown.open{max-height:480px;opacity:1;margin-top:8px;border:1px solid var(--accent);overflow:auto}
-.heavy-select-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid rgba(43,56,66,.1);padding:13px 16px;font-family:var(--sans);font-size:16px;line-height:1.45;color:#2B3842;cursor:pointer;transition:background .18s ease,color .18s ease}
-.heavy-select-option:last-child{border-bottom:none}
-.heavy-select-option:hover{background:#F3DCC8}
-.heavy-select-option.sel{background:var(--accent);font-weight:600}
-.heavy-select-option-emoji{flex-shrink:0;font-size:16px}
+.heavy-box-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;margin:0 auto}
+.heavy-box{flex:1 1 140px;max-width:170px;background:#D2DEC7;border:1px solid #FDFBF7;border-radius:16px;padding:16px 14px;font-family:var(--sans);font-size:14px;line-height:1.4;color:#2B3842;cursor:pointer;text-align:left;transition:all .22s ease}
+.heavy-box:hover{border-color:var(--accent-deep);box-shadow:0 0 0 3px rgba(232,178,154,.35);transform:translateY(-2px)}
+.heavy-box.sel{background:var(--accent);font-weight:600}
+.heavy-today-announce-text{min-height:22px;margin-top:14px;font-family:var(--sans);font-size:15px;font-weight:600;color:#FFFFFF}
 
 /* the glow + badge a chosen chapter gets in the nav list below, separate
    from the permanent .petal-btn-start cue and from .sel (actually picking
@@ -296,9 +282,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 @media(max-width:900px){
   .opening-hero{gap:26px 0}
-  .opening-letter{order:-1;max-width:480px;flex-basis:100%}
+  .opening-letter{order:-1;max-width:260px;flex-basis:100%}
   .heavy-today{order:0;flex-basis:100%;max-width:480px}
-  .pick-section{order:1;flex-basis:100%}
   .flower-block{order:2;flex-basis:100%;max-width:520px}
 }
 @media(max-width:640px){
@@ -337,16 +322,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(min-width:901px){
   html,body{font-size:19px}
   .opening-hero{display:grid;grid-template-columns:1fr;justify-items:center;row-gap:24px}
-  .opening-letter{grid-column:1;grid-row:1;max-width:420px;width:100%}
-  .heavy-today{grid-column:1;grid-row:2;max-width:420px;width:100%}
-  .pick-section{grid-column:1;grid-row:3;margin-top:0;margin-bottom:8px;max-width:1200px;width:100%}
-  .pick-section .eyebrow{display:none}
-  .pick-title{white-space:nowrap}
-  .pick-arrow{display:inline-block;vertical-align:middle;width:52px;height:auto;margin-left:8px;margin-bottom:10px}
+  .opening-letter{grid-column:1;grid-row:1;max-width:220px;width:100%}
+  .heavy-today{grid-column:1;grid-row:2;max-width:920px;width:100%}
 
   /* the chapter grid itself: a real multi-column grid of cards, not the
      mobile single-column list, spanning the full hero width */
-  .flower-block{grid-column:1;grid-row:4;display:block;max-width:1200px;width:100%;margin:0 auto}
+  .flower-block{grid-column:1;grid-row:3;display:block;max-width:1200px;width:100%;margin:0 auto}
   .opening-flower{display:block;margin-top:0}
   .petal-nav-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;flex:none}
   .petal-nav-list .petal-btn{flex-direction:column;text-align:center;gap:10px;padding:22px 16px;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14)}
@@ -371,13 +352,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    selector side by side without squeezing), let the video and the "Let's
    start here" selector sit alongside each other instead of stacked. */
 @media(min-width:1300px){
-  .opening-hero{grid-template-columns:auto auto;justify-content:center;column-gap:48px;justify-items:stretch}
-  .opening-letter{grid-column:1;grid-row:1;justify-self:end;max-width:380px;width:auto}
-  .heavy-today{grid-column:2;grid-row:1;justify-self:start;max-width:380px;width:auto;text-align:left}
-  .heavy-today-sub{margin-left:0;margin-right:0}
-  .heavy-select-wrap{margin:0}
-  .pick-section{grid-column:1/-1;grid-row:2}
-  .flower-block{grid-column:1/-1;grid-row:3}
+  .opening-hero{grid-template-columns:1fr}
+  .opening-letter{grid-column:1;grid-row:1;justify-self:center;max-width:220px;width:100%}
+  .heavy-today{grid-column:1;grid-row:2;justify-self:center;max-width:1040px;width:100%}
+  .flower-block{grid-column:1;grid-row:3}
 }
 
 /* sub-area icons */
@@ -466,9 +444,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 /* "My Welcome Letter to You": a cute, rosy pill button, warmer and softer
    than the Zero Capacity button, serif italic so it reads like an invitation. */
-.welcome-letter-btn{display:inline-flex;align-items:center;gap:8px;background:var(--rose-light);color:var(--bg-dark);border:none;font-family:var(--serif);font-style:italic;font-size:15px;font-weight:500;letter-spacing:.01em;cursor:pointer;padding:10px 22px;border-radius:999px;margin-top:6px;transition:all .25s ease;box-shadow:0 4px 14px rgba(0,0,0,.08)}
-.welcome-letter-btn:hover{background:var(--rose);color:#FFFFFF;transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.14)}
-.welcome-letter-btn svg{width:15px;height:15px;flex-shrink:0}
+.welcome-envelope-btn{display:flex;flex-direction:column;align-items:center;gap:10px;background:none;border:none;cursor:pointer;padding:14px;transition:transform .25s ease}
+.welcome-envelope-btn:hover{transform:translateY(-2px)}
+.welcome-envelope-icon{width:52px;height:52px;color:var(--rose);transition:color .25s ease}
+.welcome-envelope-btn:hover .welcome-envelope-icon{color:var(--rose-light)}
+.welcome-envelope-label{font-family:var(--sans);font-size:13.5px;font-weight:500;letter-spacing:.02em;color:var(--text-soft)}
 
 /* Mira's welcome video. Native aspect ratio (4:3, matching the actual
    export) rather than a forced 16:9 crop, so nothing gets cut off.
@@ -512,6 +492,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-text.letter-mode li{margin-bottom:13px;padding-left:26px}
 .insp-modal-text.letter-mode li::before{top:12px;width:6px;height:6px}
 .letter-highlight{color:#E8B4B8;font-weight:700}
+.letter-fineprint{font-size:13.5px;line-height:1.5;color:var(--text-muted)}
 
 /* Warm emotional flow, every modal in the Companion: "Why this makes
    sense" (validation) -> "What might help" (low demand steps) -> "A
@@ -601,6 +582,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-outlook-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .basket-outlook-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0}
 .basket-outlook-photo{display:block;width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+.basket-invite{display:none}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 .expansion-gate-actions{display:flex;flex-direction:column;gap:12px;margin-top:26px}
@@ -646,6 +628,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .basket-outlook-eyebrow{font-family:Georgia,serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A5A5F}
   .basket-outlook-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:13px}
   .basket-outlook-photo{height:110px;border-radius:8px;margin-bottom:10px}
+  .basket-invite{display:block;background:#F9EFE9;border:1px solid #F2D6D8;border-radius:10px;padding:14px 18px;margin-bottom:22px;break-inside:avoid;page-break-inside:avoid;column-span:all;text-align:center}
+  .basket-invite-eyebrow{font-family:Georgia,serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A5A5F;margin-bottom:6px}
+  .basket-invite-text{font-family:Georgia,serif;color:#4A6B7C;font-size:12.5px;line-height:1.5;margin:0 auto 10px;max-width:460px}
+  .basket-invite-btn{display:inline-block;background:#E8B4B8;color:#FFFFFF;font-family:Georgia,serif;font-weight:700;font-size:12.5px;text-decoration:none;padding:8px 20px;border-radius:999px;margin-bottom:4px}
+  .basket-invite-url{font-family:Georgia,serif;font-size:10.5px;color:#8A5A5F;margin:0}
 }
 </style>
 </head>
@@ -693,41 +680,30 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <!-- MIRA'S NOTE: the welcome video, first thing on the page on mobile
            (flex order below), alongside the low-demand selector on desktop. -->
       <div class="opening-letter" id="opening-letter">
-        <div class="welcome-video-wrap">
-          <video class="welcome-video" controls preload="metadata" playsinline poster="mira-welcome-poster.jpg">
-            <source src="mira-welcome.mp4" type="video/mp4">
-            Your browser doesn't support embedded video. <a href="mira-welcome.mp4">Watch Mira's welcome video</a>.
-          </video>
-        </div>
-        <button class="welcome-letter-btn" onclick="openIntro(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 7.5 3.2c0 5.5-7.5 10.1-7.5 10.1z"/></svg>My Welcome Letter to You</button>
+        <button class="welcome-envelope-btn" onclick="openIntro(0)">
+          <svg class="welcome-envelope-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="M3.5 7l8.5 6.2L20.5 7"/></svg>
+          <span class="welcome-envelope-label">my welcome letter to you</span>
+        </button>
       </div>
 
-      <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in, right after the
-           video. No typing required, a tap/click opens a short dropdown of
-           relatable statements, no chapter names, no analysis needed. -->
+      <!-- WHAT FEELS HEAVY TODAY: the lowest-demand way in. No typing
+           required, five plain statements sit right next to each other as
+           boxes, no chapter names, no analysis needed. Picking one never
+           opens a chapter on its own, it just points at one (see
+           pickHeavyToday), scrolling to and glowing the matching button in
+           the chapter nav below, and announces it in heavy-today-announce.
+           She still chooses whether to actually tap into the suggestion. -->
       <div class="heavy-today" id="heavy-today">
-        <h2 class="heavy-today-heading serif">Let's start here</h2>
-        <p class="heavy-today-sub">You don't need to analyze your burnout. Just choose what feels true right now:</p>
-        <div class="heavy-select-wrap">
-          <button type="button" class="heavy-select-trigger" id="heavy-select-trigger" onclick="toggleHeavySelect()" aria-haspopup="listbox" aria-expanded="false" aria-controls="heavy-select-dropdown">
-            <span class="heavy-select-placeholder" id="heavy-select-placeholder">What feels most relatable right now?</span>
-            <svg class="heavy-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="heavy-select-dropdown" id="heavy-select-dropdown" role="listbox">
-            <button class="heavy-select-option" role="option" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-select-option-emoji">&#129657;</span><span>I've been absorbing someone else's mood or drama and feel emotionally empty.</span></button>
-            <button class="heavy-select-option" role="option" data-target="body" onclick="pickHeavyToday(this,'body')"><span class="heavy-select-option-emoji">&#127911;</span><span>Everything is too loud, too bright, or too fast, my senses are fried.</span></button>
-            <button class="heavy-select-option" role="option" data-target="relationships" onclick="pickHeavyToday(this,'relationships')"><span class="heavy-select-option-emoji">&#128683;</span><span>I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</span></button>
-            <button class="heavy-select-option" role="option" data-target="identity" onclick="pickHeavyToday(this,'identity')"><span class="heavy-select-option-emoji">&#128230;</span><span>I feel like I have to do everything perfectly or it all falls apart.</span></button>
-            <button class="heavy-select-option" role="option" data-target="environment" onclick="pickHeavyToday(this,'environment')"><span class="heavy-select-option-emoji">&#128483;&#65039;</span><span>Misunderstandings, family demands, or unspoken mental load are crushing me.</span></button>
-          </div>
+        <h2 class="heavy-today-heading serif">Now let's start here</h2>
+        <p class="heavy-today-sub">Just choose what feels most true right now:</p>
+        <div class="heavy-box-row" role="group" aria-label="Choose what feels most true right now">
+          <button type="button" class="heavy-box" data-target="environment" onclick="pickHeavyToday(this,'environment')">Misunderstandings, family demands, or unspoken mental load are crushing me.</button>
+          <button type="button" class="heavy-box" data-target="relationships" onclick="pickHeavyToday(this,'relationships')">I'm exhausted from people-pleasing, setting boundaries, or feeling guilty.</button>
+          <button type="button" class="heavy-box" data-target="body" onclick="pickHeavyToday(this,'body')">Everything is too loud, too bright, or too fast, my senses are fried.</button>
+          <button type="button" class="heavy-box" data-target="identity" onclick="pickHeavyToday(this,'identity')">I feel like I have to do everything perfectly or it all falls apart.</button>
+          <button type="button" class="heavy-box" data-target="expansion" onclick="pickHeavyToday(this,'expansion')">I've lost touch with what used to make me feel alive.</button>
         </div>
-        <p class="sr-only" id="heavy-today-announce" role="status" aria-live="polite"></p>
-      </div>
-
-      <!-- HEADLINE: mobile: sits above the flower (flex order). desktop: moves below the row via grid-row. -->
-      <div class="pick-section">
-        <span class="eyebrow">Start Here</span>
-        <h1 class="pick-title serif">Where do you need relief first?<img class="pick-arrow" src="bloom-again-images/arrow-curved.png" alt="" aria-hidden="true"></h1>
+        <p class="heavy-today-announce-text" id="heavy-today-announce" role="status" aria-live="polite"></p>
       </div>
 
       <!-- FIVE CHAPTERS: the main interactive heart of the page. Order is
@@ -955,6 +931,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     <h3 class="basket-modal-title">My Flower Basket</h3>
     <p class="basket-modal-sub">Your saved tips, gathered in one place.</p>
     <div class="basket-outlook" id="basket-outlook"></div>
+    <div class="basket-invite" id="basket-invite">
+      <p class="basket-invite-eyebrow">Want to talk it through?</p>
+      <p class="basket-invite-text">I'm not a therapist or a doctor, just someone who has lived through burnout myself, who is highly sensitive and neurodivergent too, and who would love to brainstorm this with you and think through some ideas together. I'm opening a small waiting list for 1:1 calls.</p>
+      <a class="basket-invite-btn" href="https://bloom-again-vpkzmm.subscribepage.io" target="_blank" rel="noopener">Join the Waiting List</a>
+      <p class="basket-invite-url">bloom-again-vpkzmm.subscribepage.io</p>
+    </div>
     <button class="print-btn" id="basket-print-btn" onclick="window.print()">&#128196; Download My Gentle Reminders</button>
     <div class="basket-list" id="basket-list"></div>
   </div>
@@ -1051,7 +1033,8 @@ const CHAPTER_DISCLAIMER = {
 const BEFORE_YOU_BLOOM = [
   {title:"You Are Not a Project to Fix",body:"<p>You don't change the flower, you change the soil. &#127807;</p><p>If you've felt depleted, sensitive, or underwater lately:</p><ul><li>You are not broken.</li><li>You don't need a stricter routine or more discipline.</li><li><span class=\"letter-highlight\">Your system has simply been carrying too much for too long.</span></li></ul><p>Bloom Again is a gentle digital space built to help you ease the conditions around you, at your own natural pace.</p>"},
   {title:"Rest Isn't the Only Answer",body:"<p>When you're burnt out, forcing quiet can sometimes make your brain feel more restless.</p><p>Inside this companion, you'll find four distinct modes of support:</p><ul><li>&#129750; <span class=\"letter-highlight\">RESTORE</span>: low-sensory quiet when running on empty.</li><li>&#9889; <span class=\"letter-highlight\">ACTIVATE</span>: a small spark of movement when feeling flat.</li><li>&#127912; <span class=\"letter-highlight\">ENGAGE</span>: absorbing, low-stakes creative focus.</li><li>&#129293; <span class=\"letter-highlight\">CONNECT</span>: gentle relational safety.</li></ul>"},
-  {title:"Start Where You Are",body:"<p>There is no finish line here, and no correct order to follow.</p><ul><li>Take what resonates, leave the rest without guilt.</li><li>Skip chapters or sit in one for months, the flower is a map, not a ladder.</li><li>Tap <span class=\"letter-highlight\">Save to Basket</span> on any tip to build your personal printout.</li><li>Save three or more, and your basket will quietly start reflecting back a pattern in what you've been reaching for, not a diagnosis, just a gentle mirror.</li></ul><p>You are allowed to be here exactly as tired, sensitive, and unfinished as you are right now. &#127800;</p>"}
+  {title:"Start Where You Are",body:"<p>There is no finish line here, and no correct order to follow.</p><ul><li>Take what resonates, leave the rest without guilt.</li><li>Skip chapters or sit in one for months, the flower is a map, not a ladder.</li><li>Tap <span class=\"letter-highlight\">Save to Basket</span> on any tip to build your personal printout.</li><li>Save three or more, and your basket will quietly start reflecting back a pattern in what you've been reaching for, not a diagnosis, just a gentle mirror.</li></ul><p>You are allowed to be here exactly as tired, sensitive, and unfinished as you are right now. &#127800;</p>"},
+  {title:"1:1 Call Waiting List for 2027",body:"<p>For the women who are strong, yet sensitive. The ones who carry so much, think so deeply, dream so big, and sometimes feel like there's no space for them to simply be.</p><p>I'm opening a waiting list for 1:1 calls in 2027, a space where we can talk about whatever is on your heart.</p><p>Your burnout. Your worries. Your dreams. The things you're trying to figure out, the things you're afraid to say out loud, or simply the things you need to get off your chest.</p><p>Because I know that not every woman who looks strong feels strong all the time. And I know how rare it can be to find a space where you don't have to explain yourself, minimize your feelings, or pretend you have it all together.</p><p><span class=\"letter-highlight\">A space where your sensitivity is not mistaken for weakness, where your strength is not a reason to overlook your struggles, and where you can show up exactly as you are, without judgment or pressure to have all the answers.</span></p><p style=\"text-align:center;margin:20px 0\"><a class=\"kit-cta-btn\" href=\"https://bloom-again-vpkzmm.subscribepage.io\" target=\"_blank\" rel=\"noopener\">Join the 2027 Waiting List</a></p><p>I'd love to create more room for honest conversations, meaningful connection, and the kind of understanding so many of us need.</p><p class=\"letter-fineprint\">A little note: these calls are intended for personal conversation, reflection, and supportive connection. I'm not a therapist or a medical doctor, and these calls are not a substitute for professional mental health care or medical advice.</p><p>You don't always have to be the strong one. Sometimes, you deserve a space where you can just be human, too. &#129293;</p>"}
 ];
 
 const FLOWER_META = [
@@ -1119,50 +1102,26 @@ function showFirstAidMobileBtn(){
   if(btn) btn.classList.remove('hide');
 }
 
-/* "LET'S START HERE" selector: a search-styled trigger that opens a short
-   dropdown of 5 relatable statements, no typing needed. Picking one never
-   opens a chapter on its own, it just points at one, scrolling to and
-   glowing the matching button in the chapter nav below (with a small
-   attached badge, pure CSS, see .petal-btn.heavy-glow::after), and fills
-   the trigger with what she picked so it reads like a normal select. She
-   still chooses whether to actually tap into the suggested chapter. */
-function toggleHeavySelect(forceOpen){
-  const trigger = document.getElementById('heavy-select-trigger');
-  const dropdown = document.getElementById('heavy-select-dropdown');
-  if(!trigger || !dropdown) return;
-  const open = typeof forceOpen === 'boolean' ? forceOpen : !dropdown.classList.contains('open');
-  dropdown.classList.toggle('open', open);
-  trigger.classList.toggle('open', open);
-  trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-}
-document.addEventListener('click', e=>{
-  const wrap = document.querySelector('.heavy-select-wrap');
-  if(wrap && !wrap.contains(e.target)) toggleHeavySelect(false);
-});
+/* "NOW LET'S START HERE" selector: five plain statements sit as boxes,
+   no typing needed. Picking one never opens a chapter on its own, it
+   just points at one, scrolling to and glowing the matching button in
+   the chapter nav below (with a small attached badge, pure CSS, see
+   .petal-btn.heavy-glow::after), and announces it via
+   heavy-today-announce. She still chooses whether to actually tap into
+   the suggested chapter. */
 function pickHeavyToday(btn, chapterId){
-  const label = btn.textContent.trim();
-  const placeholder = document.getElementById('heavy-select-placeholder');
-  if(placeholder) placeholder.textContent = label;
-  const trigger = document.getElementById('heavy-select-trigger');
-  if(trigger) trigger.classList.add('filled');
-  document.querySelectorAll('.heavy-select-option').forEach(o=>o.classList.toggle('sel', o===btn));
+  document.querySelectorAll('.heavy-box').forEach(o=>o.classList.toggle('sel', o===btn));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.toggle('heavy-glow', b.dataset.pillar===chapterId));
-  toggleHeavySelect(false);
   const announce = document.getElementById('heavy-today-announce');
   if(announce) announce.textContent = 'This chapter will help you most for now: ' + (FLOWER_META.find(m=>m.id===chapterId)?.title || chapterId);
   const target = document.querySelector(`#petal-nav-list .petal-btn[data-pillar="${chapterId}"]`);
   if(target) setTimeout(()=>target.scrollIntoView({behavior:'smooth', block:'center'}), 150);
 }
 function clearHeavyToday(){
-  document.querySelectorAll('.heavy-select-option').forEach(o=>o.classList.remove('sel'));
+  document.querySelectorAll('.heavy-box').forEach(o=>o.classList.remove('sel'));
   document.querySelectorAll('#petal-nav-list .petal-btn').forEach(b=>b.classList.remove('heavy-glow'));
-  const placeholder = document.getElementById('heavy-select-placeholder');
-  if(placeholder) placeholder.textContent = 'What feels most relatable right now?';
-  const trigger = document.getElementById('heavy-select-trigger');
-  if(trigger) trigger.classList.remove('filled');
   const announce = document.getElementById('heavy-today-announce');
   if(announce) announce.textContent = '';
-  toggleHeavySelect(false);
 }
 
 function confirmExpansionEntry(){
@@ -1342,7 +1301,9 @@ function openIntro(i){
   const introTextEl = document.getElementById('insp-modal-text');
   introTextEl.classList.add('letter-mode');
   introTextEl.innerHTML = piece.body;
-  document.getElementById('insp-modal-media').innerHTML = '';
+  document.getElementById('insp-modal-media').innerHTML = introIdx === 0
+    ? '<div class="welcome-video-wrap"><video class="welcome-video" controls preload="metadata" playsinline poster="mira-welcome-poster.jpg"><source src="mira-welcome.mp4" type="video/mp4">Your browser doesn\'t support embedded video. <a href="mira-welcome.mp4">Watch Mira\'s welcome video</a>.</video></div>'
+    : '';
   const modal = document.getElementById('insp-modal');
   document.querySelector('.insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
