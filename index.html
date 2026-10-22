@@ -67,15 +67,23 @@ body{overflow-x:hidden}
 .flower-block{flex:1 1 340px;max-width:360px;display:flex;flex-direction:column;align-items:center}
 .opening-flower{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:14px 26px;width:100%;margin-top:14px}
 .petal-nav-list{display:flex;flex-direction:column;gap:3px;flex:1 1 260px;max-width:320px}
-.petal-btn{display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
+.petal-btn{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
 .petal-btn:hover{background:rgba(245,236,224,.08)}
 .petal-btn.sel{background:rgba(232,178,154,.14)}
-.petal-icon{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
+/* full-box photo + dark scrim: each chapter card is now filled edge to edge
+   with its own photo, dark enough underneath that the title reads clearly
+   on top of it. First-Aid Kit gets a reddish scrim instead of the neutral
+   dark one, so it stands apart from the five chapters at a glance. */
+.petal-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .35s ease}
+.petal-btn:hover .petal-bg{transform:scale(1.045)}
+.petal-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(22,15,11,.64),rgba(12,8,6,.86))}
+.firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(156,30,16,.52),rgba(94,12,8,.82))}
+.petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
-.petal-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.petal-icon-photo{display:none}
 .petal-btn:hover .petal-icon{background:rgba(232,178,154,.18)}
 .petal-btn.sel .petal-icon{background:rgba(232,178,154,.26);border-width:2px}
-.petal-text{display:flex;flex-direction:column}
+.petal-text{position:relative;z-index:2;display:flex;flex-direction:column}
 
 /* one-time "you can tap these" cue for touch devices, no hover to rely on */
 @media(hover:none) and (pointer:coarse){
@@ -85,6 +93,7 @@ body{overflow-x:hidden}
   .petal-btn:nth-child(3) .petal-icon{animation-delay:.88s}
   .petal-btn:nth-child(4) .petal-icon{animation-delay:1.02s}
   .petal-btn:nth-child(5) .petal-icon{animation-delay:1.16s}
+  .petal-btn:nth-child(6) .petal-icon{animation-delay:1.3s}
 }
 @keyframes petalTapCue{
   0%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,178,154,0)}
@@ -205,6 +214,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px;flex-wrap:wrap}
 .petal-btn.heavy-glow .petal-icon{animation:heavyGlowPulse 1.8s ease-out 2}
 .petal-btn.heavy-glow::after{
+  position:relative;
+  z-index:2;
   content:"This chapter will help you most for now \1F33B";
   flex:1 1 100%;
   display:inline-block;
@@ -244,18 +255,16 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .kit-top-row{width:100vw;position:relative;left:50%;transform:translateX(-50%);display:flex;justify-content:center;max-width:1760px;margin:0 auto;padding:0 6vw}
   .kit-top-row .opening-hero-wrap{width:auto;position:static;left:auto;transform:none;flex:1 1 auto;min-width:0}
 }
-.firstaid-mobile-btn{display:block;width:100%;margin:14px auto 0;background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.3);color:var(--accent);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:11px 16px;border-radius:999px;cursor:pointer;transition:all .25s ease;text-align:center}
-.firstaid-mobile-btn:hover{background:rgba(232,178,154,.16)}
-.firstaid-mobile-btn.hide{display:none}
+/* First-Aid Kit now lives inside the shared petal-nav-list itself, first in
+   line, at every width (desktop grid AND mobile list), see the reordered
+   markup below. The old separate mobile-only pill is retired; it's kept in
+   the markup (so hideFirstAidMobileBtn()/showFirstAidMobileBtn() still have
+   something harmless to toggle) but hidden everywhere now. */
+.firstaid-mobile-btn{display:none !important}
 .heavy-today.hide{display:none}
-@media(min-width:901px){.firstaid-mobile-btn{display:none !important}}
-/* First-Aid grid card, desktop only: the sixth petal-nav-list button,
-   styled like the five chapter cards. Mobile uses firstaid-mobile-btn
-   above instead. Both open the same firstaid-modal popup now, see
-   openFirstAidModal()/closeFirstAidModal(). */
-.firstaid-petal-btn{display:none}
+/* First-Aid grid card: same petal-btn as the five chapters, at every width. */
+.firstaid-petal-btn{display:flex}
 @media(min-width:901px){
-  .firstaid-petal-btn{display:flex}
   .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,178,154,.1);border-color:rgba(232,178,154,.35)}
   .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,178,154,.18)}
 }
@@ -757,35 +766,45 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="flower-block">
         <div class="opening-flower">
           <div class="petal-nav-list" id="petal-nav-list">
-            <button class="petal-btn petal-btn-start" data-pillar="environment" onclick="pickPillar('environment')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg><img class="petal-icon-photo" src="new_images/chapter-environment.jpg" alt="" onerror="this.remove()"></span>
+            <!-- FIRST-AID KIT now comes first, at every width: the quickest
+                 thing to reach when she's running on empty. Same petal-btn
+                 as the five chapters, just with a reddish scrim instead of
+                 the neutral dark one (see .firstaid-petal-btn .petal-scrim). -->
+            <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">
+              <span class="petal-bg" style="background-image:url('new_images/chapter-firstaid.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+              <span class="petal-text"><span class="fl-layer">Support</span><span class="fl-title">First-Aid Kit</span><span class="fl-frame">When you're running on empty</span></span>
+            </button>
+            <button class="petal-btn" data-pillar="environment" onclick="pickPillar('environment')">
+              <span class="petal-bg" style="background-image:url('new_images/chapter-environment.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Soil</span><span class="fl-title">Environment</span><span class="fl-frame">Input &amp; nourishment</span></span>
             </button>
             <button class="petal-btn" data-pillar="relationships" onclick="pickPillar('relationships')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-3.2 1-4.3 4.3-5.3 9.3"/><path d="M12 10c-1.6 2.2-2.1 5.3-2.1 8.3"/><path d="M12 10c1.6 2.2 2.1 5.3 2.1 8.3"/><path d="M12 10c3.2 1 4.3 4.3 5.3 9.3"/></svg><img class="petal-icon-photo" src="new_images/chapter-relationships.jpg" alt="" onerror="this.remove()"></span>
+              <span class="petal-bg" style="background-image:url('new_images/chapter-relationships.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v6"/><path d="M12 10c-3.2 1-4.3 4.3-5.3 9.3"/><path d="M12 10c-1.6 2.2-2.1 5.3-2.1 8.3"/><path d="M12 10c1.6 2.2 2.1 5.3 2.1 8.3"/><path d="M12 10c3.2 1 4.3 4.3 5.3 9.3"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Roots</span><span class="fl-title">Relationships</span><span class="fl-frame">Stability &amp; safety</span></span>
             </button>
             <button class="petal-btn" data-pillar="body" onclick="pickPillar('body')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V6"/><path d="M12 15c-2.1.2-4.2-.9-5-3.3"/><path d="M12 10.2c2.1-.3 3.9-1.6 4.4-4"/></svg><img class="petal-icon-photo" src="new_images/chapter-body.jpg" alt="" onerror="this.remove()"></span>
+              <span class="petal-bg" style="background-image:url('new_images/chapter-body.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V6"/><path d="M12 15c-2.1.2-4.2-.9-5-3.3"/><path d="M12 10.2c2.1-.3 3.9-1.6 4.4-4"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Stem</span><span class="fl-title">Body &amp; Energy</span><span class="fl-frame">Regulation &amp; energy</span></span>
             </button>
             <button class="petal-btn" data-pillar="identity" onclick="pickPillar('identity')">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2c-2.4 2.1-3 5.7-1.3 8.7a1.6 1.6 0 0 0 2.6 0c1.7-3 1.1-6.6-1.3-8.7z"/><path d="M12 12.9v8.1"/><path d="M12 16.2c-1.4 0-2.6-.8-3.1-2"/><path d="M12 16.2c1.4 0 2.6-.8 3.1-2"/></svg><img class="petal-icon-photo" src="new_images/chapter-identity.jpg" alt="" onerror="this.remove()"></span>
+              <span class="petal-bg" style="background-image:url('new_images/chapter-identity.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.2c-2.4 2.1-3 5.7-1.3 8.7a1.6 1.6 0 0 0 2.6 0c1.7-3 1.1-6.6-1.3-8.7z"/><path d="M12 12.9v8.1"/><path d="M12 16.2c-1.4 0-2.6-.8-3.1-2"/><path d="M12 16.2c1.4 0 2.6-.8 3.1-2"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Bud</span><span class="fl-title">Identity</span><span class="fl-frame">Inner work &amp; intuition</span></span>
             </button>
             <button class="petal-btn" data-pillar="expansion" onclick="confirmExpansionEntry()">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg><img class="petal-icon-photo" src="new_images/chapter-expansion.jpg" alt="" onerror="this.remove()"></span>
+              <span class="petal-bg" style="background-image:url('new_images/chapter-expansion.jpg')"></span>
+              <span class="petal-scrim"></span>
+              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="6.4" r="2.6"/><circle cx="17.2" cy="9.4" r="2.6"/><circle cx="17.2" cy="14.6" r="2.6"/><circle cx="12" cy="17.6" r="2.6"/><circle cx="6.8" cy="14.6" r="2.6"/><circle cx="6.8" cy="9.4" r="2.6"/></svg></span>
               <span class="petal-text"><span class="fl-layer">Bloom</span><span class="fl-title">Expansion</span><span class="fl-frame">Self-expression &amp; aliveness</span></span>
-            </button>
-
-            <!-- FIRST-AID KIT, desktop only: the sixth card, same grid, same
-                 styling as the five chapters, filling out the 3x2 layout.
-                 Mobile keeps its own separate button at the end of the page
-                 (see .firstaid-mobile-btn below), so this one is hidden
-                 there to avoid two entry points. -->
-            <button class="petal-btn firstaid-petal-btn" id="firstaid-grid-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">
-              <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg><img class="petal-icon-photo" src="new_images/chapter-firstaid.jpg" alt="" onerror="this.remove()"></span>
-              <span class="petal-text"><span class="fl-layer">Support</span><span class="fl-title">First-Aid Kit</span><span class="fl-frame">When you're running on empty</span></span>
             </button>
           </div>
         </div>
@@ -808,10 +827,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
         <cite>Alexander Den Heijer</cite>
       </div>
 
-      <!-- MOBILE ONLY: First-Aid Kit toggle, now the very last thing on the
-           page. Hidden entirely on desktop (the sidebar box covers it
-           there), and hides itself once a chapter is picked, via
-           pickPillar()/initKit() below. -->
+      <!-- Retired: First-Aid Kit now lives inside the petal-nav-list itself,
+           first in line, at every width. This button is kept in the markup
+           only so hideFirstAidMobileBtn()/showFirstAidMobileBtn() still have
+           something safe to toggle; it's hidden everywhere via CSS now. -->
       <button class="firstaid-mobile-btn" id="firstaid-mobile-btn" onclick="openFirstAidModal()" aria-haspopup="dialog">&#9889; First-Aid Kit Reminders (When Running on Empty)</button>
 
     </div>
@@ -1096,9 +1115,9 @@ const CHAPTER_DISCLAIMER = {
    broken. You do not have to earn your way back to yourself." */
 const BEFORE_YOU_BLOOM = [
   {title:"You Are Not a Project to Fix",body:"<p>You don't change the flower, you change the soil. &#127807;</p><p>If you've felt depleted, sensitive, or underwater lately:</p><ul><li>You are not broken.</li><li>You don't need a stricter routine or more discipline.</li><li><span class=\"letter-highlight\">Your system has simply been carrying too much for too long.</span></li></ul><p>Bloom Again is a gentle digital space built to help you ease the conditions around you, at your own natural pace.</p>"},
-  {title:"Rest Isn't the Only Answer",body:"<p>When you're burnt out, forcing quiet can sometimes make your brain feel more restless.</p><p>Inside this companion, you'll find four distinct modes of support:</p><ul><li>&#129750; <span class=\"letter-highlight\">RESTORE</span>: low-sensory quiet when running on empty.</li><li>&#9889; <span class=\"letter-highlight\">ACTIVATE</span>: a small spark of movement when feeling flat.</li><li>&#127912; <span class=\"letter-highlight\">ENGAGE</span>: absorbing, low-stakes creative focus.</li><li>&#129293; <span class=\"letter-highlight\">CONNECT</span>: gentle relational safety.</li></ul>"},
   {title:"Start Where You Are",body:"<p>There is no finish line here, and no correct order to follow.</p><ul><li>Take what resonates, leave the rest without guilt.</li><li>Skip chapters or sit in one for months, the flower is a map, not a ladder.</li><li>Tap <span class=\"letter-highlight\">Save to Basket</span> on any tip to build your personal printout.</li><li>Save three or more, and your basket will quietly start reflecting back a pattern in what you've been reaching for, not a diagnosis, just a gentle mirror.</li></ul><p>You are allowed to be here exactly as tired, sensitive, and unfinished as you are right now. &#127800;</p>"},
-  {title:"1:1 Call Waiting List for 2027",body:"<p>For the women who are strong, yet sensitive. The ones who carry so much, think so deeply, dream so big, and sometimes feel like there's no space for them to simply be.</p><p>I'm opening a waiting list for 1:1 calls in 2027, a space where we can talk about whatever is on your heart.</p><p>Your burnout. Your worries. Your dreams. The things you're trying to figure out, the things you're afraid to say out loud, or simply the things you need to get off your chest.</p><p>Because I know that not every woman who looks strong feels strong all the time. And I know how rare it can be to find a space where you don't have to explain yourself, minimize your feelings, or pretend you have it all together.</p><p><span class=\"letter-highlight\">A space where your sensitivity is not mistaken for weakness, where your strength is not a reason to overlook your struggles, and where you can show up exactly as you are, without judgment or pressure to have all the answers.</span></p><p style=\"text-align:center;margin:20px 0\"><a class=\"kit-cta-btn\" href=\"https://bloom-again-vpkzmm.subscribepage.io\" target=\"_blank\" rel=\"noopener\">Join the 2027 Waiting List</a></p><p>I'd love to create more room for honest conversations, meaningful connection, and the kind of understanding so many of us need.</p><p class=\"letter-fineprint\">A little note: these calls are intended for personal conversation, reflection, and supportive connection. I'm not a therapist or a medical doctor, and these calls are not a substitute for professional mental health care or medical advice.</p><p>You don't always have to be the strong one. Sometimes, you deserve a space where you can just be human, too. &#129293;</p>"}
+  {title:"Rest Isn't the Only Answer",body:"<p>When you're burnt out, forcing quiet can sometimes make your brain feel more restless.</p><p>Inside this companion, you'll find four distinct modes of support:</p><ul><li>&#129750; <span class=\"letter-highlight\">RESTORE</span>: low-sensory quiet when running on empty.</li><li>&#9889; <span class=\"letter-highlight\">ACTIVATE</span>: a small spark of movement when feeling flat.</li><li>&#127912; <span class=\"letter-highlight\">ENGAGE</span>: absorbing, low-stakes creative focus.</li><li>&#129293; <span class=\"letter-highlight\">CONNECT</span>: gentle relational safety.</li></ul>"},
+  {title:"1:1 Call Waiting List for 2027",body:"<p>For the women who are strong, yet sensitive, the ones who carry so much and sometimes feel like there's no space to simply be.</p><p>I'm opening a waiting list for 1:1 calls in 2027, a space to talk about your burnout, your worries, your dreams, whatever is on your heart.</p><p><span class=\"letter-highlight\">A space where your sensitivity is not mistaken for weakness, and you can show up exactly as you are, without judgment or pressure to have all the answers.</span></p><p style=\"text-align:center;margin:20px 0\"><a class=\"kit-cta-btn\" href=\"https://bloom-again-vpkzmm.subscribepage.io\" target=\"_blank\" rel=\"noopener\">Join the 2027 Waiting List</a></p><p class=\"letter-fineprint\">A little note: these calls are intended for personal conversation, reflection, and supportive connection. I'm not a therapist or a medical doctor, and these calls are not a substitute for professional mental health care or medical advice.</p><p>You don't always have to be the strong one. Sometimes, you deserve a space where you can just be human, too. &#129293;</p>"}
 ];
 
 const FLOWER_META = [
@@ -1384,7 +1403,7 @@ function openIntro(i){
   nav.classList.add('show');
   document.getElementById('insp-intro-prev').disabled = introIdx === 0;
   const isLast = introIdx === BEFORE_YOU_BLOOM.length - 1;
-  document.getElementById('insp-intro-next').textContent = isLast ? 'Done' : 'Next ›';
+  document.getElementById('insp-intro-next').textContent = isLast ? 'Enter the Companion Now ›' : 'Next ›';
   document.getElementById('insp-intro-next').classList.toggle('pulse', !isLast);
   document.getElementById('insp-intro-count').textContent = `${introIdx + 1} / ${BEFORE_YOU_BLOOM.length}`;
 }
