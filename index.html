@@ -201,9 +201,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-today-sub{font-size:17px;color:var(--text-soft);line-height:1.6;max-width:42ch;margin:0 auto 16px}
 /* the six cards below are closed by default, this line doubles as the
    dropdown trigger that opens them, same wording, just clickable now */
-.heavy-today-trigger{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-family:inherit;font-size:17px;color:var(--text-soft);line-height:1.6;padding:4px 0;margin-bottom:16px;text-decoration:underline;text-decoration-color:rgba(245,236,224,.35);text-underline-offset:4px;transition:color .2s ease}
-.heavy-today-trigger:hover{color:var(--text)}
-.heavy-today-chevron{width:14px;height:14px;flex-shrink:0;transition:transform .25s ease}
+.heavy-today-trigger{display:flex;align-items:center;gap:12px;width:100%;background:rgba(245,236,224,.07);border:1.5px solid rgba(245,236,224,.32);border-radius:999px;cursor:pointer;font-family:inherit;padding:15px 20px;text-align:left;margin-bottom:16px;transition:background .2s ease,border-color .2s ease}
+.heavy-today-trigger:hover{background:rgba(245,236,224,.13);border-color:rgba(245,236,224,.5)}
+.heavy-today-trigger span{flex:1;font-size:17px;line-height:1.35;color:var(--text)}
+.heavy-today-search-icon{width:18px;height:18px;flex-shrink:0;color:var(--text-soft)}
+.heavy-today-chevron{width:18px;height:18px;flex-shrink:0;color:var(--text-soft);transition:transform .25s ease}
 .heavy-today-trigger.open .heavy-today-chevron{transform:rotate(180deg)}
 .heavy-card-grid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;margin:0 auto;text-align:left}
 @media(min-width:641px){.heavy-card-grid{grid-template-columns:repeat(2,1fr)}}
@@ -475,6 +477,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 #insp-intro-next.pulse{background:var(--accent-deep);color:#FDFBF7;border-color:var(--accent-deep);animation:introNextPulse 1.8s ease-in-out infinite}
 #insp-intro-next.pulse:hover{background:var(--accent);animation-play-state:paused}
+/* on the final welcome-letter slide, a "Join the Waiting List" button
+   already sits in the body as the real call to action, so the nav's own
+   Next button steps back into a quiet text link instead of competing
+   with it for attention. */
+#insp-intro-next.quiet{background:none;border:none;color:var(--text-muted);padding:9px 4px;box-shadow:none;animation:none}
+#insp-intro-next.quiet:hover{background:none;color:var(--accent)}
 .intro-link{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--text-soft);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:6px 2px;margin-top:4px;text-decoration:underline;text-decoration-color:rgba(245,236,224,.35);text-underline-offset:3px;transition:color .2s ease}
 .intro-link:hover{color:var(--text)}
 
@@ -726,6 +734,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <div class="heavy-today" id="heavy-today">
         <h2 class="heavy-today-heading serif">Now let's start here</h2>
         <button type="button" class="heavy-today-trigger" id="heavy-today-trigger" onclick="toggleHeavyToday()" aria-expanded="false" aria-controls="heavy-card-grid">
+          <svg class="heavy-today-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           <span>Choose what feels most true right now:</span>
           <svg class="heavy-today-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </button>
@@ -1135,7 +1144,7 @@ const BEFORE_YOU_BLOOM = [
   {title:"You Are Not a Project to Fix",body:"<p>You don't change the flower, you change the soil. &#127807;</p><p>If you've felt depleted, sensitive, or underwater lately:</p><ul><li>You are not broken.</li><li>You don't need a stricter routine or more discipline.</li><li><span class=\"letter-highlight\">Your system has simply been carrying too much for too long.</span></li></ul><p>Bloom Again is a gentle digital space built to help you ease the conditions around you, at your own natural pace.</p>"},
   {title:"Start Where You Are",body:"<p>There is no finish line here, and no correct order to follow.</p><ul><li>Take what resonates, leave the rest without guilt.</li><li>Skip chapters or sit in one for months, the flower is a map, not a ladder.</li><li>Tap <span class=\"letter-highlight\">Save to Basket</span> on any tip to build your personal printout.</li><li>Save three or more, and your basket will quietly start reflecting back a pattern in what you've been reaching for, not a diagnosis, just a gentle mirror.</li></ul><p>You are allowed to be here exactly as tired, sensitive, and unfinished as you are right now. &#127800;</p>"},
   {title:"Rest Isn't the Only Answer",body:"<p>When you're burnt out, forcing quiet can sometimes make your brain feel more restless.</p><p>Inside this companion, you'll find four distinct modes of support:</p><ul><li>&#129750; <span class=\"letter-highlight\">RESTORE</span>: low-sensory quiet when running on empty.</li><li>&#9889; <span class=\"letter-highlight\">ACTIVATE</span>: a small spark of movement when feeling flat.</li><li>&#127912; <span class=\"letter-highlight\">ENGAGE</span>: absorbing, low-stakes creative focus.</li><li>&#129293; <span class=\"letter-highlight\">CONNECT</span>: gentle relational safety.</li></ul>"},
-  {title:"1:1 Call Waiting List for 2027",body:"<p>For the women who are strong, yet sensitive, the ones who carry so much and sometimes feel like there's no space to simply be.</p><p>I'm opening a waiting list for 1:1 calls in 2027, a space to talk about your burnout, your worries, your dreams, whatever is on your heart.</p><p><span class=\"letter-highlight\">A space where your sensitivity is not mistaken for weakness, and you can show up exactly as you are, without judgment or pressure to have all the answers.</span></p><p style=\"text-align:center;margin:20px 0\"><a class=\"kit-cta-btn\" href=\"https://bloom-again-vpkzmm.subscribepage.io\" target=\"_blank\" rel=\"noopener\">Join the 2027 Waiting List</a></p><p class=\"letter-fineprint\">A little note: these calls are intended for personal conversation, reflection, and supportive connection. I'm not a therapist or a medical doctor, and these calls are not a substitute for professional mental health care or medical advice.</p><p>You don't always have to be the strong one. Sometimes, you deserve a space where you can just be human, too. &#129293;</p>"}
+  {title:"1:1 Call Waiting List for 2027",body:"<p>For the women who are strong, yet sensitive, the ones who carry so much and rarely get space to simply be, I'm opening a waiting list for 1:1 calls in 2027, to talk through your burnout, your worries, your dreams, whatever is on your heart.</p><p><span class=\"letter-highlight\">A space where your sensitivity is never mistaken for weakness, and you can show up exactly as you are.</span></p><p style=\"text-align:center;margin:20px 0\"><a class=\"kit-cta-btn\" href=\"https://bloom-again-vpkzmm.subscribepage.io\" target=\"_blank\" rel=\"noopener\">Join the 2027 Waiting List</a></p><p class=\"letter-fineprint\">A little note: these calls are personal conversation and support, not therapy or medical advice.</p><p>You don't always have to be the strong one. &#129293;</p>"}
 ];
 
 const FLOWER_META = [
@@ -1468,6 +1477,7 @@ function openIntro(i){
   const isLast = introIdx === BEFORE_YOU_BLOOM.length - 1;
   document.getElementById('insp-intro-next').textContent = isLast ? 'Enter the Companion Now ›' : 'Next ›';
   document.getElementById('insp-intro-next').classList.toggle('pulse', !isLast);
+  document.getElementById('insp-intro-next').classList.toggle('quiet', isLast);
   document.getElementById('insp-intro-count').textContent = `${introIdx + 1} / ${BEFORE_YOU_BLOOM.length}`;
 }
 
