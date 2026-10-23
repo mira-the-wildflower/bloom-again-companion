@@ -483,21 +483,14 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-card-title{display:block;font-family:var(--sans);font-weight:800;font-style:normal;font-size:16px;color:#FDFBF7;line-height:1.35}
 .insp-card-takeaway{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-family:var(--sans);font-weight:400;font-size:13px;color:var(--text-soft);line-height:1.45}
 
-/* Gentle, optional mode label (Restore / Activate / Engage / Connect). Never a
-   diagnosis, never forced on a tip, just a quiet hint for which kind of
-   support this one is. */
-.insp-mode{display:inline-flex;align-items:center;font-family:var(--sans);font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:12px;margin-bottom:10px;border:1px solid transparent}
-.insp-mode-restore{background:rgba(184,205,214,.32);color:#DCEAEF;border-color:rgba(184,205,214,.5)}
-.insp-mode-activate{background:rgba(232,178,154,.34);color:#FBDFD0;border-color:rgba(232,178,154,.55)}
-.insp-mode-engage{background:rgba(196,212,184,.32);color:#E2EDD9;border-color:rgba(196,212,184,.5)}
-.insp-mode-connect{background:rgba(212,181,176,.32);color:#F2DAD7;border-color:rgba(212,181,176,.5)}
-.insp-modal-text .insp-mode{margin-bottom:14px}
-
-/* NOTE: the old top-level "browse by support mode" chip filter (Restore /
-   Activate / Engage / Connect, as clickable pills above the chapter list)
-   was removed per Mira's request, too much to decode at a glance. The mode
-   badges themselves live on, quietly, inside each tip's own modal (see
-   .insp-mode below), just not as a page-level filter anymore. */
+/* NOTE: the mode badges (Restore / Activate / Engage / Connect) that used
+   to sit at the top of a tip's modal, and before that as a clickable
+   "browse by support mode" chip filter above the chapter list, have been
+   removed entirely per Mira's request: unexplained anywhere, inconsistent
+   across chapters (some sub-chapters had one on every tip, others on
+   none), and in the free Kit not even visually distinct from each other.
+   Tip data may still carry a `mode` field here and there, it's just never
+   rendered. */
 .insp-modal-intro-nav{display:none;align-items:center;justify-content:space-between;gap:10px;margin-top:24px;padding-top:18px;border-top:1px solid rgba(245,236,224,.14)}
 .insp-modal-intro-nav.show{display:flex}
 .insp-modal-intro-btn{background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);border-radius:999px;padding:9px 16px;font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:all .2s ease}
@@ -611,7 +604,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-science-panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
 .insp-science.open .insp-science-panel{max-height:600px}
 .insp-science-inner{padding:2px 2px 10px}
-.insp-science-inner>p{font-size:18px;line-height:1.65;color:var(--text-soft);margin-bottom:10px}
+.insp-science-inner>p{font-size:16px;line-height:1.55;color:var(--text-soft);margin-bottom:10px}
 .insp-science-inner>p:last-child{margin-bottom:0}
 .insp-sources-label{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin:14px 0 4px}
 .insp-sources{font-size:12.5px;color:rgba(245,236,224,.62);line-height:1.5;margin-bottom:0}
@@ -660,29 +653,31 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-tab-panel.sel{display:block}
 .basket-print-title{display:none}
 .basket-list{display:flex;flex-direction:column;gap:12px}
-.basket-card{position:relative;display:flex;align-items:flex-start;gap:14px;background:rgba(245,236,224,.06);border:1px solid rgba(245,236,224,.16);border-radius:16px;padding:16px 42px 16px 16px}
+.basket-card{position:relative;display:flex;align-items:flex-start;gap:16px;background:rgba(245,236,224,.06);border:1.5px solid rgba(232,178,154,.45);border-radius:20px;padding:18px 42px 18px 18px;box-shadow:0 4px 16px rgba(0,0,0,.1)}
 .basket-card-body{flex:1;min-width:0}
-.basket-card-quote{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text);line-height:1.4;margin-bottom:8px}
+.basket-card-quote{font-family:var(--serif);font-weight:700;font-style:normal;font-size:17.5px;color:var(--text);line-height:1.38;margin-bottom:8px}
 .basket-card-tip{font-size:15px;color:var(--text-soft);line-height:1.55}
 .basket-card-tip ul{list-style:none;margin:0;padding:0}
 .basket-card-tip li{position:relative;padding-left:16px;margin-bottom:4px}
 .basket-card-tip li::before{content:'';position:absolute;left:3px;top:8px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
-.basket-card-reframe{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--text-soft);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,236,224,.14)}
+.basket-card-reframe{font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--text-soft);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid rgba(245,236,224,.14)}
 .basket-card-remove{position:absolute;top:14px;right:12px;width:26px;height:26px;border-radius:50%;background:none;border:none;color:var(--text-muted);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;transition:all .2s ease}
 .basket-card-remove:hover{background:rgba(217,147,142,.18);color:var(--rose)}
-.basket-card-photo{flex:0 0 auto;width:64px;height:64px;object-fit:cover;border-radius:12px;margin:0}
+.basket-card-photo{flex:0 0 auto;width:80px;height:80px;object-fit:cover;border-radius:18px;margin:0}
 .basket-empty{text-align:center;font-size:14px;line-height:1.7;color:var(--text-soft);padding:30px 10px;font-style:italic}
-.basket-outlook{display:none;align-items:flex-start;gap:14px;background:rgba(232,178,154,.1);border:1px solid rgba(232,178,154,.32);border-radius:16px;padding:16px 18px;margin-bottom:18px}
-.basket-outlook-body{flex:1;min-width:0}
-.basket-outlook-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.basket-outlook-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0}
-.basket-outlook-photo{flex:0 0 auto;width:84px;height:84px;object-fit:cover;border-radius:14px;margin:0}
-.basket-outlook-arc{display:flex;flex-direction:column;gap:12px}
-.basket-outlook-beat-label{font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 3px}
-.basket-outlook-beat-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0}
-.basket-longview{display:none;background:rgba(245,236,224,.05);border:1px dashed rgba(245,236,224,.24);border-radius:16px;padding:16px 18px;margin:0 0 18px}
-.basket-longview-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:0 0 7px}
-.basket-longview-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0}
+.basket-outlook{display:none;flex-direction:column;background:rgba(232,178,154,.12);border:1.5px solid rgba(232,178,154,.4);border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.basket-outlook-photo{width:100%;height:190px;object-fit:cover;display:block;margin:0}
+.basket-outlook-body{flex:1;min-width:0;padding:20px 22px 24px}
+.basket-outlook-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.basket-outlook-text{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--text);line-height:1.6;margin:0}
+.basket-outlook-arc{display:flex;flex-direction:column;gap:16px}
+.basket-outlook-beat-label{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.basket-outlook-beat-text{font-family:var(--serif);font-style:italic;font-size:17.5px;color:var(--text);line-height:1.6;margin:0}
+.basket-longview{display:none;align-items:flex-start;gap:14px;background:rgba(245,236,224,.05);border:1px dashed rgba(245,236,224,.24);border-radius:16px;padding:16px 18px;margin:0 0 18px}
+.basket-longview-photo{flex:0 0 auto;width:72px;height:72px;object-fit:cover;border-radius:14px;margin:0}
+.basket-longview-body{flex:1;min-width:0}
+.basket-longview-eyebrow{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin:0 0 7px}
+.basket-longview-text{font-family:var(--sans);font-size:16px;color:var(--text-soft);line-height:1.6;margin:0}
 .basket-invite{background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.28);border-radius:16px;padding:18px 16px;text-align:center}
 .basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .basket-invite-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0 0 14px}
@@ -738,24 +733,24 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .basket-print-title{display:block !important;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:30px;text-align:center;margin-bottom:22px}
   .basket-list{display:block;column-count:2;column-gap:28px}
   .basket-card{background:#FFFFFF;border:1px solid #F2D6D8;border-radius:10px;padding:16px 18px;margin-bottom:16px;break-inside:avoid;page-break-inside:avoid;display:flex;align-items:flex-start;gap:10px;width:100%}
-  .basket-card-quote{font-family:Georgia,serif;color:#4A6B7C;font-size:14px}
+  .basket-card-quote{font-family:Georgia,serif;font-weight:700;color:#4A6B7C;font-size:15.5px}
   .basket-card-tip, .basket-card-tip li{color:#5A5048;font-size:12px}
   .basket-card-tip li::before{background:#E8B4B8}
-  .basket-card-photo{width:56px;height:56px;border-radius:8px;margin:0}
+  .basket-card-photo{width:64px;height:64px;border-radius:10px;margin:0}
   .basket-card-remove{display:none}
-  .insp-mode{background:#F2D6D8 !important;color:#8A5A5F !important;border-color:#E8B4B8 !important}
   .basket-card-reframe{display:block;font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:12.5px;margin-top:8px;padding-top:8px;border-top:1px solid #F2D6D8}
   .basket-empty{display:none}
   .basket-outlook{display:flex;align-items:flex-start;gap:12px;background:#F9EFE9;border:1px solid #F2D6D8;border-radius:10px;padding:14px 18px;margin-bottom:0;break-inside:avoid;page-break-inside:avoid}
   .basket-outlook-eyebrow{font-family:Georgia,serif;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A5A5F}
-  .basket-outlook-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:13px}
+  .basket-outlook-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:15px}
   .basket-outlook-photo{width:70px;height:70px;border-radius:8px;margin:0}
-  .basket-outlook-arc{display:flex;flex-direction:column;gap:9px}
+  .basket-outlook-arc{display:flex;flex-direction:column;gap:10px}
   .basket-outlook-beat-label{font-family:Georgia,serif;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#8A5A5F}
-  .basket-outlook-beat-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:13px}
-  .basket-longview{display:block;background:#FFFFFF;border:1px dashed #D9C9BE;border-radius:10px;padding:14px 18px;margin-top:14px;break-inside:avoid;page-break-inside:avoid}
+  .basket-outlook-beat-text{font-family:Georgia,serif;font-style:italic;color:#4A6B7C;font-size:14px}
+  .basket-longview{display:flex;align-items:flex-start;gap:12px;background:#FFFFFF;border:1px dashed #D9C9BE;border-radius:10px;padding:14px 18px;margin-top:14px;break-inside:avoid;page-break-inside:avoid}
+  .basket-longview-photo{width:60px;height:60px;border-radius:8px;margin:0}
   .basket-longview-eyebrow{font-family:Georgia,serif;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#8A5A5F}
-  .basket-longview-text{font-family:Georgia,serif;color:#5A5048;font-size:12.5px}
+  .basket-longview-text{font-family:Georgia,serif;color:#5A5048;font-size:14px}
 }
 </style>
 </head>
@@ -1180,6 +1175,9 @@ const CHAPTER_COVER_IMG = {
   identity: '1_MainChapters/bud_identity.png',
   expansion: '1_MainChapters/petals_expansion.png'
 };
+/* Used for the Takeaway's outlook/bigger-picture photo whenever the basket
+   is too spread out across chapters to point to one cover image. */
+const OUTLOOK_FALLBACK_IMG = 'dream_big.png';
 const SUB_REP_IMG = {
   'bloom': 'connection2.jpg',
   'joy': 'games.jpg',
@@ -1225,10 +1223,12 @@ const CHAPTER_DISCLAIMER = {
 /* BEFORE YOU BLOOM: three pages now, kept separate from the tip count.
    Rewritten 2026-10-23 per Mira's own draft. The old "Rest Isn't the Only
    Answer" (four modes) and "1:1 Call Waiting List for 2027" pages were
-   removed on purpose, not lost: the four modes already surface as a badge
-   on every tip card (see .insp-mode), and the 1:1 call pitch already has
-   its own full panel in the basket's Invite tab (#basket-panel-invite),
-   so neither needed a repeat here. */
+   removed on purpose, not lost: the 1:1 call pitch already has its own
+   full panel in the basket's Invite tab (#basket-panel-invite). The four
+   "modes" this page used to introduce have since been removed from the
+   product entirely (the badges that used to show them on tip cards are
+   gone too, see the note further down near .insp-sec-label), so there is
+   nothing left to cross-reference there any more either. */
 const BEFORE_YOU_BLOOM = [
   {title:"My Dear!",body:"<div class=\"letter-photo-wrap\"><img src=\"new_images/mira-heart-hands.jpg\" alt=\"Mira\" class=\"letter-photo\" onerror=\"this.parentElement.remove()\"></div><p>You made it into the Full Companion and I'm so thrilled to welcome you here! You are already amazing for even coming this far in a season of intense depletion, and I hope so much that this will be your little sanctuary to feel understood, supported and inspired.</p><p>Let me tell you one thing first: <span class=\"letter-highlight\">you are NOT a project to fix.</span> Your body and mind are \"simply\" voicing out what they had to endure these past months or years, and it's time for you to give them what they're yearning for. But because I know full well myself that \"simply\" is a very unsuitable word in times of zero capacity, Bloom Again is here to untangle this very complex culmination of burdens with you, and accompany you on the journey back to more spark, in your very own timing.</p>"},
   {title:"It's Not the Flower That Needs Fixing. It's the Soil It's Growing In.",body:"<p>How often does life seem to be about self-optimization, hustle culture, and climbing the success ladder, when all we want is a peaceful place to thrive in who we really are, without all this pressure, criticism and rules that don't make sense to us?</p><div class=\"letter-inline-photo-wrap\"><img src=\"new_images/letter-seed-hand.jpg\" alt=\"A sprig of baby's breath and dried flowers growing from a bandage on a wrist\" class=\"letter-inline-photo\" onerror=\"this.parentElement.remove()\"></div><p>I can't promise you heaven on earth, obviously, but I do want to inspire you to think long about whether you have been doubting yourself too much, when actually it's the environment you live in that has been draining you, or chipping away at parts of the beautiful, radiating woman you really are.</p><p>While wanting to bring helpful advice for this season of depletion, with Bloom Again I also want to encourage gifted women out there to take the pressure off self-improvement, and actually ponder what they could redesign about their lives in a bigger fashion, to make their body, soul and spirit feel safe again. Because maybe you don't need a stricter routine or more discipline. <span class=\"letter-highlight\">Maybe you need the right soil for your seed to pop.</span> And hey, for a beautiful flower to come out of this, it can take time, so don't you go into survival mode again before letting that seed sit there for a bit.</p>"},
@@ -1471,7 +1471,7 @@ function renderInspPhoto(filename){
    mechanism and sources data). Any field can be left out and its section
    just won't print. */
 function renderStructuredTip(t){
-  let html = t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '';
+  let html = '';
   if(t.recognition) html += `<p class="insp-sec-label">Why this makes sense</p><p class="insp-sec-body">${t.recognition}</p>`;
   if(t.hiddenDynamic){
     html += `<div class="insp-science"><button class="insp-science-toggle" onclick="toggleInspScience(this)" aria-expanded="false">
@@ -1523,7 +1523,7 @@ function openInsp(i){
   document.getElementById('insp-modal-text').classList.remove('letter-mode');
   document.getElementById('insp-modal-text').innerHTML = t.recognition
     ? renderStructuredTip(t)
-    : (t.mode ? `<span class="insp-mode insp-mode-${t.mode.toLowerCase()}">${t.mode}</span>` : '') + t.body;
+    : t.body;
   document.getElementById('insp-modal-media').innerHTML = t.imgFull && t.img
     ? `<div class="insp-photo-full"><img src="new_images/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
@@ -1592,45 +1592,167 @@ document.addEventListener('keydown', e=>{
    Never written per combination of tips, that would be unbounded, this
    reads the category she keeps gravitating to instead. See computeOutlook(). */
 const OUTLOOK_NOT_ENOUGH = "Save a few more tips and this space will start reflecting something back to you, a quiet pattern in what you're drawn to, and what it might be pointing toward.";
-const OUTLOOK_SPREAD = "Your basket doesn't lean heavily toward any one area right now, it's touching a little of everything. That's its own real pattern: you may be tending to many parts of your life at once rather than one clear drain. That's not a lack of focus, it's often what it looks like to be rebuilding on several fronts at the same time. As you keep saving tips, a clearer shape may start to emerge on its own.";
+/* OUTLOOK_SPREAD, OUTLOOK_CHAPTER and OUTLOOK_SUB are each a
+   {unburdening, boundary, spark} object, rendered as three labeled beats
+   (see renderBasket / .basket-outlook-arc). Deepened from one paragraph
+   each to this three-beat structure so every outlook reading gets the
+   same "name it without blame, give permission, connect it to what
+   becomes possible" shape Body already had. */
+const OUTLOOK_SPREAD = {
+  unburdening: "Your basket doesn't lean heavily toward any one area right now, it's touching a little of everything. That's its own real pattern, you may be tending to many parts of your life at once rather than carrying one single, obvious drain.",
+  boundary: "You're allowed to let that be true without needing it to sort itself into one tidy explanation first. Rebuilding on several fronts at once isn't a lack of focus, it's often just what real recovery looks like from the inside.",
+  spark: "As you keep saving whatever actually helps, a clearer shape tends to emerge on its own, not because you forced it into one, but because you kept paying honest attention to what you reached for."
+};
 const OUTLOOK_CHAPTER = {
-  environment: "Most of what you've saved lives in Environment, the everyday conditions around you rather than anything happening inside you. A nervous system that's constantly managing the wrong home, the wrong job, too much noise, or too much financial pressure stays in survival mode no matter how much inner work happens alongside it. It might be worth asking which single condition is costing you the most energy right now, and changing just that one thing before trying to change everything at once.",
-  relationships: "Most of what you've saved lives in Relationships, how connected or alone you feel day to day. That's worth taking seriously: so much of what gets called burnout is actually under-supported, carrying things that were never meant to be carried solo. It might be worth asking, honestly, who in your life actually gives you energy back, and where you've been doing all the giving.",
+  environment: {
+    unburdening: "Most of what you've saved lives in Environment, the everyday conditions around you rather than anything happening inside you. A nervous system that's constantly managing the wrong home, the wrong job, too much noise, or too much financial pressure stays in survival mode no matter how much inner work happens alongside it, that's not a personal failure to cope better, it's a reasonable response to an unreasonable setup.",
+    boundary: "You're allowed to ask which single condition is costing you the most energy right now, and change just that one thing before trying to fix everything at once. You don't owe your environment the benefit of the doubt forever.",
+    spark: "Every condition you stop quietly managing frees up energy that was going toward survival, energy that becomes available for the parts of you that want to create, connect, and actually feel like yourself again, in Expansion and beyond."
+  },
+  relationships: {
+    unburdening: "Most of what you've saved lives in Relationships, how connected or alone you feel day to day. So much of what gets called burnout is actually under-supported, carrying things that were genuinely never meant to be carried solo, not a sign you're less resilient than other people.",
+    boundary: "You're allowed to ask, honestly, who in your life actually gives you energy back, and where you've been doing all the giving. Naming that imbalance out loud isn't ungrateful, it's accurate.",
+    spark: "Relationships that actually hold you free up energy that was going toward managing everyone else, energy that can finally go toward being curious, playful, and expansive with the people who were never asking you to perform in the first place."
+  },
   body: {unburdening:"Most of what you've saved lives in Body & Energy, the physical, felt experience of getting through a day. That's not a lack of mindset work, it's your body telling you, directly and repeatedly, that something in how you're living isn't sustainable yet.",boundary:"You're allowed to stop treating your body's signals as obstacles to push through. Sleep, food, movement, and rest you don't have to earn aren't the reward for managing everything else first, they're the baseline that makes managing anything else possible.",spark:"When your body stops running on empty, the energy that was going toward just getting through the day starts becoming available for something else, the part of you that wants to create, imagine, and feel genuinely alive again, in Expansion, isn't missing. It's just been buried under depletion."},
-  identity: "Most of what you've saved lives in Identity, who you are underneath everything you've had to manage. That usually means the real work right now is less about doing anything differently and more about relearning who you are once you're not just coping. Give yourself real room to ask that question without needing an answer right away.",
-  expansion: "Most of what you've saved lives in Expansion, what becomes possible once survival isn't taking up the whole picture. That usually means you've already done real work to get here, and some part of you is genuinely ready for more than just managing. Let yourself take that seriously instead of waiting for permission to want things again.",
+  identity: {
+    unburdening: "Most of what you've saved lives in Identity, who you are underneath everything you've had to manage. Not knowing the answer right now isn't a personality gap, it's what happens when survival has taken up the whole picture for a while.",
+    boundary: "You're allowed to give yourself real room to ask that question without needing an answer right away. Relearning who you are once you're not just coping is slow, legitimate work, not something you're behind on.",
+    spark: "Every bit of identity you reclaim from pure coping becomes something that's actually yours again, and that reclaimed self is exactly what Expansion is waiting to meet, not a finished answer, just more of the real you showing up."
+  },
+  expansion: {
+    unburdening: "Most of what you've saved lives in Expansion, what becomes possible once survival isn't taking up the whole picture. Wanting more than just managing again isn't getting ahead of yourself, it's a real sign of how much ground you've already covered to get here.",
+    boundary: "You're allowed to take that seriously instead of waiting for permission to want things again. Nobody else gets to decide when you're allowed to want more than survival.",
+    spark: "Every bit of energy that isn't going toward just getting through the day becomes available for something else, creating, exploring, feeling genuinely alive, and that's not indulgent, it's what all the earlier work was actually for."
+  },
 };
 const OUTLOOK_SUB = {
-  home: "A lot of what you're drawn to is about Home itself, the actual place you live in. That's worth taking seriously: your body can't fully exhale somewhere that was never set up to hold it. This might be worth more than a few small fixes, a real reset of your living space is allowed, secondhand furniture, new lighting, finally dealing with the pile that's been sitting there for months. You don't need a whole renovation. You need one space that's genuinely yours to land in.",
-  work: "A lot of what you're saving centers on Work, how you earn a living and what it costs you to do it. That's worth sitting with honestly. Try writing down everything you actually enjoy doing, and what genuinely makes you feel competent and regulated rather than just capable. Then let yourself brainstorm, without committing to anything yet, whether a real change in what you do for work could actually be possible.",
-  physical: "Most of what you've saved is about your Sensory Environment, how the space around you actually feels to be in. That's a strong, specific signal: your home's lighting, noise, textures, and clutter might be costing you more than you realize. Consider redecorating, even in small, affordable ways, secondhand pieces or a few warm new lamps can change a room completely. Some stores now run quiet hours for exactly this kind of overstimulation, worth looking into if a regular shopping trip already feels like too much.",
-  digital: "A lot of what you've been drawn to is about Digital Life, what reaches you through your phone and screens. Notice what's actually arriving uninvited: notifications, comparison, an inbox that never empties. You're allowed to make this less automatic, turning off notifications you never chose, muting accounts that cost more than they give, setting your phone somewhere else during the hours it matters most. Protecting your attention is not the same as disappearing.",
-  time: "Most of what you've saved is about Time & Attention, how your days actually get used. That often means your schedule is asking for more than your capacity actually has, even if everything on it looks reasonable on paper. It might help to look at one ordinary week honestly and find the single commitment that costs the most for what it gives back. You're allowed to have room in your days that isn't accounted for.",
-  financial: "A lot of what you're drawn to is about your Financial Life. Money stress is a real, physical kind of pressure, not just a mindset issue, and it deserves to be looked at directly instead of avoided. One small, concrete step, actually opening the account you've been avoiding, writing down what's coming in and going out, naming one real cost you could remove, tends to lower that pressure faster than willing it away.",
-  boundaries: "A lot of what you've saved is about Boundaries. That's often a sign that some of your drain isn't coming from inside you at all, it's coming from the people or situations around you. This might take real courage to look at directly: is there a relationship, a friendship, or even a place that's costing you more than it gives? Sometimes the way forward is a harder conversation, sometimes it's quietly stepping back, and sometimes it's building something new, a sport, a creative group, a community where you get to start over as yourself.",
-  attachment: "Most of what you've saved is about Closeness & Reassurance, how safe you feel letting someone actually get close. That often points to a pattern worth naming gently: needing more reassurance than feels comfortable to ask for, or doubting closeness even when it's real. It might help to name that need out loud to one person you trust, rather than managing it silently on your own.",
-  coregulation: "A lot of what you're drawn to is about Connection & Co-Regulation, the fact that your nervous system was never meant to settle entirely alone. If this is where your saves cluster, it might be worth building one small, regular point of real contact into your week, a call, a standing coffee, simply being in the same room as someone calm. You don't have to self-regulate your way through everything by yourself.",
-  social: "Most of what you've saved is about Social Life, belonging without having to perform. That often means some part of your social world currently asks you to be more \"on\" than you have capacity for. It might be worth noticing which gatherings actually restore you and which ones quietly drain you, and letting that difference guide where you spend your limited social energy next.",
-  receiving: "A lot of what you're drawn to is about Receiving Support, letting yourself actually be helped. If this is your pattern, you may be far more used to giving than receiving, to the point where being helped feels uncomfortable even when you need it. A real next step might be practicing one small ask this week, something specific and low stakes, just to build the muscle of letting someone else carry a little.",
-  giving: "Most of what you've saved is about Care Without Self-Abandonment, giving to others without disappearing in the process. That usually means you're already a deeply generous person, and the work isn't learning to care less, it's learning where your own edge is. It might help to notice the exact moment caring starts costing you more than you have, and treat that moment as useful information, not failure.",
+  home: {
+    unburdening: "A lot of what you're drawn to is about Home itself, the actual place you live in. Your body can't fully exhale somewhere that was never set up to hold it, and that's not you being hard to please, it's a nervous system correctly noticing it isn't safe to fully land yet.",
+    boundary: "You're allowed to want more than a few small fixes here. A real reset of your living space is allowed, secondhand furniture, new lighting, finally dealing with the pile that's been sitting there for months. You don't need a whole renovation, you need one space that's genuinely yours to land in.",
+    spark: "A home that finally holds you stops costing you energy just to exist in, and that saved energy is exactly what starts showing up elsewhere, in how much is left over for the people and plans that make you feel alive."
+  },
+  work: {
+    unburdening: "A lot of what you're saving centers on Work, how you earn a living and what it costs you to do it. If work leaves you consistently depleted rather than occasionally tired, that's data worth taking seriously, not a personal productivity problem to optimize your way out of.",
+    boundary: "You're allowed to write down everything you actually enjoy doing, and what genuinely makes you feel competent and regulated rather than just capable, then let yourself brainstorm, without committing to anything yet, whether a real change in what you do for work could actually be possible.",
+    spark: "Work that costs less than it gives leaves something behind at the end of the day, energy, curiosity, the capacity to want things beyond rest, instead of arriving home already running on empty."
+  },
+  physical: {
+    unburdening: "Most of what you've saved is about your Sensory Environment, how the space around you actually feels to be in. Harsh lighting, background noise, scratchy textures, visual clutter, these are real, physical costs, not oversensitivity you need to explain away.",
+    boundary: "You're allowed to redecorate, even in small, affordable ways. Secondhand pieces or a few warm new lamps can change a room completely, and some stores now run quiet hours for exactly this kind of overstimulation, worth looking into if a regular shopping trip already feels like too much.",
+    spark: "A space that actually matches your nervous system stops draining you just by existing in it, and what used to go toward tolerating the room can go toward actually living in it instead."
+  },
+  digital: {
+    unburdening: "A lot of what you've been drawn to is about Digital Life, what reaches you through your phone and screens. Notice what's actually arriving uninvited, notifications, comparison, an inbox that never empties, that steady low hum of demand is a real cost, even when nothing on the screen looks urgent.",
+    boundary: "You're allowed to make this less automatic. Turning off notifications you never chose, muting accounts that cost more than they give, setting your phone somewhere else during the hours it matters most, protecting your attention is not the same as disappearing.",
+    spark: "Attention you're not constantly handing away is attention you get to spend on purpose, on the people, ideas, and small pleasures that remind you there's a life happening outside the screen."
+  },
+  time: {
+    unburdening: "Most of what you've saved is about Time & Attention, how your days actually get used. If your schedule looks reasonable on paper but leaves you consistently depleted, trust the depletion over the paper, your capacity is the real measurement, not what fits in a calendar grid.",
+    boundary: "You're allowed to look at one ordinary week honestly and find the single commitment that costs the most for what it gives back. You're allowed to have room in your days that isn't accounted for, unscheduled time isn't wasted time.",
+    spark: "Time that isn't already spoken for is time your nervous system actually gets to rest in, and rested, it has somewhere to put curiosity again, instead of spending every open minute recovering from the last commitment."
+  },
+  financial: {
+    unburdening: "A lot of what you're drawn to is about your Financial Life. Money stress is a real, physical kind of pressure, it shows up in your body and your sleep, not just your spreadsheet, and it deserves to be looked at directly instead of avoided.",
+    boundary: "You're allowed to take one small, concrete step instead of solving all of it at once, actually opening the account you've been avoiding, writing down what's coming in and going out, naming one real cost you could remove. That tends to lower the pressure faster than willing it away ever does.",
+    spark: "Money that isn't a constant background hum of worry frees up a surprising amount of mental room, room that was being spent bracing for the next bill can go toward actually planning a life you want, not just surviving the one you have."
+  },
+  boundaries: {
+    unburdening: "A lot of what you've saved is about Boundaries. If this is your pattern, some of your drain genuinely isn't coming from inside you, it's coming from the people or situations around you, and no amount of inner work fixes an outside problem.",
+    boundary: "You're allowed to look directly at whether a relationship, a friendship, or even a place is costing you more than it gives. Sometimes the way forward is a harder conversation, sometimes it's quietly stepping back, and sometimes it's building something new, a sport, a creative group, a community where you get to start over as yourself.",
+    spark: "Every relationship that stops costing more than it gives frees up room for the ones that don't, and that room is where real connection, the kind that actually fuels you instead of flattening you, gets to grow."
+  },
+  attachment: {
+    unburdening: "Most of what you've saved is about Closeness & Reassurance, how safe you feel letting someone actually get close. Needing more reassurance than feels comfortable to ask for, or doubting closeness even when it's real, isn't neediness, it's a nervous system that learned closeness wasn't always reliable.",
+    boundary: "You're allowed to name that need out loud to one person you trust, rather than managing it silently on your own. Asking to be reassured isn't a failure of the relationship, it's part of building one that can actually hold you.",
+    spark: "Closeness you don't have to constantly test or manage is closeness that finally feels like rest, and that rest leaves room for the playful, easy parts of connection you may not have had energy for in a while."
+  },
+  coregulation: {
+    unburdening: "A lot of what you're drawn to is about Connection & Co-Regulation. Your nervous system was never built to settle entirely alone, needing someone else's calm nearby to help you find your own isn't a dependency to outgrow, it's how regulation actually works for most people.",
+    boundary: "You're allowed to build one small, regular point of real contact into your week, a call, a standing coffee, simply being in the same room as someone calm. You don't have to self-regulate your way through everything by yourself.",
+    spark: "Borrowed calm, used on purpose, becomes your own calm over time, and a nervous system that isn't constantly self-soothing alone has real energy left to bring to the people and things it actually wants to show up for."
+  },
+  social: {
+    unburdening: "Most of what you've saved is about Social Life, belonging without having to perform. If socializing leaves you more depleted than connected, that's a real signal, some part of your social world is currently asking you to be more \"on\" than you actually have capacity for.",
+    boundary: "You're allowed to notice which gatherings actually restore you and which ones quietly drain you, and let that difference guide where you spend your limited social energy next. You don't owe every invitation equal weight.",
+    spark: "Social energy spent where it's actually replenished instead of just spent stops feeling like an obligation and starts feeling like something closer to joy, which is usually the first sign that belonging is becoming real again, not performed."
+  },
+  receiving: {
+    unburdening: "A lot of what you're drawn to is about Receiving Support, letting yourself actually be helped. If being helped feels uncomfortable even when you clearly need it, that usually means you're far more practiced at giving than receiving, not that you don't deserve the help.",
+    boundary: "You're allowed to practice one small ask this week, something specific and low stakes, just to build the muscle of letting someone else carry a little. It doesn't have to be a big moment to count.",
+    spark: "Every time support actually lands instead of being deflected, your system gets a little more proof that you don't have to carry everything alone, and that proof is what eventually frees up the energy you've been spending on self-sufficiency for something more alive."
+  },
+  giving: {
+    unburdening: "Most of what you've saved is about Care Without Self-Abandonment, giving to others without disappearing in the process. You're already a deeply generous person, the issue was never that you care too much, it's that you haven't always known where your own edge is.",
+    boundary: "You're allowed to notice the exact moment caring starts costing you more than you have, and treat that moment as useful information, not failure. The work isn't learning to care less, it's learning when to stop.",
+    spark: "Care that has an edge to it is care that actually lasts, and a version of you that isn't quietly depleting herself to be generous has so much more left over, for herself, and for the people she chooses to keep giving to."
+  },
   sleep: {unburdening:"A lot of what you've saved is about Sleep & Recovery. If rest keeps showing up as something you have to earn or defend, that's a sign your nervous system doesn't yet feel safe enough to fully power down, not a personal discipline problem.",boundary:"You're allowed to protect one hour before bed that belongs to winding down, not catching up. That hour isn't selfish or indulgent, it's the floor your body needs to actually recover instead of just pausing.",spark:"Real rest is what your body spends on repair you can't see, and repaired, it has leftover capacity for things beyond survival, the curiosity, the creative pull, the small flickers of aliveness that Expansion is built around, that exhaustion has been quietly crowding out."},
   nourishment: {unburdening:"Most of what you've saved is about Nourishment, caring for your energy through food. If feeding yourself feels like one more decision you don't have the bandwidth for, that's decision fatigue talking, not a sign you've lost the ability to take care of yourself.",boundary:"You're allowed to eat the same two or three easy meals on repeat instead of cooking something new every day. A fed body doesn't need to be an impressive one.",spark:"Steady fuel is what keeps your blood sugar, and your mood with it, from swinging all day, and a steadier baseline is what finally leaves something left over for wanting things again, not just getting through until the next meal."},
   movement: {unburdening:"A lot of what you've saved is about Movement & Activation. If exercise has started to feel like one more obligation, that's often a sign the movement you've been trying doesn't match what your body is actually asking for right now, restless energy and depleted energy need completely different responses.",boundary:"You're allowed to stop forcing a routine that was built for someone with more capacity than you currently have. Movement that feels like relief counts just as much as movement that looks impressive.",spark:"Movement that actually fits you releases physical tension your body has been holding onto for no reason anymore, and that release is often where the first real spark of wanting to feel alive again, instead of just functional, shows back up."},
   hormones: {unburdening:"Most of what you've saved is about Hormone Cycles. If your capacity seems to change week to week no matter what you do, that's not inconsistency, your energy genuinely isn't flat across a cycle, and expecting it to be is what makes the lower weeks feel like failure.",boundary:"You're allowed to plan less, say less yes, and need more rest on your lower-capacity days, without treating that as a problem to fix. Working with your rhythm instead of flattening it is allowed.",spark:"Once your higher-capacity days aren't being spent compensating for the lower ones, they're free to actually be used for something, the creative, expansive energy that Expansion points toward, instead of constant catch-up."},
   sensory: {unburdening:"A lot of what you've saved is about Sensory Needs. If ordinary noise, light, or texture has started to feel like too much, that's an overloaded nervous system doing exactly what overloaded nervous systems do, not oversensitivity you need to apologize for.",boundary:"You're allowed to remove what overwhelms you on purpose, the lighting, the noise, the fabric, instead of white-knuckling through it to seem easygoing.",spark:"A nervous system that isn't constantly managing input has real room left over, room that's usually spent filtering the world out can go toward actually noticing it again, which is where a lot of joy and aliveness quietly live."},
   breath: {unburdening:"Most of what you've saved is about Breath & Grounding, what actually helps you in the moment itself. If you keep returning here, your body has likely been running a background hum of alert for a while, one that shows up as a tight jaw, a held breath, a braced body, long before you consciously register feeling stressed.",boundary:"You're allowed to let go of finding the one perfect technique. A small set of things that help, reached for without judgment when you need them, is enough.",spark:"Every time your body gets convincing proof that it's safe to unclench, even briefly, that's a nervous system slowly relearning it doesn't have to stay braced, and an unbraced body has so much more room left for feeling, creating, and wanting things again."},
-  roles: "A lot of what you've saved is about Roles & Expectations, who you're allowed to be beyond being capable. If this is your pattern, it might be worth naming, honestly, which roles you're playing out of habit or obligation rather than choice. You're allowed to quietly set one of them down, even just a little, without needing to explain why.",
-  permission: "Most of what you've saved is about Permission, making room for your own needs. That often means you've spent a long time waiting for someone else to say it's okay. This might be the moment to give yourself that permission directly, in writing if it helps, for one specific need you've been putting off.",
-  'self-trust': "A lot of what you've saved is about Self-Trust, learning to listen to yourself again. If this is where you keep returning, it might help to start small, practice trusting one minor instinct a day, what to eat, when to leave, what to say, and notice how often it turns out to be right. Self-trust tends to rebuild through small, repeated proof, not through one big decision.",
-  shame: "Most of what you've saved is about meeting yourself without shame. That usually points to an inner voice that's been harder on you than any friend would ever be. It might help to literally write down what you'd say to a friend in your exact situation, and then read it back to yourself, slowly, as if it were actually meant for you.",
-  'self-talk': "A lot of what you've saved is about your Inner Voice, becoming someone you can actually return to. If this is your pattern, the words you use with yourself in hard moments matter more than they might feel like they do. It could help to notice one phrase you repeat to yourself often, and consciously replace it with something closer to what you'd say to someone you love.",
-  values: "Most of what you've saved is about Values & Meaning, what actually holds you from within. If this is where you keep returning, it might be worth writing down, without overthinking it, three things that have always mattered to you regardless of circumstance. Decisions get easier once you know what you're actually protecting.",
-  desire: "A lot of what you've saved is about Desire, discovering what you actually want again. If this is your pattern, it's worth noticing how long it's been since you asked yourself that question without immediately filtering the answer through what's practical. Try writing a list of wants with no obligation to act on any of them yet, just to remember what wanting even feels like.",
-  create: "Most of what you've saved is about Creativity & Flow, making room for your spark. If this is where you keep returning, some part of you is asking for an outlet that doesn't need to be useful or impressive to count. It might be worth picking something purely for the pleasure of it, art, music, a hobby you let yourself be bad at, with zero pressure to make it anything more.",
-  vision: "A lot of what you've saved is about Vision & Possibility, imagining a different life. If this is your pattern, it could help to actually write that life down, even loosely, rather than letting it stay a vague feeling in the background. A vision you can see clearly is much easier to move toward than one you've only ever sensed.",
-  capacity: "Most of what you've saved is about Sustainable Flow, growing at your own pace instead of someone else's. If this is where you keep returning, it's worth noticing whenever you start taking on more the moment you feel a little better. Try picking one pace that feels sustainable even on an average day, not just a good one, and building from there.",
-  joy: "A lot of what you've saved is about Joy & Aliveness, letting life feel good again. If this is your pattern, you may be more used to managing hard feelings than making room for good ones. It might help to deliberately schedule one small thing this week purely because it sounds fun, with no productive justification required.",
-  bloom: "Most of what you've saved is about Bloom itself, living in greater alignment with who you actually are. If this is where you keep returning, you're likely close to something real, a shift that's less about one specific change and more about finally letting your outside match your inside. Trust that pull, even if you can't fully explain it yet.",
+  roles: {
+    unburdening: "A lot of what you've saved is about Roles & Expectations, who you're allowed to be beyond being capable. Playing a role out of habit or obligation rather than choice isn't dishonesty, it's just what happens when being needed starts to feel safer than being yourself.",
+    boundary: "You're allowed to name, honestly, which roles you're playing out of habit rather than choice, and quietly set one of them down, even just a little, without needing to explain why to anyone.",
+    spark: "Every role you're not performing out of obligation leaves more room for the parts of you that exist for their own sake, not because anyone needed them to, which is usually where the first real sense of aliveness comes back from."
+  },
+  permission: {
+    unburdening: "Most of what you've saved is about Permission, making room for your own needs. Waiting for someone else to say it's okay isn't weakness, it's what happens when your needs weren't reliably honored the first few times you voiced them.",
+    boundary: "You're allowed to give yourself that permission directly, in writing if it helps, for one specific need you've been putting off. No one else's sign-off was ever actually required.",
+    spark: "Needs you've finally given yourself permission to have stop quietly draining you in the background, and what's freed up tends to go straight toward wanting things again, not just managing them."
+  },
+  'self-trust': {
+    unburdening: "A lot of what you've saved is about Self-Trust, learning to listen to yourself again. If your own instincts feel unreliable, that's usually not because they are, it's because something taught you to override them so often that you stopped checking.",
+    boundary: "You're allowed to start small. Practice trusting one minor instinct a day, what to eat, when to leave, what to say, and notice how often it turns out to be right. Self-trust rebuilds through small, repeated proof, not one big decision.",
+    spark: "Every instinct you let yourself follow is a little more evidence that you can be trusted with your own life, and that evidence is what eventually lets you reach for bigger things, not just safer ones."
+  },
+  shame: {
+    unburdening: "Most of what you've saved is about meeting yourself without shame. An inner voice that's harder on you than any friend would ever be isn't honesty, it's a habit, usually one you learned somewhere long before you had any say in it.",
+    boundary: "You're allowed to literally write down what you'd say to a friend in your exact situation, and read it back to yourself, slowly, as if it were actually meant for you. It was.",
+    spark: "A voice that stops punishing you for being human frees up an enormous amount of energy that was going toward bracing for your own judgment, energy that's finally available for things that actually feel good."
+  },
+  'self-talk': {
+    unburdening: "A lot of what you've saved is about your Inner Voice, becoming someone you can actually return to. The words you use with yourself in hard moments matter more than they might feel like they do, they're not neutral commentary, they're the environment you actually live inside.",
+    boundary: "You're allowed to notice one phrase you repeat to yourself often, and consciously replace it with something closer to what you'd say to someone you love. You don't need the new phrase to feel true yet, just closer.",
+    spark: "An inner voice that's finally on your side stops costing you energy just to coexist with, and what's left over tends to go toward curiosity, creativity, and actually wanting to be here, not just surviving being yourself."
+  },
+  values: {
+    unburdening: "Most of what you've saved is about Values & Meaning, what actually holds you from within. Feeling unmoored isn't a character flaw, it's what happens when survival takes over for long enough that you lose touch with what you were even protecting in the first place.",
+    boundary: "You're allowed to write down, without overthinking it, three things that have always mattered to you regardless of circumstance. Decisions get easier once you know what you're actually protecting.",
+    spark: "Values you can actually name become a compass instead of a vague feeling, and a compass is what finally lets you move toward something, instead of just reacting to whatever's loudest that day."
+  },
+  desire: {
+    unburdening: "A lot of what you've saved is about Desire, discovering what you actually want again. If it's been a long time since you asked yourself that question without immediately filtering it through what's practical, that's not indecision, it's what happens when wanting got deprioritized for long enough to go quiet.",
+    boundary: "You're allowed to write a list of wants with no obligation to act on any of them yet, just to remember what wanting even feels like. Nothing on that list has to be realistic to count.",
+    spark: "Every want you let yourself name without immediately editing it down is a little more of your own voice coming back online, and that voice is exactly what starts pointing you toward a life you actually chose, not just the one that happened to you."
+  },
+  create: {
+    unburdening: "Most of what you've saved is about Creativity & Flow, making room for your spark. Some part of you is asking for an outlet that doesn't need to be useful or impressive to count, and that ask is legitimate, not a luxury you have to earn first.",
+    boundary: "You're allowed to pick something purely for the pleasure of it, art, music, a hobby you let yourself be bad at, with zero pressure to make it anything more. Not everything you make has to become something.",
+    spark: "Creativity with no performance attached to it is often where aliveness shows back up first, not because it produces anything, but because it reminds your system what wanting to do something, instead of having to, actually feels like."
+  },
+  vision: {
+    unburdening: "A lot of what you've saved is about Vision & Possibility, imagining a different life. Letting that stay a vague feeling in the background instead of writing it down isn't avoidance, it's often just that it's felt safer not to look directly at something you weren't sure you could have.",
+    boundary: "You're allowed to actually write that life down, even loosely, rather than letting it stay a feeling. A vision you can see clearly is much easier to move toward than one you've only ever sensed.",
+    spark: "A future you can actually picture stops being just a wish and starts being something you can take small, real steps toward, and that movement alone, even before anything changes, tends to bring a surprising amount of life back with it."
+  },
+  capacity: {
+    unburdening: "Most of what you've saved is about Sustainable Flow, growing at your own pace instead of someone else's. Taking on more the moment you feel a little better isn't ambition overriding wisdom, it's an old pattern of equating feeling okay with being allowed to push again.",
+    boundary: "You're allowed to pick one pace that feels sustainable even on an average day, not just a good one, and build from there. Good days don't have to become your new baseline.",
+    spark: "A pace you can actually sustain is a pace you get to keep, instead of one you have to recover from, and what doesn't get spent recovering becomes available for actually enjoying the life you're building."
+  },
+  joy: {
+    unburdening: "A lot of what you've saved is about Joy & Aliveness, letting life feel good again. Being more practiced at managing hard feelings than making room for good ones isn't a flaw, it's just what happens when survival had to come first for a long time.",
+    boundary: "You're allowed to deliberately schedule one small thing this week purely because it sounds fun, with no productive justification required. Fun doesn't need a reason beyond being fun.",
+    spark: "Joy that isn't earned or justified is often the clearest sign that the system is finally safe enough to feel good, not just cope, and that's not a small thing, it's close to the whole point."
+  },
+  bloom: {
+    unburdening: "Most of what you've saved is about Bloom itself, living in greater alignment with who you actually are. Not being able to fully explain the pull yet doesn't make it less real, some shifts are felt before they're understood.",
+    boundary: "You're allowed to trust that pull even without a tidy explanation for it. You don't need the whole picture before you're allowed to start moving toward it.",
+    spark: "A life that finally matches who you actually are underneath stops costing energy just to maintain, and what's freed up is what blooming actually looks like, not a single transformation, just more and more of your real self getting to show up."
+  },
 };
 
 /* THE BIGGER PICTURE: a short closing note shown under the outlook reading
@@ -1759,21 +1881,27 @@ function renderBasket(){
       if(longviewEl){ longviewEl.style.display = 'none'; longviewEl.innerHTML = ''; }
     } else {
       const outlook = computeOutlook(basket);
-      outlookEl.style.display = 'flex';
-      const outlookPhoto = (outlook.chapter && CHAPTER_COVER_IMG[outlook.chapter]) ? `<img class="basket-outlook-photo" src="new_images/${CHAPTER_COVER_IMG[outlook.chapter]}" alt="" onerror="this.remove()">` : '';
-      const outlookBody = (outlook.text && typeof outlook.text === 'object')
-        ? `<div class="basket-outlook-arc">
-             <div><p class="basket-outlook-beat-label">The unburdening</p><p class="basket-outlook-beat-text">${outlook.text.unburdening}</p></div>
-             <div><p class="basket-outlook-beat-label">A quiet boundary</p><p class="basket-outlook-beat-text">${outlook.text.boundary}</p></div>
-             <div><p class="basket-outlook-beat-label">A spark of expansion</p><p class="basket-outlook-beat-text">${outlook.text.spark}</p></div>
-           </div>`
-        : `<p class="basket-outlook-text">${outlook.text}</p>`;
-      outlookEl.innerHTML = `${outlookPhoto}<div class="basket-outlook-body"><div class="basket-outlook-eyebrow">${outlook.eyebrow}</div>${outlookBody}</div>`;
+      const outlookImgFile = (outlook.chapter && CHAPTER_COVER_IMG[outlook.chapter]) ? CHAPTER_COVER_IMG[outlook.chapter] : OUTLOOK_FALLBACK_IMG;
+      if(outlook.eyebrow === 'Not quite yet'){
+        outlookEl.style.display = 'flex';
+        outlookEl.innerHTML = `<div class="basket-outlook-body" style="padding-top:22px"><div class="basket-outlook-eyebrow">${outlook.eyebrow}</div><p class="basket-outlook-text">${outlook.text}</p></div>`;
+      } else {
+        outlookEl.style.display = 'flex';
+        const outlookPhoto = `<img class="basket-outlook-photo" src="new_images/${outlookImgFile}" alt="" onerror="this.remove()">`;
+        const outlookBody = (outlook.text && typeof outlook.text === 'object')
+          ? `<div class="basket-outlook-arc">
+               <div><p class="basket-outlook-beat-label">The unburdening</p><p class="basket-outlook-beat-text">${outlook.text.unburdening}</p></div>
+               <div><p class="basket-outlook-beat-label">A quiet boundary</p><p class="basket-outlook-beat-text">${outlook.text.boundary}</p></div>
+               <div><p class="basket-outlook-beat-label">A spark of expansion</p><p class="basket-outlook-beat-text">${outlook.text.spark}</p></div>
+             </div>`
+          : `<p class="basket-outlook-text">${outlook.text}</p>`;
+        outlookEl.innerHTML = `${outlookPhoto}<div class="basket-outlook-body"><div class="basket-outlook-eyebrow">${outlook.eyebrow}</div>${outlookBody}</div>`;
+      }
       if(longviewEl){
         if(outlook.eyebrow === 'Your outlook'){
           const lv = (outlook.chapter && LONGVIEW_CHAPTER[outlook.chapter]) ? LONGVIEW_CHAPTER[outlook.chapter] : LONGVIEW_SPREAD;
-          longviewEl.style.display = 'block';
-          longviewEl.innerHTML = `<p class="basket-longview-eyebrow">The bigger picture</p><p class="basket-longview-text">${lv}</p>`;
+          longviewEl.style.display = 'flex';
+          longviewEl.innerHTML = `<img class="basket-longview-photo" src="new_images/${outlookImgFile}" alt="" onerror="this.remove()"><div class="basket-longview-body"><p class="basket-longview-eyebrow">The bigger picture</p><p class="basket-longview-text">${lv}</p></div>`;
         } else {
           longviewEl.style.display = 'none';
           longviewEl.innerHTML = '';
@@ -1790,7 +1918,6 @@ function renderBasket(){
       <button class="basket-card-remove" onclick="removeFromBasket('${item.id}')" aria-label="Remove from basket">&#10005;</button>
       ${(item.img || SUB_REP_IMG[item.sub] || (item.chapter && CHAPTER_COVER_IMG[item.chapter])) ? `<img class="basket-card-photo" src="new_images/${item.img || SUB_REP_IMG[item.sub] || CHAPTER_COVER_IMG[item.chapter]}" alt="" onerror="this.remove()">` : ''}
       <div class="basket-card-body">
-        ${item.mode ? `<span class="insp-mode insp-mode-${item.mode.toLowerCase()}">${item.mode}</span>` : ''}
         <p class="basket-card-quote">${item.quote}</p>
         <div class="basket-card-tip">${item.tip.length > 1
           ? `<ul>${item.tip.map(x=>`<li>${x}</li>`).join('')}</ul>`
