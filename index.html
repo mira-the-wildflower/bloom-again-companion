@@ -294,12 +294,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 .firstaid-modal-sub{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
-.firstaid-list li{font-size:18px;line-height:1.65;color:var(--text-soft)}
+.firstaid-list li{display:flex;gap:12px;align-items:flex-start;font-size:18px;line-height:1.65;color:var(--text-soft)}
 .firstaid-list li strong{color:var(--text);font-weight:600}
-.firstaid-footnote{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--text-muted);line-height:1.5;text-align:center}
-.firstaid-zero-link{text-align:center;margin-top:12px;padding-top:12px;border-top:1px solid rgba(245,236,224,.14)}
-.firstaid-zero-link button{background:none;border:none;padding:0;font-family:var(--sans);font-size:12px;color:var(--text-muted);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
-.firstaid-zero-link button:hover{color:var(--text)}
+.firstaid-list-n{flex-shrink:0;width:24px;height:24px;margin-top:3px;border-radius:50%;background:var(--accent);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:12px;font-weight:700}
+.firstaid-list-text{flex:1}
+.firstaid-zero-link{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid rgba(245,236,224,.14)}
+.firstaid-zero-link .kit-cta-btn{padding:13px 26px;font-size:12.5px}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
 
@@ -549,7 +549,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-photo-mark{color:var(--accent);opacity:.6}
 .insp-photo-mark svg{width:28px;height:28px}
 .insp-modal-title{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
-.insp-modal-text{font-size:18px;line-height:1.65;color:var(--text)}
+.insp-modal-text{font-size:16px;line-height:1.55;color:var(--text)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
 .insp-modal-text p{margin-bottom:12px}
 .insp-modal-text p:last-child{margin-bottom:0}
@@ -571,6 +571,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .letter-fineprint{font-size:12.5px;line-height:1.5;color:var(--text-muted)}
 .letter-photo-wrap{float:right;shape-outside:margin-box;margin:0 0 10px 16px}
 .letter-photo{width:112px;height:112px;object-fit:cover;border-radius:16px;border:4px solid var(--text);box-shadow:0 2px 10px rgba(0,0,0,.2)}
+/* A second, taller inline photo style for mid-paragraph images (the
+   seed/flower-on-wrist photo on the "soil" letter page): floats along the
+   popup's own right edge, keeps its own portrait aspect ratio rather than
+   being cropped square like .letter-photo. */
+.letter-inline-photo-wrap{float:right;shape-outside:margin-box;width:132px;margin:6px 0 12px 18px}
+.letter-inline-photo{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.28)}
 
 /* Warm emotional flow, every modal in the Companion: "Why this makes
    sense" (validation) -> "What might help" (low demand steps) -> "A
@@ -591,7 +597,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .insp-safety p{margin:0}
 .insp-safety p:last-child{color:var(--text-soft)}
-.insp-takeaway{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);line-height:1.65;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
+.insp-takeaway{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--text);line-height:1.65;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
 
 /* Collapsed by default so a depleted reader's first view of a modal stays
    calm and short; opens on tap into a plain-language explanation of the
@@ -679,10 +685,13 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-longview-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0}
 .basket-invite{background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.28);border-radius:16px;padding:18px 16px;text-align:center}
 .basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.basket-invite-text{font-family:var(--serif);font-style:italic;font-size:14.5px;color:var(--text);line-height:1.6;margin:0 0 14px}
-.basket-invite-btn{display:inline-block;background:var(--accent);color:var(--bg-dark);font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.03em;text-decoration:none;padding:12px 26px;border-radius:999px;margin-bottom:8px;transition:all .22s ease}
+.basket-invite-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0 0 14px}
+.basket-invite-btn{display:inline-block;background:var(--accent);color:var(--bg-dark);font-family:var(--sans);font-weight:700;font-size:13px;letter-spacing:.03em;text-decoration:none;padding:12px 26px;border-radius:999px;margin-bottom:10px;transition:all .22s ease}
 .basket-invite-btn:hover{background:var(--text);transform:translateY(-1px)}
-.basket-invite-url{font-family:var(--sans);font-size:11.5px;color:var(--text-muted);margin:0}
+/* Small, quiet ghost button in place of the old plain URL caption, so the
+   feedback link doesn't visually compete with the main waitlist CTA above it. */
+.basket-invite-feedback-btn{display:inline-block;background:transparent;border:1px solid rgba(245,236,224,.3);color:var(--text-soft);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.03em;text-decoration:none;padding:8px 18px;border-radius:999px;transition:all .22s ease}
+.basket-invite-feedback-btn:hover{background:rgba(245,236,224,.1);color:var(--text)}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 #expansion-gate-modal .insp-modal-text{font-size:15px;line-height:1.6}
@@ -1067,14 +1076,13 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     <h3 class="insp-modal-title">First-Aid Kit</h3>
     <p class="firstaid-modal-sub">When you're running on empty</p>
     <ul class="firstaid-list">
-      <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
-      <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
-      <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-      <li>&#128154; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
-      <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
+      <li><span class="firstaid-list-n">1</span><span class="firstaid-list-text"><strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</span></li>
+      <li><span class="firstaid-list-n">2</span><span class="firstaid-list-text"><strong>One less demand:</strong> What can simply disappear from today's list?</span></li>
+      <li><span class="firstaid-list-n">3</span><span class="firstaid-list-text"><strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</span></li>
+      <li><span class="firstaid-list-n">4</span><span class="firstaid-list-text"><strong>Letting someone help:</strong> You don't have to carry this alone.</span></li>
+      <li><span class="firstaid-list-n">5</span><span class="firstaid-list-text"><strong>No need to force calm:</strong> Motion or quiet focus counts too.</span></li>
     </ul>
-    <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
-    <p class="firstaid-zero-link"><button type="button" onclick="closeFirstAidModal(); goTo('zero')">Having zero capacity today? Read this first &rarr;</button></p>
+    <p class="firstaid-zero-link"><button type="button" class="kit-cta-btn" onclick="closeFirstAidModal(); goTo('zero')">more First Aid tips</button></p>
   </div>
 </div>
 
@@ -1112,9 +1120,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
     <div class="basket-tab-panel" data-panel="invite" id="basket-panel-invite">
       <div class="basket-invite" id="basket-invite">
         <p class="basket-invite-eyebrow">Want to talk it through?</p>
-        <p class="basket-invite-text">I'm not a therapist or a doctor, just someone who has lived through burnout myself, who is highly sensitive and neurodivergent too, and who would love to brainstorm this with you and think through some ideas together. I'm opening a small waiting list for 1:1 calls.</p>
+        <p class="basket-invite-text">I'm not a therapist or a doctor, but I have built this Companion because I have lived through burnout myself, and designed my life in a way where I can use my sensitivity as a gift, not a burden. So if you'd love to talk and think through what might have come up for you, I'm happy to give an understanding ear, share my experiences, or encourage you to make changes that could really bring your spark back.</p>
+        <p class="basket-invite-text">I'm opening a waiting list for 1:1 calls for 2027, and you are more than welcome to sign up. I'll let you know once there's space to make this brainstorming of two HSP sisters possible.</p>
         <a class="basket-invite-btn" href="https://bloom-again-vpkzmm.subscribepage.io" target="_blank" rel="noopener">Join the Waiting List</a>
-        <p class="basket-invite-url">bloom-again-vpkzmm.subscribepage.io</p>
+        <a class="basket-invite-feedback-btn" href="https://bloom-again.life/feedback" target="_blank" rel="noopener">Share Your Feedback</a>
       </div>
     </div>
   </div>
@@ -1222,7 +1231,7 @@ const CHAPTER_DISCLAIMER = {
    so neither needed a repeat here. */
 const BEFORE_YOU_BLOOM = [
   {title:"My Dear!",body:"<div class=\"letter-photo-wrap\"><img src=\"new_images/mira-heart-hands.jpg\" alt=\"Mira\" class=\"letter-photo\" onerror=\"this.parentElement.remove()\"></div><p>You made it into the Full Companion and I'm so thrilled to welcome you here! You are already amazing for even coming this far in a season of intense depletion, and I hope so much that this will be your little sanctuary to feel understood, supported and inspired.</p><p>Let me tell you one thing first: <span class=\"letter-highlight\">you are NOT a project to fix.</span> Your body and mind are \"simply\" voicing out what they had to endure these past months or years, and it's time for you to give them what they're yearning for. But because I know full well myself that \"simply\" is a very unsuitable word in times of zero capacity, Bloom Again is here to untangle this very complex culmination of burdens with you, and accompany you on the journey back to more spark, in your very own timing.</p>"},
-  {title:"It's Not the Flower That Needs Fixing. It's the Soil It's Growing In.",body:"<p>How often does life seem to be about self-optimization, hustle culture, and climbing the success ladder, when all we want is a peaceful place to thrive in who we really are, without all this pressure, criticism and rules that don't make sense to us?</p><p>I can't promise you heaven on earth, obviously, but I do want to inspire you to think long about whether you have been doubting yourself too much, when actually it's the environment you live in that has been draining you, or chipping away at parts of the beautiful, radiating woman you really are.</p><p>While wanting to bring helpful advice for this season of depletion, with Bloom Again I also want to encourage gifted women out there to take the pressure off self-improvement, and actually ponder what they could redesign about their lives in a bigger fashion, to make their body, soul and spirit feel safe again. Because maybe you don't need a stricter routine or more discipline. <span class=\"letter-highlight\">Maybe you need the right soil for your seed to pop.</span> And hey, for a beautiful flower to come out of this, it can take time, so don't you go into survival mode again before letting that seed sit there for a bit.</p>"},
+  {title:"It's Not the Flower That Needs Fixing. It's the Soil It's Growing In.",body:"<p>How often does life seem to be about self-optimization, hustle culture, and climbing the success ladder, when all we want is a peaceful place to thrive in who we really are, without all this pressure, criticism and rules that don't make sense to us?</p><div class=\"letter-inline-photo-wrap\"><img src=\"new_images/letter-seed-hand.jpg\" alt=\"A sprig of baby's breath and dried flowers growing from a bandage on a wrist\" class=\"letter-inline-photo\" onerror=\"this.parentElement.remove()\"></div><p>I can't promise you heaven on earth, obviously, but I do want to inspire you to think long about whether you have been doubting yourself too much, when actually it's the environment you live in that has been draining you, or chipping away at parts of the beautiful, radiating woman you really are.</p><p>While wanting to bring helpful advice for this season of depletion, with Bloom Again I also want to encourage gifted women out there to take the pressure off self-improvement, and actually ponder what they could redesign about their lives in a bigger fashion, to make their body, soul and spirit feel safe again. Because maybe you don't need a stricter routine or more discipline. <span class=\"letter-highlight\">Maybe you need the right soil for your seed to pop.</span> And hey, for a beautiful flower to come out of this, it can take time, so don't you go into survival mode again before letting that seed sit there for a bit.</p>"},
   {title:"Some Last Instructions",body:"<p>My dear, this companion of yours has no rules!</p><ul><li>There is no finish line here, and no correct order to follow.</li><li>Take what resonates and save it to your flower basket, leave the rest without guilt.</li><li>Check into this for a minute, or engage with it for hours.</li></ul><p>This is your little comfort space, and the cool thing is, whatever you save in the basket can be printed out to give you a good overview of your main struggles and practical tools for what you can do about them.</p><p>Oh, and last but definitely not least, the basket will surprise you with a takeaway, personalised for you, <span class=\"letter-highlight\">not a diagnosis, just a gentle mirror</span> for a more longterm outlook on your depletion recovery.</p><p>I send you a warm embrace,<br>Mira &#128154;</p>"}
 ];
 
