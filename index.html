@@ -240,7 +240,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .petal-btn.heavy-glow::after{
   position:relative;
   z-index:2;
-  content:"This chapter will help you most for now \1F33B";
+  content:"This chapter will help you most for now";
   flex:1 1 100%;
   display:inline-block;
   width:fit-content;
@@ -250,7 +250,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   font-weight:700;
   letter-spacing:.01em;
   color:#FFFFFF;
-  background:var(--accent);
+  background:transparent;
   border-radius:999px;
   padding:6px 14px;
 }
@@ -616,6 +616,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .save-tip-btn:hover{background:rgba(245,236,224,.14);color:var(--text)}
 .save-tip-btn.saved{background:rgba(232,178,154,.22);border-color:var(--accent);color:var(--accent)}
 .save-tip-btn.saved:hover{background:rgba(232,178,154,.3)}
+.save-tip-btn.back-to-kit-btn{margin-top:10px;background:var(--accent);border-color:var(--accent);color:var(--bg-dark)}
+.save-tip-btn.back-to-kit-btn:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--bg-dark)}
 
 /* Floating "My flower basket" button: fixed to the viewport, not any one
    screen, so it's reachable no matter where a reader is in the app.
@@ -681,6 +683,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .basket-invite-url{font-family:var(--sans);font-size:11.5px;color:var(--text-muted);margin:0}
 
 .kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
+#expansion-gate-modal .insp-modal-text{font-size:15px;line-height:1.6}
 .expansion-gate-actions{display:flex;flex-direction:column;gap:12px;margin-top:26px}
 .expansion-gate-ghost{display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--text-soft);border:1px solid rgba(245,236,224,.22);border-radius:999px;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.06em;padding:13px 24px;cursor:pointer;text-align:center;transition:all .22s ease}
 .expansion-gate-ghost:hover{background:rgba(245,236,224,.08);color:var(--text)}
@@ -1065,7 +1068,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <li>&#127807; <strong>Rest without earning it:</strong> You don't have to prove your exhaustion.</li>
       <li>&#128230; <strong>One less demand:</strong> What can simply disappear from today's list?</li>
       <li>&#128683; <strong>One gentle boundary:</strong> Say no to one thing you don't have capacity for.</li>
-      <li>&#129293; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
+      <li>&#128154; <strong>Letting someone help:</strong> You don't have to carry this alone.</li>
       <li>&#128330;&#65039; <strong>No need to force calm:</strong> Motion or quiet focus counts too.</li>
     </ul>
     <p class="firstaid-footnote">Come back to the fuller picture below whenever you have more to give.</p>
@@ -1488,6 +1491,7 @@ function renderStructuredTip(t){
   const id = tipSlug(t.title);
   const saved = isTipSaved(id);
   html += `<button class="save-tip-btn${saved ? ' saved' : ''}" data-id="${id}" onclick="toggleSaveTip(this)">${saved ? '&#129360; Saved in my basket' : '&#127800; Save this tip in my basket'}</button>`;
+  html += `<button type="button" class="save-tip-btn back-to-kit-btn" onclick="closeInsp()">Go Back</button>`;
   return html;
 }
 
