@@ -1094,7 +1094,15 @@ const SUB_ICONS = {
    actually read as the subchapter at a glance. Only subchapters curated
    so far are listed here, everything else keeps falling back to its
    first illustrated tip automatically. Never pulls from the 6 main-chapter
-   photos (chapter-*.jpg), those stay on the main chapter circles only. */
+   photos (CHAPTER_COVER_IMG below), those stay on the main chapter circles
+   and the basket's Outlook card only. */
+const CHAPTER_COVER_IMG = {
+  environment: '1_MainChapters/soil_environment.png',
+  relationships: '1_MainChapters/roots_relationships.png',
+  body: '1_MainChapters/stem_body.png',
+  identity: '1_MainChapters/bud_identity.png',
+  expansion: '1_MainChapters/petals_expansion.png'
+};
 const SUB_REP_IMG = {
   'bloom': 'connection2.jpg',
   'joy': 'games.jpg',
@@ -1654,7 +1662,7 @@ function renderBasket(){
     } else {
       const outlook = computeOutlook(basket);
       outlookEl.style.display = 'flex';
-      const outlookPhoto = outlook.chapter ? `<img class="basket-outlook-photo" src="new_images/chapter-${outlook.chapter}.jpg" alt="" onerror="this.remove()">` : '';
+      const outlookPhoto = (outlook.chapter && CHAPTER_COVER_IMG[outlook.chapter]) ? `<img class="basket-outlook-photo" src="new_images/${CHAPTER_COVER_IMG[outlook.chapter]}" alt="" onerror="this.remove()">` : '';
       const outlookBody = (outlook.text && typeof outlook.text === 'object')
         ? `<div class="basket-outlook-arc">
              <div><p class="basket-outlook-beat-label">The unburdening</p><p class="basket-outlook-beat-text">${outlook.text.unburdening}</p></div>
@@ -1672,7 +1680,7 @@ function renderBasket(){
   list.innerHTML = basket.map(item => `
     <div class="basket-card">
       <button class="basket-card-remove" onclick="removeFromBasket('${item.id}')" aria-label="Remove from basket">&#10005;</button>
-      ${item.img ? `<img class="basket-card-photo" src="new_images/${item.img}" alt="" onerror="this.remove()">` : ''}
+      ${(item.img || SUB_REP_IMG[item.sub] || (item.chapter && CHAPTER_COVER_IMG[item.chapter])) ? `<img class="basket-card-photo" src="new_images/${item.img || SUB_REP_IMG[item.sub] || CHAPTER_COVER_IMG[item.chapter]}" alt="" onerror="this.remove()">` : ''}
       <div class="basket-card-body">
         ${item.mode ? `<span class="insp-mode insp-mode-${item.mode.toLowerCase()}">${item.mode}</span>` : ''}
         <p class="basket-card-quote">${item.quote}</p>
