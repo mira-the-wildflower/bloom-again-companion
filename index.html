@@ -63,7 +63,7 @@ body{overflow-x:hidden}
 @media(max-width:760px){
   .cover-hero{display:none}
   .cover-hero-wrap{text-align:center}
-  .cover-hero-mobile{display:block;position:relative;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 20px 46px rgba(0,0,0,.28);padding:16.5% 0 37%}
+  .cover-hero-mobile{display:block;position:relative;width:100%;border-radius:14px;overflow:hidden;box-shadow:0 20px 46px rgba(0,0,0,.28);padding:22.5% 0 31%}
   .cover-hero-mobile-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
   .cover-hero-mobile-text{position:relative;z-index:1;display:block;width:80%;margin:0 auto}
   /* The button sits right after the mobile hero block in normal document
@@ -167,7 +167,7 @@ body{overflow-x:hidden}
 /* feedback link: deliberately smaller and plainer than the other pill
    CTAs on the page, near-white text on a transparent/outline pill instead
    of the solid accent fill, so it reads as a quiet aside. */
-.feedback-wrap{text-align:center;margin:8px auto 0}
+.feedback-wrap{text-align:center;margin:0 auto}
 .feedback-wrap .kit-cta-btn{background:transparent;border:1px solid rgba(245,236,224,.35);color:var(--text);font-size:10px;padding:8px 18px;box-shadow:none}
 .feedback-wrap .kit-cta-btn:hover{background:rgba(245,236,224,.08);color:var(--text);transform:none;box-shadow:none}
 
@@ -204,6 +204,51 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(max-width:640px){
   .zero-mobile-break{display:inline}
 }
+
+/* BURNOUT INFO PAGE (s-burnout): reuses zero-page/zero-hdr/tips-eyebrow/
+   tips-title for its chrome, so only the text box and the graph below
+   need their own rules here. */
+.burnout-textbox{background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:20px;padding:26px 24px;margin-top:22px}
+.burnout-textbox p{font-size:16px;line-height:1.65;color:var(--text-soft);margin-bottom:14px}
+.burnout-textbox p:last-child{margin-bottom:0}
+
+/* graph: a quiet animated recreation of the expectations/control chart,
+   not the photographed sketch itself, so it reads like the rest of the
+   kit's own graphics. Starts hidden (no .play) until animateBurnoutChart()
+   adds the class, see goTo('burnout'); restarts every visit. */
+.burnout-graph{background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:20px;padding:28px 20px 26px;margin-top:20px;text-align:center}
+.burnout-graph-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.burnout-graph-caption-top{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text-soft);max-width:36ch;margin:0 auto 28px;line-height:1.5}
+.burnout-chart{position:relative;width:100%;max-width:240px;aspect-ratio:1/1;margin:0 auto}
+.burnout-axis-v{position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:rgba(245,236,224,.3);transform:translateX(-50%) scaleY(0);transform-origin:top center}
+.burnout-axis-h{position:absolute;top:50%;left:0;right:0;height:1.5px;background:rgba(245,236,224,.3);transform:translateY(-50%) scaleX(0);transform-origin:left center}
+.burnout-chart.play .burnout-axis-v{animation:burnoutDrawV .9s cubic-bezier(.3,.7,.3,1) forwards}
+.burnout-chart.play .burnout-axis-h{animation:burnoutDrawH .9s cubic-bezier(.3,.7,.3,1) .15s forwards}
+@keyframes burnoutDrawV{to{transform:translateX(-50%) scaleY(1)}}
+@keyframes burnoutDrawH{to{transform:translateY(-50%) scaleX(1)}}
+.burnout-quad{position:absolute;width:50%;height:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(6px)}
+.burnout-quad-tl{top:0;left:0}
+.burnout-quad-tr{top:0;right:0}
+.burnout-quad-bl{bottom:0;left:0}
+.burnout-quad-br{bottom:0;right:0}
+.burnout-chart.play .burnout-quad{animation:burnoutRise .6s ease forwards}
+.burnout-chart.play .burnout-quad-tl{animation-delay:1.0s}
+.burnout-chart.play .burnout-quad-tr{animation-delay:1.15s}
+.burnout-chart.play .burnout-quad-bl{animation-delay:1.15s}
+.burnout-chart.play .burnout-quad-br{animation-delay:1.3s}
+@keyframes burnoutRise{to{opacity:1;transform:translateY(0)}}
+.burnout-quad span{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
+.burnout-quad-active{background:radial-gradient(circle at 50% 42%,rgba(216,138,112,.22),transparent 70%)}
+.burnout-quad-active span{color:var(--accent-deep);font-size:15px;font-weight:800;letter-spacing:.03em}
+.burnout-chart.play .burnout-quad-active span{animation:burnoutGlow 2.2s ease-in-out 1.9s infinite}
+@keyframes burnoutGlow{0%,100%{text-shadow:0 0 0 rgba(216,138,112,0)}50%{text-shadow:0 0 16px rgba(216,138,112,.55)}}
+.burnout-axis-label{position:absolute;font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);opacity:0;line-height:1.3}
+.burnout-chart.play .burnout-axis-label{animation:burnoutFadeOpacity .5s ease forwards 1.6s}
+@keyframes burnoutFadeOpacity{to{opacity:1}}
+.burnout-axis-label.top{top:5px;left:50%;transform:translateX(-50%);text-align:center}
+.burnout-axis-label.bottom{bottom:5px;left:50%;transform:translateX(-50%);text-align:center}
+.burnout-axis-label.left{left:5px;top:50%;transform:translateY(-50%);text-align:left;max-width:48px}
+.burnout-axis-label.right{right:5px;top:50%;transform:translateY(-50%);text-align:right;max-width:48px}
 
 /* kit flow screen */
 @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -321,8 +366,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .firstaid-list li strong{color:var(--text);font-weight:600}
 .firstaid-list-n{flex-shrink:0;width:24px;height:24px;margin-top:3px;border-radius:50%;background:var(--accent);color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:12px;font-weight:700}
 .firstaid-list-text{flex:1}
-.firstaid-zero-link{text-align:center;margin-top:16px;padding-top:16px;border-top:1px solid rgba(245,236,224,.14)}
+.firstaid-zero-link{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(245,236,224,.14)}
 .firstaid-zero-link .kit-cta-btn{padding:13px 26px;font-size:12.5px}
+.firstaid-zero-link .expansion-gate-ghost{padding:13px 26px;font-size:12.5px}
 .kconn{display:flex;align-items:center;justify-content:center;height:0;overflow:hidden;opacity:0;transition:height .45s ease,opacity .5s ease .5s}
 .kconn.show{opacity:1;height:38px}
 
@@ -535,7 +581,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   50%{box-shadow:0 0 0 8px rgba(216,138,112,0)}
 }
 #insp-intro-next.pulse{background:var(--accent-deep);color:#FDFBF7;border-color:var(--accent-deep);animation:introNextPulse 1.8s ease-in-out infinite}
-#insp-intro-next.pulse:hover{background:var(--accent);animation-play-state:paused}
+/* stays the same deep orange and keeps pulsing on hover too, so it reads
+   the same on every page of the letter, even while her mouse is still
+   resting on it right after a click (the button sits in the same spot
+   page to page, so that happens on nearly every "Next"). */
+#insp-intro-next.pulse:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px)}
 /* on the final welcome-letter slide, Enter the Companion Now is the real
    call to action (orange, animated, same as every other Next), and the
    Join the Waiting List link inside the body steps back into a quiet
@@ -1060,6 +1110,56 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   </div>
 </div>
 
+<!-- BURNOUT INFO: reached from "More About Burnout" in the First-Aid
+     modal (see firstaid-zero-link above). Long-form reading, so it's a
+     real page rather than another popup, reusing s-zero's own page
+     chrome (zero-page/zero-hdr/zero-back-wrap) so it feels like part of
+     the same kit. The graph is a quiet animated recreation of the
+     expectations/control chart rather than a dropped-in photo, so it
+     reads like the rest of the kit's own graphics; it replays every time
+     this page opens, see animateBurnoutChart() in goTo(). -->
+<div id="s-burnout" class="screen">
+  <div class="zero-page">
+    <div class="zero-hdr">
+      <img src="bloom-again-logo.png" class="kit-hdr-logo" alt="Bloom Again">
+    </div>
+
+    <div class="tips-eyebrow"><span class="eyebrow">Going Deeper</span></div>
+    <h1 class="tips-title">Understanding Burnout in a Sensitive Woman</h1>
+
+    <div class="burnout-textbox">
+      <p>Burnout in a sensitive woman can develop when emotional, mental, physical, and social demands exceed her capacity to recover. It is often not caused by one single factor, but by a combination of stress, emotional overload, and neglecting her own needs for too long.</p>
+      <p>Sensitive women may be particularly affected by absorbing other people's emotions, overthinking, sensory overload, and feeling responsible for the well-being of others. They may struggle with people-pleasing, perfectionism, setting boundaries, avoiding conflict, or suppressing their own feelings to keep others happy.</p>
+      <p>Other contributing factors can include unbalanced relationships, constant responsibilities, feeling misunderstood, a lack of solitude, and living according to external expectations rather than personal needs. Past experiences may also lead to hypervigilance, fear of rejection, or difficulty trusting and expressing one's own feelings.</p>
+      <p>Burnout can manifest as emotional exhaustion, mental fatigue, brain fog, irritability, social withdrawal, numbness, anxiety, or feeling overwhelmed by everyday life. Physical factors, including poor sleep, hormonal changes, iron deficiency, thyroid problems, and depression or anxiety, can also contribute to similar symptoms.</p>
+      <p>At its core, burnout can arise when a woman spends too much energy adapting, giving, anticipating, and meeting expectations, while leaving too little energy for herself.</p>
+      <p>Recovery is not necessarily about becoming less sensitive or learning to tolerate more. It involves recognizing personal limits, setting healthier boundaries, allowing emotions to be felt, reducing unnecessary demands, prioritizing rest, and reconnecting with one's own needs and values.</p>
+      <p>Sensitivity itself is not a weakness. With adequate support, recovery time, and a more balanced way of living, it can become a strength rather than a constant source of exhaustion.</p>
+    </div>
+
+    <div class="burnout-graph">
+      <p class="burnout-graph-eyebrow">A Simple Way to See It</p>
+      <p class="burnout-graph-caption-top">Burnout tends to live in one corner: high expectations of yourself, paired with very little sense of control over your days.</p>
+      <div class="burnout-chart" id="burnout-chart">
+        <span class="burnout-axis-label top">High Expectations</span>
+        <span class="burnout-axis-label bottom">Low Expectations</span>
+        <span class="burnout-axis-label left">Low<br>Control</span>
+        <span class="burnout-axis-label right">High<br>Control</span>
+        <div class="burnout-axis-v"></div>
+        <div class="burnout-axis-h"></div>
+        <div class="burnout-quad burnout-quad-tl burnout-quad-active"><span>Burnout</span></div>
+        <div class="burnout-quad burnout-quad-tr"><span>Stretch</span></div>
+        <div class="burnout-quad burnout-quad-bl"><span>Apathy</span></div>
+        <div class="burnout-quad burnout-quad-br"><span>Relaxed</span></div>
+      </div>
+    </div>
+
+    <div class="zero-back-wrap">
+      <button class="kit-cta-btn" onclick="goTo('kit')">Back to Main Menu</button>
+    </div>
+  </div>
+</div>
+
 <!-- INSPIRATION MODAL: content + photos live here, not in the overview.
      Applies to every chapter and every sub-area the same way. -->
 <!-- EXPANSION GATE: shown once, the first time someone opens the Expansion
@@ -1125,7 +1225,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
       <li><span class="firstaid-list-n">4</span><span class="firstaid-list-text"><strong>Letting someone help:</strong> You don't have to carry this alone.</span></li>
       <li><span class="firstaid-list-n">5</span><span class="firstaid-list-text"><strong>No need to force calm:</strong> Motion or quiet focus counts too.</span></li>
     </ul>
-    <p class="firstaid-zero-link"><button type="button" class="kit-cta-btn" onclick="closeFirstAidModal(); goTo('zero')">more First Aid tips</button></p>
+    <div class="firstaid-zero-link">
+      <button type="button" class="kit-cta-btn" onclick="closeFirstAidModal(); goTo('zero')">more First Aid tips</button>
+      <button type="button" class="expansion-gate-ghost" onclick="closeFirstAidModal(); goTo('burnout')">More About Burnout</button>
+    </div>
   </div>
 </div>
 
@@ -1331,6 +1434,18 @@ function goTo(id){
   next.scrollTop=0; next.classList.add('active');
   window.scrollTo(0,0);
   if(id==='kit') initKit();
+  if(id==='burnout') animateBurnoutChart();
+}
+
+/* replays the expectations/control graph on the burnout info page every
+   time it's opened, not just the first time (removing then re-adding
+   .play, with a reflow in between, restarts the CSS animations). */
+function animateBurnoutChart(){
+  const chart = document.getElementById('burnout-chart');
+  if(!chart) return;
+  chart.classList.remove('play');
+  void chart.offsetWidth;
+  chart.classList.add('play');
 }
 
 function scrollInto(el){ setTimeout(()=>{ if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }, 160); }
