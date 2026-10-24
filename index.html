@@ -227,7 +227,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-layer-photo{width:60px;height:60px;border-radius:14px;object-fit:cover;flex-shrink:0;background:rgba(245,236,224,.08)}
 .burnout-layer-text{flex:1;min-width:0}
 .burnout-layer-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 3px}
-.burnout-layer-text h3{font-family:var(--serif);font-size:16.5px;color:var(--text);margin:0 0 6px}
+.burnout-layer-text h3{font-family:var(--sans);font-weight:700;font-size:16.5px;color:var(--text);margin:0 0 6px}
 .burnout-layer-text p{font-size:14px;line-height:1.55;color:var(--text-soft);margin:0}
 
 .burnout-list{margin:14px 0 0;padding-left:20px}
@@ -728,6 +728,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    see openMiraLetter() which removes the class on first open */
 @keyframes letterBtnPulse{0%,100%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 0 rgba(216,138,112,.55)}50%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 10px rgba(216,138,112,0)}}
 #open-letter-btn.pulse{animation:letterBtnPulse 2.2s ease-in-out infinite}
+#open-instructions-btn{position:fixed;top:104px;right:16px;z-index:150;display:flex;align-items:center;gap:7px;background:rgba(42,52,56,.82);backdrop-filter:blur(6px);border:1.5px solid rgba(245,236,224,.22);color:var(--text);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:9px 16px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(8,14,18,.3);transition:all .22s ease}
+#open-instructions-btn:hover{background:rgba(42,52,56,.95);border-color:var(--accent)}
 #basket-count{font-weight:700}
 
 /* "My flower basket" overlay: same modal language as the inspiration
@@ -879,12 +881,16 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 <div class="particles" id="particles"></div>
 
 <!-- FLOWER BASKET: fixed across every screen, not inside any one of them,
-     so it's reachable no matter where a reader currently is. -->
-<button id="open-basket-btn" onclick="openBasket()" aria-label="Open my flower basket">
-  &#128140; My flower basket (<span id="basket-count">0</span>)
+     so it's reachable no matter where a reader currently is. Hidden on the
+     cover (see goTo()), only appears once she's entered the Companion. -->
+<button id="open-basket-btn" style="display:none" onclick="openBasket()" aria-label="Open my flower basket">
+  &#129530; My flower basket (<span id="basket-count">0</span>)
 </button>
-<button id="open-letter-btn" class="pulse" onclick="openMiraLetter()" aria-label="Open Mira's letter to you">
-  Mira's letter to you
+<button id="open-letter-btn" class="pulse" style="display:none" onclick="openMiraLetter()" aria-label="Open Mira's letter to you">
+  &#128140; Mira's letter to you
+</button>
+<button id="open-instructions-btn" style="display:none" onclick="goTo('burnout')" aria-label="Open instructions">
+  Instructions
 </button>
 
 <!-- COVER -->
@@ -1144,14 +1150,15 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   </div>
 </div>
 
-<!-- UNDERSTANDING THE APPROACH / FIVE LAYERS: now reached only from the
-     last page of Mira's letter (see the "Understanding the Bloom Again
-     Approach" button in introStep()), not from a standalone floating
-     button anymore, that spot now opens the letter itself (see
-     #open-letter-btn above). "You Are Not a Project to Fix" and "A Few
-     Gentle Reminders" moved into the letter's own pages (BEFORE_YOU_BLOOM),
-     so this page is just the five layers now. Long-form reading, so it's a
-     real page rather than a popup, reusing s-zero's own page chrome
+<!-- UNDERSTANDING THE APPROACH / FIVE LAYERS: reached either from the
+     standalone "Instructions" floating button (see #open-instructions-btn
+     above) or from the last page of Mira's letter (see the "Understanding
+     the Bloom Again Approach" button in introStep()). "You Are Not a
+     Project to Fix" moved into the letter's first page (BEFORE_YOU_BLOOM);
+     "A Few Gentle Reminders Before You Start" lives here now, after the
+     five layers, since it's practical, reference style content rather than
+     part of the letter itself. Long-form reading, so it's a real page
+     rather than a popup, reusing s-zero's own page chrome
      (zero-page/zero-hdr/zero-back-wrap) so it feels like part of the same
      kit. Screen id kept as s-burnout to avoid touching goTo() and the nav
      wiring. -->
@@ -1209,6 +1216,18 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
           <p>Recovery isn't just about surviving, it's about coming alive again. Once your soil and roots feel steady, this space allows you to safely reconnect with your true desires, creative flow, and spark, growing gently at a pace that feels sustainable and joyful.</p>
         </div>
       </div>
+    </div>
+
+    <div class="burnout-textbox">
+      <h2>A Few Gentle Reminders Before You Start</h2>
+      <p>My dear, this guide has no rules and no expectations:</p>
+      <ul class="burnout-list">
+        <li>There is no finish line and no correct order to follow. Skip around, pause, or rest whenever you need to.</li>
+        <li>Take what resonates, and leave the rest without a single drop of guilt.</li>
+        <li>Check in for a single minute, or linger for hours. This is your comfort space.</li>
+      </ul>
+      <p>As you explore the expressions that feel true right now, save them to your Flower Basket. When you're ready, your basket will summarize your main friction points, offer practical and gentle tools tailored to you, and surprise you with a personalized takeaway, not a cold diagnosis, but a warm, supportive mirror for your long-term recovery journey.</p>
+      <p>For a beautiful flower to come out of this, it takes time. Don't go back into survival mode or rush the process before letting that seed sit in good soil for a bit.</p>
     </div>
 
     <div class="zero-back-wrap">
@@ -1445,8 +1464,7 @@ const CHAPTER_DISCLAIMER = {
    nothing left to cross-reference there any more either. */
 const BEFORE_YOU_BLOOM = [
   {title:"My Dear!",body:"<div class=\"letter-photo-wrap\"><img src=\"new_images/mira-heart-hands.jpg\" alt=\"Mira\" class=\"letter-photo\" onerror=\"this.parentElement.remove()\"></div><p>You made it into the Full Companion and I'm so thrilled to welcome you here! You are already amazing for even coming this far in a season of intense depletion, and I hope so much that this will be your little sanctuary to feel understood, supported and inspired. Let me tell you one thing first: you are NOT a project to fix.</p><p>Your body and mind are \"simply\" voicing what they have had to endure over these past months or years, and it is time to finally give them what they've been yearning for. But because I know full well that \"simply\" feels like a completely unsuitable word when you have zero capacity, Bloom Again is here to help you untangle this complex culmination of burdens, at your very own pace.</p>"},
-  {title:"",body:"<p>How often does life feel like it's all about self-optimization, hustle culture, and climbing some invisible ladder, when all you really want is a peaceful place to thrive in who you truly are? Without all the pressure, criticism, and arbitrary rules that don't make sense to your sensitive soul?</p><p>If you've been doubting yourself, let this be your gentle reminder: maybe you don't need a stricter routine, more discipline, or better coping mechanisms. Maybe it's actually the environment you've been living in that has been draining you, or chipping away at the beautiful, radiating woman you are.</p><p>Sending you a warm embrace,<br>Mira &#128154;</p>"},
-  {title:"A Few Gentle Reminders Before You Start",body:"<p>My dear, this guide has no rules and no expectations:</p><ul><li>There is no finish line and no correct order to follow. Skip around, pause, or rest whenever you need to.</li><li>Take what resonates, and leave the rest without a single drop of guilt.</li><li>Check in for a single minute, or linger for hours. This is your comfort space.</li></ul><p>As you explore the expressions that feel true right now, save them to your Flower Basket. When you're ready, your basket will summarize your main friction points, offer practical and gentle tools tailored to you, and surprise you with a personalized takeaway, not a cold diagnosis, but a warm, supportive mirror for your long-term recovery journey.</p><p>For a beautiful flower to come out of this, it takes time. Don't go back into survival mode or rush the process before letting that seed sit in good soil for a bit.</p>"}
+  {title:"",body:"<p>How often does life feel like it's all about self-optimization, hustle culture, and climbing some invisible ladder, when all you really want is a peaceful place to thrive in who you truly are? Without all the pressure, criticism, and arbitrary rules that don't make sense to your sensitive soul?</p><p>If you've been doubting yourself, let this be your gentle reminder: maybe you don't need a stricter routine, more discipline, or better coping mechanisms. Maybe it's actually the environment you've been living in that has been draining you, or chipping away at the beautiful, radiating woman you are.</p><p>Sending you a warm embrace,<br>Mira &#128154;</p>"}
 ];
 
 const FLOWER_META = [
@@ -1491,6 +1509,17 @@ function goTo(id){
   window.scrollTo(0,0);
   if(id==='kit') initKit();
   if(id==='burnout') animateBurnoutChart();
+  /* the basket, Mira's letter, and the instructions buttons only make
+     sense once she's actually inside the experience, not while still
+     looking at the cover, so they stay hidden there and appear the moment
+     she enters. */
+  const basketBtn = document.getElementById('open-basket-btn');
+  const letterBtn = document.getElementById('open-letter-btn');
+  const instrBtn = document.getElementById('open-instructions-btn');
+  const show = id !== 'cover';
+  if(basketBtn) basketBtn.style.display = show ? 'flex' : 'none';
+  if(letterBtn) letterBtn.style.display = show ? 'flex' : 'none';
+  if(instrBtn) instrBtn.style.display = show ? 'flex' : 'none';
 }
 
 /* replays the expectations/control graph on the burnout info page every
