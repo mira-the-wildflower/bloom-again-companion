@@ -242,9 +242,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .heavy-card-title{font-family:var(--sans);font-weight:800;font-size:15px;color:#FDFBF7;line-height:1.35}
 .heavy-card-sub{font-family:var(--sans);font-weight:400;font-size:12.5px;color:var(--text-soft);line-height:1.42;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-/* No longer a visible sentence, the glowing/pulsing chapter icon below is
-   the whole cue now (see .petal-btn.heavy-glow). Kept sr-only purely so
-   screen-reader users still hear which chapter got suggested. */
+/* No longer a visible sentence up here, the badge + pulsing icon on the
+   suggested chapter button below already say it (see .petal-btn.heavy-glow).
+   Kept sr-only purely so screen-reader users still hear which chapter got
+   suggested. */
 .heavy-today-announce-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* the glow + badge a chosen chapter gets in the nav list below, separate
@@ -252,12 +253,30 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    it). The badge text is constant, so it's pure CSS content, no extra
    markup duplicated per chapter. Clears itself the moment any chapter is
    actually opened (pickPillar), or on a fresh visit to the kit screen. */
-.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px}
-/* No badge text anymore, just the icon pulsing for as long as the
-   suggestion stands (cleared the moment she opens a chapter, picks a
-   different feeling, or revisits the kit screen fresh, see pickHeavyToday
-   / clearHeavyToday / initKit), so the icon itself is the whole cue. */
+.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px;flex-wrap:wrap}
+/* The icon also pulses for as long as the suggestion stands (cleared the
+   moment she opens a chapter, picks a different feeling, or revisits the
+   kit screen fresh, see pickHeavyToday / clearHeavyToday / initKit), on
+   top of the badge below, not instead of it. */
 .petal-btn.heavy-glow .petal-icon{animation:heavyGlowPulse 1.8s ease-out infinite}
+.petal-btn.heavy-glow::after{
+  position:relative;
+  z-index:2;
+  content:"This chapter will help you most for now";
+  flex:1 1 100%;
+  display:inline-block;
+  width:fit-content;
+  margin-top:8px;
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.01em;
+  color:#FFFFFF;
+  background:transparent;
+  border:1px solid rgba(245,236,224,.35);
+  border-radius:999px;
+  padding:6px 14px;
+}
 @keyframes heavyGlowPulse{
   0%{box-shadow:0 0 0 0 rgba(232,178,154,.45)}
   70%{box-shadow:0 0 0 12px rgba(232,178,154,0)}
@@ -327,8 +346,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
      of one long stacked list, same full-photo card look the desktop grid
      uses, just two per row instead of three. minmax(0,1fr) instead of a
      bare 1fr matters here: without it, a grid track won't shrink below
-     its item's content width, so a long chapter label could blow a
-     column wide open instead of wrapping inside it. */
+     its item's content width, so the heavy-glow badge (or any long label)
+     could blow a column wide open instead of wrapping inside it. */
   /* width:100% matters here too: .opening-flower is a flex row with
      flex-wrap:nowrap, and .petal-nav-list is flex:none (no shrink), so
      without an explicit width it sizes to its own content instead of its
@@ -342,6 +361,30 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .fl-title{font-size:14.5px}
   .area-circle{width:50px;height:50px}
   .area-circle svg{width:20px;height:20px}
+  /* The "this chapter will help you most" badge (.heavy-glow::after) was
+     sized with width:fit-content, which tries to fit the whole phrase on
+     one line. In the narrow 2-across phone grid that overflows the card
+     and gets clipped by .petal-btn's overflow:hidden. Here it instead
+     fills the card's own width and wraps onto two lines. border-radius
+     also drops from the desktop pill shape (999px, fine for one line) to
+     a normal rounded rectangle, since 999px on a two-line box balloons
+     into a blob instead of hugging the wrapped text. flex-wrap:wrap on
+     .heavy-glow itself was written for the desktop ROW layout, where
+     wrapping drops the badge to a new line below; on phone .petal-btn is
+     flex-direction:column, so that same wrap instead opens a new column
+     beside the icon/label, pushing the badge off to the side. nowrap it
+     here so it simply stacks below like the rest of the column. */
+  .petal-btn.heavy-glow{flex-wrap:nowrap}
+  .petal-btn.heavy-glow::after{
+    width:100%;
+    box-sizing:border-box;
+    white-space:normal;
+    text-align:center;
+    font-size:10px;
+    line-height:1.3;
+    padding:5px 8px;
+    border-radius:10px;
+  }
 }
 @media(max-width:400px){
   .petal-icon{width:44px;height:44px}
@@ -376,6 +419,12 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-nav-list .petal-btn:hover{background:rgba(245,236,224,.09)}
   .petal-nav-list .petal-btn.sel{border-color:var(--accent)}
   .petal-nav-list .petal-text{align-items:center}
+  /* the heavy-glow badge's mobile ::after uses flex:1 1 100% to force a new
+     line in the ROW layout there; in this COLUMN card layout that same
+     rule would grow to fill the card's leftover height instead, so it's
+     cancelled back to a normal, content-sized pill here. */
+  .petal-nav-list .petal-btn.heavy-glow::after{flex:0 0 auto;margin-top:10px}
+
   /* quote sits right under the chapter grid; the mobile First-Aid button
      stays hidden here (the sidebar covers it), so no reorder trick is
      needed anymore, natural DOM order already puts the quote first. */
@@ -796,9 +845,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
            required, six photo cards sit next to each other, no chapter
            names, no analysis needed. Picking one never opens a chapter on
            its own, it just points at one (see pickHeavyToday), scrolling
-           to the matching button in the chapter nav below and pulsing its
-           icon (see .petal-btn.heavy-glow), plus an sr-only announcement
-           in heavy-today-announce for screen readers. She still chooses
+           to and glowing the matching button in the chapter nav below
+           (with a small attached badge plus a pulsing icon, pure CSS, see
+           .petal-btn.heavy-glow), plus an sr-only announcement in
+           heavy-today-announce for screen readers. She still chooses
            whether to actually tap into the suggestion. -->
       <div class="heavy-today" id="heavy-today">
         <h2 class="heavy-today-heading serif">Now let's start here</h2>
@@ -1341,10 +1391,11 @@ function toggleHeavyToday(){
 
 /* "NOW LET'S START HERE" selector: six photo cards, no typing needed.
    Picking one never opens a chapter on its own, it just points at one,
-   scrolling to the matching button in the chapter nav below and setting
-   it pulsing (see .petal-btn.heavy-glow .petal-icon) for as long as the
-   suggestion stands, no visible text needed. heavy-today-announce still
-   gets the same message, just sr-only now, for screen readers. She still
+   scrolling to and glowing the matching button in the chapter nav below
+   (with a small attached badge, pure CSS, see .petal-btn.heavy-glow::after)
+   and pulsing its icon (see .petal-btn.heavy-glow .petal-icon) for as
+   long as the suggestion stands. heavy-today-announce still gets the
+   same message, just sr-only now, for screen readers. She still
    chooses whether to actually tap into the suggested chapter. */
 function pickHeavyToday(btn, chapterId){
   document.querySelectorAll('.heavy-card').forEach(o=>o.classList.toggle('sel', o===btn));
