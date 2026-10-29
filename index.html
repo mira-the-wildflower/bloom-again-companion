@@ -8,8 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:radial-gradient(ellipse 45% 32% at 28% 2%,rgba(255,224,185,.65) 0%,rgba(255,224,185,0) 68%),radial-gradient(ellipse 70% 48% at 50% -6%,rgba(255,212,168,.38) 0%,rgba(255,212,168,0) 65%),radial-gradient(ellipse 55% 38% at 88% 12%,rgba(242,176,156,.26) 0%,rgba(242,176,156,0) 68%),#A8805F;
-  --bg-deep:#B8906C; --bg-deep2:#98714A; --bg-dark:#2a3438;
+  --bg:linear-gradient(150deg,#8FACB6 0%,#4F6A75 100%);
+  --bg-deep:#7A98A4; --bg-deep2:#56717C; --bg-dark:#2a3438;
+  --bg-beige:radial-gradient(ellipse 45% 32% at 28% 2%,rgba(255,224,185,.65) 0%,rgba(255,224,185,0) 68%),radial-gradient(ellipse 70% 48% at 50% -6%,rgba(255,212,168,.38) 0%,rgba(255,212,168,0) 65%),radial-gradient(ellipse 55% 38% at 88% 12%,rgba(242,176,156,.26) 0%,rgba(242,176,156,0) 68%),#A8805F;
   --bg-deep-grad:linear-gradient(135deg,var(--bg-deep) 0%,var(--bg-deep2) 100%);
   --text:#F5ECE0; --text-soft:rgba(245,236,224,.75); --text-muted:rgba(245,236,224,.45);
   --accent:#E8A2A0; --accent-deep:#C2636B; --leaf:#C4D4B8;
@@ -117,7 +118,7 @@ body{overflow-x:hidden}
 .petal-btn:hover .petal-bg{transform:scale(1.045)}
 .petal-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(14,38,40,.4),rgba(8,20,22,.62))}
 .firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(180,122,118,.32),rgba(94,64,61,.58))}
-.petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(152,113,74,.28);transition:all .22s ease;overflow:hidden}
+.petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.18);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
 .petal-icon-photo{display:none}
 .petal-btn:hover .petal-icon{background:rgba(232,162,160,.18)}
@@ -349,6 +350,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 /* kit flow screen */
 @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 #s-kit{background:var(--bg)}
+#s-burnout{background:var(--bg-beige)}
 .kit-page{max-width:640px;margin:0 auto;padding:44px 20px 90px}
 .kit-hdr{text-align:center;margin-bottom:34px;display:flex;align-items:center;justify-content:center;position:relative}
 .kit-back{background:none;border:none;color:var(--text-muted);font-size:13px;letter-spacing:.04em;cursor:pointer;font-family:var(--sans);transition:color .2s;position:absolute;left:0}
@@ -425,7 +427,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 @media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
 
-.kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:linear-gradient(135deg,rgba(184,144,108,.5) 0%,rgba(152,113,74,.4) 100%);backdrop-filter:blur(8px);margin-bottom:0}
+.kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:linear-gradient(135deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.06) 100%);backdrop-filter:blur(8px);margin-bottom:0}
 .kbox-q{font-family:var(--heading);font-weight:700;font-size:clamp(25px,4.2vw,29px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--quote);font-style:italic;font-weight:500;font-size:18px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.65;opacity:.92}
 .chapter-disclaimer{font-size:14px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
@@ -598,7 +600,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-group-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
 .area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:144px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(152,113,74,.25)}
+.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(255,255,255,.16)}
 .area-circle svg{width:30px;height:30px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
    the root directory and it appears automatically, covering the icon
