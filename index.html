@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bloom Again Companion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Baloo+2:wght@600;700;800&family=Nunito:ital,wght@0,500;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#8C7A63; --bg-deep:#9C8A70; --bg-deep2:#7C6B4E; --bg-dark:#2a3438;
@@ -16,8 +16,8 @@
   --rose:#D9938E; --rose-light:#F0C7C3;
   --border:rgba(245,236,224,.14);
   --serif:Georgia,serif; --sans:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-  --heading:'Nunito','Plus Jakarta Sans',system-ui,sans-serif;
-  --quote:'Nunito','Plus Jakarta Sans',system-ui,sans-serif;
+  --heading:'Lora',Georgia,serif;
+  --quote:'Lora',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
@@ -34,7 +34,7 @@ body{overflow-x:hidden}
 
 /* type */
 .eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--text)}
-.serif{font-family:var(--heading);font-style:normal;font-weight:800}
+.serif{font-family:var(--heading);font-style:normal;font-weight:700}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* cover: full-bleed hero photo + bottom scrim + button, matching the
@@ -246,7 +246,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-textbox{background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:20px;padding:26px 24px;margin-top:22px}
 .burnout-textbox p{font-size:16px;line-height:1.65;color:var(--text-soft);margin-bottom:14px}
 .burnout-textbox p:last-child{margin-bottom:0}
-.burnout-textbox h2{font-family:var(--heading);font-weight:800;font-size:19px;color:var(--text);margin:0 0 12px}
+.burnout-textbox h2{font-family:var(--heading);font-weight:700;font-size:19px;color:var(--text);margin:0 0 12px}
 
 /* the two topic sections (the "no rules" reminders and the Five Layers
    intro) stack on phone, same as every other section on this page; from
@@ -425,7 +425,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 @media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
 
 .kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:linear-gradient(135deg,rgba(150,132,109,.42) 0%,rgba(124,107,86,.34) 100%);backdrop-filter:blur(8px);margin-bottom:0}
-.kbox-q{font-family:var(--heading);font-weight:800;font-size:clamp(22px,4vw,26px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
+.kbox-q{font-family:var(--heading);font-weight:700;font-size:clamp(22px,4vw,26px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--quote);font-style:italic;font-weight:500;font-size:18px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.65;opacity:.92}
 .chapter-disclaimer{font-size:14px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
 @media(max-width:640px){
@@ -613,7 +613,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 /* inspiration overview: navigation only: headings + a small open button.
    All content/imagery lives in the modal (see below), not here. */
-.tips-title{font-family:var(--heading);font-weight:800;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
+.tips-title{font-family:var(--heading);font-weight:700;font-size:clamp(22px,4vw,30px);text-align:center;margin-bottom:6px;line-height:1.2}
 .tips-subtitle{font-family:var(--sans);font-size:17px;font-weight:700;color:#FDFBF7;text-align:center;margin:0 0 22px;letter-spacing:.02em}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 /* short compassionate intro paragraph on the subchapter landing page, and
@@ -725,7 +725,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .insp-photo-mark{color:var(--accent);opacity:.6}
 .insp-photo-mark svg{width:28px;height:28px}
-.insp-modal-title{font-family:var(--heading);font-weight:800;font-size:clamp(22px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
+.insp-modal-title{font-family:var(--heading);font-weight:700;font-size:clamp(22px,4vw,26px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
 .insp-modal-title.letter-mode{text-align:left}
 .insp-modal-text{font-size:16px;line-height:1.55;color:var(--text)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
@@ -862,7 +862,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-modal.open .basket-modal-card{transform:translateY(0) scale(1)}
 .basket-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
 .basket-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
-.basket-modal-title{font-family:var(--heading);font-weight:800;font-size:24px;color:var(--text);text-align:center;margin-bottom:6px}
+.basket-modal-title{font-family:var(--heading);font-weight:700;font-size:24px;color:var(--text);text-align:center;margin-bottom:6px}
 .basket-modal-sub{font-family:var(--sans);font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px}
 .print-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent-grad);color:#FFFFFF;border:none;border-radius:999px;font-family:var(--sans);font-size:13.5px;font-weight:700;letter-spacing:.04em;padding:13px 18px;cursor:pointer;margin-bottom:22px;transition:all .22s ease}
 .print-btn:hover{background:var(--text);color:var(--bg-dark);transform:translateY(-1px)}
