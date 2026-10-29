@@ -8,9 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#7A98A4; --bg-deep:#6A8893; --bg-dark:#2a3438;
+  --bg:#786C5C; --bg-deep:#6A8893; --bg-dark:#2a3438;
   --text:#F5ECE0; --text-soft:rgba(245,236,224,.75); --text-muted:rgba(245,236,224,.45);
-  --accent:#E8B29A; --accent-deep:#D88A70; --leaf:#C4D4B8;
+  --accent:#E8A2A0; --accent-deep:#C2636B; --leaf:#C4D4B8;
+  --accent-grad:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
   --rose:#D9938E; --rose-light:#F0C7C3;
   --border:rgba(245,236,224,.14);
   --serif:'Cormorant Garamond',Georgia,serif; --sans:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
@@ -81,7 +82,7 @@ body{overflow-x:hidden}
   .lang-switch-link{margin-top:14px}
 }
 .cta{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1.5px solid var(--accent);color:var(--accent);font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:14px 34px;border-radius:999px;cursor:pointer;transition:all .3s ease}
-.cta:hover{background:var(--accent);color:var(--bg-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,178,154,.3)}
+.cta:hover{background:var(--accent-grad);color:#FFFFFF;transform:translateY(-2px);box-shadow:0 8px 28px rgba(232,162,160,.3)}
 .cover-hero-btn.cta:hover{transform:translateX(-50%) translateY(-2px)}
 @media(max-width:760px){
   .cover-hero-btn.cta:hover{transform:translateY(-2px)}
@@ -103,7 +104,7 @@ body{overflow-x:hidden}
 .petal-nav-list{display:flex;flex-direction:column;gap:3px;flex:1 1 260px;max-width:320px}
 .petal-btn{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;padding:9px 12px;border-radius:16px;transition:all .22s ease;width:100%;text-align:left;font-family:inherit;color:inherit}
 .petal-btn:hover{background:rgba(245,236,224,.08)}
-.petal-btn.sel{background:rgba(232,178,154,.14)}
+.petal-btn.sel{background:rgba(232,162,160,.14)}
 /* full-box photo + dark scrim: each chapter card is now filled edge to edge
    with its own photo, dark enough underneath that the title reads clearly
    on top of it. First-Aid Kit gets a reddish scrim instead of the neutral
@@ -115,8 +116,8 @@ body{overflow-x:hidden}
 .petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
 .petal-icon-photo{display:none}
-.petal-btn:hover .petal-icon{background:rgba(232,178,154,.18)}
-.petal-btn.sel .petal-icon{background:rgba(232,178,154,.26);border-width:2px}
+.petal-btn:hover .petal-icon{background:rgba(232,162,160,.18)}
+.petal-btn.sel .petal-icon{background:rgba(232,162,160,.26);border-width:2px}
 .petal-text{position:relative;z-index:2;display:flex;flex-direction:column}
 
 /* one-time "you can tap these" cue for touch devices, no hover to rely on */
@@ -130,9 +131,9 @@ body{overflow-x:hidden}
   .petal-btn:nth-child(6) .petal-icon{animation-delay:1.3s}
 }
 @keyframes petalTapCue{
-  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,178,154,0)}
-  45%{transform:scale(1.08);box-shadow:0 0 0 6px rgba(232,178,154,.22)}
-  100%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,178,154,0)}
+  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,162,160,0)}
+  45%{transform:scale(1.08);box-shadow:0 0 0 6px rgba(232,162,160,.22)}
+  100%{transform:scale(1);box-shadow:0 0 0 0 rgba(232,162,160,0)}
 }
 @media(prefers-reduced-motion:reduce){
   .petal-icon{animation:none}
@@ -143,12 +144,12 @@ body{overflow-x:hidden}
    slow, subtle, continuous breathing glow, so it reads as "start here"
    without looking like an alert or an ad. Stops once she's actually picked
    Environment (.sel), since the cue has done its job by then. */
-.petal-btn-start{background:rgba(232,178,154,.05);border-radius:16px}
+.petal-btn-start{background:rgba(232,162,160,.05);border-radius:16px}
 .petal-btn-start .petal-icon{border-color:var(--accent-deep);border-width:2px}
 .petal-btn-start:not(.sel) .petal-icon{animation:envStartCue 3.2s ease-in-out .8s infinite}
 @keyframes envStartCue{
-  0%,100%{box-shadow:0 0 0 3px rgba(232,178,154,.1);opacity:1}
-  50%{box-shadow:0 0 0 8px rgba(232,178,154,.3);opacity:.82}
+  0%,100%{box-shadow:0 0 0 3px rgba(232,162,160,.1);opacity:1}
+  50%{box-shadow:0 0 0 8px rgba(232,162,160,.3);opacity:.82}
 }
 @media(prefers-reduced-motion:reduce){
   .petal-btn-start:not(.sel) .petal-icon{animation:none}
@@ -225,9 +226,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .zero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.4vw,19px);color:var(--accent);text-align:center;margin-bottom:18px}
 .zero-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .zero-step{display:flex;gap:14px;align-items:flex-start;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:16px;padding:16px 18px}
-.zero-step-n{width:26px;height:26px;border-radius:50%;background:rgba(232,178,154,.16);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.zero-step-n{width:26px;height:26px;border-radius:50%;background:rgba(232,162,160,.16);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .zero-step-text{font-size:18px;font-weight:300;line-height:1.65;color:var(--text-soft);padding-top:2px}
-.zero-warn{background:rgba(232,178,154,.1);border:1.5px solid var(--accent);border-radius:16px;padding:20px 18px;display:flex;gap:14px;align-items:flex-start}
+.zero-warn{background:rgba(232,162,160,.1);border:1.5px solid var(--accent);border-radius:16px;padding:20px 18px;display:flex;gap:14px;align-items:flex-start}
 .zero-warn-icon{flex-shrink:0;color:var(--accent);margin-top:1px}
 .zero-warn-icon svg{width:22px;height:22px}
 .zero-warn-text{font-size:13.5px;font-weight:300;line-height:1.5;color:var(--text)}
@@ -329,10 +330,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-chart.play .burnout-quad-br{animation-delay:1.3s}
 @keyframes burnoutRise{to{opacity:1;transform:translateY(0)}}
 .burnout-quad span{font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-muted)}
-.burnout-quad-active{background:radial-gradient(circle at 50% 42%,rgba(216,138,112,.22),transparent 70%)}
+.burnout-quad-active{background:radial-gradient(circle at 50% 42%,rgba(194,99,107,.22),transparent 70%)}
 .burnout-quad-active span{color:var(--accent-deep);font-size:15px;font-weight:800;letter-spacing:.03em}
 .burnout-chart.play .burnout-quad-active span{animation:burnoutGlow 2.2s ease-in-out 1.9s infinite}
-@keyframes burnoutGlow{0%,100%{text-shadow:0 0 0 rgba(216,138,112,0)}50%{text-shadow:0 0 16px rgba(216,138,112,.55)}}
+@keyframes burnoutGlow{0%,100%{text-shadow:0 0 0 rgba(194,99,107,0)}50%{text-shadow:0 0 16px rgba(194,99,107,.55)}}
 .burnout-axis-label{position:absolute;font-family:var(--sans);font-size:8.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text-muted);opacity:0;line-height:1.3}
 .burnout-chart.play .burnout-axis-label{animation:burnoutFadeOpacity .5s ease forwards 1.6s}
 @keyframes burnoutFadeOpacity{to{opacity:1}}
@@ -371,8 +372,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .heavy-card-grid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;margin:0 auto;text-align:left}
 @media(min-width:641px){.heavy-card-grid{grid-template-columns:repeat(2,1fr)}}
 .heavy-card{display:flex;flex-direction:row;align-items:center;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:12px;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
-.heavy-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,178,154,.35)}
-.heavy-card.sel{border-color:var(--accent);background:rgba(232,178,154,.16)}
+.heavy-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,162,160,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,162,160,.35)}
+.heavy-card.sel{border-color:var(--accent);background:rgba(232,162,160,.16)}
 .heavy-card-media{flex:0 0 auto;width:64px;height:64px;border-radius:14px;overflow:hidden;background:rgba(245,236,224,.07);border:1.5px solid rgba(245,236,224,.3);margin-right:14px}
 .heavy-card-media img{width:100%;height:100%;object-fit:cover;display:block}
 .heavy-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
@@ -389,7 +390,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    it). The badge text is constant, so it's pure CSS content, no extra
    markup duplicated per chapter. Clears itself the moment any chapter is
    actually opened (pickPillar), or on a fresh visit to the kit screen. */
-.petal-btn.heavy-glow{background:rgba(232,178,154,.14);border-radius:16px;flex-wrap:wrap}
+.petal-btn.heavy-glow{background:rgba(232,162,160,.14);border-radius:16px;flex-wrap:wrap}
 /* The icon also pulses for as long as the suggestion stands (cleared the
    moment she opens a chapter, picks a different feeling, or revisits the
    kit screen fresh, see pickHeavyToday / clearHeavyToday / initKit), on
@@ -414,9 +415,9 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   padding:6px 14px;
 }
 @keyframes heavyGlowPulse{
-  0%{box-shadow:0 0 0 0 rgba(232,178,154,.45)}
-  70%{box-shadow:0 0 0 12px rgba(232,178,154,0)}
-  100%{box-shadow:0 0 0 0 rgba(232,178,154,0)}
+  0%{box-shadow:0 0 0 0 rgba(232,162,160,.45)}
+  70%{box-shadow:0 0 0 12px rgba(232,162,160,0)}
+  100%{box-shadow:0 0 0 0 rgba(232,162,160,0)}
 }
 @media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
 
@@ -448,8 +449,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 /* First-Aid grid card: same petal-btn as the five chapters, at every width. */
 .firstaid-petal-btn{display:flex}
 @media(min-width:901px){
-  .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,178,154,.1);border-color:rgba(232,178,154,.35)}
-  .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,178,154,.18)}
+  .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,162,160,.1);border-color:rgba(232,162,160,.35)}
+  .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,162,160,.18)}
 }
 .firstaid-modal-sub{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
@@ -595,11 +596,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    the root directory and it appears automatically, covering the icon
    fallback beneath. Nothing to wire up, no code changes needed. */
 .area-icon-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
-.area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,178,154,.18)}
-.area-icon-btn.sel .area-circle{background:rgba(232,178,154,.26);border-width:2px}
+.area-icon-btn.sel .area-circle,.area-icon-btn:hover .area-circle{background:rgba(232,162,160,.18)}
+.area-icon-btn.sel .area-circle{background:rgba(232,162,160,.26);border-width:2px}
 /* A soft "tap me" ripple that visits one circle at a time (see
    startAreaPulse in JS), just a nudge that these are clickable. */
-@keyframes areaPulseRing{0%{box-shadow:0 0 0 0 rgba(232,178,154,.55)}70%{box-shadow:0 0 0 14px rgba(232,178,154,0)}100%{box-shadow:0 0 0 0 rgba(232,178,154,0)}}
+@keyframes areaPulseRing{0%{box-shadow:0 0 0 0 rgba(232,162,160,.55)}70%{box-shadow:0 0 0 14px rgba(232,162,160,0)}100%{box-shadow:0 0 0 0 rgba(232,162,160,0)}}
 .area-icon-btn.pulse-hint .area-circle{animation:areaPulseRing 1.8s ease-out infinite}
 .area-lbl{font-family:var(--sans);font-size:15px;font-weight:700;font-style:normal;letter-spacing:.01em;color:#FDFBF7;text-align:center;line-height:1.3;width:100%;overflow-wrap:break-word}
 
@@ -617,7 +618,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 /* Marks a placeholder field still awaiting real research/writing, so it
    reads as "not finished yet" at a glance rather than blending in as
    finished copy. Swap for real content any time, no markup changes needed. */
-.content-todo{display:inline-block;font-style:italic;color:var(--text-muted);background:rgba(232,178,154,.12);border:1px dashed rgba(232,178,154,.45);border-radius:8px;padding:2px 8px;font-size:.93em}
+.content-todo{display:inline-block;font-style:italic;color:var(--text-muted);background:rgba(232,162,160,.12);border:1px dashed rgba(232,162,160,.45);border-radius:8px;padding:2px 8px;font-size:.93em}
 .tips-lead{font-size:18px;color:var(--text-soft);text-align:center;max-width:44ch;margin:0 auto 26px;line-height:1.65}
 .insp-list{display:grid;grid-template-columns:1fr;gap:14px}
 /* on desktop the 2-across tip cards break out of .kit-page's 640px cap,
@@ -647,8 +648,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    Cards are now horizontal (photo left, title and a short preview line
    right) rather than photo-on-top, still opening the same full modal. */
 .insp-card{display:flex;flex-direction:row;align-items:center;width:100%;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.15);border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;font-family:inherit;color:inherit;padding:14px;transition:transform .22s ease,box-shadow .22s ease,background .22s ease,border-color .22s ease}
-.insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,178,154,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,178,154,.35)}
-.insp-card:active{transform:translateY(-1px);box-shadow:0 4px 14px rgba(8,14,18,.18),0 0 0 1.5px rgba(232,178,154,.4)}
+.insp-card:hover{background:rgba(245,236,224,.09);border-color:rgba(232,162,160,.45);transform:translateY(-3px);box-shadow:0 10px 26px rgba(8,14,18,.22),0 0 0 1.5px rgba(232,162,160,.35)}
+.insp-card:active{transform:translateY(-1px);box-shadow:0 4px 14px rgba(8,14,18,.18),0 0 0 1.5px rgba(232,162,160,.4)}
 .insp-card-media{flex:0 0 auto;width:84px;height:84px;border-radius:14px;overflow:hidden;background:rgba(245,236,224,.07);border:1.5px solid rgba(245,236,224,.3);margin-right:16px}
 .insp-card-media img{width:100%;height:100%;object-fit:cover;display:block}
 .insp-card-body{padding:0;flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
@@ -676,19 +677,19 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-letter-skip{display:none;position:relative;z-index:1;text-align:center;margin:-6px 0 14px}
 .insp-letter-skip.show{display:block}
 .insp-letter-skip-btn{background:none;border:none;color:var(--accent-deep);font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;padding:4px 8px;transition:color .25s ease,transform .25s cubic-bezier(.2,.8,.3,1),letter-spacing .25s ease,text-shadow .25s ease}
-.insp-letter-skip-btn:hover{color:var(--accent);transform:scale(1.07);letter-spacing:.09em;text-shadow:0 0 14px rgba(232,178,154,.5)}
+.insp-letter-skip-btn:hover{color:var(--accent);transform:scale(1.07);letter-spacing:.09em;text-shadow:0 0 14px rgba(232,162,160,.5)}
 
 /* a soft orange pulse on Next, so it's clear there's more to read */
 @keyframes introNextPulse{
-  0%,100%{box-shadow:0 0 0 0 rgba(216,138,112,.5)}
-  50%{box-shadow:0 0 0 8px rgba(216,138,112,0)}
+  0%,100%{box-shadow:0 0 0 0 rgba(194,99,107,.5)}
+  50%{box-shadow:0 0 0 8px rgba(194,99,107,0)}
 }
-#insp-intro-next.pulse{background:var(--accent-deep);color:#FDFBF7;border-color:var(--accent-deep);animation:introNextPulse 1.8s ease-in-out infinite}
+#insp-intro-next.pulse{background:var(--accent-grad);color:#FDFBF7;border-color:var(--accent-deep);animation:introNextPulse 1.8s ease-in-out infinite}
 /* stays the same deep orange and keeps pulsing on hover too, so it reads
    the same on every page of the letter, even while her mouse is still
    resting on it right after a click (the button sits in the same spot
    page to page, so that happens on nearly every "Next"). */
-#insp-intro-next.pulse:hover{background:var(--accent-deep);border-color:var(--accent-deep);transform:translateY(-2px)}
+#insp-intro-next.pulse:hover{background:var(--accent-grad);border-color:var(--accent-deep);transform:translateY(-2px);filter:brightness(.94)}
 /* on the final welcome-letter slide, Enter the Companion Now is the real
    call to action (orange, animated, same as every other Next), and the
    Join the Waiting List link inside the body steps back into a quiet
@@ -713,7 +714,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-media{display:flex;gap:12px;justify-content:center;margin-bottom:22px}
 .insp-photo-full{width:100%;border-radius:20px;overflow:hidden;border:1px solid rgba(245,236,224,.18)}
 .insp-photo-full img{width:100%;height:auto;display:block}
-.insp-photo{width:116px;height:116px;border-radius:22px;overflow:hidden;position:relative;flex-shrink:0;background:linear-gradient(150deg,rgba(232,178,154,.32),rgba(196,212,184,.24));border:1px solid rgba(245,236,224,.18);display:flex;align-items:center;justify-content:center}
+.insp-photo{width:116px;height:116px;border-radius:22px;overflow:hidden;position:relative;flex-shrink:0;background:linear-gradient(150deg,rgba(232,162,160,.32),rgba(196,212,184,.24));border:1px solid rgba(245,236,224,.18);display:flex;align-items:center;justify-content:center}
 .insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .insp-photo-mark{color:var(--accent);opacity:.6}
 .insp-photo-mark svg{width:28px;height:28px}
@@ -780,7 +781,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 /* Safety callout: distinct bordered/tinted block for "when to seek more
    support," so it reads as a gentle flag, not an alarm, but still stands
    apart from the surrounding narrative text. */
-.insp-safety{margin:18px 0;padding:14px 16px;border-radius:14px;background:rgba(232,178,154,.1);border:1.5px solid rgba(232,178,154,.4)}
+.insp-safety{margin:18px 0;padding:14px 16px;border-radius:14px;background:rgba(232,162,160,.1);border:1.5px solid rgba(232,162,160,.4)}
 .insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
 .insp-safety p{margin:0}
 .insp-safety p:last-child{color:var(--text-soft)}
@@ -809,10 +810,10 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    tip, not a distraction competing with the content above it. */
 .save-tip-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:22px;padding:13px 18px;border-radius:999px;background:rgba(245,236,224,.08);border:1.5px solid rgba(245,236,224,.22);color:var(--text-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:all .22s ease}
 .save-tip-btn:hover{background:rgba(245,236,224,.14);color:var(--text)}
-.save-tip-btn.saved{background:rgba(232,178,154,.22);border-color:var(--accent);color:var(--accent)}
-.save-tip-btn.saved:hover{background:rgba(232,178,154,.3)}
-.save-tip-btn.back-to-kit-btn{margin-top:10px;background:var(--accent);border-color:var(--accent);color:var(--bg-dark)}
-.save-tip-btn.back-to-kit-btn:hover{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--bg-dark)}
+.save-tip-btn.saved{background:rgba(232,162,160,.22);border-color:var(--accent);color:var(--accent)}
+.save-tip-btn.saved:hover{background:rgba(232,162,160,.3)}
+.save-tip-btn.back-to-kit-btn{margin-top:10px;background:var(--accent-grad);border-color:var(--accent-deep);color:#FFFFFF}
+.save-tip-btn.back-to-kit-btn:hover{background:var(--accent-grad);border-color:var(--accent-deep);color:#FFFFFF;filter:brightness(.94)}
 
 /* Floating "My flower basket" button: fixed to the viewport, not any one
    screen, so it's reachable no matter where a reader is in the app.
@@ -825,7 +826,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 #open-letter-btn:hover{background:rgba(42,52,56,.95);border-color:var(--accent)}
 /* pulses gently until she's opened the letter at least once this visit,
    see openMiraLetter() which removes the class on first open */
-@keyframes letterBtnPulse{0%,100%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 0 rgba(216,138,112,.55)}50%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 10px rgba(216,138,112,0)}}
+@keyframes letterBtnPulse{0%,100%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 0 rgba(194,99,107,.55)}50%{box-shadow:0 8px 22px rgba(8,14,18,.3),0 0 0 10px rgba(194,99,107,0)}}
 #open-letter-btn.pulse{animation:letterBtnPulse 2.2s ease-in-out infinite}
 #open-instructions-btn{position:fixed;top:60px;right:16px;z-index:150;display:flex;align-items:center;gap:7px;background:rgba(42,52,56,.82);backdrop-filter:blur(6px);border:1.5px solid rgba(245,236,224,.22);color:var(--text);font-family:var(--sans);font-size:12.5px;font-weight:600;letter-spacing:.02em;padding:9px 16px;border-radius:999px;cursor:pointer;box-shadow:0 8px 22px rgba(8,14,18,.3);transition:all .22s ease}
 #open-instructions-btn:hover{background:rgba(42,52,56,.95);border-color:var(--accent)}
@@ -854,19 +855,19 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
 .basket-modal-title{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--text);text-align:center;margin-bottom:6px}
 .basket-modal-sub{font-family:var(--sans);font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px}
-.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:13.5px;font-weight:700;letter-spacing:.04em;padding:13px 18px;cursor:pointer;margin-bottom:22px;transition:all .22s ease}
-.print-btn:hover{background:var(--text);transform:translateY(-1px)}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--accent-grad);color:#FFFFFF;border:none;border-radius:999px;font-family:var(--sans);font-size:13.5px;font-weight:700;letter-spacing:.04em;padding:13px 18px;cursor:pointer;margin-bottom:22px;transition:all .22s ease}
+.print-btn:hover{background:var(--text);color:var(--bg-dark);transform:translateY(-1px)}
 .print-btn:disabled{opacity:.4;cursor:default;transform:none}
 
 .basket-tabs{display:flex;gap:6px;margin-bottom:18px}
 .basket-tab-btn{flex:1 1 auto;min-width:0;background:rgba(245,236,224,.07);border:1px solid rgba(245,236,224,.16);border-radius:14px;color:var(--text-soft);font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.01em;line-height:1.3;padding:9px 6px;cursor:pointer;text-align:center;transition:all .22s ease}
 .basket-tab-btn:hover{background:rgba(245,236,224,.12);color:var(--text)}
-.basket-tab-btn.sel{background:var(--accent);border-color:var(--accent);color:var(--bg-dark)}
+.basket-tab-btn.sel{background:var(--accent-grad);border-color:var(--accent-deep);color:#FFFFFF}
 .basket-tab-panel{display:none}
 .basket-tab-panel.sel{display:block}
 .basket-print-title{display:none}
 .basket-list{display:flex;flex-direction:column;gap:12px}
-.basket-card{position:relative;display:flex;align-items:flex-start;gap:16px;background:rgba(245,236,224,.06);border:1.5px solid rgba(232,178,154,.45);border-radius:20px;padding:18px 42px 18px 18px;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.basket-card{position:relative;display:flex;align-items:flex-start;gap:16px;background:rgba(245,236,224,.06);border:1.5px solid rgba(232,162,160,.45);border-radius:20px;padding:18px 42px 18px 18px;box-shadow:0 4px 16px rgba(0,0,0,.1)}
 .basket-card-body{flex:1;min-width:0}
 .basket-card-quote{font-family:var(--sans);font-weight:700;font-style:normal;font-size:17.5px;color:var(--text);line-height:1.38;margin-bottom:8px}
 .basket-card-tip{font-size:15px;color:var(--text-soft);line-height:1.55}
@@ -891,7 +892,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
   .basket-card-remove:hover{background:rgba(42,52,56,.75)}
 }
 .basket-empty{text-align:center;font-size:14px;line-height:1.7;color:var(--text-soft);padding:30px 10px;font-style:italic}
-.basket-outlook{display:none;flex-direction:column;background:rgba(232,178,154,.12);border:1.5px solid rgba(232,178,154,.4);border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 28px rgba(0,0,0,.14)}
+.basket-outlook{display:none;flex-direction:column;background:rgba(232,162,160,.12);border:1.5px solid rgba(232,162,160,.4);border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 28px rgba(0,0,0,.14)}
 .basket-outlook-photo{width:100%;height:190px;object-fit:cover;display:block;margin:0}
 .basket-outlook-body{flex:1;min-width:0;padding:20px 22px 24px}
 .basket-outlook-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
@@ -909,23 +910,23 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-longview-body{padding:16px 18px 18px}
 .basket-longview-eyebrow{position:relative;z-index:1;font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#FFFFFF;margin:0;padding:16px 18px}
 .basket-longview-text{font-family:var(--sans);font-size:16px;color:var(--text-soft);line-height:1.4;margin:0}
-.basket-invite{background:rgba(232,178,154,.08);border:1px solid rgba(232,178,154,.28);border-radius:16px;padding:18px 16px;text-align:center}
+.basket-invite{background:rgba(232,162,160,.08);border:1px solid rgba(232,162,160,.28);border-radius:16px;padding:18px 16px;text-align:center}
 .basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
 .basket-invite-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0 0 14px}
-.basket-invite-btn{display:inline-block;background:var(--accent);color:var(--bg-dark);font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.03em;text-decoration:none;padding:8px 18px;border-radius:999px;margin-bottom:10px;transition:all .22s ease}
-.basket-invite-btn:hover{background:var(--text);transform:translateY(-1px)}
+.basket-invite-btn{display:inline-block;background:var(--accent-grad);color:#FFFFFF;font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.03em;text-decoration:none;padding:8px 18px;border-radius:999px;margin-bottom:10px;transition:all .22s ease}
+.basket-invite-btn:hover{background:var(--text);color:var(--bg-dark);transform:translateY(-1px)}
 /* Small, quiet ghost button in place of the old plain URL caption, so the
    feedback link doesn't visually compete with the main waitlist CTA above it. */
 .basket-invite-feedback-btn{display:inline-block;background:transparent;border:1px solid rgba(245,236,224,.3);color:var(--text-soft);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.03em;text-decoration:none;padding:8px 18px;border-radius:999px;transition:all .22s ease}
 .basket-invite-feedback-btn:hover{background:rgba(245,236,224,.1);color:var(--text)}
 
-.kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--bg-dark);border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
+.kit-cta-btn{display:inline-flex;align-items:center;gap:10px;background:var(--accent-grad);color:#FFFFFF;border:none;border-radius:999px;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:15px 30px;cursor:pointer;text-decoration:none;transition:all .28s}
 #expansion-gate-modal .insp-modal-text{font-size:15px;line-height:1.6}
 .expansion-gate-actions{display:flex;flex-direction:column;gap:12px;margin-top:26px}
 .expansion-gate-ghost{display:inline-flex;align-items:center;justify-content:center;background:transparent;color:var(--text-soft);border:1px solid rgba(245,236,224,.22);border-radius:999px;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.06em;padding:13px 24px;cursor:pointer;text-align:center;transition:all .22s ease}
 .expansion-gate-ghost:hover{background:rgba(245,236,224,.08);color:var(--text)}
 .expansion-gate-actions .kit-cta-btn{justify-content:center;width:100%}
-.kit-cta-btn:hover{background:var(--text);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,178,154,.3)}
+.kit-cta-btn:hover{background:var(--text);color:var(--bg-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,162,160,.3)}
 
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
@@ -1131,7 +1132,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
               <span class="petal-text"><span class="fl-layer" id="t-petal-firstaid-layer">Support</span><span class="fl-title" id="t-petal-firstaid-title">First-Aid Kit</span><span class="fl-frame" id="t-petal-firstaid-frame">When you're running on empty</span></span>
             </button>
             <button class="petal-btn" data-pillar="environment" onclick="pickPillar('environment')">
-              <span class="petal-bg" style="background-image:url('new_images/1_MainChapters/soil_environment.png')"></span>
+              <span class="petal-bg" style="background-image:url('new_images/1_MainChapters/soil-environment.png')"></span>
               <span class="petal-scrim"></span>
               <span class="petal-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18c2-5 6-7 9-7s7 2 9 7"/><path d="M2.5 18.5h19"/></svg></span>
               <span class="petal-text"><span class="fl-layer" id="t-petal-env-layer">Soil</span><span class="fl-title" id="t-petal-env-title">Environment</span><span class="fl-frame" id="t-petal-env-frame">Surroundings &amp; daily load</span></span>
@@ -1202,7 +1203,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
       <p class="chapter-disclaimer" id="chapter-disclaimer"></p>
     </div>
 
-    <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,178,154,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="kconn" id="kconn-2"><svg width="30" height="38" viewBox="0 0 30 38"><path d="M15 2 L15 26" stroke="rgba(232,162,160,.7)" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/><path d="M9 22 L15 34 L21 22" fill="none" stroke="rgba(232,162,160,.7)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
     <!-- BOX 3: 3 tips + CTA -->
     <div class="kbox expand" id="kbox3">
@@ -1336,7 +1337,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 
     <div class="burnout-layers">
       <div class="burnout-layer-card">
-        <img class="burnout-layer-photo" src="new_images/1_MainChapters/soil_environment.png" alt="" onerror="this.remove()">
+        <img class="burnout-layer-photo" src="new_images/1_MainChapters/soil-environment.png" alt="" onerror="this.remove()">
         <div class="burnout-layer-text">
           <p class="burnout-layer-eyebrow" id="t-layer1-eyebrow">1. Soil</p>
           <h3 id="t-layer1-h3">Environment: Surroundings &amp; Daily Load</h3>
@@ -1570,7 +1571,7 @@ const SUB_ICONS = {
    photos (CHAPTER_COVER_IMG below), those stay on the main chapter circles
    and the basket's Outlook card only. */
 const CHAPTER_COVER_IMG = {
-  environment: '1_MainChapters/soil_environment.png',
+  environment: '1_MainChapters/soil-environment.png',
   relationships: '1_MainChapters/roots_relationships.png',
   body: '1_MainChapters/stem_body.png',
   identity: '1_MainChapters/bud_identity.png',
