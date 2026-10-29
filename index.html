@@ -8,10 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#786C5C; --bg-deep:#6A8893; --bg-dark:#2a3438;
+  --bg:#8C7A63; --bg-deep:#9C8A70; --bg-deep2:#7C6B4E; --bg-dark:#2a3438;
+  --bg-deep-grad:linear-gradient(135deg,var(--bg-deep) 0%,var(--bg-deep2) 100%);
   --text:#F5ECE0; --text-soft:rgba(245,236,224,.75); --text-muted:rgba(245,236,224,.45);
   --accent:#E8A2A0; --accent-deep:#C2636B; --leaf:#C4D4B8;
-  --accent-grad:linear-gradient(135deg,var(--accent) 0%,var(--accent-deep) 100%);
+  --accent-grad:linear-gradient(135deg,rgba(201,139,138,.82) 0%,rgba(168,95,96,.82) 100%);
   --rose:#D9938E; --rose-light:#F0C7C3;
   --border:rgba(245,236,224,.14);
   --serif:'Cormorant Garamond',Georgia,serif; --sans:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
@@ -30,7 +31,7 @@ body{overflow-x:hidden}
 .screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
 
 /* type */
-.eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--accent)}
+.eyebrow{font-size:11px;letter-spacing:.35em;text-transform:uppercase;color:var(--text)}
 .serif{font-family:var(--serif);font-style:italic;font-weight:400}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
@@ -113,7 +114,7 @@ body{overflow-x:hidden}
 .petal-btn:hover .petal-bg{transform:scale(1.045)}
 .petal-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(135deg,rgba(14,38,40,.4),rgba(8,20,22,.62))}
 .firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(180,122,118,.32),rgba(94,64,61,.58))}
-.petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(122,152,164,.28);transition:all .22s ease;overflow:hidden}
+.petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(140,122,99,.28);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
 .petal-icon-photo{display:none}
 .petal-btn:hover .petal-icon{background:rgba(232,162,160,.18)}
@@ -223,7 +224,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .zero-lead-group{margin-bottom:14px}
 .zero-plain{font-size:14px;font-weight:300;line-height:1.45;color:var(--text-soft);text-align:center;margin-bottom:5px}
 .zero-divider{border:none;border-top:1px dashed rgba(245,236,224,.2);margin:18px 0 14px}
-.zero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.4vw,19px);color:var(--accent);text-align:center;margin-bottom:18px}
+.zero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2.4vw,19px);color:var(--text);text-align:center;margin-bottom:18px}
 .zero-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .zero-step{display:flex;gap:14px;align-items:flex-start;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:16px;padding:16px 18px}
 .zero-step-n{width:26px;height:26px;border-radius:50%;background:rgba(232,162,160,.16);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
@@ -272,7 +273,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-layer-card{display:flex;gap:16px;align-items:flex-start;background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:18px;padding:18px 20px}
 .burnout-layer-photo{width:60px;height:60px;border-radius:14px;object-fit:cover;flex-shrink:0;background:rgba(245,236,224,.08)}
 .burnout-layer-text{flex:1;min-width:0}
-.burnout-layer-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);margin:0 0 3px}
+.burnout-layer-eyebrow{font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text);margin:0 0 3px}
 .burnout-layer-text h3{font-family:var(--sans);font-weight:700;font-size:16.5px;color:var(--text);margin:0 0 6px}
 .burnout-layer-text p{font-size:14px;line-height:1.55;color:var(--text-soft);margin:0}
 
@@ -309,7 +310,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    kit's own graphics. Starts hidden (no .play) until animateBurnoutChart()
    adds the class, see goTo('burnout'); restarts every visit. */
 .burnout-graph{background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:20px;padding:28px 20px 26px;margin-top:20px;text-align:center}
-.burnout-graph-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.burnout-graph-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text);margin-bottom:8px}
 .burnout-graph-caption-top{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--text-soft);max-width:36ch;margin:0 auto 28px;line-height:1.5}
 .burnout-chart{position:relative;width:100%;max-width:240px;aspect-ratio:1/1;margin:0 auto}
 .burnout-axis-v{position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:rgba(245,236,224,.3);transform:translateX(-50%) scaleY(0);transform-origin:top center}
@@ -421,11 +422,11 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 }
 @media(prefers-reduced-motion:reduce){.petal-btn.heavy-glow .petal-icon{animation:none}}
 
-.kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:rgba(122,152,164,.38);backdrop-filter:blur(8px);margin-bottom:0}
+.kbox{border:1px solid rgba(245,236,224,.18);border-radius:24px;padding:28px 24px;background:linear-gradient(135deg,rgba(150,132,109,.42) 0%,rgba(124,107,86,.34) 100%);backdrop-filter:blur(8px);margin-bottom:0}
 .kbox-q{font-family:var(--serif);font-style:italic;font-size:clamp(22px,4vw,26px);color:var(--text);margin-bottom:18px;line-height:1.4;text-align:center}
 .chapter-takeaway{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--text);text-align:center;max-width:48ch;margin:22px auto 0;line-height:1.65;opacity:.92}
 .chapter-disclaimer{font-size:14px;color:var(--text-muted);text-align:center;max-width:40ch;margin:14px auto 0;line-height:1.6}
-.kbox-step{color:var(--accent);font-style:normal}
+.kbox-step{color:var(--text);font-style:normal}
 
 /* FIRST-AID KIT WIDGET: lives across the whole 5-chapter overview, not
    gated to one chapter. Desktop: a persistent square sidebar box to the
@@ -452,7 +453,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
   .petal-nav-list .petal-btn.firstaid-petal-btn{background:rgba(232,162,160,.1);border-color:rgba(232,162,160,.35)}
   .petal-nav-list .petal-btn.firstaid-petal-btn:hover{background:rgba(232,162,160,.18)}
 }
-.firstaid-modal-sub{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);text-align:center;margin:-6px 0 20px}
+.firstaid-modal-sub{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text);text-align:center;margin:-6px 0 20px}
 .firstaid-list{list-style:none;text-align:left;display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
 .firstaid-list li{display:flex;gap:12px;align-items:flex-start;font-size:18px;line-height:1.65;color:var(--text-soft)}
 .firstaid-list li strong{color:var(--text);font-weight:600}
@@ -470,7 +471,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .kbox.expand.open{padding:28px 24px;border-width:1px}
 
 /* flower nav labels: shared by the opening flower nav */
-.fl-layer{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block}
+.fl-layer{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--text);display:block}
 .fl-title{font-family:var(--sans);font-weight:700;font-style:normal;font-size:21px;color:#FDFBF7;line-height:1.25;display:block}
 .fl-frame{font-size:10.5px;color:var(--text-muted);line-height:1.3;display:block}
 @media(max-width:520px){.fl-title{font-size:19px}.fl-frame{display:none}}
@@ -590,7 +591,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-group-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
 .area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:144px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(122,152,164,.25)}
+.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(140,122,99,.25)}
 .area-circle svg{width:30px;height:30px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
    the root directory and it appears automatically, covering the icon
@@ -707,7 +708,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
 .insp-modal.open{opacity:1;pointer-events:all}
 .insp-modal-scrim{position:absolute;inset:0;background:rgba(20,28,32,.6);backdrop-filter:blur(3px)}
-.insp-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
+.insp-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep-grad);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
 .insp-modal.open .insp-modal-card{transform:translateY(0) scale(1)}
 .insp-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
 .insp-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
@@ -739,7 +740,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-modal-text.letter-mode li{margin-bottom:11px;padding-left:24px}
 .insp-modal-text.letter-mode li::before{top:10px;width:5.5px;height:5.5px}
 .letter-highlight{color:#E8B4B8;font-weight:700}
-.letter-section-heading{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:20px 0 9px}
+.letter-section-heading{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text);font-weight:600;margin:20px 0 9px}
 .letter-section-heading:first-child{margin-top:0}
 .letter-step-list{list-style:none;margin:4px 0 16px;padding:0;display:flex;flex-direction:column;gap:8px}
 .letter-step-list li{display:flex;gap:10px;align-items:flex-start;padding-left:0;margin-bottom:0}
@@ -772,7 +773,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    "The science behind this" drawer at the very bottom. Section labels are
    sentence case and warm, never shouting, so a depleted reader's eye can
    land softly instead of scanning a clinical form. */
-.insp-sec-label{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.015em;color:var(--accent);margin:20px 0 7px}
+.insp-sec-label{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.015em;color:var(--text);margin:20px 0 7px}
 .insp-modal-text>.insp-sec-label:first-of-type{margin-top:0}
 .insp-sec-body{margin-bottom:4px}
 .insp-sec-list{list-style:none;margin:8px 0 4px;padding:0}
@@ -782,7 +783,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    support," so it reads as a gentle flag, not an alarm, but still stands
    apart from the surrounding narrative text. */
 .insp-safety{margin:18px 0;padding:14px 16px;border-radius:14px;background:rgba(232,162,160,.1);border:1.5px solid rgba(232,162,160,.4)}
-.insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.insp-safety-label{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:6px}
 .insp-safety p{margin:0}
 .insp-safety p:last-child{color:var(--text-soft)}
 .insp-takeaway{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--text);line-height:1.65;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
@@ -849,7 +850,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-modal{position:fixed;inset:0;z-index:210;display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .28s ease}
 .basket-modal.open{opacity:1;pointer-events:all}
 .basket-modal-scrim{position:absolute;inset:0;background:rgba(20,28,32,.6);backdrop-filter:blur(3px)}
-.basket-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
+.basket-modal-card{position:relative;max-width:460px;width:100%;max-height:86vh;overflow-y:auto;background:var(--bg-deep-grad);border:1px solid rgba(245,236,224,.18);border-radius:26px;padding:32px 26px 30px;box-shadow:0 34px 80px rgba(8,14,18,.45);transform:translateY(18px) scale(.98);transition:transform .32s cubic-bezier(.2,.8,.3,1)}
 .basket-modal.open .basket-modal-card{transform:translateY(0) scale(1)}
 .basket-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(245,236,224,.08);border:1px solid rgba(245,236,224,.18);color:var(--text-soft);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
 .basket-modal-close:hover{background:rgba(245,236,224,.18);color:var(--text)}
@@ -895,10 +896,10 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-outlook{display:none;flex-direction:column;background:rgba(232,162,160,.12);border:1.5px solid rgba(232,162,160,.4);border-radius:20px;overflow:hidden;margin-bottom:18px;box-shadow:0 8px 28px rgba(0,0,0,.14)}
 .basket-outlook-photo{width:100%;height:190px;object-fit:cover;display:block;margin:0}
 .basket-outlook-body{flex:1;min-width:0;padding:20px 22px 24px}
-.basket-outlook-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.basket-outlook-eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text);margin-bottom:8px}
 .basket-outlook-text{font-family:var(--sans);font-style:normal;font-size:19px;color:var(--text);line-height:1.4;margin:0}
 .basket-outlook-arc{display:flex;flex-direction:column;gap:16px}
-.basket-outlook-beat-label{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.basket-outlook-beat-label{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin:0 0 4px}
 .basket-outlook-beat-text{font-family:var(--sans);font-style:normal;font-size:17.5px;color:var(--text);line-height:1.4;margin:0}
 /* "The bigger picture" box: a fixed header photo (not tied to the basket's
    chapter, see LONGVIEW_IMG) with its eyebrow label written directly on
@@ -911,7 +912,7 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
 .basket-longview-eyebrow{position:relative;z-index:1;font-family:var(--sans);font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#FFFFFF;margin:0;padding:16px 18px}
 .basket-longview-text{font-family:var(--sans);font-size:16px;color:var(--text-soft);line-height:1.4;margin:0}
 .basket-invite{background:rgba(232,162,160,.08);border:1px solid rgba(232,162,160,.28);border-radius:16px;padding:18px 16px;text-align:center}
-.basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.basket-invite-eyebrow{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text);margin-bottom:8px}
 .basket-invite-text{font-family:var(--sans);font-size:13.5px;color:var(--text-soft);line-height:1.65;margin:0 0 14px}
 .basket-invite-btn{display:inline-block;background:var(--accent-grad);color:#FFFFFF;font-family:var(--sans);font-weight:700;font-size:11px;letter-spacing:.03em;text-decoration:none;padding:8px 18px;border-radius:999px;margin-bottom:10px;transition:all .22s ease}
 .basket-invite-btn:hover{background:var(--text);color:var(--bg-dark);transform:translateY(-1px)}
