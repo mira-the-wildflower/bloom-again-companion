@@ -288,6 +288,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-textbox .burnout-understanding-cta{margin-top:20px;padding-top:18px;border-top:1px solid var(--border);text-align:center}
 .burnout-textbox .burnout-understanding-cta p.burnout-understanding-cta-label{font-weight:700;color:var(--text);margin-bottom:14px}
 .burnout-textbox .burnout-understanding-cta p.burnout-understanding-sub{font-size:13px;color:var(--text-muted);margin-top:14px;margin-bottom:0}
+#t-burnout-understanding-btn{padding:9px 20px;font-size:12.5px}
 
 /* On desktop, the burnout page's content breaks out wider than the
    640px .zero-page column (see .burnout-topics below), but .zero-close
@@ -977,6 +978,10 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
   .basket-longview-eyebrow{position:static;font-family:Georgia,serif;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#8A5A5F;padding:0;margin:10px 0 6px}
   .basket-longview-text{font-family:Helvetica,Arial,sans-serif;color:#5A5048;font-size:14px;line-height:1.35}
 }
+/* Widen the letter and flower-basket pop-ups on desktop so their content
+   needs less vertical scrolling; placed last in the stylesheet so it wins
+   over each card's own earlier max-width:460px rule at equal specificity. */
+@media(min-width:901px){.insp-modal-card,.basket-modal-card{max-width:640px}}
 </style>
 </head>
 <body>
