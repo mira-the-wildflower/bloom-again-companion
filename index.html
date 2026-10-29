@@ -122,8 +122,8 @@ body{overflow-x:hidden}
 .firstaid-petal-btn .petal-scrim{background:linear-gradient(135deg,rgba(190,40,32,.2),rgba(90,18,15,.36))}
 .petal-btn[data-pillar="body"] .petal-bg{background-position:center 80%}
 img[src*="stem_body.png"]{object-position:center 80%}
-.petal-btn[data-pillar="environment"] .petal-bg{background-position:center calc(50% - 7mm)}
-img[src*="soil-environment.png"]{object-position:center calc(50% - 7mm)}
+.petal-btn[data-pillar="environment"] .petal-bg{background-position:center calc(50% - 16mm)}
+img[src*="soil-environment.png"]{object-position:center calc(50% - 16mm)}
 .petal-icon{position:relative;z-index:2;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.18);transition:all .22s ease;overflow:hidden}
 .petal-icon svg{width:30px;height:30px}
 .petal-icon-photo{display:none}
@@ -313,6 +313,15 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
    other "give it real desktop room" widening in this file). */
 @media(min-width:901px){
   #s-burnout .zero-close{right:calc(344px - min(920px, 100vw - 48px)/2)}
+}
+
+/* On phone, #s-burnout (the "Instructions" page) sits under the same
+   fixed top-right button stack as the rest of the app (letter/
+   instructions/basket, see #open-letter-btn etc.), so a close "x" at
+   zero-close's usual top-right spot gets hidden behind them. Move it to
+   the opposite corner here instead, where nothing else lives. */
+@media(max-width:640px){
+  #s-burnout .zero-close{left:24px;right:auto}
 }
 
 /* graph: a quiet animated recreation of the expectations/control chart,
@@ -606,8 +615,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .area-group-icons{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 10px}
 .area-icon-btn{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:4px;width:144px;transition:transform .25s}
 .area-icon-btn:hover{transform:translateY(-3px)}
-.area-circle{position:relative;width:78px;height:78px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(255,255,255,.16)}
-.area-circle svg{width:30px;height:30px}
+.area-circle{position:relative;width:90px;height:90px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;transition:all .25s;overflow:hidden;background:rgba(255,255,255,.16)}
+.area-circle svg{width:34px;height:34px}
 /* Photo layer: drop a file matching each sub-area's `img` filename into
    the root directory and it appears automatically, covering the icon
    fallback beneath. Nothing to wire up, no code changes needed. */
@@ -806,6 +815,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-safety p{margin:0}
 .insp-safety p:last-child{color:var(--text-soft)}
 .letter-signoff{font-family:var(--handwritten);font-weight:700;font-size:clamp(30px,5vw,36px);color:var(--text);clear:both}
+@media(max-width:640px){.letter-signoff{line-height:.78}}
 .insp-takeaway{font-family:var(--quote);font-style:italic;font-weight:500;font-size:18px;color:var(--text);line-height:1.4;margin:18px 0 4px;padding-top:14px;border-top:1px solid rgba(245,236,224,.16)}
 
 /* Collapsed by default so a depleted reader's first view of a modal stays
@@ -1860,7 +1870,7 @@ function pickPillar(id){
           ${SUB_ICONS[a.id] || '✦'}
           ${repImg ? `<img class="area-icon-photo" src="new_images/${repImg}" alt="" onerror="this.remove()">` : ''}
         </div>
-        <span class="area-lbl">${a.label}</span>
+        <span class="area-lbl">${a.id === 'coregulation' ? a.label.replace(' & ', ' &<br>') : a.label}</span>
       </button>`;
   }).join('');
 
@@ -2029,7 +2039,7 @@ function openInsp(i){
     ? `<div class="insp-photo-full"><img src="new_images/${t.img}" alt="" onerror="this.parentElement.remove()"></div>`
     : renderInspPhoto(t.img) + (t.img2 ? renderInspPhoto(t.img2) : '');
   const modal = document.getElementById('insp-modal');
-  document.querySelector('.insp-modal-card').scrollTop = 0;
+  document.querySelector('#insp-modal .insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
 }
 
@@ -2073,7 +2083,7 @@ function openIntro(i){
   introTextEl.innerHTML = piece.body;
   document.getElementById('insp-modal-media').innerHTML = '';
   const modal = document.getElementById('insp-modal');
-  document.querySelector('.insp-modal-card').scrollTop = 0;
+  document.querySelector('#insp-modal .insp-modal-card').scrollTop = 0;
   modal.classList.add('open');
   document.getElementById('insp-letter-skip').classList.add('show');
   const nav = document.getElementById('insp-modal-intro-nav');
