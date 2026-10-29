@@ -246,7 +246,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .burnout-textbox{background:rgba(245,236,224,.05);border:1px solid rgba(245,236,224,.14);border-radius:20px;padding:26px 24px;margin-top:22px}
 .burnout-textbox p{font-size:16px;line-height:1.65;color:var(--text-soft);margin-bottom:14px}
 .burnout-textbox p:last-child{margin-bottom:0}
-.burnout-textbox h2{font-family:var(--heading);font-weight:700;font-size:22px;color:var(--text);margin:0 0 12px}
+.burnout-textbox h2{font-family:var(--heading);font-weight:700;font-size:19px;color:var(--text);margin:0 0 12px}
 
 /* the two topic sections (the "no rules" reminders and the Five Layers
    intro) stack on phone, same as every other section on this page; from
@@ -613,7 +613,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 
 /* inspiration overview: navigation only: headings + a small open button.
    All content/imagery lives in the modal (see below), not here. */
-.tips-title{font-family:var(--heading);font-weight:700;font-size:clamp(25px,4.2vw,33px);text-align:center;margin-bottom:6px;line-height:1.2}
+.tips-title{font-family:var(--heading);font-weight:700;font-size:clamp(21px,3.6vw,26px);text-align:center;margin-bottom:6px;line-height:1.2}
 .tips-subtitle{font-family:var(--sans);font-size:17px;font-weight:700;color:#FDFBF7;text-align:center;margin:0 0 22px;letter-spacing:.02em}
 .tips-eyebrow{text-align:center;margin-bottom:18px}
 /* short compassionate intro paragraph on the subchapter landing page, and
@@ -725,8 +725,8 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .insp-photo-mark{color:var(--accent);opacity:.6}
 .insp-photo-mark svg{width:28px;height:28px}
-.insp-modal-title{font-family:var(--heading);font-weight:700;font-size:clamp(25px,4.2vw,29px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
-.insp-modal-title.letter-mode{text-align:left;font-family:var(--quote);font-style:normal;font-weight:700}
+.insp-modal-title{font-family:var(--heading);font-weight:700;font-size:clamp(21px,3.6vw,24px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
+.insp-modal-title.letter-mode{text-align:left;font-family:var(--quote);font-style:normal;font-weight:700;font-size:clamp(25px,4.2vw,29px)}
 .insp-modal-text{font-size:16px;line-height:1.55;color:var(--text)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
 .insp-modal-text p{margin-bottom:12px}
@@ -1069,7 +1069,6 @@ body:has(.insp-modal.open, .basket-modal.open) #open-instructions-btn{
            heavy-today-announce for screen readers. She still chooses
            whether to actually tap into the suggestion. -->
       <div class="heavy-today" id="heavy-today">
-        <h2 class="heavy-today-heading serif" id="t-heavy-today-heading">Now let's start here</h2>
         <button type="button" class="heavy-today-trigger" id="heavy-today-trigger" onclick="toggleHeavyToday()" aria-expanded="false" aria-controls="heavy-card-grid">
           <svg class="heavy-today-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           <span id="t-heavy-trigger">Choose what feels most true right now:</span>
