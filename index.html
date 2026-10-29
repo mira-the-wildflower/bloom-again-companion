@@ -727,6 +727,7 @@ button:focus-visible, a:focus-visible{outline:2px solid var(--accent);outline-of
 .insp-photo-mark svg{width:28px;height:28px}
 .insp-modal-title{font-family:var(--heading);font-weight:700;font-size:clamp(21px,3.6vw,24px);color:var(--text);line-height:1.32;text-align:center;margin-bottom:14px}
 .insp-modal-title.letter-mode{text-align:left;font-family:var(--quote);font-style:normal;font-weight:700;font-size:clamp(25px,4.2vw,29px)}
+.insp-modal-title.letter-mode.sans-title{font-family:var(--heading)}
 .insp-modal-text{font-size:16px;line-height:1.55;color:var(--text)}
 .insp-modal-text strong{color:var(--text);font-weight:600}
 .insp-modal-text p{margin-bottom:12px}
@@ -2012,6 +2013,7 @@ function openIntro(i){
   const piece = BEFORE_YOU_BLOOM[introIdx];
   document.getElementById('insp-modal-title').textContent = piece.title;
   document.getElementById('insp-modal-title').classList.add('letter-mode');
+  document.getElementById('insp-modal-title').classList.toggle('sans-title', introIdx === 2);
   const introTextEl = document.getElementById('insp-modal-text');
   introTextEl.classList.add('letter-mode');
   introTextEl.innerHTML = piece.body;
