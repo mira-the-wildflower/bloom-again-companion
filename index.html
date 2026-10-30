@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:linear-gradient(210deg,#B1C5CC 0%,#4F6A75 100%);
+  --bg:linear-gradient(210deg,#B1C5CC 0%,#4F6A75 65%);
   --bg-deep:#7A98A4; --bg-deep2:#56717C; --bg-dark:#2a3438;
   --bg-beige:radial-gradient(ellipse 45% 32% at 28% 2%,rgba(255,224,185,.65) 0%,rgba(255,224,185,0) 68%),radial-gradient(ellipse 70% 48% at 50% -6%,rgba(255,212,168,.38) 0%,rgba(255,212,168,0) 65%),radial-gradient(ellipse 55% 38% at 88% 12%,rgba(242,176,156,.26) 0%,rgba(242,176,156,0) 68%),#A8805F;
   --bg-deep-grad:linear-gradient(135deg,var(--bg-deep) 0%,var(--bg-deep2) 100%);
@@ -1947,7 +1947,16 @@ function selectArea(id){
 
   const box3=document.getElementById('kbox3'); box3.classList.add('open');
   document.getElementById('kconn-2').classList.add('show');
-  scrollInto(box3);
+  /* Scroll to the tip grid itself, not the top of kbox3: kbox3's own
+     eyebrow/title/intro sit above the grid and were eating enough height
+     that only ~6 of the 8 tip cards landed inside the viewport. Waiting
+     for the box's expand transition (padding/transform, .8s/.7s) to
+     finish before measuring keeps the landing spot accurate instead of
+     scrolling to a position that then drifts as the box keeps opening. */
+  setTimeout(()=>{
+    const list = document.getElementById('tips-list');
+    if(list) list.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 850);
 }
 
 /* Placeholder shown in the modal for any inspiration that doesn't have a
